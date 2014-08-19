@@ -16,7 +16,7 @@
 		BAAE15F719A3FDC200DA3462 /* File_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15F319A3FDC200DA3462 /* File_Tests.swift */; };
 		BAAE15F819A3FDC200DA3462 /* Command_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15F419A3FDC200DA3462 /* Command_Tests.swift */; };
 		BAAE15F919A3FDC200DA3462 /* Stream_Iteration_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15F519A3FDC200DA3462 /* Stream_Iteration_Tests.swift */; };
-		BAAE15FA19A3FDC200DA3462 /* String_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15F619A3FDC200DA3462 /* String_Tests.swift */; };
+		BAAE15FA19A3FDC200DA3462 /* String_Partition_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15F619A3FDC200DA3462 /* String_Partition_Tests.swift */; };
 		BAAE160B19A4007700DA3462 /* Stream_Iteration_SpeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE160A19A4007700DA3462 /* Stream_Iteration_SpeedTests.swift */; };
 		BAAE160E19A4014900DA3462 /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAAE15D019A3FB5E00DA3462 /* SwiftShell.framework */; };
 /* End PBXBuildFile section */
@@ -45,7 +45,7 @@
 		BAAE15F319A3FDC200DA3462 /* File_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File_Tests.swift; sourceTree = "<group>"; };
 		BAAE15F419A3FDC200DA3462 /* Command_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command_Tests.swift; sourceTree = "<group>"; };
 		BAAE15F519A3FDC200DA3462 /* Stream_Iteration_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Iteration_Tests.swift; sourceTree = "<group>"; };
-		BAAE15F619A3FDC200DA3462 /* String_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String_Tests.swift; sourceTree = "<group>"; };
+		BAAE15F619A3FDC200DA3462 /* String_Partition_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String_Partition_Tests.swift; sourceTree = "<group>"; };
 		BAAE160119A3FFEC00DA3462 /* SwiftShell_Speed_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftShell_Speed_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAE160419A3FFEC00DA3462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAAE160A19A4007700DA3462 /* Stream_Iteration_SpeedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Iteration_SpeedTests.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 				BAAE15F319A3FDC200DA3462 /* File_Tests.swift */,
 				BAAE15F419A3FDC200DA3462 /* Command_Tests.swift */,
 				BAAE15F519A3FDC200DA3462 /* Stream_Iteration_Tests.swift */,
-				BAAE15F619A3FDC200DA3462 /* String_Tests.swift */,
+				BAAE15F619A3FDC200DA3462 /* String_Partition_Tests.swift */,
 				BAAE15DD19A3FB5E00DA3462 /* Supporting Files */,
 			);
 			path = SwiftShellTests;
@@ -305,7 +305,7 @@
 			files = (
 				BAAE15F719A3FDC200DA3462 /* File_Tests.swift in Sources */,
 				BAAE15F919A3FDC200DA3462 /* Stream_Iteration_Tests.swift in Sources */,
-				BAAE15FA19A3FDC200DA3462 /* String_Tests.swift in Sources */,
+				BAAE15FA19A3FDC200DA3462 /* String_Partition_Tests.swift in Sources */,
 				BAAE15F819A3FDC200DA3462 /* Command_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

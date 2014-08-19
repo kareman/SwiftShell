@@ -1,9 +1,9 @@
 //
-//  SwiftShell_Speed_Tests.swift
-//  SwiftShell Speed Tests
+// SwiftShell_Speed_Tests.swift
+// SwiftShell Speed Tests
 //
-//  Created by Kåre Morstøl on 28/07/14.
-//  Copyright (c) 2014 NotTooBad Software. All rights reserved.
+// Created by Kåre Morstøl on 28/07/14.
+// Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
 import SwiftShell
@@ -38,7 +38,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 			
 			var i = 0
 			var result = ""
-			for line in split(text,  { $0 ==  "\n"}, allowEmptySlices:  true) {
+			for line in split(text, { $0 == "\n"}, allowEmptySlices: true) {
 				i++
 				result += line
 			}
@@ -84,7 +84,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 		XCTAssertEqual(i, 5470)
 		XCTAssert(result != "")
 		f.closeFile()
-		return  times
+		return times
 	}
 	
 	func allSpeedIterateOverFile() -> Array<UInt64>{
@@ -106,10 +106,10 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 	}
 	
 	func testWhenSplitFileAsStringBecomesQuicker() {
-		let splitarray =  allSpeedsSplitFileAsString()
+		let splitarray = allSpeedsSplitFileAsString()
 		let myarray = allSpeedIterateOverFile()
-		for i in  0..<splitarray.count {
-			if  myarray[i]  > splitarray[i] {
+		for i in 0..<splitarray.count {
+			if myarray[i] > splitarray[i] {
 				println(" splitting strings is faster after \(i) of \(splitarray.count) iterations")
 				return
 			}

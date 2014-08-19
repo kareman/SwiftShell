@@ -1,9 +1,9 @@
 //
-//  File.swift
-//  SwiftShell
+// File.swift
+// SwiftShell
 //
-//  Created by Kåre Morstøl on 17/08/14.
-//  Copyright (c) 2014 NotTooBad Software. All rights reserved.
+// Created by Kåre Morstøl on 17/08/14.
+// Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
 import Foundation
@@ -37,19 +37,19 @@ public enum FileMode {
 }
 
 public func open(path: String, mode: FileMode = .Read) -> File {
-	var  file: File?
+	var file: File?
 	switch mode {
-	case .Read:
-		file = File(forReadingAtPath: path)
-	case .Write:
-		file = File(forWritingAtPath: path)
-	case .ReadAndWrite:
-		file = File(forUpdatingAtPath: path)
+		case .Read:
+			file = File(forReadingAtPath: path)
+		case .Write:
+			file = File(forWritingAtPath: path)
+		case .ReadAndWrite:
+			file = File(forUpdatingAtPath: path)
 	}
 
 	// file may be nil if for instance path is invalid
 	// TODO: it physically pains me to write the next line. Proper error handling is forthcoming.
-	assert( file !=  nil,  "open file \"\(path)\" failed.")
+	assert( file != nil, "open file \"\(path)\" failed.")
 	return file!
 }
 

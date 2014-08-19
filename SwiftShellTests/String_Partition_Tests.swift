@@ -1,26 +1,16 @@
 //
-// StringTests.swift
-// Pythonic
+// String_Partition_Tests.swift
+// SwiftShell
 //
 // Created by Kåre Morstøl on 20/07/14.
-// Copyright (c) 2014 practicalswift. All rights reserved.
+// Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
 import XCTest
 import SwiftShell
 
-class PartitionTests: XCTestCase {
-	
-	override func setUp() {
-		super.setUp()
-		// Put setup code here. This method is called before the invocation of each test method in the class.
-	}
-	
-	override func tearDown() {
-		// Put teardown code here. This method is called after the invocation of each test method in the class.
-		super.tearDown()
-	}
-	
+class String_Partition_Tests: XCTestCase {
+
 	func testPartitionWithSeparatorInTheMiddle() {
 		let text = "the first part\nthe second part"
 		let (firstpart, returnedseparator, secondpart) = text.partition ("\n")

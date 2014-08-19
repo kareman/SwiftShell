@@ -1,3 +1,10 @@
+//
+// String.swift
+// SwiftShell
+//
+// Created by Kåre Morstøl on 15/08/14.
+// Copyright (c) 2014 NotTooBad Software. All rights reserved.
+//
 
 import Foundation
 
@@ -7,7 +14,6 @@ extension String {
 		return self.stringByReplacingOccurrencesOfString(replaceOldString, withString: withString)
 	}
 	
-	// TODO: More arguments. string.split(s[, sep[, maxsplit]])
 	public func split(sep: String) -> [String] {
 		return self.componentsSeparatedByString(sep)
 	}

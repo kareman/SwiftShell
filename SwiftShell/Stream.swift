@@ -1,6 +1,6 @@
 //
 // Stream.swift
-// Shell.Swift
+// SwiftShell
 //
 // Created by Kåre Morstøl on 25/07/14.
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
@@ -55,5 +55,5 @@ struct StringStreamGenerator : GeneratorType {
 }
 
 public func split(delimiter: String = "\n")(stream: ReadableStreamType) -> SequenceOf<String> {
-	return SequenceOf({StringStreamGenerator (stream: stream, delimiter:  delimiter)})
+	return SequenceOf({StringStreamGenerator (stream: stream, delimiter: delimiter)})
 }

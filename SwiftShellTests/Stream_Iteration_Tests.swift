@@ -1,15 +1,15 @@
 //
-// PythonicTests.swift
-// PythonicTests
+// Stream_Iteration_Tests.swift
+// SwiftShell
 //
 // Created by Kåre Morstøl on 18/07/14.
-// Copyright (c) 2014 practicalswift. All rights reserved.
+// Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
 import XCTest
 import SwiftShell
 
-class StreamIterationTests: XCTestCase {
+class Stream_Iteration_Tests: XCTestCase {
 	
 	func stream(text: String) -> NSFileHandle {
 		let pipe = NSPipe()
@@ -19,7 +19,7 @@ class StreamIterationTests: XCTestCase {
 		return pipe.fileHandleForReading
 	}
 	
-	func stream ( array: [String])  -> ReadableStreamType {
+	func stream ( array: [String]) -> ReadableStreamType {
 		class ArrayStream: ReadableStreamType {
 			var generator: IndexingGenerator<[ String]>
 			
@@ -32,7 +32,7 @@ class StreamIterationTests: XCTestCase {
 			}
 			
 			func read() -> String {
-				XCTAssert(false,  "not implemented")
+				XCTAssert(false, "not implemented")
 				return "" 
 			}
 			
@@ -70,9 +70,9 @@ class StreamIterationTests: XCTestCase {
 		XCTAssert(["","", "line 3"] == Array(stream(["\n","\nli","ne 3"]).lines()))		
 	}
 
-	// FIXME:  crashes with "incorrect checksum for freed object - object was probably modified after being freed."
+	// FIXME: crashes with "incorrect checksum for freed object - object was probably modified after being freed."
 	func notestReadingLinesFromShellCommand () {
-		for line in  SwiftShell.run("ls -R  ~/Library").lines()  {
+		for line in SwiftShell.run("ls -R ~/Library").lines() {
 			println(line)
 		}
 	}
@@ -80,15 +80,15 @@ class StreamIterationTests: XCTestCase {
 	// same input as above, works fine
 	func notestReadingLinesFromLongFile () {
 		var numberoflines = 0
-		for line in SwiftShell.open("/Users/karemorstol/Data/Programmering/Shell.Swift/Shell.Swift/Shell.SwiftTests/Scripts/longtext.txt").lines()  {
+		for line in SwiftShell.open("/Users/karemorstol/Data/Programmering/Shell.Swift/Shell.Swift/Shell.SwiftTests/Scripts/longtext.txt").lines() {
 			 numberoflines++
 		}
 		XCTAssertEqual(numberoflines, 641810)
 	}
 
-	//  same input as above, works fine
+	// same input as above, works fine
 	func notestReadingFromShellCommand () {
-		let file = SwiftShell.run("ls -R  ~/Library") as ReadableStreamType
+		let file = SwiftShell.run("ls -R ~/Library") as ReadableStreamType
 		var some = file.readSome()
 		var i = 1
 		while (some != nil) {

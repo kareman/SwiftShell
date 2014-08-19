@@ -1,13 +1,13 @@
 //
-//  Pipes.swift
-//  SwiftShell
+// Pipes.swift
+// SwiftShell
 //
-//  Created by Kåre Morstøl on 17/08/14.
-//  Copyright (c) 2014 NotTooBad Software. All rights reserved.
+// Created by Kåre Morstøl on 17/08/14.
+// Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
 
-infix operator |>  { precedence 50 associativity left }
+infix operator |> { precedence 50 associativity left }
 
 public func |> <T,U>(lhs: T, rhs: T -> U) -> U {
 	return rhs(lhs)
