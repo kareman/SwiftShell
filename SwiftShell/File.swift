@@ -32,6 +32,17 @@ extension File: ReadableStreamType {
 	}
 }
 
+extension File: WriteableStreamType  {
+
+	public func write (text: String)  {
+		writeData(text.dataUsingEncoding(streamencoding, allowLossyConversion:false)!)
+	}
+
+	public func closeStream () {
+		self.closeFile()
+	}
+}
+
 public enum FileMode {
 	case Read, Write, ReadAndWrite
 }

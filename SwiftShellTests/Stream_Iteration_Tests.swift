@@ -14,7 +14,7 @@ class Stream_Iteration_Tests: XCTestCase {
 	func stream(text: String) -> NSFileHandle {
 		let pipe = NSPipe()
 		let input = pipe.fileHandleForWriting
-		input.writeData( text.dataUsingEncoding(streamencoding, allowLossyConversion:false)!)
+		input.write(text)
 		input.closeFile()
 		return pipe.fileHandleForReading
 	}
