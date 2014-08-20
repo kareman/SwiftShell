@@ -13,9 +13,14 @@ class Stream_Iteration_Tests: XCTestCase {
 	
 	func stream(text: String) -> NSFileHandle {
 		let pipe = NSPipe()
-		let input = pipe.fileHandleForWriting
-		input.write(text)
-		input.closeFile()
+		
+		let input: NSFileHandle = pipe.fileHandleForWriting
+		input.writeabilityHandler = {  filehandle in 
+			filehandle.write(text) 
+			// input.closeFile() 
+			input.writeabilityHandler = nil
+		} 
+
 		return pipe.fileHandleForReading
 	}
 	
@@ -53,7 +58,7 @@ class Stream_Iteration_Tests: XCTestCase {
 		}
 		XCTAssert(filehandletest == "line 1\nline 2\n")
 		
-		XCTAssert(["line 1","line 2"] == Array(stream("line 1\nline 2").lines()))
+		XCTAssertEqual(["line 1","line 2"] , Array(stream("line 1\nline 2").lines()))
 		XCTAssert(["line 1"] == Array(stream("line 1\n").lines()))
 		XCTAssert(["line 1"] == Array(stream("line 1").lines()))
 		XCTAssert(["line 1","", "line 3"] == Array(stream("line 1\n\nline 3").lines()))
