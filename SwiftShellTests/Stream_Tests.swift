@@ -10,25 +10,29 @@ import SwiftShell
 import XCTest
 
 class Stream_Tests: XCTestCase {
-
+	
 	func testStreamFromAString () {
-		XCTAssertEqual( "this is a string", stream("this is a string").read())
-		XCTAssertEqual( "These are weird↔️🐻♨︎", stream("These are weird↔️🐻♨︎").read())
+		XCTAssertEqual( "this is a string", stream("this is a string").read() )
+		XCTAssertEqual( "These are weird↔️🐻♨︎", stream("These are weird↔️🐻♨︎").read() )
 	}
 	
 	func testCustomStream () {
 		let result = stream ({
-			 var finished = false
+			var finished = false
 			return {
 				if !finished {
 					finished = true
 					return "this is it"
 				} else {
 					return nil
-				
+					
 				}
 			}
 		})
-		XCTAssertEqual( result.read(), "this is it")
+		XCTAssertEqual( result.read(), "this is it" )
+	}
+	
+	func testStreamFromArray () {
+		XCTAssertEqual( stream(["item 1","item 2"]).read(), "item 1item 2")
 	}
 }

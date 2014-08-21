@@ -24,19 +24,11 @@ public protocol WriteableStreamType : OutputStreamType {
 }
 
 
-public func stream (text: String) -> NSFileHandle {
+public func stream(text: String) -> ReadableStreamType {
 	let pipe = NSPipe()
-	
-	let input: NSFileHandle = pipe.fileHandleForWriting
-	input.writeabilityHandler = { filehandle in 
-		filehandle.write(text) 
-		//filehandle.closeStream() // why doesn't this work? (beta 6) 
-		// input.closeFile() 
-		
-		// this will surely create a reference cycle, but it doesn't work when input is declared unowned (beta 6)
-		input.writeabilityHandler = nil
-	} 
-	
+	let input = pipe.fileHandleForWriting
+	input.write(text)
+	input.closeStream()
 	return pipe.fileHandleForReading
 }
 
@@ -49,9 +41,10 @@ public func stream ( closureclosure:() -> () -> String? ) -> NSFileHandle {
 		if let text = closure() {
 			filehandle.write(text) 
 		} else {
-			// why don't these work? (beta 6) 
+			// why won't these work? (beta 6) 
 			// filehandle.closeStream() 
-			// input.closeFile() 
+			// input.closeStream() 
+			// filehandle.writeabilityHandler = nil
 			
 			// this will surely create a reference cycle, but it crashes when input is declared unowned (beta 6)
 			input.writeabilityHandler = nil
@@ -61,33 +54,12 @@ public func stream ( closureclosure:() -> () -> String? ) -> NSFileHandle {
 	return pipe.fileHandleForReading
 }
 
-
-// TODO: replace with stream ( () -> () -> String? )
-public func stream (array: [String]) -> ReadableStreamType {
-	class ArrayStream: ReadableStreamType {
-		var generator: IndexingGenerator<[ String]>
-		
-		init(array: Array <String >) {
-			generator = array.generate() 
-		}
-		
-		func readSome() -> String? {
-			return generator.next()
-		}
-		
-		func read() -> String {
-			assert(false, "not implemented")
-			return "" 
-		}
-		
-		func lines() -> SequenceOf <String >{
-			return split(delimiter: "\n")(stream: self)
-		}
+public func stream <Seq:SequenceType where Seq.Generator.Element == String>(sequence: Seq) -> ReadableStreamType {
+	return stream {
+		var generator = sequence.generate()
+		return { generator.next() }
 	}
-	
-	return ArrayStream (array: array)
 }
-
 
 
 struct StringStreamGenerator : GeneratorType {
