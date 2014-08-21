@@ -24,6 +24,71 @@ public protocol WriteableStreamType : OutputStreamType {
 }
 
 
+public func stream (text: String) -> NSFileHandle {
+	let pipe = NSPipe()
+	
+	let input: NSFileHandle = pipe.fileHandleForWriting
+	input.writeabilityHandler = { filehandle in 
+		filehandle.write(text) 
+		//filehandle.closeStream() // why doesn't this work? (beta 6) 
+		// input.closeFile() 
+		
+		// this will surely create a reference cycle, but it doesn't work when input is declared unowned (beta 6)
+		input.writeabilityHandler = nil
+	} 
+	
+	return pipe.fileHandleForReading
+}
+
+public func stream ( closureclosure:() -> () -> String? ) -> NSFileHandle {
+	let closure = closureclosure()
+	let pipe = NSPipe()
+	
+	let input: NSFileHandle = pipe.fileHandleForWriting
+	input.writeabilityHandler = { filehandle in 
+		if let text = closure() {
+			filehandle.write(text) 
+		} else {
+			// why don't these work? (beta 6) 
+			// filehandle.closeStream() 
+			// input.closeFile() 
+			
+			// this will surely create a reference cycle, but it crashes when input is declared unowned (beta 6)
+			input.writeabilityHandler = nil
+		}
+	}
+	
+	return pipe.fileHandleForReading
+}
+
+
+// TODO: replace with stream ( () -> () -> String? )
+public func stream (array: [String]) -> ReadableStreamType {
+	class ArrayStream: ReadableStreamType {
+		var generator: IndexingGenerator<[ String]>
+		
+		init(array: Array <String >) {
+			generator = array.generate() 
+		}
+		
+		func readSome() -> String? {
+			return generator.next()
+		}
+		
+		func read() -> String {
+			assert(false, "not implemented")
+			return "" 
+		}
+		
+		func lines() -> SequenceOf <String >{
+			return split(delimiter: "\n")(stream: self)
+		}
+	}
+	
+	return ArrayStream (array: array)
+}
+
+
 
 struct StringStreamGenerator : GeneratorType {
 	private let stream: ReadableStreamType

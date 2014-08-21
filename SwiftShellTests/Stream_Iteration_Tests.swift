@@ -10,46 +10,7 @@ import XCTest
 import SwiftShell
 
 class Stream_Iteration_Tests: XCTestCase {
-	
-	func stream(text: String) -> NSFileHandle {
-		let pipe = NSPipe()
-		
-		let input: NSFileHandle = pipe.fileHandleForWriting
-		input.writeabilityHandler = {  filehandle in 
-			filehandle.write(text) 
-			// input.closeFile() 
-			input.writeabilityHandler = nil
-		} 
 
-		return pipe.fileHandleForReading
-	}
-	
-	func stream ( array: [String]) -> ReadableStreamType {
-		class ArrayStream: ReadableStreamType {
-			var generator: IndexingGenerator<[ String]>
-			
-			init(array: Array <String >) {
-				generator = array.generate() 
-			}
-			
-			func readSome() -> String? {
-				return generator.next()
-			}
-			
-			func read() -> String {
-				XCTAssert(false, "not implemented")
-				return "" 
-			}
-			
-			func lines() -> SequenceOf <String >{
-				return split(delimiter: "\n")(stream: self)
-			}
-		}
-		
-		return ArrayStream (array: array)
-	}
-	
-	
 	func testIterateOverFileHandle() {
 		var filehandletest = ""
 		
@@ -57,7 +18,7 @@ class Stream_Iteration_Tests: XCTestCase {
 			filehandletest += line + "\n"
 		}
 		XCTAssert(filehandletest == "line 1\nline 2\n")
-		
+		// TODO: replace XCT assert with XCT assert equal
 		XCTAssertEqual(["line 1","line 2"] , Array(stream("line 1\nline 2").lines()))
 		XCTAssert(["line 1"] == Array(stream("line 1\n").lines()))
 		XCTAssert(["line 1"] == Array(stream("line 1").lines()))
@@ -75,7 +36,7 @@ class Stream_Iteration_Tests: XCTestCase {
 		XCTAssert(["","", "line 3"] == Array(stream(["\n","\nli","ne 3"]).lines()))		
 	}
 
-	// FIXME: crashes with "incorrect checksum for freed object - object was probably modified after being freed."
+	// FIXME: crashes with "incorrect checksum for freed object - object was probably modified after being freed." (beta 6)
 	func notestReadingLinesFromShellCommand () {
 		for line in SwiftShell.run("ls -R ~/Library").lines() {
 			println(line)
