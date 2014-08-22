@@ -9,11 +9,27 @@
 import SwiftShell
 import XCTest
 
+extension XCTestCase {
+
+	func pathForTestResource (filename: String, type: String) -> String {
+		let path = NSBundle(forClass: self.dynamicType).pathForResource(filename, ofType: type) 
+		assert(path != nil, "resource \(filename).\(type) not found") 
+
+		return path!
+	}
+}
+
 class Stream_Iteration_SpeedTests: XCTestCase {
 
-	func testSpeedNSStringSplit() {
-		self.measureBlock(){
-			let f = open( "/Users/karemorstol/Dropbox/Swift Standard Library Beta 5.txt")
+	let numberoflines = 2000
+
+	func testSpeedNSStringSplit () {
+
+		// won't work outside of a function (beta 6)
+		let longtextpath = pathForTestResource("long text", type: "txt")
+
+		self.measureBlock() {
+			let f = open(longtextpath)
 			let text = f.read()
 			let array = (text.split("\n"))
 			
@@ -23,18 +39,18 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 				i++
 				result += line
 			}
-			XCTAssertEqual(i, 5470)
+			XCTAssertEqual(i, self.numberoflines)
 			XCTAssert(result != "")
 			f.closeFile()
 		}
 	}
 	
 	// takes a very long time
-	func notestSpeedSwiftSplit() {
+	func testSpeedSwiftSplit () {
+		let longtextpath = pathForTestResource("long text", type: "txt")
 		self.measureBlock(){
-			let f = open( "/Users/karemorstol/Dropbox/Swift Standard Library Beta 5.txt")
+			let f = open(longtextpath)
 			let text = f.read()
-			// let array = (text.split("\n"))
 			
 			var i = 0
 			var result = ""
@@ -42,15 +58,16 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 				i++
 				result += line
 			}
-			XCTAssertEqual(i, 5470)
+			XCTAssertEqual(i, self.numberoflines)
 			XCTAssert(result != "")
 			f.closeFile()
 		}
 	}
 	
-	func testSpeedMyPartition() {
+	func testSpeedSwiftShellSplit () {
+		let longtextpath = pathForTestResource("long text", type: "txt")
 		self.measureBlock() {
-			let f = open( "/Users/karemorstol/Dropbox/Swift Standard Library Beta 5.txt")
+			let f = open(longtextpath)
 			
 			var i = 0
 			var result = ""
@@ -58,16 +75,19 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 				i++
 				result += line
 			}
-			XCTAssertEqual(i, 5469)
+			XCTAssertEqual(i, self.numberoflines)
 			XCTAssert(result != "")
 			f.closeFile()
 		}
 	}	
 	
 	func allSpeedsSplitFileAsString() -> Array<UInt64> {
-		var times = Array<UInt64>(count: 5471,repeatedValue: 0)
+		let longtextpath = pathForTestResource("long text", type: "txt")
+
+		// set initial size of array.
+		var times = Array<UInt64>(count: numberoflines, repeatedValue: 0)
 		
-		let f = open( "/Users/karemorstol/Dropbox/Swift Standard Library Beta 5.txt")
+		let f = open(longtextpath)
 		let start = mach_absolute_time()
 
 		let text = f.read()
@@ -81,16 +101,17 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 			result += line
 		}
 		
-		XCTAssertEqual(i, 5470)
+	XCTAssertEqual(i, numberoflines)
 		XCTAssert(result != "")
 		f.closeFile()
 		return times
 	}
 	
 	func allSpeedIterateOverFile() -> Array<UInt64>{
-		var times = Array<UInt64>(count: 5471,repeatedValue: 0)
+		let longtextpath = pathForTestResource("long text", type: "txt")
+		var times = Array<UInt64>(count:  numberoflines, repeatedValue: 0)
 		
-		let f = open( "/Users/karemorstol/Dropbox/Swift Standard Library Beta 5.txt")
+		let f = open(longtextpath)
 		let start = mach_absolute_time()
 
 		var i = 0
@@ -99,7 +120,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 			times[i++] = (mach_absolute_time() - start)
 			result += line
 		}
-		XCTAssertEqual(i, 5469)
+		XCTAssertEqual(i, numberoflines)
 		XCTAssert(result != "")
 		f.closeFile()
 		return times
