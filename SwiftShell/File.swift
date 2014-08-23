@@ -30,11 +30,16 @@ extension File: ReadableStreamType {
 	public func lines() -> SequenceOf <String >{
 		return split(delimiter: "\n")(stream: self)
 	}
+
+    public func writeTo<Target : OutputStreamType>(inout target: Target) {
+		target.write(self.read())
+	}
+
 }
 
-extension File: WriteableStreamType  {
+extension File: WriteableStreamType {
 
-	public func write (text: String)  {
+	public func write (text: String) {
 		writeData(text.dataUsingEncoding(streamencoding, allowLossyConversion:false)!)
 	}
 

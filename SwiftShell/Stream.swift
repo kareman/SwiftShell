@@ -10,11 +10,12 @@ import Foundation
 
 public var streamencoding = NSUTF8StringEncoding
 
-public protocol ReadableStreamType {
+public protocol ReadableStreamType : Streamable {
 	
 	func readSome() -> String?
 	func read() -> String
 	func lines() -> SequenceOf <String >
+	func writeTo<Target : OutputStreamType>(inout target: Target)
 }
 
 public protocol WriteableStreamType : OutputStreamType {
@@ -32,7 +33,7 @@ public func stream(text: String) -> ReadableStreamType {
 	return pipe.fileHandleForReading
 }
 
-public func stream ( closureclosure:() -> () -> String? ) -> NSFileHandle {
+public func stream ( closureclosure:() -> () -> String? ) -> ReadableStreamType {
 	let closure = closureclosure()
 	let pipe = NSPipe()
 	
@@ -41,12 +42,9 @@ public func stream ( closureclosure:() -> () -> String? ) -> NSFileHandle {
 		if let text = closure() {
 			filehandle.write(text) 
 		} else {
-			// why won't these work? (beta 6) 
-			// filehandle.closeStream() 
-			// input.closeStream() 
+			// why won't this work? (beta 6) 
 			// filehandle.writeabilityHandler = nil
 			
-			// this will surely create a reference cycle, but it crashes when input is declared unowned (beta 6)
 			input.writeabilityHandler = nil
 		}
 	}

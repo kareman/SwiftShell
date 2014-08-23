@@ -25,7 +25,6 @@ class Stream_Tests: XCTestCase {
 					return "this is it"
 				} else {
 					return nil
-					
 				}
 			}
 		})
@@ -35,4 +34,27 @@ class Stream_Tests: XCTestCase {
 	func testStreamFromArray () {
 		XCTAssertEqual( stream(["item 1","item 2"]).read(), "item 1item 2")
 	}
+	
+	func streams () -> (WriteableStreamType, ReadableStreamType) {
+		let pipe = NSPipe()
+		return (pipe.fileHandleForWriting, pipe.fileHandleForReading)
+	}
+	
+	func testPrintStreamToStream () {
+		var (writable, readable) = streams()
+		let input = stream("this goes in") 
+		
+		// doesn't work in beta 6 (see Pipes.Swift)
+		// stream("this goes in") |> writable
+		
+		// nor does this. Damn you beta 6
+		// print(stream("this goes in") , &writable)
+		// input.writeTo(&writable)
+		
+		writable.write(input.read())
+		
+		XCTAssertEqual(readable.readSome()!, "this goes in")
+		
+	}
+	
 }
