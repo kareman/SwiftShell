@@ -109,7 +109,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 	
 	func allSpeedIterateOverFile() -> Array<UInt64>{
 		let longtextpath = pathForTestResource("long text", type: "txt")
-		var times = Array<UInt64>(count:  numberoflines, repeatedValue: 0)
+		var times = Array<UInt64>(count: numberoflines, repeatedValue: 0)
 		
 		let f = open(longtextpath)
 		let start = mach_absolute_time()

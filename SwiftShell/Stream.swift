@@ -8,23 +8,40 @@
 
 import Foundation
 
+// TODO: get encoding from environmental variable LC_TYPE
 public var streamencoding = NSUTF8StringEncoding
 
+/** A stream of text. Does as much as possible lazily. */
 public protocol ReadableStreamType : Streamable {
 	
+	/**
+	Whatever amount of text the stream feels like providing.
+	If the source is a file this will read everything at once.
+	
+	:returns: more text from the stream, or nil if we have reached the end.
+	*/
 	func readSome() -> String?
+	
+	/// Reads everything at once.
 	func read() -> String
-	func lines() -> SequenceOf <String >
+	
+	/// Lazily splits the stream into lines
+	func lines() -> SequenceOf<String>
+	
+	/// Allows stream to be used by "println"
 	func writeTo<Target : OutputStreamType>(inout target: Target)
 }
 
+/** An output stream, like standard output and standard error. */
 public protocol WriteableStreamType : OutputStreamType {
 	
 	func write(string: String)
+	
+	/// Must be called on local streams when done writing.
 	func closeStream()
 }
 
-
+/** Creates a stream from a String. */
 public func stream(text: String) -> ReadableStreamType {
 	let pipe = NSPipe()
 	let input = pipe.fileHandleForWriting
@@ -79,7 +96,7 @@ struct StringStreamGenerator : GeneratorType {
 			return nextline
 		} else {
 			if let newcache = stream.readSome() {
-				cache = nextline + newcache // TODO: crashes on long streams
+				cache = nextline + newcache 
 				return next()
 			} else {
 				return nextline == "" ? nil : nextline
