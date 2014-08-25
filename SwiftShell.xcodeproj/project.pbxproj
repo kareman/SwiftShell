@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA08E7D719AA3D8D002DA02F /* Scripts_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08E7D619AA3D8D002DA02F /* Scripts_Tests.swift */; };
 		BA338BF819A6897B00654EC4 /* Stream_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA338BF719A6897B00654EC4 /* Stream_Tests.swift */; };
 		BAAE15EE19A3FD4D00DA3462 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15E919A3FD4D00DA3462 /* Stream.swift */; };
 		BAAE15EF19A3FD4D00DA3462 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15EA19A3FD4D00DA3462 /* Command.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA08E7D619AA3D8D002DA02F /* Scripts_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts_Tests.swift; sourceTree = "<group>"; };
 		BA338BF719A6897B00654EC4 /* Stream_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Tests.swift; sourceTree = "<group>"; };
 		BAAE15D019A3FB5E00DA3462 /* SwiftShell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftShell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAE15D419A3FB5E00DA3462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		BAAE160419A3FFEC00DA3462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAAE160A19A4007700DA3462 /* Stream_Iteration_SpeedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Iteration_SpeedTests.swift; sourceTree = "<group>"; };
 		BAB0F87D19A6CD6C000191AB /* long text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "long text.txt"; sourceTree = "<group>"; };
+		BAD3708919ABC990008E83EE /* swiftshell.bash */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = swiftshell.bash; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +82,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA08E7D319AA3810002DA02F /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				BA08E7D619AA3D8D002DA02F /* Scripts_Tests.swift */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 		BAAE15C619A3FB5D00DA3462 = {
 			isa = PBXGroup;
 			children = (
+				BAD3708919ABC990008E83EE /* swiftshell.bash */,
 				BAAE15D219A3FB5E00DA3462 /* SwiftShell */,
 				BAAE15DC19A3FB5E00DA3462 /* SwiftShellTests */,
 				BAAE160219A3FFEC00DA3462 /* SwiftShell_Speed_Tests */,
@@ -103,10 +115,10 @@
 			isa = PBXGroup;
 			children = (
 				BAAE15E919A3FD4D00DA3462 /* Stream.swift */,
+				BAAE15ED19A3FD4D00DA3462 /* Pipes.swift */,
+				BAAE15EC19A3FD4D00DA3462 /* File.swift */,
 				BAAE15EA19A3FD4D00DA3462 /* Command.swift */,
 				BAAE15EB19A3FD4D00DA3462 /* String.swift */,
-				BAAE15EC19A3FD4D00DA3462 /* File.swift */,
-				BAAE15ED19A3FD4D00DA3462 /* Pipes.swift */,
 				BAAE15D319A3FB5E00DA3462 /* Supporting Files */,
 			);
 			path = SwiftShell;
@@ -123,6 +135,7 @@
 		BAAE15DC19A3FB5E00DA3462 /* SwiftShellTests */ = {
 			isa = PBXGroup;
 			children = (
+				BA08E7D319AA3810002DA02F /* Scripts */,
 				BAAE15F319A3FDC200DA3462 /* File_Tests.swift */,
 				BAAE15F419A3FDC200DA3462 /* Command_Tests.swift */,
 				BAAE15F519A3FDC200DA3462 /* Stream_Iteration_Tests.swift */,
@@ -310,6 +323,7 @@
 				BAAE15F719A3FDC200DA3462 /* File_Tests.swift in Sources */,
 				BAAE15F919A3FDC200DA3462 /* Stream_Iteration_Tests.swift in Sources */,
 				BAAE15FA19A3FDC200DA3462 /* String_Partition_Tests.swift in Sources */,
+				BA08E7D719AA3D8D002DA02F /* Scripts_Tests.swift in Sources */,
 				BAAE15F819A3FDC200DA3462 /* Command_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,8 +454,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = "~/";
+				DEPLOYMENT_LOCATION = NO;
+				DSTROOT = /;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
