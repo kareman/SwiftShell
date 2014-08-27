@@ -20,4 +20,4 @@ fi
 SWIFT_FRAMEWORK_ARGUMENTS=${FRAMEWORKS_PATH//:/ -F }
 
 # Pass Swift all the arguments, the first of which is the Swift file to run.
-xcrun swift $SWIFT_FRAMEWORK_ARGUMENTS $@
+xcrun swift $SWIFT_FRAMEWORK_ARGUMENTS "$@"
