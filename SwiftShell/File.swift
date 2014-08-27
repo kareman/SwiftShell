@@ -64,8 +64,12 @@ public func open(path: String, mode: FileMode = .Read) -> File {
 	}
 
 	// file may be nil if for instance path is invalid
-	// TODO: it physically pains me to write the next line. Proper error handling is forthcoming.
-	assert( file != nil, "open file \"\(path)\" failed.")
+	// TODO: it physically pains me to write the next lines. Proper error handling is forthcoming.
+	if file == nil {
+		standarderror.write("Error: Opening file \"\(path)\" failed.\n")
+		exit(EXIT_FAILURE)
+	}
+
 	return file!
 }
 
