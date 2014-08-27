@@ -27,21 +27,19 @@ public func |> <T,U,V>(lhs: T, rhs:((T,V) -> U, V)) -> U {
 */
 
 /* crashes the compiler (beta 6)
-/**
-  Print one stream to another.
-    readablestream |> writablestream
-*/
-public func |> <U>(lhs: Streamable, inout rhs: OutputStreamType) {
+public func |> (lhs: Streamable, inout rhs: OutputStreamType) {
 	// lhs.writeTo(&rhs)
-	// rhs.write(lhs)
-	print(lhs, &rhs)
+	// rhs.write(lhs.read())
+	// print(lhs, &rhs)
+	
 }
 */
 
-/* crashes the compiler (beta 6)
-public func |> <U>(lhs: ReadableStreamType, inout rhs:  WriteableStreamType) {
-	// lhs.writeTo(&rhs)
-	// rhs.write(lhs)
-	print(lhs, &rhs)
-}
+/**
+Prints one stream to another.
+
+	readablestream |> writablestream
 */
+public func |> (lhs: ReadableStreamType, inout rhs: WriteableStreamType) {
+	 rhs.write(lhs.read())
+}

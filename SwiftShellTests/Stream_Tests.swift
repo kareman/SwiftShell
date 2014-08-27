@@ -42,16 +42,8 @@ class Stream_Tests: XCTestCase {
 	
 	func testPrintStreamToStream () {
 		var (writable, readable) = streams()
-		let input = stream("this goes in") 
 		
-		// doesn't work in beta 6 (see Pipes.Swift)
-		// stream("this goes in") |> writable
-		
-		// nor does this. Damn you beta 6
-		// print(stream("this goes in") , &writable)
-		// input.writeTo(&writable)
-		
-		writable.write(input.read())
+		stream("this goes in") |> writable
 		
 		XCTAssertEqual(readable.readSome()!, "this goes in")
 		
