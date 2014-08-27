@@ -12,24 +12,30 @@ private func newtask (shellcommand: String) -> NSTask {
 	let task = NSTask()
 	task.arguments = ["-c",shellcommand]
 	task.launchPath = "/bin/bash"
-	task.standardInput = NSPipe ()// to avoid implicit reading of the script's standardInput
+
+	// avoids implicit reading of the main script's standardInput
+	task.standardInput = NSPipe ()
 
 	return task
 }
 
 public func run (shellcommand: String) -> ReadableStreamType {
 	let task = newtask(shellcommand)
+	
 	let output = NSPipe ()
 	task.standardOutput = output
 	task.launch()
+	task.waitUntilExit()
 	return output.fileHandleForReading
 }
 
 public func run (shellcommand: String)(input: ReadableStreamType) -> ReadableStreamType {
 	let task = newtask(shellcommand)
 	task.standardInput = input as File
+	
 	let output = NSPipe ()
 	task.standardOutput = output
 	task.launch()
+	task.waitUntilExit()
 	return output.fileHandleForReading
 }
