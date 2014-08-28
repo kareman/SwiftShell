@@ -54,6 +54,7 @@
 		BAAE160A19A4007700DA3462 /* Stream_Iteration_SpeedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Iteration_SpeedTests.swift; sourceTree = "<group>"; };
 		BAB0F87D19A6CD6C000191AB /* long text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "long text.txt"; sourceTree = "<group>"; };
 		BAD3708919ABC990008E83EE /* swiftshell.bash */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = swiftshell.bash; sourceTree = "<group>"; };
+		BAF5E7D719AE993900E78212 /* Test area.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Test area.playground"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +94,7 @@
 		BAAE15C619A3FB5D00DA3462 = {
 			isa = PBXGroup;
 			children = (
+				BAF5E7D719AE993900E78212 /* Test area.playground */,
 				BAD3708919ABC990008E83EE /* swiftshell.bash */,
 				BAAE15D219A3FB5E00DA3462 /* SwiftShell */,
 				BAAE15DC19A3FB5E00DA3462 /* SwiftShellTests */,
