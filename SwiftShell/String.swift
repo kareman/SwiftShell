@@ -22,7 +22,11 @@ extension String {
 		return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
 	}
 	
-	/// Split the string at the first occurrence of separator, and return a 3-tuple containing the part before the separator, the separator itself, and the part after the separator. If the separator is not found, return a 3-tuple containing the string itself, followed by two empty strings.
+	/** 
+	  Splits the string at the first occurrence of separator, and returns a 3-tuple containing the part
+ 	  before the separator, the separator itself, and the part after the separator. If the separator is 
+	  not found, returns a 3-tuple containing the string itself, followed by two empty strings. 
+	*/
 	public func partition(separator: String) -> (String, String, String) {
 		if let separatorRange = self.rangeOfString(separator) {
 			if !separatorRange.isEmpty {

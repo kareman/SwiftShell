@@ -22,13 +22,13 @@ public protocol ReadableStreamType : Streamable {
 	*/
 	func readSome() -> String?
 	
-	/// Reads everything at once.
+	/** Reads everything at once. */
 	func read() -> String
 	
-	/// Lazily splits the stream into lines
+	/** Lazily splits the stream into lines. */
 	func lines() -> SequenceOf<String>
 	
-	/// Allows stream to be used by "println"
+	/** Allows stream to be used by "println". */
 	func writeTo<Target : OutputStreamType>(inout target: Target)
 }
 
@@ -37,12 +37,12 @@ public protocol WriteableStreamType : OutputStreamType {
 	
 	func write(string: String)
 	
-	/// Must be called on local streams when done writing.
+	/** Must be called on local streams when done writing. */
 	func closeStream()
 }
 
 /** Creates a stream from a String. */
-public func stream(text: String) -> ReadableStreamType {
+public func stream (text: String) -> ReadableStreamType {
 	let pipe = NSPipe()
 	let input = pipe.fileHandleForWriting
 	input.write(text)
@@ -59,9 +59,6 @@ public func stream ( closureclosure:() -> () -> String? ) -> ReadableStreamType 
 		if let text = closure() {
 			filehandle.write(text) 
 		} else {
-			// why won't this work? (beta 6) 
-			// filehandle.writeabilityHandler = nil
-			
 			input.writeabilityHandler = nil
 		}
 	}
