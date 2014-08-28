@@ -50,15 +50,29 @@ public func stream (text: String) -> ReadableStreamType {
 	return pipe.fileHandleForReading
 }
 
-public func stream ( closureclosure:() -> () -> String? ) -> ReadableStreamType {
-	let closure = closureclosure()
+/** 
+Creates a stream from a function returning a  generator function, which is called everytime the stream is  asked for more text.
+
+stream {
+	// initialisation...
+	return {
+		// called repeatedly by the resulting stream
+		// return text,	or return nil when done.
+	}
+}
+
+:returns:  The output stream.
+*/
+public func stream ( closure:() -> () -> String? ) -> ReadableStreamType {
+	let getmoretext = closure()
 	let pipe = NSPipe()
 	
 	let input: NSFileHandle = pipe.fileHandleForWriting
 	input.writeabilityHandler = { filehandle in 
-		if let text = closure() {
+		if let text = getmoretext() {
 			filehandle.write(text) 
 		} else {
+			// close the stream
 			input.writeabilityHandler = nil
 		}
 	}
@@ -66,6 +80,7 @@ public func stream ( closureclosure:() -> () -> String? ) -> ReadableStreamType 
 	return pipe.fileHandleForReading
 }
 
+/** Creates a stream from a sequence of Strings. */
 public func stream <Seq:SequenceType where Seq.Generator.Element == String>(sequence: Seq) -> ReadableStreamType {
 	return stream {
 		var generator = sequence.generate()
@@ -73,7 +88,7 @@ public func stream <Seq:SequenceType where Seq.Generator.Element == String>(sequ
 	}
 }
 
-
+/** For splitting a stream into parts separated by "delimiter". */
 struct StringStreamGenerator : GeneratorType {
 	private let stream: ReadableStreamType
 	private	let delimiter: String
@@ -84,25 +99,30 @@ struct StringStreamGenerator : GeneratorType {
 		self.delimiter = delimiter
 	}
 	
+	/** Passes on the stream until the next occurrence of "delimiter" */
 	mutating func next () -> String? {
-		let (nextline, returnedseparator, remainder) = cache.partition(delimiter)
-		let separatorwasfound = returnedseparator != ""
+		let (nextpart, returneddelimiter, remainder) = cache.partition(delimiter)
+		let delimiterwasfound = returneddelimiter != ""
 		cache = remainder
 		
-		if separatorwasfound {
-			return nextline
+		if delimiterwasfound {
+			return nextpart
 		} else {
 			if let newcache = stream.readSome() {
-				cache = nextline + newcache 
+				// add the next part of the stream to what's left of the previous one, 
+				// and start again from the beginning of the function.
+				cache = nextpart + newcache 
 				return next()
 			} else {
-				return nextline == "" ? nil : nextline
+				// the stream is empty and there are no more delimiters left.
+				// return whatever is left, or nil if empty.
+				return nextpart == "" ? nil : nextpart
 			}
 		}
 	}
-	
 }
 
+/** Split a stream lazily */
 public func split(delimiter: String = "\n")(stream: ReadableStreamType) -> SequenceOf<String> {
 	return SequenceOf({StringStreamGenerator (stream: stream, delimiter: delimiter)})
 }

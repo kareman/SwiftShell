@@ -17,7 +17,7 @@ private func newtask (shellcommand: String) -> NSTask {
 }
 
 /** 
-Run a shellcommand synchronously with no standard input. 
+Run a shell command synchronously with no standard input. 
 
 :returns: Standard output
 */
