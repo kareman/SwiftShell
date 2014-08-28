@@ -12,7 +12,7 @@
 		BAAE15EE19A3FD4D00DA3462 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15E919A3FD4D00DA3462 /* Stream.swift */; };
 		BAAE15EF19A3FD4D00DA3462 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15EA19A3FD4D00DA3462 /* Command.swift */; };
 		BAAE15F019A3FD4D00DA3462 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15EB19A3FD4D00DA3462 /* String.swift */; };
-		BAAE15F119A3FD4D00DA3462 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15EC19A3FD4D00DA3462 /* File.swift */; };
+		BAAE15F119A3FD4D00DA3462 /* FileHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15EC19A3FD4D00DA3462 /* FileHandle.swift */; };
 		BAAE15F219A3FD4D00DA3462 /* Pipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15ED19A3FD4D00DA3462 /* Pipes.swift */; };
 		BAAE15F719A3FDC200DA3462 /* File_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15F319A3FDC200DA3462 /* File_Tests.swift */; };
 		BAAE15F819A3FDC200DA3462 /* Command_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15F419A3FDC200DA3462 /* Command_Tests.swift */; };
@@ -43,7 +43,7 @@
 		BAAE15E919A3FD4D00DA3462 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
 		BAAE15EA19A3FD4D00DA3462 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		BAAE15EB19A3FD4D00DA3462 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		BAAE15EC19A3FD4D00DA3462 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		BAAE15EC19A3FD4D00DA3462 /* FileHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHandle.swift; sourceTree = "<group>"; };
 		BAAE15ED19A3FD4D00DA3462 /* Pipes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pipes.swift; sourceTree = "<group>"; };
 		BAAE15F319A3FDC200DA3462 /* File_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File_Tests.swift; sourceTree = "<group>"; };
 		BAAE15F419A3FDC200DA3462 /* Command_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command_Tests.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 			children = (
 				BAAE15E919A3FD4D00DA3462 /* Stream.swift */,
 				BAAE15ED19A3FD4D00DA3462 /* Pipes.swift */,
-				BAAE15EC19A3FD4D00DA3462 /* File.swift */,
+				BAAE15EC19A3FD4D00DA3462 /* FileHandle.swift */,
 				BAAE15EA19A3FD4D00DA3462 /* Command.swift */,
 				BAAE15EB19A3FD4D00DA3462 /* String.swift */,
 				BAAE15D319A3FB5E00DA3462 /* Supporting Files */,
@@ -311,7 +311,7 @@
 			files = (
 				BAAE15F019A3FD4D00DA3462 /* String.swift in Sources */,
 				BAAE15F219A3FD4D00DA3462 /* Pipes.swift in Sources */,
-				BAAE15F119A3FD4D00DA3462 /* File.swift in Sources */,
+				BAAE15F119A3FD4D00DA3462 /* FileHandle.swift in Sources */,
 				BAAE15EE19A3FD4D00DA3462 /* Stream.swift in Sources */,
 				BAAE15EF19A3FD4D00DA3462 /* Command.swift in Sources */,
 			);

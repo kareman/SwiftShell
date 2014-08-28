@@ -1,5 +1,5 @@
 //
-// File.swift
+// FileHandle.swift
 // SwiftShell
 //
 // Created by Kåre Morstøl on 17/08/14.
@@ -9,9 +9,9 @@
 import Foundation
 
 
-public typealias File = NSFileHandle
+public typealias FileHandle = NSFileHandle
 
-extension File: ReadableStreamType {
+extension FileHandle: ReadableStreamType {
 	
 	public func readSome() -> String? {
 		let data: NSData = self.availableData
@@ -37,7 +37,7 @@ extension File: ReadableStreamType {
 
 }
 
-extension File: WriteableStreamType {
+extension FileHandle: WriteableStreamType {
 
 	public func write (text: String) {
 		writeData(text.dataUsingEncoding(streamencoding, allowLossyConversion:false)!)
@@ -52,28 +52,28 @@ public enum FileMode {
 	case Read, Write, ReadAndWrite
 }
 
-public func open(path: String, mode: FileMode = .Read) -> File {
-	var file: File?
+public func open(path: String, mode: FileMode = .Read) -> FileHandle {
+	var filehandle: FileHandle?
 	switch mode {
 		case .Read:
-			file = File(forReadingAtPath: path)
+			filehandle = FileHandle(forReadingAtPath: path)
 		case .Write:
-			file = File(forWritingAtPath: path)
+			filehandle = FileHandle(forWritingAtPath: path)
 		case .ReadAndWrite:
-			file = File(forUpdatingAtPath: path)
+			filehandle = FileHandle(forUpdatingAtPath: path)
 	}
 
 	// file may be nil if for instance path is invalid
 	// TODO: it physically pains me to write the next lines. Proper error handling is forthcoming.
-	if file == nil {
+	if filehandle == nil {
 		standarderror.write("Error: Opening file \"\(path)\" failed.\n")
 		exit(EXIT_FAILURE)
 	}
 
-	return file!
+	return filehandle!
 }
 
 public let environment = NSProcessInfo.processInfo().environment as [String: String]
-public let standardinput = File.fileHandleWithStandardInput()
-public let standardoutput = File.fileHandleWithStandardOutput()
-public let standarderror = File.fileHandleWithStandardError()
+public let standardinput = FileHandle.fileHandleWithStandardInput()
+public let standardoutput = FileHandle.fileHandleWithStandardOutput()
+public let standarderror = FileHandle.fileHandleWithStandardError()

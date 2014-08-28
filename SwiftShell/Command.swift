@@ -48,7 +48,7 @@ Run a shell command synchronously.
 */
 public func run (shellcommand: String)(input: ReadableStreamType) -> ReadableStreamType {
 	let task = newtask(shellcommand)
-	task.standardInput = input as File
+	task.standardInput = input as FileHandle
 	
 	let output = NSPipe ()
 	task.standardOutput = output
