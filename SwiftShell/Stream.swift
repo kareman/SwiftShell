@@ -51,7 +51,7 @@ public func stream (text: String) -> ReadableStreamType {
 }
 
 /** 
-Creates a stream from a function returning a  generator function, which is called everytime the stream is  asked for more text.
+Creates a stream from a function returning a generator function, which is called everytime the stream is asked for more text.
 
 stream {
 	// initialisation...
@@ -61,7 +61,7 @@ stream {
 	}
 }
 
-:returns:  The output stream.
+:returns: The output stream.
 */
 public func stream ( closure:() -> () -> String? ) -> ReadableStreamType {
 	let getmoretext = closure()

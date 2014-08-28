@@ -15,11 +15,11 @@ public func |> <T,U>(lhs: T, rhs: T -> U) -> U {
 
 /* crashes the compiler (beta 6)
 /**
-    Sequence |>  (sorted, {<})  
+	Sequence |> (sorted, {<}) 
 
-  leads to
+leads to
 
-    sorted( Sequence, {<})
+	sorted( Sequence, {<})
 */
 public func |> <T,U,V>(lhs: T, rhs:((T,V) -> U, V)) -> U {
 	return rhs.0(lhs, rhs.1 )

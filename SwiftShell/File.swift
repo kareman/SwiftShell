@@ -31,7 +31,7 @@ extension File: ReadableStreamType {
 		return split(delimiter: "\n")(stream: self)
 	}
 
-    public func writeTo<Target : OutputStreamType>(inout target: Target) {
+	public func writeTo<Target : OutputStreamType>(inout target: Target) {
 		target.write(self.read())
 	}
 
