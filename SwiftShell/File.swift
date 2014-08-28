@@ -73,6 +73,7 @@ public func open(path: String, mode: FileMode = .Read) -> File {
 	return file!
 }
 
+public let environment = NSProcessInfo.processInfo().environment as [String: String]
 public let standardinput = File.fileHandleWithStandardInput()
 public let standardoutput = File.fileHandleWithStandardOutput()
 public let standarderror = File.fileHandleWithStandardError()
