@@ -1,5 +1,5 @@
 //
-// File_Tests.swift
+// FileHandle_Tests.swift
 // SwiftShell
 //
 // Created by Kåre Morstøl on 19/08/14.
@@ -9,7 +9,7 @@
 import SwiftShell
 import XCTest
 
-class File_Tests: XCTestCase {
+class FileHandle_Tests: XCTestCase {
 
 	// waiting for error handling to be implemented
 	func notestOpenForReadingFileWhichDoesNotExist() {
