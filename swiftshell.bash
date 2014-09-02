@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# swiftshell.bash
-# SwiftShell
 #
-# Created by Kåre Morstøl on 24/08/14.
-# Copyright (c) 2014 NotTooBad Software. All rights reserved.
+# SwiftShell run script
+#
 
 # The folders where Swift can find the frameworks it imports as modules.
 # SwiftShell.framework must be in one of these.
