@@ -6,7 +6,7 @@
 * http://www.eclipse.org/legal/epl-v10.html
 *
 * Contributors:
-*    Kåre Morstøl, https://github.com/kareman - initial API and implementation.
+*	Kåre Morstøl, https://github.com/kareman - initial API and implementation.
 */
 
 
@@ -34,7 +34,7 @@ Should replace the function below as it is more general and will also work with 
 
 public func |> (lhs: Streamable, inout rhs: OutputStreamType) {
 	
-	// specifically its these that crash the compiler, not the function definition.
+	// specifically it's these that crash the compiler, not the function definition.
 	// lhs.writeTo(&rhs)
 	// rhs.write(lhs.)
 	// print(lhs, &rhs)

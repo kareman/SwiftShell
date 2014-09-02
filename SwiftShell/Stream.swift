@@ -6,7 +6,7 @@
 * http://www.eclipse.org/legal/epl-v10.html
 *
 * Contributors:
-*    Kåre Morstøl, https://github.com/kareman - initial API and implementation.
+*	Kåre Morstøl, https://github.com/kareman - initial API and implementation.
 */
 
 import Foundation
@@ -54,7 +54,7 @@ public func stream (text: String) -> ReadableStreamType {
 }
 
 /** 
-Creates a stream from a function returning a generator function, which is called everytime the stream is asked for more text.
+Creates a stream from a function returning a generator function, which is called every time the stream is asked for more text.
 
 stream {
 	// initialisation...
@@ -91,7 +91,7 @@ public func stream <Seq:SequenceType where Seq.Generator.Element == String>(sequ
 	}
 }
 
-/** For splitting a stream into parts separated by "delimiter". */
+/** Splits a stream into parts separated by "delimiter". */
 struct StringStreamGenerator : GeneratorType {
 	private let stream: ReadableStreamType
 	private	let delimiter: String
@@ -125,7 +125,7 @@ struct StringStreamGenerator : GeneratorType {
 	}
 }
 
-/** Split a stream lazily */
+/** Splits a stream lazily */
 public func split(delimiter: String = "\n")(stream: ReadableStreamType) -> SequenceOf<String> {
 	return SequenceOf({StringStreamGenerator (stream: stream, delimiter: delimiter)})
 }

@@ -6,7 +6,7 @@
 * http://www.eclipse.org/legal/epl-v10.html
 *
 * Contributors:
-*    Kåre Morstøl, https://github.com/kareman - initial API and implementation.
+*	Kåre Morstøl, https://github.com/kareman - initial API and implementation.
 */
 
 import Foundation

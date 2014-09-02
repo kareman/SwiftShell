@@ -6,7 +6,7 @@
 * http://www.eclipse.org/legal/epl-v10.html
 *
 * Contributors:
-*    Kåre Morstøl, https://github.com/kareman - initial API and implementation.
+*	Kåre Morstøl, https://github.com/kareman - initial API and implementation.
 */
 
 import Foundation
@@ -77,6 +77,6 @@ public func open(path: String, mode: FileMode = .Read) -> FileHandle {
 }
 
 public let environment = NSProcessInfo.processInfo().environment as [String: String]
-public let standardinput = FileHandle.fileHandleWithStandardInput()  as ReadableStreamType
+public let standardinput = FileHandle.fileHandleWithStandardInput() as ReadableStreamType
 public let standardoutput = FileHandle.fileHandleWithStandardOutput() as WriteableStreamType
 public let standarderror = FileHandle.fileHandleWithStandardError() as WriteableStreamType
