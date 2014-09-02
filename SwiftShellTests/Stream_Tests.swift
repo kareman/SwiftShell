@@ -46,7 +46,15 @@ class Stream_Tests: XCTestCase {
 		stream("this goes in") |> writable
 		
 		XCTAssertEqual(readable.readSome()!, "this goes in")
-		
 	}
+
+	func testCommandChainToStream () {
+		var (writable, readable) = streams()
+		
+		SwiftShell.run("echo this is streamed") |> SwiftShell.run("wc -w") |> writable
+		
+		XCTAssertEqual(readable.readSome()!.trim(), "3")
+	}
+
 	
 }

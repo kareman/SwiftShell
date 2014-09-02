@@ -6,7 +6,7 @@
 * http://www.eclipse.org/legal/epl-v10.html
 *
 * Contributors:
-*    Kåre Morstøl, https://github.com/kareman - initial API and implementation.
+*	Kåre Morstøl, https://github.com/kareman - initial API and implementation.
 */
 
 import Foundation
@@ -15,20 +15,49 @@ private func newtask (shellcommand: String) -> NSTask {
 	let task = NSTask()
 	task.arguments = ["-c", shellcommand]
 	task.launchPath = "/bin/bash"
-
+	
 	return task
 }
 
+// TODO: explain thoroughly why this local state monstrosity is necessary.
+// Summary: it is used exclusively for sending a stream through the forward operator and use it as standardInput in a run command.
+// Required to enable "func run (shellcommand: String) -> ReadableStreamType" to also be run by itself on a single line.
+private var _nextinput_: ReadableStreamType?
+
+/**
+Specific handling of func run (shellcommand: String) -> ReadableStreamType on the right side using the stream on the 
+left side as standard input.
+
+Warning: is only meant to be used with the "run" command, but could also unintentionally catch other uses of
+"ReadableStreamType |> ReadableStreamType", though that statement doesn't make any sense.
+*/
+public func |> (lhs: ReadableStreamType, rhs: @autoclosure () -> ReadableStreamType) -> ReadableStreamType {
+	assert(_nextinput_ == nil)
+	_nextinput_ = lhs
+	let result = rhs()
+	if _nextinput_ != nil {
+		standarderror.write("The statement 'ReadableStreamType |> ReadableStreamType' doesn't make any sense.")
+		exit(1)
+	}
+	return result
+}
+
 /** 
-Run a shell command synchronously with no standard input. 
+Run a shell command synchronously with no standard input,
+of if to the right of a "ReadableStreamType |> ", use the stream on the left side as standard input.
 
 :returns: Standard output
 */
 public func run (shellcommand: String) -> ReadableStreamType {
 	let task = newtask(shellcommand)
-
+	
 	// avoids implicit reading of the main script's standardInput
-	task.standardInput = NSPipe ()
+	if let input = _nextinput_ {
+		task.standardInput = input as FileHandle
+		_nextinput_ = nil
+	} else {
+		task.standardInput = NSPipe ()
+	}
 	
 	let output = NSPipe ()
 	task.standardOutput = output
@@ -42,21 +71,3 @@ public func run (shellcommand: String) -> ReadableStreamType {
 	return output.fileHandleForReading
 }
 
-/** 
-Run a shell command synchronously.
-
-:param: input	Standard input.
-
-:returns:		Standard output
-*/
-public func run (shellcommand: String)(input: ReadableStreamType) -> ReadableStreamType {
-	let task = newtask(shellcommand)
-	task.standardInput = input as FileHandle
-	
-	let output = NSPipe ()
-	task.standardOutput = output
-	task.launch()
-	task.waitUntilExit()
-	
-	return output.fileHandleForReading
-}

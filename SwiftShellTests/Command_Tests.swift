@@ -11,6 +11,10 @@ import XCTest
 
 class Command_Tests: XCTestCase {
 
+	func testSimpleCommand() {
+		SwiftShell.run("echo")
+	}
+	
 	func testSimpleCommandWithOutput() {
 		XCTAssertEqual(SwiftShell.run("echo this is streamed").read(), "this is streamed\n")
 	}
