@@ -77,6 +77,6 @@ public func open(path: String, mode: FileMode = .Read) -> FileHandle {
 }
 
 public let environment = NSProcessInfo.processInfo().environment as [String: String]
-public let standardinput = FileHandle.fileHandleWithStandardInput()
-public let standardoutput = FileHandle.fileHandleWithStandardOutput()
-public let standarderror = FileHandle.fileHandleWithStandardError()
+public let standardinput = FileHandle.fileHandleWithStandardInput()  as ReadableStreamType
+public let standardoutput = FileHandle.fileHandleWithStandardOutput() as WriteableStreamType
+public let standarderror = FileHandle.fileHandleWithStandardError() as WriteableStreamType
