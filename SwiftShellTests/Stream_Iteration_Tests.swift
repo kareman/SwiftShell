@@ -32,6 +32,7 @@ class Stream_Iteration_Tests: XCTestCase {
 		XCTAssertEqual(["line 1"] , Array(stream(["line 1","\n"]).lines()))
 		XCTAssertEqual(["line 1"] , Array(stream(["li","ne"," 1"]).lines()))
 		XCTAssertEqual(["line 1", "", "line 3"] , Array(stream(["line 1\n","\n","line 3"]).lines()))
+		XCTAssertEqual(["line 1", "", "line 3"] , Array(stream(["line 1\n","\nline 3"]).lines()))
 		XCTAssertEqual(["", "line 2", "line 3"] , Array(stream(["\nline 2\n","line 3"]).lines()))
 		XCTAssertEqual(["", "", "line 3"] , Array(stream(["\n","\nli","ne 3"]).lines()))		
 	}
