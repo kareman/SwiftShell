@@ -29,7 +29,7 @@ public func |> <T,U,V>(lhs: T, rhs:((T,V) -> U, V)) -> U {
 }
 */
 
-/* crashes the compiler (beta 6).
+/* crashes the compiler (beta 7).
 Should replace the function below as it is more general and will also work with strings.
 
 public func |> (lhs: Streamable, inout rhs: OutputStreamType) {
