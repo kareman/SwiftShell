@@ -7,8 +7,10 @@ A Swift module for shell scripting.
 
 - In the Terminal, go to where you want to download SwiftShell.
 - Run
+
         git clone https://github.com/kareman/SwiftShell.git 
         cd SwiftShell
+
 - Copy/link `Div/swiftshell` to your bin folder or anywhere in your PATH.
 - To install the framework, either:
   - run `xcodebuild install` from the project's root folder. This will install the SwiftShell framework in ~/Library/Frameworks.
@@ -58,5 +60,4 @@ run("echo this is streamed") |> run("wc -w") |> standardoutput
 
 ## LICENSE
 
-Copyright (c) 2014 Kåre Morstøl (NotTooBad Software).
-All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
