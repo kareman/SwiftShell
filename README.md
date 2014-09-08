@@ -7,10 +7,8 @@ A Swift module for shell scripting.
 
 - In the Terminal, go to where you want to download SwiftShell.
 - Run
-```
-git clone https://github.com/kareman/SwiftShell.git 
-cd SwiftShell
-```
+        git clone https://github.com/kareman/SwiftShell.git 
+        cd SwiftShell
 - Copy/link `Div/swiftshell` to your bin folder or anywhere in your PATH.
 - To install the framework, either:
   - run `xcodebuild install` from the project's root folder. This will install the SwiftShell framework in ~/Library/Frameworks.
