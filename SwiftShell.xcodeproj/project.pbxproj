@@ -21,6 +21,7 @@
 		BAAE160B19A4007700DA3462 /* Stream_Iteration_SpeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE160A19A4007700DA3462 /* Stream_Iteration_SpeedTests.swift */; };
 		BAAE160E19A4014900DA3462 /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAAE15D019A3FB5E00DA3462 /* SwiftShell.framework */; };
 		BAB0F87E19A6CD6C000191AB /* long text.txt in Resources */ = {isa = PBXBuildFile; fileRef = BAB0F87D19A6CD6C000191AB /* long text.txt */; };
+		BAB5EBC319BF65350083971B /* shorttext.txt in Resources */ = {isa = PBXBuildFile; fileRef = BAB5EBC219BF65350083971B /* shorttext.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		BAAE160419A3FFEC00DA3462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAAE160A19A4007700DA3462 /* Stream_Iteration_SpeedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Iteration_SpeedTests.swift; sourceTree = "<group>"; };
 		BAB0F87D19A6CD6C000191AB /* long text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "long text.txt"; sourceTree = "<group>"; };
+		BAB5EBC219BF65350083971B /* shorttext.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shorttext.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 		BAAE15DD19A3FB5E00DA3462 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BAB5EBC219BF65350083971B /* shorttext.txt */,
 				BAAE15DE19A3FB5E00DA3462 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -297,6 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAB5EBC319BF65350083971B /* shorttext.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
