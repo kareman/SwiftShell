@@ -51,3 +51,10 @@ Prints one stream to another.
 public func |> (lhs: ReadableStreamType, rhs: WriteableStreamType) {
 	 rhs.write(lhs.read())
 }
+
+/**
+Prints something Printable, like a String, to a writable stream.
+*/
+public func |> (lhs: Printable, rhs: WriteableStreamType) {
+	rhs.write(lhs.description)
+}

@@ -48,6 +48,14 @@ class Stream_Tests: XCTestCase {
 		XCTAssertEqual(readable.readSome()!, "this goes in")
 	}
 
+	func testPrintStringToStream () {
+		var (writable, readable) = streams()
+		
+		"this goes in" |> writable
+		
+		XCTAssertEqual(readable.readSome()!, "this goes in")
+	}
+
 	func testCommandChainToStream () {
 		var (writable, readable) = streams()
 		
