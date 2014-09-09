@@ -35,6 +35,6 @@ class FileHandle_Tests: XCTestCase {
 			contents.write(line)
 		}
 		
-		XCTAssertFalse(contents.isEmpty)
+
 	}
 }
