@@ -16,6 +16,7 @@ xcuserdata
 DerivedData
 *.hmap
 *.ipa
+*.xctimeline
 
 # CocoaPods
 #
