@@ -29,22 +29,20 @@ public func |> <T,U,V>(lhs: T, rhs:((T,V) -> U, V)) -> U {
 }
 */
 
-/* crashes the compiler (beta 7).
-Should replace the function below as it is more general and will also work with strings.
-
+/* crashes the compiler (6.1 beta).
+Should replace other implementations of "|> (lhs: <whatever>, rhs: WriteableStreamType)" 
+as it is more general and will also work with strings.
 public func |> (lhs: Streamable, inout rhs: OutputStreamType) {
 	
 	// specifically it's these that crash the compiler, not the function definition.
 	// lhs.writeTo(&rhs)
-	// rhs.write(lhs.)
 	// print(lhs, &rhs)
 	
 }
 */
 
-
 /**
-Prints one stream to another.
+Writes one stream to another.
 
 	readablestream |> writablestream
 */
@@ -53,8 +51,15 @@ public func |> (lhs: ReadableStreamType, rhs: WriteableStreamType) {
 }
 
 /**
-Prints something Printable, like a String, to a writable stream.
+Writes something Printable to a writable stream.
 */
 public func |> (lhs: Printable, rhs: WriteableStreamType) {
 	rhs.write(lhs.description)
+}
+
+/**
+Writes a String to a writable stream.
+*/
+public func |> (lhs: String, rhs: WriteableStreamType) {
+	rhs.write(lhs)
 }
