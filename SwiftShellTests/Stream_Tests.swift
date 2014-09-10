@@ -35,17 +35,12 @@ class Stream_Tests: XCTestCase {
 		XCTAssertEqual( stream(["item 1","item 2"]).read(), "item 1item 2")
 	}
 	
-	func streams () -> (WriteableStreamType, ReadableStreamType) {
-		let pipe = NSPipe()
-		return (pipe.fileHandleForWriting, pipe.fileHandleForReading)
-	}
-	
 	func testPrintStreamToStream () {
 		var (writable, readable) = streams()
 		
 		stream("this goes in") |> writable
 		
-		XCTAssertEqual(readable.readSome()!, "this goes in")
+		XCTAssertEqual( readable.readSome()!, "this goes in")
 	}
 
 	func testPrintStringToStream () {
@@ -53,7 +48,7 @@ class Stream_Tests: XCTestCase {
 		
 		"this goes in" |> writable
 		
-		XCTAssertEqual(readable.readSome()!, "this goes in")
+		XCTAssertEqual( readable.readSome()!, "this goes in")
 	}
 
 	func testCommandChainToStream () {
@@ -61,7 +56,7 @@ class Stream_Tests: XCTestCase {
 		
 		SwiftShell.run("echo this is streamed") |> SwiftShell.run("wc -w") |> writable
 		
-		XCTAssertEqual(readable.readSome()!.trim(), "3")
+		XCTAssertEqual( readable.readSome()!.trim(), "3")
 	}
 
 	

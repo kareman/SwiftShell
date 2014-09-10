@@ -91,6 +91,16 @@ public func stream <Seq:SequenceType where Seq.Generator.Element == String>(sequ
 	}
 }
 
+/** 
+Returns a writable stream and a readable stream. What you write to the 1st one can be read from the 2nd one.
+Make sure to call closeStream() on the writable stream before you call read() on the readable one.
+*/
+public func streams () -> (WriteableStreamType, ReadableStreamType) {
+	let pipe = NSPipe()
+	return (pipe.fileHandleForWriting, pipe.fileHandleForReading)
+}
+
+
 /** Splits a stream into parts separated by "delimiter". */
 struct StringStreamGenerator : GeneratorType {
 	private let stream: ReadableStreamType
