@@ -47,7 +47,9 @@ Writes one stream to another.
 	readablestream |> writablestream
 */
 public func |> (lhs: ReadableStreamType, rhs: WriteableStreamType) {
-	 rhs.write(lhs.read())
+	while let some = lhs.readSome() {
+		rhs.write(some)
+	}
 }
 
 /**
