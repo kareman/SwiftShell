@@ -5,24 +5,27 @@ A Swift module for shell scripting.
 
 ##  Usage
 
-#### Pipe several commands together
+Launch shell commands with `run("command")`. The output is a readable stream which you can `read()`, `readSome()` (read in parts, for large amounts of text) or split into `lines()`. For in-line commands you can use `$("command")`.
 
 ```swift
 #!/usr/bin/env swiftshell
 
 import SwiftShell
 
-run("echo this is streamed") |> run("wc -w") |> standardoutput 
+let result = run("some shell command")
+print( "The time and date is " + $("date") )
+```
+
+#### Pipe several commands together
+
+```swift
+run("echo this is piped to the next command") |> run("wc -w") |> standardoutput 
 ```
 
 #### Read a file line by line
 
 ```swift
-#!/usr/bin/env swiftshell
-
-import SwiftShell
-
-for line in open("../shorttext.txt").lines() {
+for line in open(filename).lines() {
 	// Do something with each line
 }
 ```
@@ -30,10 +33,6 @@ for line in open("../shorttext.txt").lines() {
 #### Print standard input with line numbers
 
 ```swift
-#!/usr/bin/env swiftshell
-
-import SwiftShell
-
 var i = 1
 for line in standardinput.lines() {
 	print("line \(i++): ")
@@ -46,12 +45,7 @@ Launch with e.g. `ls | print_linenumbers.swift`
 #### List all executables in PATH
 
 ```swift
-#!/usr/bin/env swiftshell
-
-import SwiftShell
-
 let directories = environment["PATH"]!.split(":")
-
 for directory in directories {
 	run("find \"\(directory)\" -type f -perm +ugo+x -print") |> standardoutput
 }
