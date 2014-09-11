@@ -51,11 +51,11 @@ of if to the right of a "ReadableStreamType |> ", use the stream on the left sid
 public func run (shellcommand: String) -> ReadableStreamType {
 	let task = newtask(shellcommand)
 	
-	// avoids implicit reading of the main script's standardInput
 	if let input = _nextinput_ {
 		task.standardInput = input as FileHandle
 		_nextinput_ = nil
 	} else {
+		// avoids implicit reading of the main script's standardInput
 		task.standardInput = NSPipe ()
 	}
 	
@@ -69,5 +69,20 @@ public func run (shellcommand: String) -> ReadableStreamType {
 	task.waitUntilExit()
 	
 	return output.fileHandleForReading
+}
+
+/** Shortcut for in-line command, returns output as String. */
+public func $ (shellcommand: String) -> String {
+	let task = newtask(shellcommand)
+	
+	// avoids implicit reading of the main script's standardInput
+	task.standardInput = NSPipe ()
+	
+	let output = NSPipe ()
+	task.standardOutput = output
+	task.launch()
+	task.waitUntilExit()
+	
+	return output.fileHandleForReading.read().trim()
 }
 
