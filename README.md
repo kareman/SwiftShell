@@ -7,7 +7,7 @@ A Swift module for shell scripting.
 
 Launch shell commands with `run("command")`. The output is a readable stream which you can `read()`, `readSome()` (read in parts, for large amounts of text) or split into `lines()`. For in-line commands you can use `$("command")`.
 
-```swift
+```
 #!/usr/bin/env swiftshell
 
 import SwiftShell
@@ -19,7 +19,7 @@ print( "The time and date is " + $("date") )
 #### Pipe several commands together
 
 ```swift
-run("echo this is piped to the next command") |> run("wc -w") |> standardoutput 
+run("echo piped to the next command") |> run("wc -w") |> standardoutput 
 ```
 
 #### Read a file line by line
