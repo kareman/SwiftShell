@@ -43,7 +43,7 @@
 
 /* Begin PBXFileReference section */
 		BA08E7D619AA3D8D002DA02F /* Scripts_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts_Tests.swift; sourceTree = "<group>"; };
-		BA2E031E19B5F01C005B1227 /* Test area.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "Test area.playground"; sourceTree = "<group>"; };
+		BA2E031E19B5F01C005B1227 /* Test area.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = "Test area.playground"; path = "Div/Test area.playground"; sourceTree = "<group>"; };
 		BA338BF719A6897B00654EC4 /* Stream_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Tests.swift; sourceTree = "<group>"; };
 		BAAE15D019A3FB5E00DA3462 /* SwiftShell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftShell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAE15D419A3FB5E00DA3462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
