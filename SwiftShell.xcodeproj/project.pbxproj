@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BA08E7D719AA3D8D002DA02F /* Scripts_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08E7D619AA3D8D002DA02F /* Scripts_Tests.swift */; };
 		BA338BF819A6897B00654EC4 /* Stream_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA338BF719A6897B00654EC4 /* Stream_Tests.swift */; };
+		BAA4EEC819C77BA3006CEB87 /* XCTestCase_Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4EEC719C77BA3006CEB87 /* XCTestCase_Additions.swift */; };
+		BAA4EECB19C77F0F006CEB87 /* XCTestCase_Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4EEC719C77BA3006CEB87 /* XCTestCase_Additions.swift */; };
 		BAAE15EE19A3FD4D00DA3462 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15E919A3FD4D00DA3462 /* Stream.swift */; };
 		BAAE15EF19A3FD4D00DA3462 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15EA19A3FD4D00DA3462 /* Command.swift */; };
 		BAAE15F019A3FD4D00DA3462 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE15EB19A3FD4D00DA3462 /* String.swift */; };
@@ -45,6 +47,7 @@
 		BA08E7D619AA3D8D002DA02F /* Scripts_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts_Tests.swift; sourceTree = "<group>"; };
 		BA2E031E19B5F01C005B1227 /* Test area.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = "Test area.playground"; path = "Div/Test area.playground"; sourceTree = "<group>"; };
 		BA338BF719A6897B00654EC4 /* Stream_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Tests.swift; sourceTree = "<group>"; };
+		BAA4EEC719C77BA3006CEB87 /* XCTestCase_Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCTestCase_Additions.swift; path = SwiftShellTests/XCTestCase_Additions.swift; sourceTree = "<group>"; };
 		BAAE15D019A3FB5E00DA3462 /* SwiftShell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftShell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAAE15D419A3FB5E00DA3462 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAAE15DB19A3FB5E00DA3462 /* SwiftShellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftShellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +102,14 @@
 			path = Scripts;
 			sourceTree = "<group>";
 		};
+		BAA4EECA19C77ED6006CEB87 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BAA4EEC719C77BA3006CEB87 /* XCTestCase_Additions.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		BAAE15C619A3FB5D00DA3462 = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +117,7 @@
 				BAAE15D219A3FB5E00DA3462 /* SwiftShell */,
 				BAAE15DC19A3FB5E00DA3462 /* SwiftShellTests */,
 				BAAE160219A3FFEC00DA3462 /* SwiftShell_Speed_Tests */,
+				BAA4EECA19C77ED6006CEB87 /* Common */,
 				BAAE15D119A3FB5E00DA3462 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -332,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA338BF819A6897B00654EC4 /* Stream_Tests.swift in Sources */,
+				BAA4EEC819C77BA3006CEB87 /* XCTestCase_Additions.swift in Sources */,
 				BAAE15F719A3FDC200DA3462 /* FileHandle_Tests.swift in Sources */,
 				BAAE15F919A3FDC200DA3462 /* Stream_Iteration_Tests.swift in Sources */,
 				BAAE15FA19A3FDC200DA3462 /* String_Partition_Tests.swift in Sources */,
@@ -344,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAA4EECB19C77F0F006CEB87 /* XCTestCase_Additions.swift in Sources */,
 				BAAE160B19A4007700DA3462 /* Stream_Iteration_SpeedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
