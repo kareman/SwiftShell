@@ -21,7 +21,7 @@ extension FileHandle: ReadableStreamType {
 		if data.length == 0 {
 			return nil
 		} else {
-			return NSString(data: data, encoding: streamencoding) as String
+			return (NSString(data: data, encoding: streamencoding) as String)
 		}
 	}
 	
