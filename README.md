@@ -64,6 +64,10 @@ for directory in directories {
   - run `xcodebuild install` from the project's root folder. This will install the SwiftShell framework in ~/Library/Frameworks.
   - _or_ run `xcodebuild` and copy the resulting framework from the build folder to your library folder of choice. If that is not "~/Library/Frameworks", "/Library/Frameworks" or a folder mentioned in the $DYLD_FRAMEWORK_PATH environment variable then you need to add your folder to $DYLD_FRAMEWORK_PATH.
 
+  - NOTE: if using Xcode 6.1 beta 2 (and possibly later), Release builds of SwiftShell will crash when using streams. Work around this by using debug builds instead:
+
+        xcodebuild -configuration Debug install
+
 
 ## LICENSE
 
