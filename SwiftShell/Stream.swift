@@ -139,3 +139,40 @@ struct StringStreamGenerator : GeneratorType {
 public func split(delimiter: String = "\n")(stream: ReadableStreamType) -> SequenceOf<String> {
 	return SequenceOf({StringStreamGenerator (stream: stream, delimiter: delimiter)})
 }
+
+/* crashes the compiler (6.1 beta).
+Should replace other implementations of "|> (lhs: <whatever>, rhs: WriteableStreamType)" 
+as it is more general and will also work with strings.
+public func |> (lhs: Streamable, inout rhs: OutputStreamType) {
+
+// specifically it's these that crash the compiler, not the function definition.
+// lhs.writeTo(&rhs)
+// print(lhs, &rhs)
+
+}
+*/
+
+/**
+Writes one stream to another.
+
+readablestream |> writablestream
+*/
+public func |> (lhs: ReadableStreamType, rhs: WriteableStreamType) {
+	while let some = lhs.readSome() {
+		rhs.write(some)
+	}
+}
+
+/**
+Writes something Printable to a writable stream.
+*/
+public func |> (lhs: Printable, rhs: WriteableStreamType) {
+	rhs.write(lhs.description)
+}
+
+/**
+Writes a String to a writable stream.
+*/
+public func |> (lhs: String, rhs: WriteableStreamType) {
+	rhs.write(lhs)
+}
