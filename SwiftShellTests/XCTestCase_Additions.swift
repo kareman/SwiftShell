@@ -1,9 +1,9 @@
 //
-//  XCTestCase_Additions.swift
-//  SwiftShell
+// XCTestCase_Additions.swift
+// SwiftShell
 //
-//  Created by Kåre Morstøl on 15/09/14.
-//  Copyright (c) 2014 NotTooBad Software. All rights reserved.
+// Created by Kåre Morstøl on 15/09/14.
+// Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
 import XCTest
