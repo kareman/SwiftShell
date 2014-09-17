@@ -30,6 +30,23 @@ for line in open(filename).lines() {
 }
 ```
 
+#### List all executables in PATH
+
+```swift
+let directories = environment["PATH"]!.split(":")
+for directory in directories {
+	run("find \"\(directory)\" -type f -perm +ugo+x -print") |> standardoutput
+}
+```
+
+or in a Functional Programming style:
+
+```swift
+environment["PATH"]! |> split(":") 
+	|> map { dir in run("find \"\(dir)\" -type f -perm +ugo+x -print") } 
+	|> standardoutput
+```
+
 #### Print standard input with line numbers
 
 ```swift
@@ -41,15 +58,6 @@ for line in standardinput.lines() {
 ```
 
 Launch with e.g. `ls | print_linenumbers.swift`
-
-#### List all executables in PATH
-
-```swift
-let directories = environment["PATH"]!.split(":")
-for directory in directories {
-	run("find \"\(directory)\" -type f -perm +ugo+x -print") |> standardoutput
-}
-```
 
 ## Installation
 

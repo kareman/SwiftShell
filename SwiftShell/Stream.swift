@@ -163,16 +163,19 @@ public func |> (lhs: ReadableStreamType, rhs: WriteableStreamType) {
 	}
 }
 
-/**
-Writes something Printable to a writable stream.
-*/
+/** Writes something Printable to a writable stream. */
 public func |> (lhs: Printable, rhs: WriteableStreamType) {
 	rhs.write(lhs.description)
 }
 
-/**
-Writes a String to a writable stream.
-*/
+/** Writes a String to a writable stream. */
 public func |> (lhs: String, rhs: WriteableStreamType) {
 	rhs.write(lhs)
+}
+
+/** Writes a sequence of streams to another stream. */
+public func |> <S : SequenceType where S.Generator.Element == ReadableStreamType>(lhs: S, rhs: WriteableStreamType) {
+	for stream in lhs {
+		stream |> rhs
+	}
 }
