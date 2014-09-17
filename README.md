@@ -66,7 +66,7 @@ for directory in directories {
 
   - NOTE: if using Xcode 6.1 beta 2 (and possibly later), Release builds of SwiftShell will crash when using streams. Work around this by using debug builds instead:
 
-        xcodebuild -configuration Debug install
+            xcodebuild -configuration Debug install
 
 
 ## LICENSE
