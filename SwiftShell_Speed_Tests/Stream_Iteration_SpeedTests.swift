@@ -15,7 +15,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 
 	func testSpeedNSStringSplit () {
 
-		// won't work outside of a method (6.1 beta 1)
+		// won't work outside of a method (6.1 beta 2)
 		let longtextpath = pathForTestResource("long text", type: "txt")
 
 		self.measureBlock() {
