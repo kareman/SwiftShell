@@ -68,5 +68,13 @@ class Stream_Tests: XCTestCase {
 		XCTAssertEqual( readable.readSome()!.trim(), "3")
 	}
 
-	
+	func testSequenceOfStreamsToStream () {
+		var (writable, readable) = streams()
+		
+		// make sure the array isn't printed as a Printable.
+		SequenceOf([stream("line 1"), stream("line 2"), stream("line 3")].generate()) |> writable
+		
+		XCTAssertEqual( readable.readSome()!.trim(), "line 1line 2line 3")
+	}
+
 }
