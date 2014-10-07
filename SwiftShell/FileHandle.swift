@@ -16,7 +16,7 @@ public typealias FileHandle = NSFileHandle
 
 extension FileHandle: ReadableStreamType {
 	
-	public func readSome() -> String? {
+	public func readSome () -> String? {
 		let data: NSData = self.availableData
 		if data.length == 0 {
 			return nil
@@ -25,16 +25,16 @@ extension FileHandle: ReadableStreamType {
 		}
 	}
 	
-	public func read() -> String {
+	public func read () -> String {
 		let data: NSData = self.readDataToEndOfFile()
 		return NSString(data: data, encoding: streamencoding) as String
 	}
 	
-	public func lines() -> SequenceOf <String >{
+	public func lines () -> SequenceOf<String> {
 		return split(delimiter: "\n")(stream: self)
 	}
 
-	public func writeTo<Target : OutputStreamType>(inout target: Target) {
+	public func writeTo<Target : OutputStreamType> (inout target: Target) {
 		target.write(self.read())
 	}
 
@@ -55,7 +55,7 @@ public enum FileMode {
 	case Read, Write, ReadAndWrite
 }
 
-public func open(path: String, mode: FileMode = .Read) -> FileHandle {
+public func open (path: String, mode: FileMode = .Read) -> FileHandle {
 	var filehandle: FileHandle?
 	switch mode {
 		case .Read:
