@@ -6,7 +6,6 @@ set -e
 # Exit on any error in a pipeline.
 set -o pipefail
 
-./callswiftscriptfromswift.swift
 #./exitswhenopeningnon-existentfile.swift
 ./listallexecutablesinpath.swift
 ./print_arguments.swift 1 2
@@ -14,3 +13,4 @@ set -o pipefail
 ls | ./print_linenumbers.swift
 ./readfilelinebyline.swift
 ./stream_out.swift
+./callswiftscriptfromswift.swift
