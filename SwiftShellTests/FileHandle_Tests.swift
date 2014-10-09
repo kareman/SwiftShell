@@ -24,7 +24,5 @@ class FileHandle_Tests: XCTestCase {
 		for line in open(shorttextpath).lines() {
 			contents.write(line)
 		}
-		
-
 	}
 }

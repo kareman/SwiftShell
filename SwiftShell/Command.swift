@@ -44,7 +44,7 @@ public func |> (lhs: ReadableStreamType, rhs: @autoclosure () -> ReadableStreamT
 
 /** 
 Run a shell command synchronously with no standard input,
-of if to the right of a "ReadableStreamType |> ", use the stream on the left side as standard input.
+or if to the right of a "ReadableStreamType |> ", use the stream on the left side as standard input.
 
 :returns: Standard output
 */
