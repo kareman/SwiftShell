@@ -77,4 +77,15 @@ class Stream_Tests: XCTestCase {
 		XCTAssertEqual( readable.readSome()!.trim(), "line 1line 2line 3")
 	}
 
+	func testChainWithSequenceOfStreamsPrintedToStream () {
+		var (writable, readable) = streams()
+		let dict = ["test":"line 1:line 2:line 3"]
+		
+		dict["test"]! |> split(":") 
+			|> map { line in SwiftShell.run("echo \(line)") } 
+			|> writable
+
+		XCTAssertEqual( readable.readSome()!.trim(), "line 1\nline 2\nline 3")
+	}
+	
 }
