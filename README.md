@@ -81,12 +81,10 @@ Launch with e.g. `ls | print_linenumbers.swift`
 
 - Copy/link `Div/swiftshell` to your bin folder or anywhere in your PATH.
 - To install the framework itself, either:
-  - run `xcodebuild install` from the project's root folder. This will install the SwiftShell framework in ~/Library/Frameworks.
+  - run `xcodebuild -configuration Debug install` from the project's root folder. This will install the SwiftShell framework in ~/Library/Frameworks.
   - _or_ run `xcodebuild` and copy the resulting framework from the build folder to your library folder of choice. If that is not "~/Library/Frameworks", "/Library/Frameworks" or a folder mentioned in the $DYLD_FRAMEWORK_PATH environment variable then you need to add your folder to $DYLD_FRAMEWORK_PATH.
 
-NOTE: Release builds of SwiftShell built with Xcode 6.1 beta 2 (and possibly later) crash when using streams. Work around this by using debug builds instead:
-
-    xcodebuild -configuration Debug install
+NOTE: _Release_ builds of SwiftShell built with Xcode 6.1 GM 2 (and possibly later) crash when using streams.
 
 
 ## LICENSE
