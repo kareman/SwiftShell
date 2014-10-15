@@ -40,7 +40,7 @@ public protocol WriteableStreamType : OutputStreamType {
 	
 	func write(string: String)
 	
-	/** Must be called on local streams when done writing. */
+	/** Must be called on local streams when finished writing. */
 	func closeStream()
 }
 
@@ -141,13 +141,13 @@ public func split(delimiter: String = "\n")(stream: ReadableStreamType) -> Seque
 }
 
 /* crashes the compiler (6.1 beta).
-Should replace other implementations of "|> (lhs: <whatever>, rhs: WriteableStreamType)" 
+Should replace other implementations of "write (stream: WriteableStreamType)(input: ReadableStreamType)" 
 as it is more general and will also work with strings.
-public func |> (lhs: Streamable, inout rhs: OutputStreamType) {
+public func write (stream: WriteableStreamType)(input: Streamable) {
 
 // specifically it's these that crash the compiler, not the function definition.
-// lhs.writeTo(&rhs)
-// print(lhs, &rhs)
+// input.writeTo(&stream)
+// print(input, &stream)
 
 }
 */
@@ -155,27 +155,35 @@ public func |> (lhs: Streamable, inout rhs: OutputStreamType) {
 /**
 Writes one stream to another.
 
-readablestream |> writablestream
+readablestream |> write(writablestream)
 */
-public func |> (lhs: ReadableStreamType, rhs: WriteableStreamType) {
-	while let some = lhs.readSome() {
-		rhs.write(some)
+public func write (stream: WriteableStreamType)(input: ReadableStreamType) {
+	while let some = input.readSome() {
+		stream.write(some)
 	}
 }
 
 /** Writes something Printable to a writable stream. */
-public func |> (lhs: Printable, rhs: WriteableStreamType) {
-	rhs.write(lhs.description)
+public func write (stream: WriteableStreamType)(input: Printable) {
+	stream.write(input.description)
 }
 
 /** Writes a String to a writable stream. */
-public func |> (lhs: String, rhs: WriteableStreamType) {
-	rhs.write(lhs)
+public func write (stream: WriteableStreamType)(input: String) {
+	stream.write(input)
 }
 
-/** Writes a sequence of streams to another stream. */
-public func |> <S : SequenceType where S.Generator.Element == ReadableStreamType>(lhs: S, rhs: WriteableStreamType) {
-	for stream in lhs {
-		stream |> rhs
+/*  Me and Swift (6.1 GM 2) are having a disagreement over whether or not it should be possible to define multiple functions which only differ in the generic “where” clause. Me and the language reference say yes, Swift says "Basic Block in function ' something something USs12SequenceType_USs13GeneratorType__FQ_Si' does not have terminator!". So until Swift comes to its senses there can only be one "write" function which takes a sequence, and that will have to be the unholy mess seen below.
+*/
+/** Writes a sequence of streams or strings to another stream. */
+public func write <S : SequenceType>(stream: WriteableStreamType)(seq: S) {
+	for item in seq {
+		if let inputstream = item as? FileHandle {
+			inputstream as ReadableStreamType |> write(stream)
+		} else if let text = item as? String {
+			stream.write(text)
+		} else {
+			preconditionFailure("SwiftShell error: Currently only sequences of strings and readable streams can be written directly to a writable stream with the global 'write' function") 
+		}
 	}
 }

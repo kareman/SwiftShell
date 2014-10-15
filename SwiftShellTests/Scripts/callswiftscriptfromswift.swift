@@ -2,4 +2,4 @@
 
 import SwiftShell
 
-run("./listallexecutablesinpath.swift") |> run("./print_linenumbers.swift") |> standardoutput 
+run("./listallexecutablesinpath.swift") |> run("./print_linenumbers.swift") |> write(standardoutput) 
