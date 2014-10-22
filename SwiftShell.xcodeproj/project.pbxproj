@@ -480,7 +480,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -584,7 +583,7 @@
 				BAAE15E219A3FB5E00DA3462 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		BAAE15E319A3FB5E00DA3462 /* Build configuration list for PBXNativeTarget "SwiftShell" */ = {
 			isa = XCConfigurationList;
@@ -593,7 +592,7 @@
 				BAAE15E519A3FB5E00DA3462 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		BAAE15E619A3FB5E00DA3462 /* Build configuration list for PBXNativeTarget "SwiftShellTests" */ = {
 			isa = XCConfigurationList;
@@ -602,7 +601,7 @@
 				BAAE15E819A3FB5E00DA3462 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		BAAE160719A3FFEC00DA3462 /* Build configuration list for PBXNativeTarget "SwiftShell_Speed_Tests" */ = {
 			isa = XCConfigurationList;
@@ -611,7 +610,7 @@
 				BAAE160919A3FFEC00DA3462 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
