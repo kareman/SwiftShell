@@ -29,4 +29,11 @@ class Pipes_Tests: XCTestCase {
 		XCTAssertEqual( result, 45 )
 	}
 	
+	func testTurnSequenceIntoArray () {
+		let numbers = [4,1,6]
+		
+		let result = SequenceOf(numbers) |> array
+		
+		XCTAssertEqual( result, [4,1,6] )
+	}
 }

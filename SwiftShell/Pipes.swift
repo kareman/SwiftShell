@@ -77,3 +77,8 @@ public func join<C : ExtensibleCollectionType, S : SequenceType where S.Generato
 		
 	return join(separator, elements)
 }
+
+/** Turn a sequence into an array. For use after the |> operator. */
+public func array <S : SequenceType, T where S.Generator.Element == T>(sequence: S) -> [T] {
+	return Array(sequence)
+}
