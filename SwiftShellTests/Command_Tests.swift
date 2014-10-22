@@ -32,4 +32,20 @@ class Command_Tests: XCTestCase {
 		let result = stream("line 1\nline 2\nline 3") |> SwiftShell.run("grep " + $("echo 2"))
 		XCTAssertEqual( result.read(), "line 2\n")
 	}
+	
+	func testParametersFromSequenceOfStrings () {
+		XCTAssertEqual( parameters(["one", "two", "three"]), "\"one\" \"two\" \"three\"" )
+	}
+	
+	func testParametersFromSequenceOfStreams () {
+		var (writable, readable) = streams()
+		
+		let result = SequenceOf([stream("one"), stream("two"), stream("three")].generate()) |> parameters
+		
+		XCTAssertEqual( result, "\"one\" \"two\" \"three\"" )
+	}
+	
+	func testParametersFromSequenceOfNumbers () {
+		XCTAssertEqual( parameters([1, 2, 3]), "\"1\" \"2\" \"3\"" )
+	}
 }
