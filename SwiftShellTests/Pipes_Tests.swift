@@ -32,7 +32,7 @@ class Pipes_Tests: XCTestCase {
 	func testTurnSequenceIntoArray () {
 		let numbers = [4,1,6]
 		
-		let result = SequenceOf(numbers) |> array
+		let result = SequenceOf(numbers) |> toArray
 		
 		XCTAssertEqual( result, [4,1,6] )
 	}
