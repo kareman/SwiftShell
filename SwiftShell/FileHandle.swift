@@ -35,9 +35,10 @@ extension FileHandle: ReadableStreamType {
 	}
 
 	public func writeTo<Target : OutputStreamType> (inout target: Target) {
-		target.write(self.read())
+		while let some = self.readSome() {
+			target.write(some)
+		}
 	}
-
 }
 
 extension FileHandle: WriteableStreamType {

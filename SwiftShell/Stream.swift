@@ -31,7 +31,7 @@ public protocol ReadableStreamType : Streamable {
 	/** Lazily splits the stream into lines. */
 	func lines() -> SequenceOf<String>
 	
-	/** Allows stream to be used by "println". */
+	/** Allows stream to be used by "println" and "toString". */
 	func writeTo<Target : OutputStreamType>(inout target: Target)
 }
 
@@ -140,50 +140,25 @@ public func split(delimiter: String = "\n")(stream: ReadableStreamType) -> Seque
 	return SequenceOf({StringStreamGenerator (stream: stream, delimiter: delimiter)})
 }
 
-/* crashes the compiler (6.1 beta).
-Should replace other implementations of "write (stream: WriteableStreamType)(input: ReadableStreamType)" 
-as it is more general and will also work with strings.
-public func write (stream: WriteableStreamType)(input: Streamable) {
-
-// specifically it's these that crash the compiler, not the function definition.
-// input.writeTo(&stream)
-// print(input, &stream)
-
-}
-*/
-
 /**
-Writes one stream to another.
+Writes something to a stream.
 
-readablestream |> write(writablestream)
+	something |> write(writablestream)
 */
-public func write (stream: WriteableStreamType)(input: ReadableStreamType) {
-	while let some = input.readSome() {
-		stream.write(some)
-	}
+public func write <T>(stream: WriteableStreamType)(input: T) {
+	stream.write( toString(input) )
 }
 
-/** Writes something Printable to a writable stream. */
-public func write (stream: WriteableStreamType)(input: Printable) {
-	stream.write(input.description)
-}
-
+// needed to avoid `write(SequenceType)` being called instead,
+// treating the string as a sequence of characters.
 /** Writes a String to a writable stream. */
 public func write (stream: WriteableStreamType)(input: String) {
 	stream.write(input)
 }
 
-/*  Me and Swift (6.1 GM 2) are having a disagreement over whether or not it should be possible to define multiple functions which only differ in the generic “where” clause. Me and the language reference say yes, Swift says "Basic Block in function ' something something USs12SequenceType_USs13GeneratorType__FQ_Si' does not have terminator!". So until Swift comes to its senses there can only be one "write" function which takes a sequence, and that will have to be the unholy mess seen below.
-*/
-/** Writes a sequence of streams or strings to another stream. */
+/** Writes a sequence to a stream. */
 public func write <S : SequenceType>(stream: WriteableStreamType)(seq: S) {
 	for item in seq {
-		if let inputstream = item as? FileHandle {
-			inputstream as ReadableStreamType |> write(stream)
-		} else if let text = item as? String {
-			stream.write(text)
-		} else {
-			preconditionFailure("SwiftShell error: Currently only sequences of strings and readable streams can be written directly to a writable stream with the global 'write' function") 
-		}
+		item |> write(stream)
 	}
 }
