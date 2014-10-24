@@ -34,7 +34,7 @@ class Command_Tests: XCTestCase {
 	}
 	
 	func testParametersFromSequenceOfStrings () {
-		XCTAssertEqual( parameters(["one", "two", "three"]), "\"one\" \"two\" \"three\"" )
+		XCTAssertEqual( parameters(["one", "two", "three"]), " \"one\" \"two\" \"three\"" )
 	}
 	
 	func testParametersFromSequenceOfStreams () {
@@ -42,10 +42,10 @@ class Command_Tests: XCTestCase {
 		
 		let result = SequenceOf([stream("one"), stream("two"), stream("three")].generate()) |> parameters
 		
-		XCTAssertEqual( result, "\"one\" \"two\" \"three\"" )
+		XCTAssertEqual( result, " \"one\" \"two\" \"three\"" )
 	}
 	
 	func testParametersFromSequenceOfNumbers () {
-		XCTAssertEqual( parameters([1, 2, 3]), "\"1\" \"2\" \"3\"" )
+		XCTAssertEqual( parameters([1, 2, 3]), " \"1\" \"2\" \"3\"" )
 	}
 }
