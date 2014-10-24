@@ -82,3 +82,12 @@ public func join<C : ExtensibleCollectionType, S : SequenceType where S.Generato
 public func toArray <S : SequenceType, T where S.Generator.Element == T>(sequence: S) -> [T] {
 	return Array(sequence)
 }
+
+/** Discard all elements in `tobedropped` from sequence. */
+public func drop <S: SequenceType, T: Equatable where S.Generator.Element == T>
+	(tobedropped: [T])
+	(sequence: S)
+	-> LazySequence<FilterSequenceView<S>> {
+
+	return sequence |> filter { !contains(tobedropped, $0) }
+}

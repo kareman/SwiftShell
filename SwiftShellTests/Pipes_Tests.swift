@@ -36,4 +36,12 @@ class Pipes_Tests: XCTestCase {
 		
 		XCTAssertEqual( result, [4,1,6] )
 	}
+	
+	func testDrop () {
+		let numbers = [1,2,3,4,5,6]
+		
+		let result = numbers |> drop([2,3,5]) |> toArray 
+		
+		XCTAssertEqual( result, [1,4,6] )
+	}
 }
