@@ -40,6 +40,10 @@ public protocol WriteableStreamType : OutputStreamType {
 	
 	func write(string: String)
 	
+	func writeln(string: String)
+
+	func writeln()
+
 	/** Must be called on local streams when finished writing. */
 	func closeStream()
 }

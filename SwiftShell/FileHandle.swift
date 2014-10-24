@@ -43,10 +43,18 @@ extension FileHandle: ReadableStreamType {
 
 extension FileHandle: WriteableStreamType {
 
-	public func write (text: String) {
-		writeData(text.dataUsingEncoding(streamencoding, allowLossyConversion:false)!)
+	public func write (string: String) {
+		writeData(string.dataUsingEncoding(streamencoding, allowLossyConversion:false)!)
 	}
 
+	public func writeln (string: String) {
+		self.write(string + "\n")
+	}
+
+	public func writeln () {
+		self.write("\n")
+	}
+	
 	public func closeStream () {
 		self.closeFile()
 	}
