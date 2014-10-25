@@ -24,7 +24,7 @@ print( "The time and date is " + $("date -u") )
 #### Pipe several commands together
 
 ```swift
-run("echo piped to the next command") |> run("wc -w") |> write(standardoutput) 
+run("echo piped to the next command") |> run("wc -w") |> writeTo(standardoutput) 
 ```
 
 #### Read a file line by line
@@ -40,7 +40,7 @@ for line in open(filename).lines() {
 ```swift
 let directories = environment["PATH"]!.split(":")
 for directory in directories {
-	run("find \"\(directory)\" -type f -perm +ugo+x -print") |> write(standardoutput)
+	run("find \"\(directory)\" -type f -perm +ugo+x -print") |> writeTo(standardoutput)
 }
 ```
 
@@ -49,7 +49,7 @@ or more Functionally:
 ```swift
 environment["PATH"]! |> split(":") 
 	|> map { dir in run("find \"\(dir)\" -type f -perm +ugo+x -print") } 
-	|> write(standardoutput)
+	|> writeTo(standardoutput)
 ```
 
 #### Print standard input with line numbers
@@ -66,7 +66,7 @@ or
 
 ```swift
 var i = 1
-standardinput.lines() |> map {line in "line \(i++): \(line)\n"} |> write(standardoutput)
+standardinput.lines() |> map {line in "line \(i++): \(line)\n"} |> writeTo(standardoutput)
 ```
 
 Launch with e.g. `ls | print_linenumbers.swift`
