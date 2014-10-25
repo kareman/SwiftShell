@@ -147,22 +147,22 @@ public func split(delimiter: String = "\n")(stream: ReadableStreamType) -> Seque
 /**
 Writes something to a stream.
 
-	something |> write(writablestream)
+	something |> writeTo(writablestream)
 */
-public func write <T>(stream: WriteableStreamType)(input: T) {
+public func writeTo <T>(stream: WriteableStreamType)(input: T) {
 	stream.write( toString(input) )
 }
 
 // needed to avoid `write(SequenceType)` being called instead,
 // treating the string as a sequence of characters.
 /** Writes a String to a writable stream. */
-public func write (stream: WriteableStreamType)(input: String) {
+public func writeTo (stream: WriteableStreamType)(input: String) {
 	stream.write(input)
 }
 
 /** Writes a sequence to a stream. */
-public func write <S : SequenceType>(stream: WriteableStreamType)(seq: S) {
+public func writeTo <S : SequenceType>(stream: WriteableStreamType)(seq: S) {
 	for item in seq {
-		item |> write(stream)
+		item |> writeTo(stream)
 	}
 }

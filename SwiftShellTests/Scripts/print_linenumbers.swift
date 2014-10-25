@@ -11,4 +11,4 @@ for line in standardinput.lines() {
 */
 
 var i = 1
-standardinput.lines() |> map {line in "line \(i++): \(line)\n"} |> write(standardoutput)
+standardinput.lines() |> map {line in "line \(i++): \(line)\n"} |> writeTo(standardoutput)
