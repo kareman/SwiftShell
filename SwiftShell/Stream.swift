@@ -23,32 +23,32 @@ public protocol ReadableStreamType : Streamable {
 	
 	:returns: more text from the stream, or nil if we have reached the end.
 	*/
-	func readSome() -> String?
+	func readSome () -> String?
 	
 	/** Reads everything at once. */
-	func read() -> String
+	func read () -> String
 	
 	/** Lazily splits the stream into lines. */
-	func lines() -> SequenceOf<String>
+	func lines () -> SequenceOf<String>
 	
 	/** Allows stream to be used by "println" and "toString". */
-	func writeTo<Target : OutputStreamType>(inout target: Target)
+	func writeTo <Target : OutputStreamType> (inout target: Target)
 }
 
 /** An output stream, like standard output and standard error. */
 public protocol WriteableStreamType : OutputStreamType {
 	
-	func write(string: String)
+	func write (string: String)
 	
-	func writeln(string: String)
+	func writeln (string: String)
 
-	func writeln()
+	func writeln ()
 
 	/** Must be called on local streams when finished writing. */
-	func closeStream()
+	func closeStream ()
 }
 
-/** Creates a stream from a String. */
+/** Create a stream from a String. */
 public func stream (text: String) -> ReadableStreamType {
 	let pipe = NSPipe()
 	let input = pipe.fileHandleForWriting
@@ -58,7 +58,7 @@ public func stream (text: String) -> ReadableStreamType {
 }
 
 /** 
-Creates a stream from a function returning a generator function, which is called every time the stream is asked for more text.
+Create a stream from a function returning a generator function, which is called every time the stream is asked for more text.
 
 stream {
 	// initialisation...
@@ -87,8 +87,8 @@ public func stream ( closure:() -> () -> String? ) -> ReadableStreamType {
 	return pipe.fileHandleForReading
 }
 
-/** Creates a stream from a sequence of Strings. */
-public func stream <Seq:SequenceType where Seq.Generator.Element == String>(sequence: Seq) -> ReadableStreamType {
+/** Create a stream from a sequence of Strings. */
+public func stream <Seq : SequenceType where Seq.Generator.Element == String>(sequence: Seq) -> ReadableStreamType {
 	return stream {
 		var generator = sequence.generate()
 		return { generator.next() }
@@ -96,7 +96,7 @@ public func stream <Seq:SequenceType where Seq.Generator.Element == String>(sequ
 }
 
 /** 
-Returns a writable stream and a readable stream. What you write to the 1st one can be read from the 2nd one.
+Return a writable stream and a readable stream. What you write to the 1st one can be read from the 2nd one.
 Make sure to call closeStream() on the writable stream before you call read() on the readable one.
 */
 public func streams () -> (WriteableStreamType, ReadableStreamType) {
@@ -105,7 +105,7 @@ public func streams () -> (WriteableStreamType, ReadableStreamType) {
 }
 
 
-/** Splits a stream into parts separated by "delimiter". */
+/** Split a stream into parts separated by "delimiter". */
 struct StringStreamGenerator : GeneratorType {
 	private let stream: ReadableStreamType
 	private	let delimiter: String
@@ -116,7 +116,7 @@ struct StringStreamGenerator : GeneratorType {
 		self.delimiter = delimiter
 	}
 	
-	/** Passes on the stream until the next occurrence of "delimiter" */
+	/** Pass on the stream until the next occurrence of "delimiter" */
 	mutating func next () -> String? {
 		let (nextpart, returneddelimiter, remainder) = cache.partition(delimiter)
 		let delimiterwasfound = returneddelimiter != ""
@@ -139,13 +139,13 @@ struct StringStreamGenerator : GeneratorType {
 	}
 }
 
-/** Splits a stream lazily */
-public func split(delimiter: String = "\n")(stream: ReadableStreamType) -> SequenceOf<String> {
+/** Split a stream lazily */
+public func split (delimiter: String = "\n")(stream: ReadableStreamType) -> SequenceOf<String> {
 	return SequenceOf({StringStreamGenerator (stream: stream, delimiter: delimiter)})
 }
 
 /**
-Writes something to a stream.
+Write something to a stream.
 
 	something |> writeTo(writablestream)
 */
@@ -155,12 +155,12 @@ public func writeTo <T>(stream: WriteableStreamType)(input: T) {
 
 // needed to avoid `write(SequenceType)` being called instead,
 // treating the string as a sequence of characters.
-/** Writes a String to a writable stream. */
+/** Write a String to a writable stream. */
 public func writeTo (stream: WriteableStreamType)(input: String) {
 	stream.write(input)
 }
 
-/** Writes a sequence to a stream. */
+/** Write a sequence to a stream. */
 public func writeTo <S : SequenceType>(stream: WriteableStreamType)(seq: S) {
 	for item in seq {
 		item |> writeTo(stream)

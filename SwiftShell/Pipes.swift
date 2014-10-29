@@ -20,62 +20,62 @@ public func |> <T,U>(lhs: T, rhs: T -> U) -> U {
 	return rhs(lhs)
 }
 
-/** Lazily returns a sequence containing the elements of source, in order, that satisfy the predicate includeElement */
-public func filter<S : SequenceType> 
+/** Lazily return a sequence containing the elements of source, in order, that satisfy the predicate includeElement */
+public func filter <S : SequenceType> 
 	(includeElement: (S.Generator.Element) -> Bool)
 	(source: S)
 	-> LazySequence<FilterSequenceView<S>> {
 		
-	return lazy(source).filter(includeElement)
+		return lazy(source).filter(includeElement)
 }
 
 /**
-Returns an `Array` containing the sorted elements of `source` according to 'isOrderedBefore'. 
+Return an `Array` containing the sorted elements of `source` according to 'isOrderedBefore'. 
 
 Requires: `isOrderedBefore` is a `strict weak ordering 
 <http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings>` over `elements`.
 */
-public func sorted<S : SequenceType>
+public func sorted <S : SequenceType>
 	(isOrderedBefore: (S.Generator.Element, S.Generator.Element) -> Bool)
 	(source: S)
 	-> [S.Generator.Element] {
 		
-	return sorted(source, isOrderedBefore)
+		return sorted(source, isOrderedBefore)
 }
 
-/** Lazily returns a sequence containing the results of mapping transform over source. */
-public func map<S: SequenceType, T>
+/** Lazily return a sequence containing the results of mapping transform over source. */
+public func map <S: SequenceType, T>
 	(transform: (S.Generator.Element) -> T)
 	(source: S)
 	-> LazySequence<MapSequenceView<S, T>> {
 		
-	return lazy(source).map(transform)
+		return lazy(source).map(transform)
 }
 
 /** 
-Returns the result of repeatedly calling combine with an accumulated value 
+Return the result of repeatedly calling combine with an accumulated value 
 initialized to initial and each element of sequence, in turn.
 */
-public func reduce<S : SequenceType, U>
+public func reduce <S : SequenceType, U>
 	(initial: U, combine: (U, S.Generator.Element) -> U)
 	(sequence: S)
 	-> U {
 		
-	return reduce(sequence, initial, combine)
+		return reduce(sequence, initial, combine)
 }
 
-/** Splits text over delimiter, returning an array. */
-public func split(_ delimiter: String = "\n")(text: String) -> [String] {
+/** Split text over delimiter, returning an array. */
+public func split (_ delimiter: String = "\n")(text: String) -> [String] {
 	return text.componentsSeparatedByString(delimiter)
 }
 
 /** Insert separator between each item in elements. */
-public func join<C : ExtensibleCollectionType, S : SequenceType where S.Generator.Element == C>
+public func join <C : ExtensibleCollectionType, S : SequenceType where S.Generator.Element == C>
 	(separator: C)
 	(elements: S) 
 	-> C {
 		
-	return join(separator, elements)
+		return join(separator, elements)
 }
 
 /** Turn a sequence into an array. For use after the |> operator. */
@@ -88,6 +88,6 @@ public func drop <S: SequenceType, T: Equatable where S.Generator.Element == T>
 	(tobedropped: [T])
 	(sequence: S)
 	-> LazySequence<FilterSequenceView<S>> {
-
-	return sequence |> filter { !contains(tobedropped, $0) }
+		
+		return sequence |> filter { !contains(tobedropped, $0) }
 }
