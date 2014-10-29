@@ -25,13 +25,13 @@ public protocol ReadableStreamType : Streamable {
 	*/
 	func readSome () -> String?
 	
-	/** Reads everything at once. */
+	/** Read everything at once. */
 	func read () -> String
 	
-	/** Lazily splits the stream into lines. */
+	/** Lazily split the stream into lines. */
 	func lines () -> SequenceOf<String>
 	
-	/** Allows stream to be used by "println" and "toString". */
+	/** Enable stream to be used by "println" and "toString". */
 	func writeTo <Target : OutputStreamType> (inout target: Target)
 }
 

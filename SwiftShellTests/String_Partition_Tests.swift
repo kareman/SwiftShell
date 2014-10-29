@@ -11,7 +11,7 @@ import SwiftShell
 
 class String_Partition_Tests: XCTestCase {
 
-	func testPartitionWithSeparatorInTheMiddle() {
+	func testPartitionWithSeparatorInTheMiddle () {
 		let text = "the first part\nthe second part"
 		let (firstpart, returnedseparator, secondpart) = text.partition ("\n")
 		XCTAssertEqual( firstpart, "the first part")
@@ -19,7 +19,7 @@ class String_Partition_Tests: XCTestCase {
 		XCTAssertEqual( secondpart, "the second part")
 	}
 	
-	func testPartitionWithNoSeparatorFound() {
+	func testPartitionWithNoSeparatorFound () {
 		let text = "the first partthe second part"
 		let (firstpart, returnedseparator, secondpart) = text.partition ("\n")
 		XCTAssertEqual( firstpart, "the first partthe second part")
@@ -27,7 +27,7 @@ class String_Partition_Tests: XCTestCase {
 		XCTAssertEqual( secondpart, "")
 	}
 	
-	func testPartitionWithSeparatorAtTheEnd() {
+	func testPartitionWithSeparatorAtTheEnd () {
 		let text = "the first partthe second part\n"
 		let (firstpart, returnedseparator, secondpart) = text.partition ("\n")
 		XCTAssertEqual( firstpart, "the first partthe second part")
@@ -35,7 +35,7 @@ class String_Partition_Tests: XCTestCase {
 		XCTAssertEqual( secondpart, "")
 	}
 	
-	func testPartitionWithSeparatorAtTheBeginning() {
+	func testPartitionWithSeparatorAtTheBeginning () {
 		let text = "\nthe first partthe second part\n"
 		let (firstpart, returnedseparator, secondpart) = text.partition ("\n")
 		XCTAssertEqual( firstpart, "")
@@ -43,7 +43,7 @@ class String_Partition_Tests: XCTestCase {
 		XCTAssertEqual( secondpart, "the first partthe second part\n")
 	}
 	
-	func testPartitionWithSeveralSeparators() {
+	func testPartitionWithSeveralSeparators () {
 		let text = "the first partthe second part"
 		let (firstpart, returnedseparator, secondpart) = text.partition ("part")
 		XCTAssertEqual( firstpart, "the first ")
@@ -51,7 +51,7 @@ class String_Partition_Tests: XCTestCase {
 		XCTAssertEqual( secondpart, "the second part")
 	}
 	
-	func testPartitionWithEmptyText() {
+	func testPartitionWithEmptyText () {
 		let text = ""
 		let (firstpart, returnedseparator, secondpart) = text.partition ("part")
 		XCTAssertEqual( firstpart, "")

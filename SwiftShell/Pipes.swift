@@ -84,7 +84,7 @@ public func toArray <S : SequenceType, T where S.Generator.Element == T>(sequenc
 }
 
 /** Discard all elements in `tobedropped` from sequence. */
-public func drop <S: SequenceType, T: Equatable where S.Generator.Element == T>
+public func drop <S : SequenceType, T : Equatable where S.Generator.Element == T>
 	(tobedropped: [T])
 	(sequence: S)
 	-> LazySequence<FilterSequenceView<S>> {

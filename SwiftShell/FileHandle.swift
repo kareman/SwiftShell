@@ -34,7 +34,7 @@ extension FileHandle: ReadableStreamType {
 		return split(delimiter: "\n")(stream: self)
 	}
 
-	public func writeTo<Target : OutputStreamType> (inout target: Target) {
+	public func writeTo <Target : OutputStreamType> (inout target: Target) {
 		while let some = self.readSome() {
 			target.write(some)
 		}
@@ -59,6 +59,7 @@ extension FileHandle: WriteableStreamType {
 		self.closeFile()
 	}
 }
+
 
 public enum FileMode {
 	case Read, Write, ReadAndWrite
@@ -85,7 +86,8 @@ public func open (path: String, mode: FileMode = .Read) -> FileHandle {
 	return filehandle!
 }
 
-public let environment = NSProcessInfo.processInfo().environment as [String: String]
-public let standardinput = FileHandle.fileHandleWithStandardInput() as ReadableStreamType
-public let standardoutput = FileHandle.fileHandleWithStandardOutput() as WriteableStreamType
-public let standarderror = FileHandle.fileHandleWithStandardError() as WriteableStreamType
+
+public let environment		= NSProcessInfo.processInfo().environment as [String: String]
+public let standardinput	= FileHandle.fileHandleWithStandardInput() as ReadableStreamType
+public let standardoutput	= FileHandle.fileHandleWithStandardOutput() as WriteableStreamType
+public let standarderror	= FileHandle.fileHandleWithStandardError() as WriteableStreamType

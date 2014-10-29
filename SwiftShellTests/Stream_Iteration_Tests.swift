@@ -11,7 +11,7 @@ import SwiftShell
 
 class Stream_Iteration_Tests: XCTestCase {
 	
-	func testIterateOverFileHandle() {
+	func testIterateOverFileHandle () {
 		var filehandletest = ""
 		
 		for line in stream("line 1\nline 2\n").lines() {

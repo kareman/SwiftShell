@@ -96,5 +96,4 @@ class Stream_Tests: XCTestCase {
 		
 		XCTAssertEqual( readable.readSome()!.trim(), "line 1: line 1\nline 2: line 2\nline 3: line 3")
 	}
-	
 }

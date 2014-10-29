@@ -12,12 +12,12 @@ import XCTest
 class FileHandle_Tests: XCTestCase {
 
 	// waiting for error handling to be implemented
-	func notestOpenForReadingFileWhichDoesNotExist() {
+	func notestOpenForReadingFileWhichDoesNotExist () {
 		let file = open("file which does not exist")
 		XCTFail("not implemented yet")
 	}
 	
-	func testReadFileLineByLine() {
+	func testReadFileLineByLine () {
 		let shorttextpath = pathForTestResource("shorttext", type: "txt")
 		var contents = ""
 		
