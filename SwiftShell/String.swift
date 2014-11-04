@@ -24,6 +24,10 @@ extension String {
 	public func trim () -> String {
 		return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
 	}
+
+	public func countOccurrencesOf (substring: String) -> Int {
+		return self.split(substring).count - 1
+	}
 	
 	/** 
 	Split the string at the first occurrence of separator, and return a 3-tuple containing the part

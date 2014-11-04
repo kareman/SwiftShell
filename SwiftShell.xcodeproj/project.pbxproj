@@ -25,6 +25,7 @@
 		BAAE160E19A4014900DA3462 /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAAE15D019A3FB5E00DA3462 /* SwiftShell.framework */; };
 		BAB0F87E19A6CD6C000191AB /* long text.txt in Resources */ = {isa = PBXBuildFile; fileRef = BAB0F87D19A6CD6C000191AB /* long text.txt */; };
 		BAB5EBC319BF65350083971B /* shorttext.txt in Resources */ = {isa = PBXBuildFile; fileRef = BAB5EBC219BF65350083971B /* shorttext.txt */; };
+		BAB8852D1A0939E700FCFC14 /* String_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB8852C1A0939E700FCFC14 /* String_Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		BAAE160A19A4007700DA3462 /* Stream_Iteration_SpeedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Iteration_SpeedTests.swift; sourceTree = "<group>"; };
 		BAB0F87D19A6CD6C000191AB /* long text.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "long text.txt"; sourceTree = "<group>"; };
 		BAB5EBC219BF65350083971B /* shorttext.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shorttext.txt; sourceTree = "<group>"; };
+		BAB8852C1A0939E700FCFC14 /* String_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String_Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 				BA338BF719A6897B00654EC4 /* Stream_Tests.swift */,
 				BAAE15F519A3FDC200DA3462 /* Stream_Iteration_Tests.swift */,
 				BAAE15F619A3FDC200DA3462 /* String_Partition_Tests.swift */,
+				BAB8852C1A0939E700FCFC14 /* String_Tests.swift */,
 				BAAE15DD19A3FB5E00DA3462 /* Supporting Files */,
 			);
 			path = SwiftShellTests;
@@ -346,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAB8852D1A0939E700FCFC14 /* String_Tests.swift in Sources */,
 				BA338BF819A6897B00654EC4 /* Stream_Tests.swift in Sources */,
 				BAA4EEC819C77BA3006CEB87 /* XCTestCase_Additions.swift in Sources */,
 				BAAE15F719A3FDC200DA3462 /* FileHandle_Tests.swift in Sources */,
