@@ -91,3 +91,19 @@ public func drop <S : SequenceType, T : Equatable where S.Generator.Element == T
 		
 		return sequence |> filter { !contains(tobedropped, $0) }
 }
+
+/** Return at most the first `numbertotake` elements of sequence */
+public func take <S : SequenceType, T where S.Generator.Element == T>
+	(numbertotake: Int)(sequence: S) -> [T] {
+
+	var generator = sequence.generate()
+	var result = [T]()
+	for _ in 0..<numbertotake {
+		if let value = generator.next() {
+			result.append(value)
+		} else {
+			break
+		}
+	}
+	return result
+}

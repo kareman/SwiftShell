@@ -44,4 +44,12 @@ class Pipes_Tests: XCTestCase {
 		
 		XCTAssertEqual( result, [1,4,6] )
 	}
+
+	func testTake () {
+		let numbers = [1,2,3,4,5,6]
+
+		XCTAssertEqual( numbers |> take(3), [1,2,3] )
+		XCTAssertEqual( numbers |> take(100), [1,2,3,4,5,6] )
+		XCTAssertEqual( numbers |> take(0), [] )
+	}
 }
