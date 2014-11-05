@@ -12,9 +12,18 @@
 import Foundation
 
 extension String {
-	
-	public func replace (replaceOldString: String, _ withString: String) -> String {
-		return self.stringByReplacingOccurrencesOfString(replaceOldString, withString: withString)
+
+	public func replace (oldString: String, _ newString: String) -> String {
+		return self.stringByReplacingOccurrencesOfString(oldString, withString: newString)
+	}
+
+	/** Replace the first `limit` occurrences of oldString with newString. */
+	public func replace (oldString: String, _ newString: String, limit: Int) -> String {
+		let ranges = self.findAll(oldString) |> take(limit)
+		return ranges.count == 0
+			? self
+			: self.stringByReplacingOccurrencesOfString(oldString, withString: newString,
+				range: ranges.first!.startIndex ..< ranges.last!.endIndex)
 	}
 
 	public func split (sep: String) -> [String] {

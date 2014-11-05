@@ -34,4 +34,30 @@ class String_Tests: XCTestCase {
 		XCTAssertEqual(ranges("a ").count, 2)
 	}
 
+
+	func testReplaceStringwithstring () {
+		let text = "a b c aa bb cc ab bc ca"
+
+		XCTAssertEqual( text.replace("a", "x"), "x b c xx bb cc xb bc cx")
+		XCTAssertEqual( text.replace("b ", "x"), "a xc aa bxcc axbc ca")
+	}
+
+	func testReplaceOnlySomeStringsWithString () {
+		let text = "a b c aa bb cc ab bc ca"
+
+		XCTAssertEqual( text.replace("a", "x", limit: 0), "a b c aa bb cc ab bc ca")
+		XCTAssertEqual( text.replace("a", "x", limit: 2), "x b c xa bb cc ab bc ca")
+		XCTAssertEqual( text.replace("a", "x", limit: 4), "x b c xx bb cc xb bc ca")
+		XCTAssertEqual( text.replace("a", "x", limit: 5), "x b c xx bb cc xb bc cx")
+		XCTAssertEqual( text.replace("a", "x", limit: 6), "x b c xx bb cc xb bc cx")
+
+		XCTAssertEqual( text.replace("a", "[xy]", limit: 4), "[xy] b c [xy][xy] bb cc [xy]b bc ca")
+		XCTAssertEqual( text.replace("a", "[xy]", limit: 5), "[xy] b c [xy][xy] bb cc [xy]b bc c[xy]")
+		XCTAssertEqual( text.replace("a", "[xy]", limit: 6), "[xy] b c [xy][xy] bb cc [xy]b bc c[xy]")
+
+		XCTAssertEqual( text.replace("a ", "x", limit: 0), "a b c aa bb cc ab bc ca")
+		XCTAssertEqual( text.replace("a ", "x", limit: 1), "xb c aa bb cc ab bc ca")
+		XCTAssertEqual( text.replace("a ", "x", limit: 2), "xb c axbb cc ab bc ca")
+		XCTAssertEqual( text.replace("a ", "x", limit: 3), "xb c axbb cc ab bc ca")
+	}
 }
