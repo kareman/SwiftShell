@@ -28,10 +28,23 @@ extension String {
 	public func countOccurrencesOf (substring: String) -> Int {
 		return self.split(substring).count - 1
 	}
-	
+
+	/** A lazy sequence of the ranges of `findstring` in this string. */
+	public func findAll (findstring: String) -> SequenceOf<Range<String.Index>> {
+		var rangeofremainder: Range = self.startIndex..<self.endIndex
+		return SequenceOf (GeneratorOf {
+			if let foundrange = self.rangeOfString(findstring, range:rangeofremainder) {
+				rangeofremainder = foundrange.endIndex..<self.endIndex
+				return foundrange
+			} else {
+				return nil
+			}
+		})
+	}
+
 	/** 
 	Split the string at the first occurrence of separator, and return a 3-tuple containing the part
- 	before the separator, the separator itself, and the part after the separator. If the separator is 
+	before the separator, the separator itself, and the part after the separator. If the separator is
 	not found, return a 3-tuple containing the string itself, followed by two empty strings. 
 	*/
 	public func partition (separator: String) -> (String, String, String) {

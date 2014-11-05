@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftShell
 
 class String_Tests: XCTestCase {
 
@@ -20,4 +21,17 @@ class String_Tests: XCTestCase {
 		XCTAssertEqual( text.countOccurrencesOf( "re"), 3)
 		XCTAssertEqual( text.countOccurrencesOf( "Not found"), 0)
 	}
+
+	func testFindAll () {
+
+		func ranges(findstring: String) -> [Range<String.Index>] {
+			let text = "a b c aa bbb cc ab bc ca"
+			return text.findAll(findstring) |> toArray
+		}
+
+		XCTAssertEqual(ranges("a").count, 5)
+		XCTAssertEqual(ranges("bb").count, 1)
+		XCTAssertEqual(ranges("a ").count, 2)
+	}
+
 }
