@@ -1,9 +1,9 @@
 //
-//  String_Tests.swift
-//  SwiftShell
+// String_Tests.swift
+// SwiftShell
 //
-//  Created by Kåre Morstøl on 04.11.14.
-//  Copyright (c) 2014 NotTooBad Software. All rights reserved.
+// Created by Kåre Morstøl on 04.11.14.
+// Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
 import XCTest
