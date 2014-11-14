@@ -89,6 +89,6 @@ NOTE: The Swift compiler (Xcode 6.1) crashes when reading from streams when opti
 
 ## LICENSE
 
-This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+Released under the MIT License (MIT), http://opensource.org/licenses/MIT
 
-If you want to use this project together with a different project with an incompatible license, send a message on GitHub and we will see what we can do.
+Kåre Morstøl, [NotTooBad Software](http://nottoobadsoftware.com)

@@ -1,9 +1,7 @@
 /*
-* Copyright (c) 2014 Kåre Morstøl (NotTooBad Software).
-* All rights reserved. This program and the accompanying materials
-* are made available under the terms of the Eclipse Public License v1.0
-* which accompanies this distribution, and is available at
-* http://www.eclipse.org/legal/epl-v10.html
+* Released under the MIT License (MIT), http://opensource.org/licenses/MIT
+*
+* Copyright (c) 2014 Kåre Morstøl, NotTooBad Software (nottoobadsoftware.com)
 *
 * Contributors:
 *	Kåre Morstøl, https://github.com/kareman - initial API and implementation.
