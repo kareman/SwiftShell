@@ -5,7 +5,7 @@ An OS X Framework for command line scripting in Swift. It supports joining toget
 
 ## Usage
 
-Shell commands return readable streams, which can be read all at once with "read()" or read lazily (as in piece by piece) with "readSome()". The latter is useful for very long texts.
+Shell commands return readable streams, which can be read all at once with "read()" or read lazily (as in piece by piece) with "readSome()". The latter is useful for long texts.
 
 ```
 #!/usr/bin/env swiftshell
@@ -70,6 +70,10 @@ standardinput.lines() |> map {line in "line \(i++): \(line)\n"} |> writeTo(stand
 ```
 
 Launch with e.g. `ls | print_linenumbers.swift`
+
+## Scripts
+
+- [trash.swift](https://gist.github.com/kareman/322c1091f3cc7e1078af): moves files and folders to the trash.
 
 ## Installation
 
