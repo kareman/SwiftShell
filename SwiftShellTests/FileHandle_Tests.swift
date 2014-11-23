@@ -11,10 +11,9 @@ import XCTest
 
 class FileHandle_Tests: XCTestCase {
 
-	// waiting for error handling to be implemented
 	func notestOpenForReadingFileWhichDoesNotExist () {
+		// prints error message and stops execution.
 		let file = open("file which does not exist")
-		XCTFail("not implemented yet")
 	}
 	
 	func testReadFileLineByLine () {

@@ -58,30 +58,31 @@ extension FileHandle: WriteableStreamType {
 	}
 }
 
-
-public enum FileMode {
-	case Read, Write, ReadAndWrite
+/** Print message to standard error and halt execution */
+@noreturn public func printErrorAndExit (errormessage: String) {
+	standarderror.writeln("SwiftShell: " + errormessage)
+	exit(EXIT_FAILURE)
 }
 
-public func open (path: String, mode: FileMode = .Read) -> FileHandle {
-	var filehandle: FileHandle?
-	switch mode {
-		case .Read:
-			filehandle = FileHandle(forReadingAtPath: path)
-		case .Write:
-			filehandle = FileHandle(forWritingAtPath: path)
-		case .ReadAndWrite:
-			filehandle = FileHandle(forUpdatingAtPath: path)
-	}
+/** Open a file for reading, and exit if an error occurs. */
+public func open (path: String) -> ReadableStreamType {
 
-	// file may be nil if for instance path is invalid
-	// TODO: it physically pains me to write the next lines. Proper error handling is forthcoming.
-	if filehandle == nil {
-		standarderror.write("Error: Opening file \"\(path)\" failed.\n")
-		exit(EXIT_FAILURE)
-	}
+	if let url = NSURL(fileURLWithPath: path) {
 
-	return filehandle!
+		var error: NSError?
+		let filehandle = FileHandle(forReadingFromURL: url, error: &error)
+
+		if let error = error {
+			var fileaccesserror: NSError?
+			url.checkResourceIsReachableAndReturnError(&fileaccesserror)
+			printErrorAndExit( fileaccesserror?.localizedDescription ?? error.localizedDescription )
+		}
+
+		return filehandle!
+
+	} else {
+		printErrorAndExit("Invalid file path: \(path)")
+	}
 }
 
 
