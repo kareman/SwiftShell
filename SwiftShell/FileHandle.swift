@@ -13,7 +13,7 @@ import Foundation
 public typealias FileHandle = NSFileHandle
 
 extension FileHandle: ReadableStreamType {
-	
+
 	public func readSome () -> String? {
 		let data: NSData = self.availableData
 		if data.length == 0 {
@@ -22,12 +22,12 @@ extension FileHandle: ReadableStreamType {
 			return (NSString(data: data, encoding: streamencoding) as String)
 		}
 	}
-	
+
 	public func read () -> String {
 		let data: NSData = self.readDataToEndOfFile()
 		return NSString(data: data, encoding: streamencoding) as String
 	}
-	
+
 	public func lines () -> SequenceOf<String> {
 		return split(delimiter: "\n")(stream: self)
 	}
@@ -52,7 +52,7 @@ extension FileHandle: WriteableStreamType {
 	public func writeln () {
 		self.write("\n")
 	}
-	
+
 	public func closeStream () {
 		self.closeFile()
 	}
