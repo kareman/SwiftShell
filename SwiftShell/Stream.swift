@@ -9,7 +9,7 @@
 
 import Foundation
 
-// TODO: get encoding from environmental variable LC_TYPE
+// TODO: get encoding from environmental variable LC_CTYPE
 public var streamencoding = NSUTF8StringEncoding
 
 /** A stream of text. Does as much as possible lazily. */
