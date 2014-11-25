@@ -23,5 +23,48 @@ class FileHandle_Tests: XCTestCase {
 		for line in open(shorttextpath).lines() {
 			contents.write(line)
 		}
+
+		XCTAssertFalse(contents.isEmpty, "could not read from file")
+	}
+
+
+	func testOpenForWritingFileWhichDoesNotExist () {
+		let path = self.temporaryDirectory().URLByAppendingPathComponent("non-existent.txt").path!
+		let file = open(forWriting: path)
+		file.writeln( "line 1")
+		file.closeStream()
+
+		XCTAssertEqual( open(path).read(), "line 1\n" )
+	}
+
+	func testOpenForOverWritingFileWhichDoesNotExist () {
+		let path = self.temporaryDirectory().URLByAppendingPathComponent("non-existent.txt").path!
+		let file = open(forWriting: path, overwrite: true)
+		file.writeln( "line 1")
+		file.closeStream()
+
+		XCTAssertEqual( open(path).read(), "line 1\n" )
+	}
+
+	func testOpenForWritingExistingFile_AppendsFile () {
+		let path = self.temporaryDirectory().URLByAppendingPathComponent("existent.txt").path!
+		SwiftShell.run("echo existing line > " + path)
+
+		let file = open(forWriting: path)
+		file.writeln( "new line")
+		file.closeStream()
+
+		XCTAssertEqual( open(path).read(), "existing line\nnew line\n" )
+	}
+
+	func testOpenForOverWritingExistingFile () {
+		let path = self.temporaryDirectory().URLByAppendingPathComponent("existent.txt").path!
+		SwiftShell.run("echo existing line > " + path)
+
+		let file = open(forWriting: path, overwrite: true)
+		file.writeln( "new line")
+		file.closeStream()
+
+		XCTAssertEqual( open(path).read(), "new line\n" )
 	}
 }

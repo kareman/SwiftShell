@@ -85,6 +85,38 @@ public func open (path: String) -> ReadableStreamType {
 	}
 }
 
+/** 
+Open a file for writing, create it if it doesn't exist, and exit if an error occurs.
+If the file already exists and overwrite=false, the writing will begin at the end of the file.
+
+:param: overwrite If true, replace the file if it exists.
+*/
+public func open (forWriting path: String, overwrite: Bool = false) -> WriteableStreamType {
+
+	if let url = NSURL(fileURLWithPath: path) {
+
+		let filemanager = NSFileManager.defaultManager()
+		if overwrite || !filemanager.fileExistsAtPath(url.path!) {
+			filemanager.createFileAtPath(url.path!, contents: nil, attributes: nil)
+		}
+
+		var error: NSError?
+		let filehandle = FileHandle(forWritingToURL: url, error: &error)
+
+		if let error = error {
+			var fileaccesserror: NSError?
+			url.checkResourceIsReachableAndReturnError(&fileaccesserror)
+			printErrorAndExit( fileaccesserror?.localizedDescription ?? error.localizedDescription )
+		} else {
+			filehandle!.seekToEndOfFile()
+			return filehandle!
+		}
+
+	} else {
+		printErrorAndExit("Invalid file path: \(path)")
+	}
+}
+
 
 public let environment		= NSProcessInfo.processInfo().environment as [String: String]
 public let standardinput	= FileHandle.fileHandleWithStandardInput() as ReadableStreamType

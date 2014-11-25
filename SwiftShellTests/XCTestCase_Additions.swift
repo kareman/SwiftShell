@@ -6,7 +6,9 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
+import SwiftShell
 import XCTest
+import Foundation
 
 extension XCTestCase {
 	
@@ -15,6 +17,18 @@ extension XCTestCase {
 		assert(path != nil, "resource \(filename).\(type) not found") 
 		
 		return path!
+	}
+
+	func temporaryDirectory () -> NSURL {
+		var error: NSError?
+		let tempdirectory = NSURL(fileURLWithPath: NSTemporaryDirectory().stringByAppendingPathComponent(NSProcessInfo.processInfo().globallyUniqueString), isDirectory: true)!
+		NSFileManager.defaultManager().createDirectoryAtURL(tempdirectory, withIntermediateDirectories:true, attributes: nil
+			, error: &error)
+		if let error = error {
+			printErrorAndExit("could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
+		}
+
+		return tempdirectory
 	}
 }
 
