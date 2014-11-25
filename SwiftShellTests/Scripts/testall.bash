@@ -14,3 +14,4 @@ ls | ./print_linenumbers.swift
 ./readfilelinebyline.swift
 ./stream_out.swift
 ./callswiftscriptfromswift.swift
+./readandwritefiles.swift
