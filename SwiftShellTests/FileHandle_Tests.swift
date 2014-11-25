@@ -29,7 +29,7 @@ class FileHandle_Tests: XCTestCase {
 
 
 	func testOpenForWritingFileWhichDoesNotExist () {
-		let path = self.temporaryDirectory().URLByAppendingPathComponent("non-existent.txt").path!
+		let path = tempdirectory.URLByAppendingPathComponent("testOpenForWritingFileWhichDoesNotExist.txt").path!
 		let file = open(forWriting: path)
 		file.writeln( "line 1")
 		file.closeStream()
@@ -38,7 +38,7 @@ class FileHandle_Tests: XCTestCase {
 	}
 
 	func testOpenForOverWritingFileWhichDoesNotExist () {
-		let path = self.temporaryDirectory().URLByAppendingPathComponent("non-existent.txt").path!
+		let path = tempdirectory.URLByAppendingPathComponent("testOpenForOverWritingFileWhichDoesNotExist.txt").path!
 		let file = open(forWriting: path, overwrite: true)
 		file.writeln( "line 1")
 		file.closeStream()
@@ -47,7 +47,7 @@ class FileHandle_Tests: XCTestCase {
 	}
 
 	func testOpenForWritingExistingFile_AppendsFile () {
-		let path = self.temporaryDirectory().URLByAppendingPathComponent("existent.txt").path!
+		let path = tempdirectory.URLByAppendingPathComponent("testOpenForWritingExistingFile_AppendsFile.txt").path!
 		SwiftShell.run("echo existing line > " + path)
 
 		let file = open(forWriting: path)
@@ -58,7 +58,7 @@ class FileHandle_Tests: XCTestCase {
 	}
 
 	func testOpenForOverWritingExistingFile () {
-		let path = self.temporaryDirectory().URLByAppendingPathComponent("existent.txt").path!
+		let path = tempdirectory.URLByAppendingPathComponent("testOpenForOverWritingExistingFile.txt").path!
 		SwiftShell.run("echo existing line > " + path)
 
 		let file = open(forWriting: path, overwrite: true)

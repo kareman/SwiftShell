@@ -19,16 +19,5 @@ extension XCTestCase {
 		return path!
 	}
 
-	func temporaryDirectory () -> NSURL {
-		var error: NSError?
-		let tempdirectory = NSURL(fileURLWithPath: NSTemporaryDirectory().stringByAppendingPathComponent(NSProcessInfo.processInfo().globallyUniqueString), isDirectory: true)!
-		NSFileManager.defaultManager().createDirectoryAtURL(tempdirectory, withIntermediateDirectories:true, attributes: nil
-			, error: &error)
-		if let error = error {
-			printErrorAndExit("could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
-		}
-
-		return tempdirectory
-	}
 }
 
