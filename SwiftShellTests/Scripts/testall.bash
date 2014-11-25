@@ -7,7 +7,6 @@ set -e
 set -o pipefail
 
 #./exitswhenopeningnon-existentfile.swift
-./listallexecutablesinpath.swift
 ./print_arguments.swift 1 2
 ./print_environment.swift
 ls | ./print_linenumbers.swift
