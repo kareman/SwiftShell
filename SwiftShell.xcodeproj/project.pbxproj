@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA08E7D719AA3D8D002DA02F /* Scripts_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA08E7D619AA3D8D002DA02F /* Scripts_Tests.swift */; };
 		BA338BF819A6897B00654EC4 /* Stream_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA338BF719A6897B00654EC4 /* Stream_Tests.swift */; };
 		BA880BBC19CA12C9002FACCB /* Pipes_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA880BBB19CA12C9002FACCB /* Pipes_Tests.swift */; };
 		BAA4EEC819C77BA3006CEB87 /* XCTestCase_Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4EEC719C77BA3006CEB87 /* XCTestCase_Additions.swift */; };
@@ -48,7 +47,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BA08E7D619AA3D8D002DA02F /* Scripts_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts_Tests.swift; sourceTree = "<group>"; };
 		BA2E031E19B5F01C005B1227 /* Test area.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = "Test area.playground"; path = "Div/Test area.playground"; sourceTree = "<group>"; };
 		BA338BF719A6897B00654EC4 /* Stream_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Tests.swift; sourceTree = "<group>"; };
 		BA880BBB19CA12C9002FACCB /* Pipes_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pipes_Tests.swift; sourceTree = "<group>"; };
@@ -102,14 +100,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BA08E7D319AA3810002DA02F /* Scripts */ = {
-			isa = PBXGroup;
-			children = (
-				BA08E7D619AA3D8D002DA02F /* Scripts_Tests.swift */,
-			);
-			path = Scripts;
-			sourceTree = "<group>";
-		};
 		BAA4EECA19C77ED6006CEB87 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,7 +155,6 @@
 		BAAE15DC19A3FB5E00DA3462 /* SwiftShellTests */ = {
 			isa = PBXGroup;
 			children = (
-				BA08E7D319AA3810002DA02F /* Scripts */,
 				BAAE15F419A3FDC200DA3462 /* Command_Tests.swift */,
 				BAAE15F319A3FDC200DA3462 /* FileHandle_Tests.swift */,
 				BA880BBB19CA12C9002FACCB /* Pipes_Tests.swift */,
@@ -362,7 +351,6 @@
 				BAAE15F719A3FDC200DA3462 /* FileHandle_Tests.swift in Sources */,
 				BAAE15F919A3FDC200DA3462 /* Stream_Iteration_Tests.swift in Sources */,
 				BAAE15FA19A3FDC200DA3462 /* String_Partition_Tests.swift in Sources */,
-				BA08E7D719AA3D8D002DA02F /* Scripts_Tests.swift in Sources */,
 				BAAE15F819A3FDC200DA3462 /* Command_Tests.swift in Sources */,
 				BA880BBC19CA12C9002FACCB /* Pipes_Tests.swift in Sources */,
 				BAC5312D1A250288001BDA50 /* Files_Tests.swift in Sources */,

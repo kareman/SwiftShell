@@ -2,4 +2,4 @@
 
 import SwiftShell
 
-run("ls") |> run("./print_linenumbers.swift") |> writeTo(standardoutput) 
+run("cat onetwothree.txt") |> run("./print_linenumbers.swift") |> writeTo(standardoutput) 
