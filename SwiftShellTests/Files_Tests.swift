@@ -11,7 +11,7 @@ import XCTest
 
 class Files_Tests: XCTestCase {
 
-  func testTempDirectoryIsTheSameAfterRepeatedCalls () {
+	func testTempDirectoryIsTheSameAfterRepeatedCalls () {
 		XCTAssertEqual(tempdirectory, tempdirectory)
 	}
 }
