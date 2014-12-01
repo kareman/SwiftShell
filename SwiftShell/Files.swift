@@ -33,10 +33,10 @@ separate process and changing the directory there will not affect the rest of th
 
 This directory is also used as the base for relative URL's.
 */
-public var workdirectory: String  {
+public var workdirectory: String {
 	get {	return NSFileManager.defaultManager().currentDirectoryPath }
 	set {
-		if !NSFileManager.defaultManager().changeCurrentDirectoryPath(newValue)  {
+		if !NSFileManager.defaultManager().changeCurrentDirectoryPath(newValue) {
 			printErrorAndExit("could not change the working directory to \(newValue)")
 		}
 	}
