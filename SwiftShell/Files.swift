@@ -24,3 +24,20 @@ public let tempdirectory: NSURL = {
 
 	return tempdirectory
 }()
+
+/** 
+The current working directory.
+
+Must be used instead of `run("cd ...")` because all the `run` commands are executed in a
+separate process and changing the directory there will not affect the rest of the Swift script.
+
+This directory is also used as the base for relative URL's.
+*/
+public var workdirectory: String  {
+	get {	return NSFileManager.defaultManager().currentDirectoryPath }
+	set {
+		if !NSFileManager.defaultManager().changeCurrentDirectoryPath(newValue)  {
+			printErrorAndExit("could not change the working directory to \(newValue)")
+		}
+	}
+}

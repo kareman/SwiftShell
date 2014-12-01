@@ -11,7 +11,18 @@ import XCTest
 
 class Files_Tests: XCTestCase {
 
-	func testTempDirectoryIsTheSameAfterRepeatedCalls () {
+	func testTempDirectory_IsTheSameAfterRepeatedCalls () {
 		XCTAssertEqual(tempdirectory, tempdirectory)
+	}
+
+	func testWorkDirectory_IsCurrentDirectory () {
+		XCTAssertEqual( workdirectory, NSFileManager.defaultManager().currentDirectoryPath )
+	}
+
+	func testWorkDirectory_CanChange () {
+		workdirectory = "/private/tmp"
+
+		XCTAssertEqual( workdirectory, "/private/tmp" )
+		XCTAssertEqual( $("pwd"), "/private/tmp" )
 	}
 }
