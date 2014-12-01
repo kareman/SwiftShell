@@ -157,13 +157,13 @@
 			children = (
 				BAAE15F419A3FDC200DA3462 /* Command_Tests.swift */,
 				BAAE15F319A3FDC200DA3462 /* FileHandle_Tests.swift */,
+				BAC5312C1A250288001BDA50 /* Files_Tests.swift */,
 				BA880BBB19CA12C9002FACCB /* Pipes_Tests.swift */,
 				BA338BF719A6897B00654EC4 /* Stream_Tests.swift */,
 				BAAE15F519A3FDC200DA3462 /* Stream_Iteration_Tests.swift */,
 				BAAE15F619A3FDC200DA3462 /* String_Partition_Tests.swift */,
 				BAB8852C1A0939E700FCFC14 /* String_Tests.swift */,
 				BAAE15DD19A3FB5E00DA3462 /* Supporting Files */,
-				BAC5312C1A250288001BDA50 /* Files_Tests.swift */,
 			);
 			path = SwiftShellTests;
 			sourceTree = "<group>";
