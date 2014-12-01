@@ -67,25 +67,20 @@ extension FileHandle: WriteableStreamType {
 /** Open a file for reading, and exit if an error occurs. */
 public func open (path: String) -> ReadableStreamType {
 
-	if let url = NSURL(fileURLWithPath: path) {
+	let url = toURLOrError(path)
+	var error: NSError?
+	let filehandle = FileHandle(forReadingFromURL: url, error: &error)
 
-		var error: NSError?
-		let filehandle = FileHandle(forReadingFromURL: url, error: &error)
-
-		if let error = error {
-			var fileaccesserror: NSError?
-			url.checkResourceIsReachableAndReturnError(&fileaccesserror)
-			printErrorAndExit( fileaccesserror?.localizedDescription ?? error.localizedDescription )
-		}
-
-		return filehandle!
-
-	} else {
-		printErrorAndExit("Invalid file path: \(path)")
+	if let error = error {
+		var fileaccesserror: NSError?
+		url.checkResourceIsReachableAndReturnError(&fileaccesserror)
+		printErrorAndExit( fileaccesserror?.localizedDescription ?? error.localizedDescription )
 	}
+
+	return filehandle!
 }
 
-/** 
+/**
 Open a file for writing, create it if it doesn't exist, and exit if an error occurs.
 If the file already exists and overwrite=false, the writing will begin at the end of the file.
 
@@ -93,27 +88,22 @@ If the file already exists and overwrite=false, the writing will begin at the en
 */
 public func open (forWriting path: String, overwrite: Bool = false) -> WriteableStreamType {
 
-	if let url = NSURL(fileURLWithPath: path) {
+	let url = toURLOrError(path)
+	let filemanager = NSFileManager.defaultManager()
+	if overwrite || !filemanager.fileExistsAtPath(url.path!) {
+		filemanager.createFileAtPath(url.path!, contents: nil, attributes: nil)
+	}
 
-		let filemanager = NSFileManager.defaultManager()
-		if overwrite || !filemanager.fileExistsAtPath(url.path!) {
-			filemanager.createFileAtPath(url.path!, contents: nil, attributes: nil)
-		}
+	var error: NSError?
+	let filehandle = FileHandle(forWritingToURL: url, error: &error)
 
-		var error: NSError?
-		let filehandle = FileHandle(forWritingToURL: url, error: &error)
-
-		if let error = error {
-			var fileaccesserror: NSError?
-			url.checkResourceIsReachableAndReturnError(&fileaccesserror)
-			printErrorAndExit( fileaccesserror?.localizedDescription ?? error.localizedDescription )
-		} else {
-			filehandle!.seekToEndOfFile()
-			return filehandle!
-		}
-
+	if let error = error {
+		var fileaccesserror: NSError?
+		url.checkResourceIsReachableAndReturnError(&fileaccesserror)
+		printErrorAndExit( fileaccesserror?.localizedDescription ?? error.localizedDescription )
 	} else {
-		printErrorAndExit("Invalid file path: \(path)")
+		filehandle!.seekToEndOfFile()
+		return filehandle!
 	}
 }
 

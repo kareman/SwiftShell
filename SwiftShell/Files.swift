@@ -9,7 +9,16 @@
 
 import Foundation
 
-/** 
+func toURLOrError (path: String) -> NSURL {
+	if let url = NSURL(fileURLWithPath: path) {
+		return url
+	} else {
+		printErrorAndExit("Invalid file path: \(path)")
+	}
+}
+
+
+/**
 The tempdirectory is unique each time a script is run and is created the first time it is used.
 It lies in the user's temporary directory and will be automatically deleted at some point.
 */
