@@ -13,11 +13,11 @@ import Foundation
 The tempdirectory is unique each time a script is run and is created the first time it is used.
 It lies in the user's temporary directory and will be automatically deleted at some point.
 */
-public let tempdirectory: NSURL = {
+public let tempdirectory: String = {
 	var error: NSError?
-	let tempdirectory = NSURL(fileURLWithPath: NSTemporaryDirectory().stringByAppendingPathComponent("SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString), isDirectory: true)!
+	let tempdirectory = NSTemporaryDirectory().stringByAppendingPathComponent("SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString)
 	NSFileManager.defaultManager()
-		.createDirectoryAtURL(tempdirectory, withIntermediateDirectories:true, attributes: nil, error: &error)
+		.createDirectoryAtPath(tempdirectory, withIntermediateDirectories:true, attributes: nil, error: &error)
 	if let error = error {
 		printErrorAndExit("could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
 	}

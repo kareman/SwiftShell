@@ -2,7 +2,7 @@
 
 import SwiftShell
 
-let filepath = tempdirectory.URLByAppendingPathComponent("newfile.txt").path!
+let filepath = tempdirectory + "/newfile.txt"
 
 // File doesn't exist. Create it.
 let file1 = open(forWriting: filepath )
