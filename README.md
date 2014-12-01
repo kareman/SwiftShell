@@ -7,7 +7,7 @@ An OS X Framework for command line scripting in Swift. It supports joining toget
 
 Shell commands return readable streams, which can be read all at once with "read()" or read lazily (as in piece by piece) with "readSome()". The latter is useful for long texts.
 
-```
+```swift
 #!/usr/bin/env swiftshell
 
 import SwiftShell
@@ -17,7 +17,7 @@ let result = run("some shell command").read()
 
 For in-line commands, use `$("command")`.
 
-```
+```swift
 print( "The time and date is " + $("date -u") )
 ```
 
