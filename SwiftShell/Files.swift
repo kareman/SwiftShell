@@ -24,7 +24,7 @@ It lies in the user's temporary directory and will be automatically deleted at s
 */
 public let tempdirectory: String = {
 	var error: NSError?
-	let tempdirectory = NSTemporaryDirectory().stringByAppendingPathComponent("SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString)
+	let tempdirectory = NSTemporaryDirectory() / "SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString
 	NSFileManager.defaultManager()
 		.createDirectoryAtPath(tempdirectory, withIntermediateDirectories:true, attributes: nil, error: &error)
 	if let error = error {
@@ -49,4 +49,10 @@ public var workdirectory: String {
 			printErrorAndExit("could not change the working directory to \(newValue)")
 		}
 	}
+}
+
+
+/** Allows for `"/directory" / "file.extension"` etc. */
+public func / (leftpath: String, rightpath: String) -> String {
+	return toURLOrError(leftpath).URLByAppendingPathComponent(rightpath).path!
 }

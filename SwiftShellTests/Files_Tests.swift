@@ -25,4 +25,10 @@ class Files_Tests: XCTestCase {
 		XCTAssertEqual( workdirectory, "/private/tmp" )
 		XCTAssertEqual( $("pwd"), "/private/tmp" )
 	}
+
+	func testURLConcatenationOperator () {
+		XCTAssertEqual( "/directory" / "file.extension", "/directory/file.extension" )
+		XCTAssertEqual( "/root" / "directory" / "file.extension", "/root/directory/file.extension" )
+		XCTAssertEqual( "directory" / "file.extension", workdirectory + "/directory/file.extension" )
+	}
 }
