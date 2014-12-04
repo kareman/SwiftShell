@@ -152,6 +152,7 @@ public func writeTo <T>(stream: WriteableStreamType)(input: T) {
 }
 
 // needed to avoid `write(SequenceType)` being called instead,
+// needed to avoid `writeTo(SequenceType)` being called instead,
 // treating the string as a sequence of characters.
 /** Write a String to a writable stream. */
 public func writeTo (stream: WriteableStreamType)(input: String) {
