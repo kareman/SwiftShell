@@ -38,7 +38,7 @@ class Stream_Tests: XCTestCase {
 	func testPrintStreamToStream () {
 		var (writable, readable) = streams()
 		
-		stream("this goes in") |> writeTo(writable)
+		stream("this goes in") |>> writable
 		
 		XCTAssertEqual( readable.readSome()!, "this goes in")
 	}
@@ -46,7 +46,7 @@ class Stream_Tests: XCTestCase {
 	func testPrintStreamToStreamInPieces () {
 		var (writable, readable) = streams()
 		
-		stream(["this ", "goes", " in"]) |> writeTo(writable)
+		stream(["this ", "goes", " in"]) |>> writable
 		
 		writable.closeStream()
 		XCTAssertEqual( readable.read(), "this goes in")
@@ -55,7 +55,7 @@ class Stream_Tests: XCTestCase {
 	func testPrintStringToStream () {
 		var (writable, readable) = streams()
 		
-		"this goes in" |> writeTo(writable)
+		"this goes in" |>> writable
 		
 		XCTAssertEqual( readable.readSome()!, "this goes in")
 	}
@@ -63,7 +63,7 @@ class Stream_Tests: XCTestCase {
 	func testCommandChainToStream () {
 		var (writable, readable) = streams()
 		
-		SwiftShell.run("echo this is streamed") |> SwiftShell.run("wc -w") |> writeTo(writable)
+		SwiftShell.run("echo this is streamed") |> SwiftShell.run("wc -w") |>> writable
 		
 		XCTAssertEqual( readable.readSome()!.trim(), "3")
 	}
@@ -72,7 +72,7 @@ class Stream_Tests: XCTestCase {
 		var (writable, readable) = streams()
 		
 		// make sure the array isn't printed as a Printable.
-		SequenceOf([stream("line 1"), stream("line 2"), stream("line 3")].generate()) |> writeTo(writable)
+		SequenceOf([stream("line 1"), stream("line 2"), stream("line 3")].generate()) |>> writable
 		
 		XCTAssertEqual( readable.readSome()!.trim(), "line 1line 2line 3")
 	}
@@ -83,7 +83,7 @@ class Stream_Tests: XCTestCase {
 		
 		dict["test"]! |> split(":") 
 			|> map { line in SwiftShell.run("echo \(line)") } 
-			|> writeTo(writable)
+			|>> writable
 
 		XCTAssertEqual( readable.readSome()!.trim(), "line 1\nline 2\nline 3")
 	}
@@ -92,7 +92,7 @@ class Stream_Tests: XCTestCase {
 		var (writable, readable) = streams()
 		var i = 1
 		
-		stream("line 1\nline 2\nline 3").lines() |> map {line in "line \(i++): \(line)\n"} |> writeTo(writable)
+		stream("line 1\nline 2\nline 3").lines() |> map {line in "line \(i++): \(line)\n"} |>> writable
 		
 		XCTAssertEqual( readable.readSome()!.trim(), "line 1: line 1\nline 2: line 2\nline 3: line 3")
 	}

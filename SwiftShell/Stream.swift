@@ -142,6 +142,7 @@ public func split (delimiter: String = "\n")(stream: ReadableStreamType) -> Sequ
 	return SequenceOf({StringStreamGenerator (stream: stream, delimiter: delimiter)})
 }
 
+
 /**
 Write something to a stream.
 
@@ -151,7 +152,6 @@ public func writeTo <T>(stream: WriteableStreamType)(input: T) {
 	stream.write( toString(input) )
 }
 
-// needed to avoid `write(SequenceType)` being called instead,
 // needed to avoid `writeTo(SequenceType)` being called instead,
 // treating the string as a sequence of characters.
 /** Write a String to a writable stream. */
@@ -164,4 +164,27 @@ public func writeTo <S : SequenceType>(stream: WriteableStreamType)(seq: S) {
 	for item in seq {
 		item |> writeTo(stream)
 	}
+}
+
+infix operator |>> { precedence 50 associativity left }
+
+/**
+Write something to a stream.
+
+something |>> writablestream
+*/
+public func |>> <T>(input: T, stream: WriteableStreamType) {
+	writeTo(stream)(input: input)
+}
+
+// needed to avoid `func |>> <S : SequenceType>` being called instead,
+// treating the string as a sequence of characters.
+/** Write a String to a writable stream. */
+public func |>> (text: String, stream: WriteableStreamType) {
+	writeTo(stream)(input: text)
+}
+
+/** Write a sequence to a stream. */
+public func |>> <S : SequenceType>(seq: S, stream: WriteableStreamType) {
+	writeTo(stream)(seq: seq)
 }
