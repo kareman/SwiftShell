@@ -1,6 +1,6 @@
 # SwiftShell
 
-An OS X Framework for command line scripting in Swift. It supports joining together shell commands and Swift functions, like the pipe in UNIX shell commands and the pipe forward operator in F#. As Swift itself it supports both object-oriented and functional programming.
+An OS X Framework for command line scripting in Swift. It supports joining together shell commands and Swift functions, like the pipe in shell commands and the pipe forward operator in F#. As Swift itself it supports both object-oriented and functional programming.
 
 
 ## Usage
@@ -15,44 +15,37 @@ import SwiftShell
 let result = run("some shell command").read()
 ```
 
+Commands can be piped together.
+
+```swift
+run("echo piped to the next command") |> run("wc -w") |>> standardoutput
+```
+
 For in-line commands, use `$("command")`.
 
 ```swift
 print( "The time and date is " + $("date -u") )
 ```
 
-#### Pipe several commands together
+#### Read and write files
+
+Files are streams too. They can be read line by line:
 
 ```swift
-run("echo piped to the next command") |> run("wc -w") |>> standardoutput
-```
-
-#### Read a file line by line
-
-```swift
-for line in open(filename).lines() {
+for line in open("file1.txt").lines() {
 	// Do something with each line
 }
 ```
 
-#### List all executables in PATH
+Or written to:
 
 ```swift
-let directories = environment["PATH"]!.split(":")
-for directory in directories {
-	run("find \"\(directory)\" -type f -perm +ugo+x -print") |>> standardoutput
-}
+let file2 = open(forWriting: tempdirectory / "newfile.txt" )
+run("echo line 1") |>> file2
+file2.writeln("line 2")
 ```
 
-or more Functionally:
-
-```swift
-environment["PATH"]! |> split(":") 
-	|> map { dir in run("find \"\(dir)\" -type f -perm +ugo+x -print") } 
-	|>> standardoutput
-```
-
-#### Print standard input with line numbers
+#### Use standard input
 
 ```swift
 var i = 1
@@ -71,7 +64,7 @@ standardinput.lines() |> map {line in "line \(i++): \(line)\n"} |>> standardoutp
 
 Launch with e.g. `ls | print_linenumbers.swift`
 
-## Scripts
+## Examples
 
 - [trash.swift](https://gist.github.com/kareman/322c1091f3cc7e1078af): moves files and folders to the trash.
 - [listallexecutablesinpath.swift](https://gist.github.com/kareman/d157c46858f91f1a22a7): lists all executables currently available in PATH.
@@ -89,7 +82,7 @@ Launch with e.g. `ls | print_linenumbers.swift`
   - run `xcodebuild install` from the project's root folder. This will install the SwiftShell framework in ~/Library/Frameworks.
   - _or_ run `xcodebuild` and copy the resulting framework from the build folder to your library folder of choice. If that is not "~/Library/Frameworks", "/Library/Frameworks" or a folder mentioned in the $DYLD_FRAMEWORK_PATH environment variable then you need to add your folder to $DYLD_FRAMEWORK_PATH.
 
-NOTE: Code compiled with optimisations turned on (anything but "SWIFT_OPTIMIZATION_LEVEL = -Onone") crashes when reading from streams. SwiftShell is therefore compiled with the “Debug” configuration by default.
+NOTE: Code compiled with optimisations turned on (anything but "SWIFT_OPTIMIZATION_LEVEL = -Onone") crashes when reading from streams. So SwiftShell is compiled with the “Debug” configuration by default.
 
 
 ## LICENSE
