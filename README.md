@@ -45,6 +45,14 @@ run("echo line 1") |>> file2
 file2.writeln("line 2")
 ```
 
+And there's easy access to NSFileManager:
+
+```swift
+File.fileExistsAtPath("fileiwant.txt")
+File.isExecutableFileAtPath("program")
+...
+```
+
 #### Use standard input
 
 ```swift
@@ -85,7 +93,7 @@ Launch with e.g. `ls | print_linenumbers.swift`
 NOTE: Code compiled with optimisations turned on (anything but "SWIFT_OPTIMIZATION_LEVEL = -Onone") crashes when reading from streams. So SwiftShell is compiled with the “Debug” configuration by default.
 
 
-## LICENSE
+## License
 
 Released under the MIT License (MIT), http://opensource.org/licenses/MIT
 
