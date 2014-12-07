@@ -89,9 +89,8 @@ If the file already exists and overwrite=false, the writing will begin at the en
 public func open (forWriting path: String, overwrite: Bool = false) -> WriteableStreamType {
 
 	let url = toURLOrError(path)
-	let filemanager = NSFileManager.defaultManager()
-	if overwrite || !filemanager.fileExistsAtPath(url.path!) {
-		filemanager.createFileAtPath(url.path!, contents: nil, attributes: nil)
+	if overwrite || !File.fileExistsAtPath(url.path!) {
+		File.createFileAtPath(url.path!, contents: nil, attributes: nil)
 	}
 
 	var error: NSError?

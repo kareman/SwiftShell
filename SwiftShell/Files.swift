@@ -17,6 +17,8 @@ func toURLOrError (path: String) -> NSURL {
 	}
 }
 
+/** The default NSFileManager */
+public let File = NSFileManager.defaultManager()
 
 /**
 The tempdirectory is unique each time a script is run and is created the first time it is used.
@@ -25,8 +27,7 @@ It lies in the user's temporary directory and will be automatically deleted at s
 public let tempdirectory: String = {
 	var error: NSError?
 	let tempdirectory = NSTemporaryDirectory() / "SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString
-	NSFileManager.defaultManager()
-		.createDirectoryAtPath(tempdirectory, withIntermediateDirectories:true, attributes: nil, error: &error)
+	File.createDirectoryAtPath(tempdirectory, withIntermediateDirectories:true, attributes: nil, error: &error)
 	if let error = error {
 		printErrorAndExit("could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
 	}
@@ -43,9 +44,9 @@ separate process and changing the directory there will not affect the rest of th
 This directory is also used as the base for relative URL's.
 */
 public var workdirectory: String {
-	get {	return NSFileManager.defaultManager().currentDirectoryPath }
+	get {	return File.currentDirectoryPath }
 	set {
-		if !NSFileManager.defaultManager().changeCurrentDirectoryPath(newValue) {
+		if !File.changeCurrentDirectoryPath(newValue) {
 			printErrorAndExit("could not change the working directory to \(newValue)")
 		}
 	}
