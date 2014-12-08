@@ -5,6 +5,8 @@ An OS X Framework for command line scripting in Swift. It supports joining toget
 
 ## Usage
 
+#### Commands
+
 Shell commands return readable streams, which can be read all at once with "read()" or read lazily (as in piece by piece) with "readSome()". The latter is useful for long texts.
 
 ```swift
@@ -15,19 +17,19 @@ import SwiftShell
 let result = run("some shell command").read()
 ```
 
-Commands can be piped together.
+Commands can be piped together:
 
 ```swift
 run("echo piped to the next command") |> run("wc -w") |>> standardoutput
 ```
 
-For in-line commands, use `$("command")`.
+For in-line commands, use `$("command")`:
 
 ```swift
 print( "The time and date is " + $("date -u") )
 ```
 
-#### Read and write files
+#### Files
 
 Files are streams too. They can be read line by line:
 
@@ -48,12 +50,12 @@ file2.writeln("line 2")
 And there's easy access to NSFileManager:
 
 ```swift
-File.fileExistsAtPath("fileiwant.txt")
-File.isExecutableFileAtPath("program")
+if File.fileExistsAtPath("fileiwant.txt") {...}
+if File.isExecutableFileAtPath("program") {...}
 ...
 ```
 
-#### Use standard input
+#### Standard input
 
 ```swift
 var i = 1
