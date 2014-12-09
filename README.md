@@ -63,6 +63,8 @@ if File.isExecutableFileAtPath("program") {...}
 
 #### Standard input
 
+is also a stream:
+
 ```swift
 var i = 1
 for line in standardinput.lines() {
