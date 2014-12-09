@@ -23,6 +23,12 @@ Commands can be piped together:
 run("echo piped to the next command") |> run("wc -w") |>> standardoutput
 ```
 
+Use any sequence as parameters for a command:
+
+```swift
+run( "chmod +x" + parameters(files) )
+```
+
 For in-line commands, use `$("command")`:
 
 ```swift
