@@ -86,7 +86,7 @@ public func stream ( closure:() -> () -> String? ) -> ReadableStreamType {
 }
 
 /** Create a stream from a sequence of Strings. */
-public func stream <Seq : SequenceType where Seq.Generator.Element == String>(sequence: Seq) -> ReadableStreamType {
+public func stream <Seq : SequenceType where Seq.Generator.Element == String> (sequence: Seq) -> ReadableStreamType {
 	return stream {
 		var generator = sequence.generate()
 		return { generator.next() }
@@ -148,7 +148,7 @@ Write something to a stream.
 
 	something |> writeTo(writablestream)
 */
-public func writeTo <T>(stream: WriteableStreamType)(input: T) {
+public func writeTo <T> (stream: WriteableStreamType)(input: T) {
 	stream.write( toString(input) )
 }
 
@@ -160,7 +160,7 @@ public func writeTo (stream: WriteableStreamType)(input: String) {
 }
 
 /** Write a sequence to a stream. */
-public func writeTo <S : SequenceType>(stream: WriteableStreamType)(seq: S) {
+public func writeTo <S : SequenceType> (stream: WriteableStreamType)(seq: S) {
 	for item in seq {
 		item |> writeTo(stream)
 	}
@@ -173,7 +173,7 @@ Write something to a stream.
 
 something |>> writablestream
 */
-public func |>> <T>(input: T, stream: WriteableStreamType) {
+public func |>> <T> (input: T, stream: WriteableStreamType) {
 	writeTo(stream)(input: input)
 }
 
@@ -185,6 +185,6 @@ public func |>> (text: String, stream: WriteableStreamType) {
 }
 
 /** Write a sequence to a stream. */
-public func |>> <S : SequenceType>(seq: S, stream: WriteableStreamType) {
+public func |>> <S : SequenceType> (seq: S, stream: WriteableStreamType) {
 	writeTo(stream)(seq: seq)
 }

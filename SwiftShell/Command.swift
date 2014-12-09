@@ -84,6 +84,6 @@ public func $ (shellcommand: String) -> String {
 }
 
 /** Turn a sequence into valid parameters for a shell command, properly quoted */
-public func parameters <S : SequenceType>(sequence: S) -> String {
-	return " " + ( sequence |> map {"\"\(toString($0))\""} |> join(" ") )
+public func parameters <S : SequenceType> (sequence: S) -> String {
+	return " " + ( sequence |> map { "\"\(toString($0))\"" } |> join(" ") )
 }

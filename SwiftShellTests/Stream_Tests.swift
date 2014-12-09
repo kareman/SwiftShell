@@ -32,7 +32,7 @@ class Stream_Tests: XCTestCase {
 	}
 	
 	func testStreamFromArray () {
-		XCTAssertEqual( stream(["item 1","item 2"]).read(), "item 1item 2")
+		XCTAssertEqual( stream(["item 1","item 2"]).read(), "item 1item 2" )
 	}
 	
 	func testPrintStreamToStream () {
@@ -40,7 +40,7 @@ class Stream_Tests: XCTestCase {
 		
 		stream("this goes in") |>> writable
 		
-		XCTAssertEqual( readable.readSome()!, "this goes in")
+		XCTAssertEqual( readable.readSome()!, "this goes in" )
 	}
 
 	func testPrintStreamToStreamInPieces () {
@@ -49,7 +49,7 @@ class Stream_Tests: XCTestCase {
 		stream(["this ", "goes", " in"]) |>> writable
 		
 		writable.closeStream()
-		XCTAssertEqual( readable.read(), "this goes in")
+		XCTAssertEqual( readable.read(), "this goes in" )
 	}
 	
 	func testPrintStringToStream () {
@@ -57,7 +57,7 @@ class Stream_Tests: XCTestCase {
 		
 		"this goes in" |>> writable
 		
-		XCTAssertEqual( readable.readSome()!, "this goes in")
+		XCTAssertEqual( readable.readSome()!, "this goes in" )
 	}
 
 	func testCommandChainToStream () {
@@ -65,7 +65,7 @@ class Stream_Tests: XCTestCase {
 		
 		SwiftShell.run("echo this is streamed") |> SwiftShell.run("wc -w") |>> writable
 		
-		XCTAssertEqual( readable.readSome()!.trim(), "3")
+		XCTAssertEqual( readable.readSome()!.trim(), "3" )
 	}
 
 	func testSequenceOfStreamsToStream () {
@@ -74,7 +74,7 @@ class Stream_Tests: XCTestCase {
 		// make sure the array isn't printed as a Printable.
 		SequenceOf([stream("line 1"), stream("line 2"), stream("line 3")].generate()) |>> writable
 		
-		XCTAssertEqual( readable.readSome()!.trim(), "line 1line 2line 3")
+		XCTAssertEqual( readable.readSome()!.trim(), "line 1line 2line 3" )
 	}
 
 	func testChainWithSequenceOfStreamsPrintedToStream () {
@@ -85,7 +85,7 @@ class Stream_Tests: XCTestCase {
 			|> map { line in SwiftShell.run("echo \(line)") } 
 			|>> writable
 
-		XCTAssertEqual( readable.readSome()!.trim(), "line 1\nline 2\nline 3")
+		XCTAssertEqual( readable.readSome()!.trim(), "line 1\nline 2\nline 3" )
 	}
 	
 	func testChainWithSequenceOfStringsPrintedToStream () {
@@ -94,6 +94,6 @@ class Stream_Tests: XCTestCase {
 		
 		stream("line 1\nline 2\nline 3").lines() |> map {line in "line \(i++): \(line)\n"} |>> writable
 		
-		XCTAssertEqual( readable.readSome()!.trim(), "line 1: line 1\nline 2: line 2\nline 3: line 3")
+		XCTAssertEqual( readable.readSome()!.trim(), "line 1: line 1\nline 2: line 2\nline 3: line 3" )
 	}
 }

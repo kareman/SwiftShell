@@ -14,7 +14,7 @@ It can be used on its own.
 
 infix operator |> { precedence 50 associativity left }
 
-public func |> <T,U>(lhs: T, rhs: T -> U) -> U {
+public func |> <T,U> (lhs: T, rhs: T -> U) -> U {
 	return rhs(lhs)
 }
 
@@ -77,7 +77,7 @@ public func join <C : ExtensibleCollectionType, S : SequenceType where S.Generat
 }
 
 /** Turn a sequence into an array. For use after the |> operator. */
-public func toArray <S : SequenceType, T where S.Generator.Element == T>(sequence: S) -> [T] {
+public func toArray <S : SequenceType> (sequence: S) -> [S.Generator.Element] {
 	return Array(sequence)
 }
 
@@ -86,7 +86,7 @@ public func drop <S : SequenceType, T : Equatable where S.Generator.Element == T
 	(tobedropped: [T])
 	(sequence: S)
 	-> LazySequence<FilterSequenceView<S>> {
-
+		
 		return sequence |> filter { !contains(tobedropped, $0) }
 }
 
