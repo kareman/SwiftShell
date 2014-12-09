@@ -105,4 +105,6 @@ NOTE: Code compiled with optimisations turned on (anything but "SWIFT_OPTIMIZATI
 
 Released under the MIT License (MIT), http://opensource.org/licenses/MIT
 
+Some files are covered by other licences, see [included works](Div/Included%20Works).
+
 Kåre Morstøl, [NotTooBad Software](http://nottoobadsoftware.com)
