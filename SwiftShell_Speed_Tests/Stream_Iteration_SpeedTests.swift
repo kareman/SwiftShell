@@ -116,15 +116,18 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 	}
 
 	func testWhenSplitFileAsStringBecomesQuicker() {
+		println()
 		let splitarray = allSpeedsSplitFileAsString()
 		let myarray = allSpeedIterateOverFile()
 		for i in 0..<splitarray.count {
 			if myarray[i] > splitarray[i] {
 				println(" splitting strings is faster after \(i) of \(splitarray.count) iterations")
+				println()
 				return
 			}
 		}
 		println( "splitting strings was never faster!")
+		println()
 	}
 	
 }

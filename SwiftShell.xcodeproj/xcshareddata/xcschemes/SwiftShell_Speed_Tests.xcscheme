@@ -37,6 +37,11 @@
                BlueprintName = "SwiftShell_Speed_Tests"
                ReferencedContainer = "container:SwiftShell.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "Stream_Iteration_SpeedTests/testSpeedSwiftSplit()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
