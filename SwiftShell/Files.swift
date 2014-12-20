@@ -29,7 +29,7 @@ public let tempdirectory: String = {
 	let tempdirectory = NSTemporaryDirectory() / "SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString
 	File.createDirectoryAtPath(tempdirectory, withIntermediateDirectories:true, attributes: nil, error: &error)
 	if let error = error {
-		printErrorAndExit("could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
+		printErrorAndExit("Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
 	}
 
 	return tempdirectory
@@ -47,7 +47,7 @@ public var workdirectory: String {
 	get {	return File.currentDirectoryPath }
 	set {
 		if !File.changeCurrentDirectoryPath(newValue) {
-			printErrorAndExit("could not change the working directory to \(newValue)")
+			printErrorAndExit("Could not change the working directory to \(newValue)")
 		}
 	}
 }

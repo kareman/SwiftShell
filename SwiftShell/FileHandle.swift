@@ -21,7 +21,7 @@ extension FileHandle: ReadableStreamType {
 			if let result = NSString(data: data, encoding: streamencoding) {
 				return result
 			} else {
-				printErrorAndExit("SwiftShell: Fatal error - could not read stream.")
+				printErrorAndExit("Fatal error - could not read stream.")
 			}
 		}
 	}
@@ -31,7 +31,7 @@ extension FileHandle: ReadableStreamType {
 		if let result = NSString(data: data, encoding: streamencoding) {
 			return result
 		} else {
-			printErrorAndExit("SwiftShell: Fatal error - could not read stream.")
+			printErrorAndExit("Fatal error - could not read stream.")
 		}
 	}
 
@@ -65,7 +65,7 @@ extension FileHandle: WriteableStreamType {
 	}
 }
 
-/** Print message to standard error and halt execution */
+/** Print message to standard error and halt execution. */
 @noreturn public func printErrorAndExit (errormessage: String) {
 	standarderror.writeln("SwiftShell: " + errormessage)
 	exit(EXIT_FAILURE)

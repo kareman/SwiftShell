@@ -34,7 +34,7 @@ public func |> (lhs: ReadableStreamType, rhs: @autoclosure () -> ReadableStreamT
 	_nextinput_ = lhs
 	let result = rhs()
 	if _nextinput_ != nil {
-		printErrorAndExit("SwiftShell: The statement 'ReadableStreamType |> ReadableStreamType' is invalid.")
+		printErrorAndExit("The statement 'ReadableStreamType |> ReadableStreamType' is invalid.")
 	}
 	return result
 }
