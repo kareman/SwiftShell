@@ -47,7 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BA2E031E19B5F01C005B1227 /* Test area.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = "Test area.playground"; path = "Div/Test area.playground"; sourceTree = "<group>"; };
+		BA2E031E19B5F01C005B1227 /* Test area.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = "Test area.playground"; path = "Misc/Test area.playground"; sourceTree = "<group>"; };
 		BA338BF719A6897B00654EC4 /* Stream_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream_Tests.swift; sourceTree = "<group>"; };
 		BA880BBB19CA12C9002FACCB /* Pipes_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pipes_Tests.swift; sourceTree = "<group>"; };
 		BAA4EEC719C77BA3006CEB87 /* XCTestCase_Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCTestCase_Additions.swift; path = SwiftShellTests/XCTestCase_Additions.swift; sourceTree = "<group>"; };

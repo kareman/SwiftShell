@@ -1,6 +1,6 @@
 # SwiftShell
 
-An OS X Framework for command line scripting in Swift. It supports joining together shell commands and Swift functions, like the pipe in shell commands and the pipe forward operator in F#. As Swift itself it supports both object-oriented and functional programming.
+An OS X Framework for command line scripting in Swift. It supports joining together shell commands and Swift functions, like the pipe in shell commands and the pipe forward operator in F#. Like Swift itself it supports both object-oriented and functional programming.
 
 
 ## Usage
@@ -95,7 +95,7 @@ Launch with e.g. `ls | print_linenumbers.swift`
         git clone https://github.com/kareman/SwiftShell.git 
         cd SwiftShell
 
-- Copy/link `Div/swiftshell` to your bin folder or anywhere in your PATH.
+- Copy/link `Misc/swiftshell` to your bin folder or anywhere in your PATH.
 - To install the framework itself, either:
   - run `xcodebuild install` from the project's root folder. This will install the SwiftShell framework in ~/Library/Frameworks.
   - _or_ run `xcodebuild` and copy the resulting framework from the build folder to your library folder of choice. If that is not "~/Library/Frameworks", "/Library/Frameworks" or a folder mentioned in the $DYLD_FRAMEWORK_PATH environment variable then you need to add your folder to $DYLD_FRAMEWORK_PATH.
@@ -104,6 +104,6 @@ Launch with e.g. `ls | print_linenumbers.swift`
 
 Released under the MIT License (MIT), http://opensource.org/licenses/MIT
 
-Some files are covered by other licences, see [included works](Div/Included%20Works).
+Some files are covered by other licences, see [included works](Misc/Included%20Works).
 
 Kåre Morstøl, [NotTooBad Software](http://nottoobadsoftware.com)
