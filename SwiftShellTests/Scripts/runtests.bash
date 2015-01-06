@@ -1,3 +1,20 @@
+#!/usr/bin/env bash
+
+PROJECT_ROOT=../..
+
+# Build the framework and record any errors.
+BUILDERRORS=$(xcodebuild -project $PROJECT_ROOT/SwiftShell.xcodeproj/ 2>&1 >/dev/null)
+
+# If there were any errors (exit code is not 0), print them and exit.
+if [ $? -ne 0 ]; then
+	printf "$BUILDERRORS \n"
+	exit 1
+fi
+
+# Make sure the swiftshell script will use the newly built framework.
+export DYLD_FRAMEWORK_PATH=$PROJECT_ROOT/build/Release/
+
+# Import the unit testing script.
 . assert.sh
 
 # Be aware the “assert” command does not check standard error output or exit code.
