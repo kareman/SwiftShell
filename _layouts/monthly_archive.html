@@ -1,0 +1,28 @@
+---
+layout: wrapper
+---
+
+          <header>
+            <h2>Posts in <strong>{{ page.date | date: "%B %Y" }}</strong></h2>
+          </header>
+          
+          <article class="content">
+            <ul class="postlist">
+  {% for post in page.posts %}
+  
+    {% include post-item.html %}
+  
+  {% endfor %}
+            </ul>
+
+            <br />
+            <ul class="pager">
+              {% if page.previousArchive %}
+              <li class="previous"><a href="{{ site.baseurl }}/news/{{ page.previousArchive }}">&larr; Older</a></li>
+              {% endif %}
+              {% if page.nextArchive %}
+              <li class="next"><a href="{{ site.baseurl }}/news/{{ page.nextArchive }}">Newer &rarr;</a></li>
+              {% endif %}
+            </ul>
+          </article>
+

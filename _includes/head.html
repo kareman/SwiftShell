@@ -1,0 +1,58 @@
+{% capture meta_title %}{% if page.title %}{{ page.title | strip_html }}{% else %}{{ site.title }}{% endif %}{% endcapture %}
+{% capture meta_description %}{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
+{% capture meta_keywords %}{% if page.keywords %}{{ page.keywords }}{% else %}{{ site.keywords }}{% endif %}{% endcapture %}
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% if page.title %}{{ page.title | strip_html }} &#8212; {% endif %}{{ site.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ meta_description }}">
+    <meta name="keywords" content="{{ meta_keywords }}">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/images/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/images/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/images/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/images/touch-icon-ipad-retina.png">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.baseurl }}/feed.xml" />
+
+    <meta property="og:site_name" content="{{ site.title }}"/>
+    <meta property="og:image" content="{{ site.url }}/assets/images/touch-icon-ipad-retina.png"/>
+    <meta property="og:title" content="{{ meta_title }}"/>
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}"/>
+    <meta property="og:description" content="{{ meta_description }}"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SwiftDocOrg"/>
+    <meta name="twitter:creator" content="@SwiftDocOrg"/>
+    <meta name="twitter:title" content="{{ meta_title }}"/>
+    <meta name="twitter:image" content="{{ site.url }}/assets/images/touch-icon-ipad-retina.png"/>
+    <meta name="twitter:description" content="{{ meta_description | escape }}"/>
+    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}"/>
+
+    {% css_asset_tag swift %}
+    - /_assets/css/bootstrap.min.css
+    - /_assets/css/bootstrap-theme.min.css
+    - /_assets/css/select2.css
+    - /_assets/css/select2-bootstrap.css
+    - /_assets/css/theme.css.less
+    - /_assets/css/apple-swift.css
+    {% endcss_asset_tag %}
+    {% javascript_asset_tag swift %}
+    - /_assets/js/jquery-2.1.1.min.js
+    - /_assets/js/bootstrap.min.js
+    - /_assets/js/select2.min.js
+    - /_assets/js/syntaxhighlighter.min.js
+    - /_assets/js/brushes/swift.js
+    - /assets/js/swift-linkdata.js
+    - /_assets/js/swift-site.js
+    {% endjavascript_asset_tag %}
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% if page.version %}
+    <script src="/assets/js/swift-linkdata-{{ page.version }}.js"></script>
+    {% endif %}
+  </head>

@@ -1,0 +1,23 @@
+# Site settings
+title:              "SwiftShell Documentation"
+email:              kare@nottoobadsoftware.com
+description:        "Auto-generated documentation for SwiftShell. Command-click no more."
+keywords:           "swift,documentation,swiftdoc,apple,SwiftShell"
+baseurl:            ""
+url:                "http://swiftshell.github.io"
+twitter_username:   nottoobadsw
+github_username:    kareman
+
+port:               4040
+include:            [ "_[A-Z]*" ]
+exclude:            [ "README.md", "LICENSE", "CC-BY-NC-LICENSE.md" ]
+keep_files:         [ ".nojekyll", ".git", "CNAME", "README.md" ]
+
+# Build settings
+markdown:           kramdown
+paginate:           10
+permalink:          /news/:year/:month/:title
+paginate_path:      /news/page:num
+tag_dir:            /news/tags
+monthly_archive:
+  path:             /news

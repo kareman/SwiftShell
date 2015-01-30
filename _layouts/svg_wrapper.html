@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body class="{{ page.dir | replace: '/', ' p-' | replace_first: ' ', '' }}">
+    <div id="wrapper">
+
+    <div class="container">
+      <div class="row">
+        
+        <object data="index.svg" type="image/svg+xml">
+          <img src="index.svg" />
+        </object>
+        
+      </div><!-- row -->
+    </div><!-- cont -->
+        <div class="push"></div>
+    </div><!-- wrapper -->
+
+    {% include footer.html %}
+  
+  </body>
+</html>

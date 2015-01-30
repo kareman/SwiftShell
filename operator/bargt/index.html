@@ -1,0 +1,26 @@
+---
+layout: "default"
+title: "Operator: |>"
+description: "Swift documentation for the '|>' operator."
+---
+
+<code class="language-swift">infix operator |&gt; {
+    associativity left
+    precedence 50
+}</code>
+
+<h3>Declarations</h3>
+
+<div class="declaration">
+<code class="language-swift">func |&gt;(lhs: ReadableStreamType, rhs: @autoclosure () -&gt; ReadableStreamType) -> ReadableStreamType</code>
+<div class="comment">
+    <p>Specific handling of func run (shellcommand: String) -&gt; ReadableStreamType on the right side using the stream on the 
+left side as standard input.</p>
+
+<p>Warning: is only meant to be used with the &quot;run&quot; command, but could also unintentionally catch other uses of
+&quot;ReadableStreamType |&gt; ReadableStreamType&quot;, though that statement doesn&#39;t make any sense.</p>
+</div>
+</div>
+<div class="declaration">
+<code class="language-swift">func |&gt;&lt;T, U&gt;(lhs: T, rhs: T -&gt; U) -> U</code>
+</div>

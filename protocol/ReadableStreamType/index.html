@@ -1,0 +1,56 @@
+---
+layout: "default"
+title: "ReadableStreamType"
+description: "Swift documentation for 'ReadableStreamType': A stream of text. Does as much as possible lazily. ."
+keywords: "ReadableStreamType,protocol,swift,documentation,readSome,read,lines,writeTo"
+---
+
+<code class="language-swift">protocol ReadableStreamType { ... }</code>
+
+<div class="comment">
+    <p>A stream of text. Does as much as possible lazily. </p>
+</div>
+
+<h3>Inheritance</h3>
+<code class="inherits">Streamable</code>
+<span class="viz"><a href="hierarchy/">Protocol hierarchy</a></span>
+
+
+
+
+
+
+
+
+<h3>Instance Methods</h3>
+<div class="declaration">
+<code class="language-swift">func readSome() -> String?</code>
+<div class="comment">
+    <p>Whatever amount of text the stream feels like providing.
+    	If the source is a file this will read everything at once.</p>
+
+<pre><code class="language-swift">	**Returns:** more text from the stream, or nil if we have reached the end.
+	</code></pre>
+</div>
+</div>
+<div class="declaration">
+<code class="language-swift">func read() -> String</code>
+<div class="comment">
+    <p>Read everything at once. </p>
+</div>
+</div>
+<div class="declaration">
+<code class="language-swift">func lines() -> SequenceOf&lt;String&gt;</code>
+<div class="comment">
+    <p>Lazily split the stream into lines. </p>
+</div>
+</div>
+<div class="declaration">
+<code class="language-swift">func writeTo&lt;Target : OutputStreamType&gt;(inout target: Target)</code>
+<div class="comment">
+    <p>Enable stream to be used by &quot;println&quot; and &quot;toString&quot;. </p>
+</div>
+</div>
+
+
+

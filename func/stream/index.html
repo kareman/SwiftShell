@@ -1,0 +1,35 @@
+---
+layout: "default"
+title: "stream"
+description: "Swift documentation for 'stream': Create a stream from a sequence of Strings. ."
+keywords: "stream,func,swift,documentation"
+---
+
+<div class="declaration">
+<code class="language-swift">func stream&lt;Seq : SequenceType where String == String&gt;(sequence: Seq) -> ReadableStreamType</code>
+<div class="comment">
+    <p>Create a stream from a sequence of Strings. </p>
+</div>
+</div>
+<div class="declaration">
+<code class="language-swift">func stream(closure: () -&gt; () -&gt; String?) -> ReadableStreamType</code>
+<div class="comment">
+    <p>Create a stream from a function returning a generator function, which is called every time the stream is asked for more text.</p>
+
+<p>stream {
+	// initialisation...
+	return {
+		// called repeatedly by the resulting stream
+		// return text,	or return nil when done.
+	}
+}</p>
+
+<p><strong>Returns:</strong> The output stream.</p>
+</div>
+</div>
+<div class="declaration">
+<code class="language-swift">func stream(text: String) -> ReadableStreamType</code>
+<div class="comment">
+    <p>Create a stream from a String. </p>
+</div>
+</div>

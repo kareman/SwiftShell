@@ -1,0 +1,19 @@
+---
+layout: wrapper
+---
+
+          <div class="posts content">
+{% assign post = page %}
+{% include post.html %}
+
+          <br />
+          <ul class="pager">
+            {% if post.previous %}
+            <li class="previous"><a href="{{ post.previous.url | prepend: site.baseurl }}">&larr; Older</a></li>
+            {% endif %}
+            {% if post.next %}
+            <li class="next"><a href="{{ post.next.url | prepend: site.baseurl }}">Newer &rarr;</a></li>
+            {% endif %}
+          </ul>
+          </div><!-- posts -->
+

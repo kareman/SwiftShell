@@ -1,0 +1,44 @@
+	<nav class="navbar navbar-default" role="navigation" id="navbar">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <h1><a href="/">SwiftDoc.org</a></h1>
+          <span class="version"></span>
+        </div>
+	    <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <form class="navbar-form navbar-left" role="search">
+          
+    		<div class="form-group input-group has-feedback">
+    			<input type="hidden" class="form-control select2">
+    			<span class="glyphicon glyphicon-search form-control-feedback"></span>
+    		</div>
+            
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+              <li><a href="/type/">Types</a></li>
+              <li><a href="/protocol/">Protocols</a></li>
+              <li><a href="/operator/">Operators</a></li>
+              <li><a href="/global/">Globals</a></li>
+          </ul>
+	    </div>
+	</nav>				
+
+	<div id="header">
+		<div class="container">
+			<h1><a href="/">{{ site.title }}</a></h1>
+			<p>Auto-generated documentation for <a href="https://developer.apple.com/swift/">Swift</a>. Command-click no more.</p>
+			
+			{% if page.url == "/index.html" %}
+    		<div class="form-group form-group-lg input-group-lg has-feedback">
+    			<input type="hidden" class="form-control select2">
+    			<span class="glyphicon glyphicon-search form-control-feedback"></span>
+    		</div>
+    		{% endif %}
+		</div>
+	</div>

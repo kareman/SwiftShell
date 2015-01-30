@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body class="{{ page.dir | replace: '/', ' p-' | replace_first: ' ', '' }}">
+    <div id="wrapper">
+
+    {% include header.html %}    
+	
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 col-md-3" id="sidebar">
+
+    		<div class="form-group input-group has-feedback">
+    			<input type="hidden" class="form-control select2">
+    			<span class="glyphicon glyphicon-search form-control-feedback"></span>
+    		</div>
+
+            {% include sidebar.html %}
+        </div>
+
+        <div class="col-sm-8 col-md-9" id="content">
+{{ content }}
+    
+        </div><!-- content -->
+      </div><!-- row -->
+    </div><!-- cont -->
+        <div class="push"></div>
+    </div><!-- wrapper -->
+
+    {% include footer.html %}
+  
+  </body>
+</html>
