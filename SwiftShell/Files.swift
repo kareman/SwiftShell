@@ -35,23 +35,26 @@ public let tempdirectory: String = {
 	return tempdirectory
 }()
 
-/** 
-The current working directory.
+public extension NSFileManager  {
 
-Must be used instead of `run("cd ...")` because all the `run` commands are executed in a
-separate process and changing the directory there will not affect the rest of the Swift script.
+	/**
+	The current working directory.
 
-This directory is also used as the base for relative URL's.
-*/
-public struct workdirectory {
-    public static func get() -> String { return File.currentDirectoryPath }
-    public static func set(newValue: String) {
-		if !File.changeCurrentDirectoryPath(newValue) {
-			printErrorAndExit("Could not change the working directory to \(newValue)")
+	Must be used instead of `run("cd ...")` because all the `run` commands are executed in a
+	separate process and changing the directory there will not affect the rest of the Swift script.
+
+	This directory is also used as the base for relative URL's.
+	*/
+	public var workdirectory: String {
+		get {	return File.currentDirectoryPath }
+		set {
+			if !File.changeCurrentDirectoryPath(newValue) {
+				printErrorAndExit("Could not change the working directory to \(newValue)")
+			}
+
 		}
 	}
 }
-
 
 /** Allows for `"/directory" / "file.extension"` etc. */
 public func / (leftpath: String, rightpath: String) -> String {
