@@ -33,7 +33,7 @@ extension String {
 	}
 
 	public func countOccurrencesOf (substring: String) -> Int {
-		return self.findAll(substring) |> toArray |> countElements
+		return self.findAll(substring) |> toArray |> count
 	}
 
 	/** A lazy sequence of the ranges of `findstring` in this string. */

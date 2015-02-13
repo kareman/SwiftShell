@@ -29,7 +29,7 @@ left side as standard input.
 Warning: is only meant to be used with the "run" command, but could also unintentionally catch other uses of
 "ReadableStreamType |> ReadableStreamType", though that statement doesn't make any sense.
 */
-public func |> (lhs: ReadableStreamType, rhs: @autoclosure () -> ReadableStreamType) -> ReadableStreamType {
+public func |> (lhs: ReadableStreamType, @autoclosure rhs:  () -> ReadableStreamType) -> ReadableStreamType {
 	assert(_nextinput_ == nil)
 	_nextinput_ = lhs
 	let result = rhs()
@@ -49,7 +49,7 @@ public func run (shellcommand: String) -> ReadableStreamType {
 	let task = newtask(shellcommand)
 	
 	if let input = _nextinput_ {
-		task.standardInput = input as FileHandle
+		task.standardInput = input as! FileHandle
 		_nextinput_ = nil
 	} else {
 		// avoids implicit reading of the main script's standardInput

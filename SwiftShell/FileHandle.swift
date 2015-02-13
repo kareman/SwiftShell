@@ -19,7 +19,7 @@ extension FileHandle: ReadableStreamType {
 			return nil
 		} else {
 			if let result = NSString(data: data, encoding: streamencoding) {
-				return result
+				return result as String
 			} else {
 				printErrorAndExit("Fatal error - could not read stream.")
 			}
@@ -29,7 +29,7 @@ extension FileHandle: ReadableStreamType {
 	public func read () -> String {
 		let data: NSData = self.readDataToEndOfFile()
 		if let result = NSString(data: data, encoding: streamencoding) {
-			return result
+			return result as String
 		} else {
 			printErrorAndExit("Fatal error - could not read stream.")
 		}
@@ -114,7 +114,7 @@ public func open (forWriting path: String, overwrite: Bool = false) -> Writeable
 }
 
 
-public let environment		= NSProcessInfo.processInfo().environment as [String: String]
+public let environment		= NSProcessInfo.processInfo().environment as! [String: String]
 public let standardinput	= FileHandle.fileHandleWithStandardInput() as ReadableStreamType
 public let standardoutput	= FileHandle.fileHandleWithStandardOutput() as WriteableStreamType
 public let standarderror	= FileHandle.fileHandleWithStandardError() as WriteableStreamType
