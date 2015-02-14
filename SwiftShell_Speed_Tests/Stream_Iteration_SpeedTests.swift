@@ -31,7 +31,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 			}
 			XCTAssertEqual(i, self.numberoflines)
 			XCTAssert(result != "")
-			(f as NSFileHandle).closeFile()
+			(f as! NSFileHandle).closeFile()
 		}
 	}
 
@@ -50,7 +50,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 			}
 			XCTAssertEqual(i, self.numberoflines)
 			XCTAssert(result != "")
-			(f as NSFileHandle).closeFile()
+			(f as! NSFileHandle).closeFile()
 		}
 	}
 
@@ -67,7 +67,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 			}
 			XCTAssertEqual(i, self.numberoflines)
 			XCTAssert(result != "")
-			(f as NSFileHandle).closeFile()
+			(f as! NSFileHandle).closeFile()
 		}
 	}
 
@@ -92,7 +92,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 
 		XCTAssertEqual(i, numberoflines)
 		XCTAssert(result != "")
-		(f as NSFileHandle).closeFile()
+		(f as! NSFileHandle).closeFile()
 		return times
 	}
 
@@ -111,7 +111,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 		}
 		XCTAssertEqual(i, numberoflines)
 		XCTAssert(result != "")
-		(f as NSFileHandle).closeFile()
+		(f as!  NSFileHandle).closeFile()
 		return times
 	}
 
