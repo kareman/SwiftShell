@@ -16,19 +16,19 @@ class Files_Tests: XCTestCase {
 	}
 
 	func testWorkDirectory_IsCurrentDirectory () {
-		XCTAssertEqual( workdirectory.get(), NSFileManager.defaultManager().currentDirectoryPath )
+		XCTAssertEqual( workdirectory, NSFileManager.defaultManager().currentDirectoryPath )
 	}
 
 	func testWorkDirectory_CanChange () {
-		workdirectory.set("/private/tmp")
+		workdirectory = "/private/tmp"
 
-		XCTAssertEqual( workdirectory.get(), "/private/tmp" )
+		XCTAssertEqual( workdirectory, "/private/tmp" )
 		XCTAssertEqual( $("pwd"), "/private/tmp" )
 	}
 
 	func testURLConcatenationOperator () {
 		XCTAssertEqual( "/directory" / "file.extension", "/directory/file.extension" )
 		XCTAssertEqual( "/root" / "directory" / "file.extension", "/root/directory/file.extension" )
-		XCTAssertEqual( "directory" / "file.extension", workdirectory.get() + "/directory/file.extension" )
+		XCTAssertEqual( "directory" / "file.extension", workdirectory + "/directory/file.extension" )
 	}
 }

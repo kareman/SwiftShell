@@ -43,9 +43,9 @@ separate process and changing the directory there will not affect the rest of th
 
 This directory is also used as the base for relative URL's.
 */
-public struct workdirectory {
-    public static func get() -> String { return File.currentDirectoryPath }
-    public static func set(newValue: String) {
+public var workdirectory: String {
+	get {	return File.currentDirectoryPath }
+	set {
 		if !File.changeCurrentDirectoryPath(newValue) {
 			printErrorAndExit("Could not change the working directory to \(newValue)")
 		}
