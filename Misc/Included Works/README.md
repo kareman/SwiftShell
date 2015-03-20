@@ -1,6 +1,6 @@
 # Included Works
 
-The following files come from other projects:
+The following files are from other projects:
 
 - SwiftShellTests/Scripts/assert.sh
 
