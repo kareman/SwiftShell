@@ -2,7 +2,7 @@ _Updated to [Swift 1.2](https://developer.apple.com/swift/blog/?id=22) (Xcode 6.
 
 # SwiftShell
 
-An OS X Framework for command line scripting in Swift. It supports joining together shell commands and Swift functions, like the pipe in shell commands and the pipe forward operator in F#. Like Swift itself it supports both object-oriented and functional programming.
+An OS X Framework for command line scripting in Swift. It supports joining together shell commands and Swift functions, like the pipe in shell commands and the pipe forward operator in F#.
 
 
 ## Usage
