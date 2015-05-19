@@ -89,6 +89,10 @@ Launch with e.g. `ls | print_linenumbers.swift`
 - [trash.swift](https://gist.github.com/kareman/322c1091f3cc7e1078af): moves files and folders to the trash.
 - [listallexecutablesinpath.swift](https://gist.github.com/kareman/d157c46858f91f1a22a7): lists all executables currently available in PATH.
 
+## Documentation
+
+- [generated from code](http://kareman.github.io/SwiftShell)
+
 ## Installation
 
 - In the Terminal, go to where you want to download SwiftShell.
