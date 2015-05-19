@@ -1,1 +1,0 @@
-jekyll: jekyll serve --watch
