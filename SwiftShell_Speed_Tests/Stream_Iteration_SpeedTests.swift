@@ -44,7 +44,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 
 			var i = 0
 			var result = ""
-			for line in split(text, { $0 == "\n"}, allowEmptySlices: true) {
+			for line in Swift.split(text, allowEmptySlices: true, isSeparator: { $0 == "\n"}) {
 				i++
 				result += line
 			}
