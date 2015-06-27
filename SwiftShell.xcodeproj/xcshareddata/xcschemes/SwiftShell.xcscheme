@@ -37,17 +37,6 @@
                BlueprintName = "SwiftShellTests"
                ReferencedContainer = "container:SwiftShell.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "Stream_Tests/testChainWithSequenceOfStreamsPrintedToStream()">
-               </Test>
-               <Test
-                  Identifier = "Stream_Tests/testChainWithSequenceOfStringsPrintedToStream()">
-               </Test>
-               <Test
-                  Identifier = "Stream_Tests/testSequenceOfStreamsToStream()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
