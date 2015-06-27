@@ -33,13 +33,13 @@ extension String {
 	}
 
 	public func countOccurrencesOf (substring: String) -> Int {
-		return self.findAll(substring) |> toArray |> count
+		return (self.findAll(substring) |> toArray).count
 	}
 
 	/** A lazy sequence of the ranges of `findstring` in this string. */
-	public func findAll (findstring: String) -> SequenceOf<Range<String.Index>> {
+	public func findAll (findstring: String) -> AnySequence<Range<String.Index>> {
 		var rangeofremainder: Range = self.startIndex..<self.endIndex
-		return SequenceOf (GeneratorOf {
+		return AnySequence (anyGenerator {
 			if let foundrange = self.rangeOfString(findstring, range:rangeofremainder) {
 				rangeofremainder = foundrange.endIndex..<self.endIndex
 				return foundrange

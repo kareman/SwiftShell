@@ -38,7 +38,7 @@ public func sorted <S : SequenceType>
 	(source: S)
 	-> [S.Generator.Element] {
 
-		return sorted(source, isOrderedBefore)
+		return source.sort(isOrderedBefore)
 }
 
 /** Lazily return a sequence containing the results of mapping transform over source. */
@@ -59,11 +59,11 @@ public func reduce <S : SequenceType, U>
 	(sequence: S)
 	-> U {
 
-		return reduce(sequence, initial, combine)
+		return sequence.reduce(initial, combine: combine)
 }
 
 /** Split text over delimiter, returning an array. */
-public func split (_ delimiter: String = "\n")(text: String) -> [String] {
+public func split (delimiter delimiter: String = "\n")(text: String) -> [String] {
 	return text.componentsSeparatedByString(delimiter)
 }
 
@@ -87,7 +87,7 @@ public func drop <S : SequenceType, T : Equatable where S.Generator.Element == T
 	(sequence: S)
 	-> LazySequence<FilterSequenceView<S>> {
 		
-		return sequence |> filter { !contains(tobedropped, $0) }
+		return sequence |> filter { !tobedropped.contains($0) }
 }
 
 /** Return at most the first `numbertotake` elements of sequence */

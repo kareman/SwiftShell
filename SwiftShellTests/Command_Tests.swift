@@ -38,9 +38,7 @@ class Command_Tests: XCTestCase {
 	}
 	
 	func testParametersFromSequenceOfStreams () {
-		var (writable, readable) = streams()
-		
-		let result = SequenceOf( [stream("one"), stream("two"), stream("three")].generate() ) |> parameters
+		let result = AnySequence( [stream("one"), stream("two"), stream("three")].generate() ) |> parameters
 		
 		XCTAssertEqual( result, " \"one\" \"two\" \"three\"" )
 	}

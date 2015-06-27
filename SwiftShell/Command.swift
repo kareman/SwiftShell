@@ -43,7 +43,7 @@ public func |> (lhs: ReadableStreamType, @autoclosure rhs:  () -> ReadableStream
 Run a shell command synchronously with no standard input,
 or if to the right of a "ReadableStreamType |> ", use the stream on the left side as standard input.
 
-:returns: Standard output
+- returns: Standard output
 */
 public func run (shellcommand: String) -> ReadableStreamType {
 	let task = newtask(shellcommand)
@@ -85,5 +85,5 @@ public func $ (shellcommand: String) -> String {
 
 /** Turn a sequence into valid parameters for a shell command, properly quoted */
 public func parameters <S : SequenceType> (sequence: S) -> String {
-	return " " + ( sequence |> map { "\"\(toString($0))\"" } |> join(" ") )
+	return " " + " ".join( sequence.map { "\"\($0)\"" } )
 }
