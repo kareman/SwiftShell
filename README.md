@@ -1,4 +1,4 @@
-_Updated to [Swift 1.2](https://developer.apple.com/swift/blog/?id=22) (Xcode 6.3). [Use this](https://github.com/kareman/SwiftShell/releases/tag/v0.1) for earlier versions of Swift (Xcode 6.1.1 and 6.2)._
+_This is the **Swift 2.0** (Xcode 7) branch. Use [master](https://github.com/kareman/SwiftShell/tree/master) for Swift 1.2._
 
 # SwiftShell
 
@@ -70,8 +70,8 @@ is also a stream:
 ```swift
 var i = 1
 for line in standardinput.lines() {
-	print("line \(i++): ")
-	println(line)
+	print("line \(i++): ", appendNewline: false)
+	print(line)
 }
 ```
 
