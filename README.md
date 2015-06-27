@@ -1,4 +1,4 @@
-_Updated to [Swift 1.2](https://developer.apple.com/swift/blog/?id=22) (Xcode 6.3). [Use this](https://github.com/kareman/SwiftShell/releases/tag/v0.1) for earlier versions of Swift (Xcode 6.1.1 and 6.2)._
+_Works with **Swift 1.2** (Xcode 6.3). Here's the the [Swift 2.0](https://github.com/kareman/SwiftShell/tree/Swift2.0) version._
 
 # SwiftShell
 
