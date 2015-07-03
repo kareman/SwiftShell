@@ -1,4 +1,4 @@
-_Works with **Swift 1.2** (Xcode 6.3). Here's the the [Swift 2.0](https://github.com/kareman/SwiftShell/tree/Swift2.0) version._
+_Works with **Swift 1.2** (Xcode 6.3). Here's the [Swift 2.0](https://github.com/kareman/SwiftShell/tree/Swift2.0) version._
 
 # SwiftShell
 
