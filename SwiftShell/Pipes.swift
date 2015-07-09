@@ -22,7 +22,7 @@ public func |> <T,U> (lhs: T, rhs: T -> U) -> U {
 public func filter <S : SequenceType>
 	(includeElement: (S.Generator.Element) -> Bool)
 	(source: S)
-	-> LazySequence<FilterSequenceView<S>> {
+	-> LazySequence<FilterSequence<S>> {
 
 		return lazy(source).filter(includeElement)
 }
@@ -45,7 +45,7 @@ public func sorted <S : SequenceType>
 public func map <S: SequenceType, T>
 	(transform: (S.Generator.Element) -> T)
 	(source: S)
-	-> LazySequence<MapSequenceView<S, T>> {
+	-> LazySequence<MapSequence<S, T>> {
 
 		return lazy(source).map(transform)
 }
@@ -85,7 +85,7 @@ public func toArray <S : SequenceType> (sequence: S) -> [S.Generator.Element] {
 public func drop <S : SequenceType, T : Equatable where S.Generator.Element == T>
 	(tobedropped: [T])
 	(sequence: S)
-	-> LazySequence<FilterSequenceView<S>> {
+	-> LazySequence<FilterSequence<S>> {
 		
 		return sequence |> filter { !tobedropped.contains($0) }
 }
