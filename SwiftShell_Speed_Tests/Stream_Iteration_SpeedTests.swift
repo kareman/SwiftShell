@@ -42,14 +42,10 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 			let f = open(longtextpath)
 			let text = f.read()
 
-			var i = 0
-			var result = ""
-			for line in Swift.split(text, allowEmptySlices: true, isSeparator: { $0 == "\n"}) {
-				i++
-				result += line
-			}
-			XCTAssertEqual(i, self.numberoflines)
-			XCTAssert(result != "")
+			var result = Swift.split(text.characters, allowEmptySlices: true, isSeparator: { $0 == "\n"})
+
+			XCTAssertEqual(result.count, self.numberoflines)
+
 			(f as! NSFileHandle).closeFile()
 		}
 	}
@@ -59,14 +55,10 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 		self.measureBlock() {
 			let f = open(longtextpath)
 
-			var i = 0
-			var result = ""
-			for line in f.lines() {
-				i++
-				result += line
-			}
-			XCTAssertEqual(i, self.numberoflines)
-			XCTAssert(result != "")
+			let result = Array(f.lines())
+
+			XCTAssertEqual(result.count, self.numberoflines)
+
 			(f as! NSFileHandle).closeFile()
 		}
 	}
