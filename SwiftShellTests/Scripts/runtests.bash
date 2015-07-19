@@ -3,7 +3,7 @@
 PROJECT_ROOT=../..
 
 # Build the framework and record any errors.
-BUILDERRORS=$(xcodebuild -project $PROJECT_ROOT/SwiftShell.xcodeproj/ 2>&1 >/dev/null)
+BUILDERRORS=$(xcodebuild -project $PROJECT_ROOT/SwiftShell2.xcodeproj/ 2>&1 >/dev/null)
 
 # If there were any errors (exit code is not 0), print them and exit.
 if [ $? -ne 0 ]; then
