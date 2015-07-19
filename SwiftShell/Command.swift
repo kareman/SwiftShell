@@ -9,11 +9,11 @@
 
 import Foundation
 
-private func newtask (shellcommand: String) -> NSTask {
+public func runLater (shellcommand: String) -> NSTask {
 	let task = NSTask()
 	task.arguments = ["-c", shellcommand]
 	task.launchPath = "/bin/bash"
-	
+
 	return task
 }
 
@@ -23,7 +23,7 @@ private func newtask (shellcommand: String) -> NSTask {
 private var _nextinput_: ReadableStreamType?
 
 /**
-Specific handling of func run (shellcommand: String) -> ReadableStreamType on the right side using the stream on the 
+Specific handling of func run (shellcommand: String) -> ReadableStreamType on the right side using the stream on the
 left side as standard input.
 
 Warning: is only meant to be used with the "run" command, but could also unintentionally catch other uses of
@@ -39,15 +39,15 @@ public func |> (lhs: ReadableStreamType, @autoclosure rhs:  () -> ReadableStream
 	return result
 }
 
-/** 
+/**
 Run a shell command synchronously with no standard input,
 or if to the right of a "ReadableStreamType |> ", use the stream on the left side as standard input.
 
 - returns: Standard output
 */
 public func run (shellcommand: String) -> ReadableStreamType {
-	let task = newtask(shellcommand)
-	
+	let task = runLater(shellcommand)
+
 	if let input = _nextinput_ {
 		task.standardInput = input as! FileHandle
 		_nextinput_ = nil
@@ -55,31 +55,31 @@ public func run (shellcommand: String) -> ReadableStreamType {
 		// avoids implicit reading of the main script's standardInput
 		task.standardInput = NSPipe ()
 	}
-	
+
 	let output = NSPipe ()
 	task.standardOutput = output
 	task.launch()
-	
+
 	// necessary for now to ensure one shellcommand is finished before another begins.
 	// uncontrolled asynchronous shell processes could be messy.
 	// but shell commands on the same line connected with the pipe operator should preferably be asynchronous.
 	task.waitUntilExit()
-	
+
 	return output.fileHandleForReading
 }
 
 /** Shortcut for in-line command, returns output as String. */
 public func $ (shellcommand: String) -> String {
-	let task = newtask(shellcommand)
-	
+	let task = runLater(shellcommand)
+
 	// avoids implicit reading of the main script's standardInput
 	task.standardInput = NSPipe ()
-	
+
 	let output = NSPipe ()
 	task.standardOutput = output
 	task.launch()
 	task.waitUntilExit()
-	
+
 	return output.fileHandleForReading.read().trim()
 }
 
