@@ -11,7 +11,6 @@
 		BA2E3B331B5C35CC001ED175 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B2D1B5C35CC001ED175 /* Command.swift */; };
 		BA2E3B341B5C35CC001ED175 /* FileHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B2E1B5C35CC001ED175 /* FileHandle.swift */; };
 		BA2E3B351B5C35CC001ED175 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B2F1B5C35CC001ED175 /* Files.swift */; };
-		BA2E3B361B5C35CC001ED175 /* Pipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B301B5C35CC001ED175 /* Pipes.swift */; };
 		BA2E3B371B5C35CC001ED175 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B311B5C35CC001ED175 /* Stream.swift */; };
 		BA2E3B381B5C35CC001ED175 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B321B5C35CC001ED175 /* String.swift */; };
 		BA2E3B431B5C3635001ED175 /* Command_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B391B5C3635001ED175 /* Command_Tests.swift */; };
@@ -44,7 +43,6 @@
 		BA2E3B2D1B5C35CC001ED175 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		BA2E3B2E1B5C35CC001ED175 /* FileHandle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHandle.swift; sourceTree = "<group>"; };
 		BA2E3B2F1B5C35CC001ED175 /* Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
-		BA2E3B301B5C35CC001ED175 /* Pipes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pipes.swift; sourceTree = "<group>"; };
 		BA2E3B311B5C35CC001ED175 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
 		BA2E3B321B5C35CC001ED175 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BA2E3B391B5C3635001ED175 /* Command_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command_Tests.swift; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 				BA2E3B2D1B5C35CC001ED175 /* Command.swift */,
 				BA2E3B2E1B5C35CC001ED175 /* FileHandle.swift */,
 				BA2E3B2F1B5C35CC001ED175 /* Files.swift */,
-				BA2E3B301B5C35CC001ED175 /* Pipes.swift */,
 				BA2E3B311B5C35CC001ED175 /* Stream.swift */,
 				BA2E3B321B5C35CC001ED175 /* String.swift */,
 				BA2E3B1A1B5C34DD001ED175 /* Info.plist */,
@@ -242,7 +239,6 @@
 				BA2E3B331B5C35CC001ED175 /* Command.swift in Sources */,
 				BA2E3B341B5C35CC001ED175 /* FileHandle.swift in Sources */,
 				BA2E3B351B5C35CC001ED175 /* Files.swift in Sources */,
-				BA2E3B361B5C35CC001ED175 /* Pipes.swift in Sources */,
 				BA2E3B371B5C35CC001ED175 /* Stream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
