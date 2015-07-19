@@ -16,3 +16,10 @@ public func runLater (shellcommand: String) -> NSTask {
 
 	return task
 }
+
+/** Print message to standard error and halt execution. */
+@noreturn public func printErrorAndExit <T> (errormessage: T, errorcode: Int32 = EXIT_FAILURE) {
+	main.stderror.writeln("SwiftShell: \(errormessage)")
+	exit(errorcode)
+}
+}
