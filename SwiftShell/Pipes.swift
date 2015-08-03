@@ -68,7 +68,7 @@ public func split (delimiter delimiter: String = "\n")(text: String) -> [String]
 }
 
 /** Insert separator between each item in elements. */
-public func join <C : ExtensibleCollectionType, S : SequenceType where S.Generator.Element == C>
+public func join <C : RangeReplaceableCollectionType, S : SequenceType where S.Generator.Element == C>
 	(separator: C)
 	(elements: S)
 	-> C {
