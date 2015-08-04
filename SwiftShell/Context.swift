@@ -3,8 +3,6 @@
 *
 * Copyright (c) 2015 Kåre Morstøl, NotTooBad Software (nottoobadsoftware.com)
 *
-* Contributors:
-*	Kåre Morstøl, https://github.com/kareman - initial API and implementation.
 */
 
 import Foundation
