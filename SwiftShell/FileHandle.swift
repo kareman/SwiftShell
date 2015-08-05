@@ -33,8 +33,8 @@ extension NSFileHandle {
 
 extension NSFileHandle {
 
-	public func write (string: String, encoding: UInt = main.encoding) {
-		writeData(string.dataUsingEncoding(encoding, allowLossyConversion:false)!)
+	public func write <T> (x: T, encoding: UInt = main.encoding) {
+		writeData(String(x).dataUsingEncoding(encoding, allowLossyConversion:false)!)
 	}
 
 	public func writeln (string: String = "", encoding: UInt = main.encoding) {
