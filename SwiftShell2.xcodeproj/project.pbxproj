@@ -117,6 +117,7 @@
 		BA2E3B231B5C34DD001ED175 /* SwiftShellTests */ = {
 			isa = PBXGroup;
 			children = (
+				BAE03DBA1B5C6B7200D731A0 /* Context_Tests.swift */,
 				BA2E3B391B5C3635001ED175 /* Command_Tests.swift */,
 				BA2E3B3A1B5C3635001ED175 /* FileHandle_Tests.swift */,
 				BA2E3B3B1B5C3635001ED175 /* Files_Tests.swift */,
@@ -128,7 +129,6 @@
 				BA2E3B421B5C3635001ED175 /* XCTestCase_Additions.swift */,
 				BA2E3B3D1B5C3635001ED175 /* shorttext.txt */,
 				BA2E3B261B5C34DD001ED175 /* Info.plist */,
-				BAE03DBA1B5C6B7200D731A0 /* Context_Tests.swift */,
 			);
 			path = SwiftShellTests;
 			sourceTree = "<group>";
