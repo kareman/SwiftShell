@@ -54,7 +54,7 @@ public struct MainShellContext: ShellContextType {
 		}
 	}
 
-	public lazy var arguments: [String] = Process.arguments.isEmpty ? [] : Array(dropFirst(Process.arguments))
+	public lazy var arguments: [String] = Process.arguments.isEmpty ? [] : Array(Process.arguments.dropFirst())
 	public lazy var name: String = Process.arguments.first ?? ""
 
 	private init() {
