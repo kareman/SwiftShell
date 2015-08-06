@@ -19,6 +19,6 @@ class Context_Tests: XCTestCase {
 		main.currentdirectory = "/tmp"
 
 		XCTAssertEqual( main.currentdirectory, "/private/tmp" )
-		XCTAssertEqual( main.$("/bin/pwd"), "/tmp\n" )
+		XCTAssertEqual( main.$("/bin/pwd"), "/tmp" )
 	}
 }

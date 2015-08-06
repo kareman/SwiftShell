@@ -11,4 +11,16 @@ import XCTest
 
 class Command_Tests: XCTestCase {
 
+	func test$BashCommand () {
+		XCTAssertEqual( main.$(bash:"echo one"), "one" )
+	}
+
+	func testSingleline$Command () {
+		XCTAssertEqual( main.$("/bin/echo", "one", "two"), "one two" )
+	}
+
+	func testMultiline$Command () {
+		XCTAssertEqual( main.$("/bin/echo", "one\ntwo"), "one\ntwo\n" )
+	}
+
 }
