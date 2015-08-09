@@ -45,8 +45,10 @@ extension ShellContextType {
 		var outputstring = output.fileHandleForReading.read(encoding: self.encoding)
 
 		// if output is single-line, trim it.
-		if outputstring.hasSuffix("\n") && outputstring.characters.indexOf("\n") == outputstring.endIndex.predecessor() {
-			outputstring = outputstring.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
+		let firstnewline = outputstring.characters.indexOf("\n")
+		if firstnewline == nil ||
+			firstnewline == outputstring.endIndex.predecessor() {
+				outputstring = outputstring.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
 		}
 
 		return outputstring
