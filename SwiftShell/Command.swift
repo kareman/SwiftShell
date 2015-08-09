@@ -34,12 +34,9 @@ extension ShellContextType {
 	func setupTask (bash bashcommand: String) -> NSTask {
 		return setupTask("/bin/bash", args: ["-c", bashcommand])
 	}
-	
+
 
 	private func outputFrom$ (task: NSTask) -> String {
-		// avoids implicit reading from standardInput
-		task.standardInput = NSPipe ()
-
 		let output = NSPipe ()
 		task.standardOutput = output
 		task.standardError = output
