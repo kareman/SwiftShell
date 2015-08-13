@@ -14,7 +14,7 @@ extension NSFileHandle {
 
 		guard data.length > 0 else { return nil }
 		guard let result = NSString(data: data, encoding: encoding) else {
-			printErrorAndExit("Fatal error - could not convert stream to text.")
+			exit(errormessage: "Fatal error - could not convert stream to text.")
 		}
 
 		return result as String
@@ -24,7 +24,7 @@ extension NSFileHandle {
 		let data: NSData = self.readDataToEndOfFile()
 		
 		guard let result = NSString(data: data, encoding: encoding) else {
-			printErrorAndExit("Fatal error - could not convert stream to text.")
+			exit(errormessage: "Fatal error - could not convert stream to text.")
 		}
 
 		return result as String

@@ -47,7 +47,7 @@ public struct MainShellContext: ShellContextType {
 		get {	return Files.currentDirectoryPath }
 		set {
 			if !Files.changeCurrentDirectoryPath(newValue) {
-				printErrorAndExit("Could not change the working directory to \(newValue)")
+				exit(errormessage: "Could not change the working directory to \(newValue)")
 			}
 		}
 	}

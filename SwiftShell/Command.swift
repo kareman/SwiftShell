@@ -8,9 +8,15 @@
 import Foundation
 
 
-/** Print message to standard error and halt execution. */
-@noreturn public func printErrorAndExit <T> (errormessage: T, errorcode: Int32 = EXIT_FAILURE) {
-	main.stderror.writeln("SwiftShell: \(errormessage)")
+/** 
+Print message to standard error and halt execution. 
+
+- parameter errormessage: the error message.
+- parameter errorcode: exit code for the entire program. Defaults to 1.
+- returns: not.
+*/
+@noreturn public func exit <T> (errormessage errormessage: T, errorcode: Int32 = EXIT_FAILURE) {
+	main.stderror.writeln(errormessage)
 	exit(errorcode)
 }
 
