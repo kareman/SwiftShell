@@ -23,7 +23,7 @@ class FileHandle_Tests: XCTestCase {
 
 		writer.closeFile()
 		XCTAssertNil(reader.readSome())
-		XCTAssertNil(reader.readSome(), "Performing readSome() repeatedly on closed filehandle should return empty string.")
+		XCTAssertNil(reader.readSome(), "Performing readSome() repeatedly on closed filehandle should return nil.")
 		XCTAssertEqual(reader.read(), "")
 	}
 
