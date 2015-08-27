@@ -71,16 +71,25 @@ extension FileHandle: WriteableStreamType {
 	exit(EXIT_FAILURE)
 }
 
+/** Run a function which takes a NSErrorPointer. If an NSError occurs, throw it, otherwise return result. */
+func makeThrowable <T> (nserrorfunc: (NSErrorPointer) -> T) throws -> T {
+	var maybeerror: NSError?
+	let result = nserrorfunc(&maybeerror)
+	if let actualerror = maybeerror {
+		throw actualerror
+	}
+	return result
+}
+
 /** Open a file for reading, and exit if an error occurs. */
 public func open (path: String) -> ReadableStreamType {
 
 	let url = toURLOrError(path)
 	do {
-		let filehandle = try FileHandle(forReadingFromURL: url)
-		return filehandle
+		return try FileHandle(forReadingFromURL: url)
 	} catch {
 		do {
-			try url.checkResourceIsReachable()
+			try makeThrowable(url.checkResourceIsReachableAndReturnError)
 		} catch {
 			printErrorAndExit(error)
 		}
@@ -107,7 +116,7 @@ public func open (forWriting path: String, overwrite: Bool = false) -> Writeable
 		return filehandle
 	} catch {
 		do {
-			try url.checkResourceIsReachable()
+			try makeThrowable(url.checkResourceIsReachableAndReturnError)
 		} catch {
 			printErrorAndExit(error)
 		}

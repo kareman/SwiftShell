@@ -22,9 +22,9 @@ public func |> <T,U> (lhs: T, rhs: T -> U) -> U {
 public func filter <S : SequenceType>
 	(includeElement: (S.Generator.Element) -> Bool)
 	(source: S)
-	-> LazySequence<FilterSequence<S>> {
+	-> LazyFilterSequence<S> {
 
-		return lazy(source).filter(includeElement)
+		return source.lazy.filter(includeElement)
 }
 
 /**
@@ -45,9 +45,9 @@ public func sorted <S : SequenceType>
 public func map <S: SequenceType, T>
 	(transform: (S.Generator.Element) -> T)
 	(source: S)
-	-> LazySequence<MapSequence<S, T>> {
+	-> LazyMapSequence<S,T> {
 
-		return lazy(source).map(transform)
+		return source.lazy.map(transform)
 }
 
 /**
@@ -71,9 +71,9 @@ public func split (delimiter delimiter: String = "\n")(text: String) -> [String]
 public func join <C : RangeReplaceableCollectionType, S : SequenceType where S.Generator.Element == C>
 	(separator: C)
 	(elements: S)
-	-> C {
+	-> JoinSequence<S> {
 
-		return join(separator, elements)
+		return elements.joinWithSeparator(separator)
 }
 
 /** Turn a sequence into an array. For use after the |> operator. */
@@ -85,7 +85,7 @@ public func toArray <S : SequenceType> (sequence: S) -> [S.Generator.Element] {
 public func drop <S : SequenceType, T : Equatable where S.Generator.Element == T>
 	(tobedropped: [T])
 	(sequence: S)
-	-> LazySequence<FilterSequence<S>> {
+	-> LazyFilterSequence<S> {
 		
 		return sequence |> filter { !tobedropped.contains($0) }
 }
