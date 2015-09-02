@@ -24,11 +24,13 @@ class Run_Tests: XCTestCase {
 	}
 }
 
+import CatchingFire
+
 class RunAsync_Tests: XCTestCase {
 
 	func testReturnsStandardOutput () {
 		let asynctask = main.runAsync("/bin/echo", "one", "two" )
-		try! asynctask.finish()
+		AssertNoThrow { try asynctask.finish() }
 
 		XCTAssertEqual( asynctask.stdout.read(), "one two\n" )
 		XCTAssertEqual( asynctask.stderror.read(), "" )
@@ -36,7 +38,12 @@ class RunAsync_Tests: XCTestCase {
 
 	func testReturnsStandardError () {
 		let asynctask = main.runAsync(bash: "echo one two > /dev/stderr" )
-		try! asynctask.finish()
+		AssertNoThrow { try asynctask.finish() }
+
+		XCTAssertEqual( asynctask.stderror.read(), "one two\n" )
+		XCTAssertEqual( asynctask.stdout.read(), "" )
+	}
+
 
 		XCTAssertEqual( asynctask.stderror.read(), "one two\n" )
 		XCTAssertEqual( asynctask.stdout.read(), "" )

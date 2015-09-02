@@ -1,0 +1,10 @@
+framework module CatchingFire {
+  umbrella header "CatchingFire.h"
+
+  export *
+  module * { export * }
+}
+
+module CatchingFire.Swift {
+    header "CatchingFire-Swift.h"
+}
