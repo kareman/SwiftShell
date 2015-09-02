@@ -19,7 +19,7 @@ class Context_Tests: XCTestCase {
 		main.currentdirectory = "/tmp"
 
 		XCTAssertEqual( main.currentdirectory, "/private/tmp" )
-		XCTAssertEqual( main.$("/bin/pwd"), "/tmp" )
+		XCTAssertEqual( main.run("/bin/pwd"), "/tmp" )
 		XCTAssertEqual( main.currentdirectory, NSFileManager.defaultManager().currentDirectoryPath )
 	}
 }

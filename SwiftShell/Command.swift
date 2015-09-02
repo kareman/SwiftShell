@@ -8,8 +8,8 @@
 import Foundation
 
 
-/** 
-Print message to standard error and halt execution. 
+/**
+Print message to standard error and halt execution.
 
 - parameter errormessage: the error message.
 - parameter errorcode: exit code for the entire program. Defaults to 1.
@@ -40,9 +40,11 @@ extension ShellContextType {
 	func setupTask (bash bashcommand: String) -> NSTask {
 		return setupTask("/bin/bash", args: ["-c", bashcommand])
 	}
+}
 
+extension ShellContextType {
 
-	private func outputFrom$ (task: NSTask) -> String {
+	private func outputFromRun (task: NSTask) -> String {
 		let output = NSPipe ()
 		task.standardOutput = output
 		task.standardError = output
@@ -66,8 +68,8 @@ extension ShellContextType {
 	- parameter args: the arguments, one string for each.
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
-	public func $ (executable: String, _ args: String ...) -> String {
-		return outputFrom$(setupTask(executable, args: args))
+	public func run (executable: String, _ args: String ...) -> String {
+		return outputFromRun(setupTask(executable, args: args))
 	}
 
 	/**
@@ -75,8 +77,8 @@ extension ShellContextType {
 
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
-	public func $ (bash bashcommand: String) -> String {
-		return outputFrom$(setupTask(bash: bashcommand))
+	public func run (bash bashcommand: String) -> String {
+		return outputFromRun(setupTask(bash: bashcommand))
 	}
 }
 

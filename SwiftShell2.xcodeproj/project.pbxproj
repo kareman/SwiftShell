@@ -59,7 +59,7 @@
 		BA2E3B421B5C3635001ED175 /* XCTestCase_Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestCase_Additions.swift; sourceTree = "<group>"; };
 		BA2E3B4E1B5C380C001ED175 /* Test area 2.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = "Test area 2.playground"; path = "Misc/Test area 2.playground"; sourceTree = "<group>"; };
 		BA2E3B4F1B5C450C001ED175 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
-		BAE03DBA1B5C6B7200D731A0 /* Context_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context_Tests.swift; sourceTree = "<group>"; };
+		BAE03DBA1B5C6B7200D731A0 /* Context_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Context_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

@@ -9,18 +9,18 @@
 import SwiftShell
 import XCTest
 
-class Command_Tests: XCTestCase {
+class Run_Tests: XCTestCase {
 
-	func test$BashCommand () {
-		XCTAssertEqual( main.$(bash:"echo one"), "one" )
+	func testBashCommand () {
+		XCTAssertEqual( main.run(bash:"echo one"), "one" )
 	}
 
-	func testSingleline$Command () {
-		XCTAssertEqual( main.$("/bin/echo", "one", "two"), "one two" )
+	func testSinglelineOutput () {
+		XCTAssertEqual( main.run("/bin/echo", "one", "two"), "one two" )
 	}
 
-	func testMultiline$Command () {
-		XCTAssertEqual( main.$("/bin/echo", "one\ntwo"), "one\ntwo\n" )
+	func testMultilineOutput () {
+		XCTAssertEqual( main.run("/bin/echo", "one\ntwo"), "one\ntwo\n" )
 	}
 }
 
