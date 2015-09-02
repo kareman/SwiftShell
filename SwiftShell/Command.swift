@@ -60,22 +60,75 @@ extension ShellContextType {
 		return outputstring
 	}
 
-	/** 
-   Shortcut for shell command, returns output and errors as a String.
+	/**
+	Shortcut for shell command, returns output and errors as a String.
 
-   - parameter args: the arguments, one string for each.
-   - returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
+	- parameter args: the arguments, one string for each.
+	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
 	public func $ (executable: String, _ args: String ...) -> String {
 		return outputFrom$(setupTask(executable, args: args))
 	}
 
-	/** 
-   Shortcut for bash shell command, returns output and errors as a String.
+	/**
+	Shortcut for bash shell command, returns output and errors as a String.
 
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
 	public func $ (bash bashcommand: String) -> String {
 		return outputFrom$(setupTask(bash: bashcommand))
+	}
+}
+
+public struct AsyncShellTask {
+	public let stdout: NSFileHandle
+	public let stderror: NSFileHandle
+	private let task: NSTask
+
+	private init (task: NSTask) {
+		self.task = task
+
+		let outpipe = NSPipe()
+		task.standardOutput = outpipe
+		self.stdout = outpipe.fileHandleForReading
+
+		let errorpipe = NSPipe()
+		task.standardError = errorpipe
+		self.stderror = errorpipe.fileHandleForReading
+
+		task.launch()
+	}
+
+	/** 
+   Wait for this shell task to finish.
+
+   - throws: a TaskError if the return code is anything but 0.
+	*/
+	public func finish() throws {
+		task.waitUntilExit()
+	}
+}
+
+extension ShellContextType {
+
+	/**
+   Run executable and return before it is finished.
+
+   - parameter executable: path to an executable file.
+   - parameter args: arguments to the executable.
+   - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
+	*/
+	public func runAsync (executable: String, _ args: String ...) -> AsyncShellTask {
+		return AsyncShellTask(task: setupTask(executable, args: args))
+	}
+
+	/**
+   Run bash command and return before it is finished.
+
+   - parameter bashcommand: the bash shell command.
+   - returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
+	*/
+	public func runAsync (bash bashcommand: String) -> AsyncShellTask {
+		return AsyncShellTask(task: setupTask(bash: bashcommand))
 	}
 }
