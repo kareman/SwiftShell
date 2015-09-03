@@ -44,8 +44,10 @@ class RunAsync_Tests: XCTestCase {
 		XCTAssertEqual( asynctask.stdout.read(), "" )
 	}
 
+	func testThrowsErrorOnExitcodeNotZero () {
+		let asynctask = main.runAsync(bash: "echo errormessage > /dev/stderr; exit 1" )
 
-		XCTAssertEqual( asynctask.stderror.read(), "one two\n" )
-		XCTAssertEqual( asynctask.stdout.read(), "" )
+		AssertThrows(ShellError.ReturnedErrorCode(errorcode: 1)) { try asynctask.finish() }
+		XCTAssertEqual( asynctask.stderror.read(), "errormessage\n" )
 	}
 }

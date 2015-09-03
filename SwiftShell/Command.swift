@@ -42,6 +42,7 @@ extension ShellContextType {
 	}
 }
 
+
 extension ShellContextType {
 
 	private func outputFromRun (task: NSTask) -> String {
@@ -82,6 +83,22 @@ extension ShellContextType {
 	}
 }
 
+
+/** Error type for completed shell commands. */
+public enum ShellError: ErrorType, Equatable {
+
+	/** Exit code was not zero. */
+	case ReturnedErrorCode (errorcode: Int32)
+}
+
+public func == (e1: ShellError, e2: ShellError) -> Bool {
+	switch (e1, e2) {
+	case (.ReturnedErrorCode(let c1), .ReturnedErrorCode(let c2)):
+		return c1 == c2
+	}
+}
+
+/** Output from the 'runAsync' methods. */
 public struct AsyncShellTask {
 	public let stdout: NSFileHandle
 	public let stderror: NSFileHandle
@@ -104,10 +121,13 @@ public struct AsyncShellTask {
 	/** 
    Wait for this shell task to finish.
 
-   - throws: a TaskError if the return code is anything but 0.
+   - throws: a ShellError if the return code is anything but 0.
 	*/
 	public func finish() throws {
 		task.waitUntilExit()
+		if task.terminationStatus != 0 {
+			throw ShellError.ReturnedErrorCode(errorcode: task.terminationStatus)
+		}
 	}
 }
 
