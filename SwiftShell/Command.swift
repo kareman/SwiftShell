@@ -121,13 +121,15 @@ public struct AsyncShellTask {
 	/** 
    Wait for this shell task to finish.
 
+   - returns: itself
    - throws: a ShellError if the return code is anything but 0.
 	*/
-	public func finish() throws {
+	public func finish() throws -> AsyncShellTask {
 		task.waitUntilExit()
-		if task.terminationStatus != 0 {
+		guard task.terminationStatus == 0 else {
 			throw ShellError.ReturnedErrorCode(errorcode: task.terminationStatus)
 		}
+		return self
 	}
 }
 
