@@ -162,3 +162,19 @@ extension ShellContextType {
 		return AsyncShellTask(task: setupTask(bash: bashcommand))
 	}
 }
+
+
+extension ShellContextType {
+
+	public func runAndPrint (executable: String, _ args: String ...) throws {
+		let task = setupTask(executable, args: args)
+		task.launch()
+		try task.finish()
+	}
+
+	public func runAndPrint (bash bashcommand: String) throws {
+		let task = setupTask(bash: bashcommand)
+		task.launch()
+		try task.finish()
+	}
+}

@@ -58,3 +58,38 @@ class RunAsync_Tests: XCTestCase {
 		}
 	}
 }
+
+class RunAndPrint_Tests: XCTestCase {
+
+	var test_stdout: NSFileHandle!
+	var test_stderr: NSFileHandle!
+
+	override func setUp () {
+		let outputpipe = NSPipe()
+		main.stdout = outputpipe.fileHandleForWriting
+		test_stdout = outputpipe.fileHandleForReading
+
+		let errorpipe = NSPipe()
+		main.stderror = errorpipe.fileHandleForWriting
+		test_stderr = errorpipe.fileHandleForReading
+	}
+
+	func testReturnsStandardOutput () {
+		AssertNoThrow { try main.runAndPrint("/bin/echo", "one", "two" ) }
+
+		XCTAssertEqual( test_stdout.readSome(), "one two\n" )
+	}
+
+	func testReturnsStandardError () {
+		AssertNoThrow { try main.runAndPrint(bash: "echo one two > /dev/stderr" ) }
+
+		XCTAssertEqual( test_stderr.readSome(), "one two\n" )
+	}
+
+	func testThrowsErrorOnExitcodeNotZero () {
+		AssertThrows(ShellError.ReturnedErrorCode(errorcode: 1))
+			{ try main.runAndPrint(bash: "echo errormessage > /dev/stderr; exit 1" ) }
+
+		XCTAssertEqual( test_stderr.readSome(), "errormessage\n" )
+	}
+}
