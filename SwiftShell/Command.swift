@@ -98,6 +98,15 @@ public func == (e1: ShellError, e2: ShellError) -> Bool {
 	}
 }
 
+extension NSTask {
+	public func finish() throws {
+		self.waitUntilExit()
+		guard self.terminationStatus == 0 else {
+			throw ShellError.ReturnedErrorCode(errorcode: self.terminationStatus)
+		}
+	}
+}
+
 /** Output from the 'runAsync' methods. */
 public struct AsyncShellTask {
 	public let stdout: NSFileHandle
@@ -125,10 +134,7 @@ public struct AsyncShellTask {
    - throws: a ShellError if the return code is anything but 0.
 	*/
 	public func finish() throws -> AsyncShellTask {
-		task.waitUntilExit()
-		guard task.terminationStatus == 0 else {
-			throw ShellError.ReturnedErrorCode(errorcode: task.terminationStatus)
-		}
+		try task.finish()
 		return self
 	}
 }
