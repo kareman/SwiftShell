@@ -42,6 +42,7 @@ extension ShellContextType {
 	}
 }
 
+// MARK: run
 
 extension ShellContextType {
 
@@ -66,6 +67,7 @@ extension ShellContextType {
 	/**
 	Shortcut for shell command, returns output and errors as a String.
 
+	- parameter executable: path to an executable file.
 	- parameter args: the arguments, one string for each.
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
@@ -73,6 +75,13 @@ extension ShellContextType {
 		return run(executable, args)
 	}
 
+	/**
+	Shortcut for shell command, returns output and errors as a String.
+
+	- parameter executable: path to an executable file.
+	- parameter args: array of the arguments, one string for each.
+	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
+	*/
 	public func run (executable: String, _ args: [String]) -> String {
 		return outputFromRun(setupTask(executable, args: args))
 	}
@@ -80,6 +89,7 @@ extension ShellContextType {
 	/**
 	Shortcut for bash shell command, returns output and errors as a String.
 
+	- parameter bashcommand: the bash shell command.
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
 	public func run (bash bashcommand: String) -> String {
@@ -87,6 +97,8 @@ extension ShellContextType {
 	}
 }
 
+
+// MARK: runAsync
 
 /** Error type for completed shell commands. */
 public enum ShellError: ErrorType, Equatable {
@@ -156,6 +168,13 @@ extension ShellContextType {
 		return runAsync(executable, args)
 	}
 
+	/**
+	Run executable and return before it is finished.
+
+	- parameter executable: path to an executable file.
+	- parameter args: array of arguments to the executable.
+	- returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
+	*/
 	public func runAsync (executable: String, _ args: [String]) -> AsyncShellTask {
 		return AsyncShellTask(task: setupTask(executable, args: args))
 	}
@@ -172,18 +191,40 @@ extension ShellContextType {
 }
 
 
+// MARK: runAndPrint
+
 extension ShellContextType {
 
+	/** 
+   Run executable and print output and errors.
+
+   - parameter executable: path to an executable file.
+   - parameter args: arguments to the executable.
+   - throws: a ShellError if the return code is anything but 0.
+	*/
 	public func runAndPrint (executable: String, _ args: String ...) throws {
 		return try runAndPrint(executable, args)
 	}
 
+	/**
+	Run executable and print output and errors.
+
+	- parameter executable: path to an executable file.
+	- parameter args: array of arguments to the executable.
+	- throws: a ShellError if the return code is anything but 0.
+	*/
 	public func runAndPrint (executable: String, _ args: [String]) throws {
 		let task = setupTask(executable, args: args)
 		task.launch()
 		try task.finish()
 	}
 
+	/**
+	Run bash command and print output and errors.
+
+	- parameter bashcommand: the bash shell command.
+	- throws: a ShellError if the return code is anything but 0.
+	*/
 	public func runAndPrint (bash bashcommand: String) throws {
 		let task = setupTask(bash: bashcommand)
 		task.launch()
@@ -193,38 +234,100 @@ extension ShellContextType {
 
 // MARK: Global functions
 
-public func runAndPrint (executable: String, _ args: String ...) throws {
-	return try main.runAndPrint(executable, args)
-}
+/**
+Shortcut for shell command, returns output and errors as a String.
 
-public func runAndPrint (executable: String, _ args: [String]) throws {
-	return try main.runAndPrint(executable, args)
-}
-
-public func runAndPrint (bash bashcommand: String) throws {
-	return try main.runAndPrint(bash: bashcommand)
-}
-
+- parameter executable: path to an executable file.
+- parameter args: the arguments, one string for each.
+- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
+*/
 public func run (executable: String, _ args: String ...) -> String {
 	return main.run(executable, args)
 }
 
+/**
+Shortcut for shell command, returns output and errors as a String.
+
+- parameter executable: path to an executable file.
+- parameter args: array of the arguments, one string for each.
+- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
+*/
 public func run (executable: String, _ args: [String]) -> String {
 	return main.run(executable, args)
 }
 
+/**
+Shortcut for bash shell command, returns output and errors as a String.
+
+- parameter bashcommand: the bash shell command.
+- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
+*/
 public func run (bash bashcommand: String) -> String {
 	return main.run(bash: bashcommand)
 }
 
+
+/**
+Run executable and return before it is finished.
+
+- parameter executable: path to an executable file.
+- parameter args: arguments to the executable.
+- returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
+*/
 public func runAsync (executable: String, _ args: String ...) -> AsyncShellTask {
 	return main.runAsync(executable, args)
 }
 
+/**
+Run executable and return before it is finished.
+
+- parameter executable: path to an executable file.
+- parameter args: array of arguments to the executable.
+- returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
+*/
 public func runAsync (executable: String, _ args: [String]) -> AsyncShellTask {
 	return main.runAsync(executable, args)
 }
 
+/**
+Run bash command and return before it is finished.
+
+- parameter bashcommand: the bash shell command.
+- returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
+*/
 public func runAsync (bash bashcommand: String) -> AsyncShellTask {
 	return main.runAsync(bash: bashcommand)
+}
+
+
+/**
+Run executable and print output and errors.
+
+- parameter executable: path to an executable file.
+- parameter args: arguments to the executable.
+- throws: a ShellError if the return code is anything but 0.
+*/
+public func runAndPrint (executable: String, _ args: String ...) throws {
+	return try main.runAndPrint(executable, args)
+}
+
+/**
+Run executable and print output and errors.
+
+- parameter executable: path to an executable file.
+- parameter args: array of arguments to the executable.
+- throws: a ShellError if the return code is anything but 0.
+*/
+public func runAndPrint (executable: String, _ args: [String]) throws {
+	return try main.runAndPrint(executable, args)
+}
+
+/**
+Run bash command and print output and errors.
+
+- parameter bashcommand: the bash shell command.
+- throws: a ShellError if the return code is anything but 0.
+*/
+public func runAndPrint (bash bashcommand: String) throws {
+	return try main.runAndPrint(bash: bashcommand)
 }
