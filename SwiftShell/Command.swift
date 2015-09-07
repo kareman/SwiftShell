@@ -70,6 +70,10 @@ extension ShellContextType {
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
 	public func run (executable: String, _ args: String ...) -> String {
+		return run(executable, args)
+	}
+
+	public func run (executable: String, _ args: [String]) -> String {
 		return outputFromRun(setupTask(executable, args: args))
 	}
 
@@ -149,6 +153,10 @@ extension ShellContextType {
    - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
 	*/
 	public func runAsync (executable: String, _ args: String ...) -> AsyncShellTask {
+		return runAsync(executable, args)
+	}
+
+	public func runAsync (executable: String, _ args: [String]) -> AsyncShellTask {
 		return AsyncShellTask(task: setupTask(executable, args: args))
 	}
 
@@ -167,6 +175,10 @@ extension ShellContextType {
 extension ShellContextType {
 
 	public func runAndPrint (executable: String, _ args: String ...) throws {
+		return try runAndPrint(executable, args)
+	}
+
+	public func runAndPrint (executable: String, _ args: [String]) throws {
 		let task = setupTask(executable, args: args)
 		task.launch()
 		try task.finish()
@@ -177,4 +189,42 @@ extension ShellContextType {
 		task.launch()
 		try task.finish()
 	}
+}
+
+// MARK: Global functions
+
+public func runAndPrint (executable: String, _ args: String ...) throws {
+	return try main.runAndPrint(executable, args)
+}
+
+public func runAndPrint (executable: String, _ args: [String]) throws {
+	return try main.runAndPrint(executable, args)
+}
+
+public func runAndPrint (bash bashcommand: String) throws {
+	return try main.runAndPrint(bash: bashcommand)
+}
+
+public func run (executable: String, _ args: String ...) -> String {
+	return main.run(executable, args)
+}
+
+public func run (executable: String, _ args: [String]) -> String {
+	return main.run(executable, args)
+}
+
+public func run (bash bashcommand: String) -> String {
+	return main.run(bash: bashcommand)
+}
+
+public func runAsync (executable: String, _ args: String ...) -> AsyncShellTask {
+	return main.runAsync(executable, args)
+}
+
+public func runAsync (executable: String, _ args: [String]) -> AsyncShellTask {
+	return main.runAsync(executable, args)
+}
+
+public func runAsync (bash bashcommand: String) -> AsyncShellTask {
+	return main.runAsync(bash: bashcommand)
 }
