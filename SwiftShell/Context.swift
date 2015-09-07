@@ -25,7 +25,7 @@ public protocol ShellContextType {
 }
 
 
-public struct MainShellContext: ShellContextType {
+public final class MainShellContext: ShellContextType {
 
 	// TODO: get encoding from environmental variable LC_CTYPE
 	public var encoding = NSUTF8StringEncoding
