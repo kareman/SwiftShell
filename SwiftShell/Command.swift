@@ -36,17 +36,13 @@ extension ShellContextType {
 
 		return task
 	}
-
-	func setupTask (bash bashcommand: String) -> NSTask {
-		return setupTask("/bin/bash", args: ["-c", bashcommand])
-	}
 }
 
 // MARK: run
 
 extension ShellContextType {
 
-	private func outputFromRun (task: NSTask) -> String {
+	func outputFromRun (task: NSTask) -> String {
 		let output = NSPipe ()
 		task.standardOutput = output
 		task.standardError = output
@@ -85,20 +81,10 @@ extension ShellContextType {
 	public func run (executable: String, _ args: [String]) -> String {
 		return outputFromRun(setupTask(executable, args: args))
 	}
-
-	/**
-	Shortcut for bash shell command, returns output and errors as a String.
-
-	- parameter bashcommand: the bash shell command.
-	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
-	*/
-	public func run (bash bashcommand: String) -> String {
-		return outputFromRun(setupTask(bash: bashcommand))
-	}
 }
 
 
-// MARK: runAsync
+// MARK: ShellError
 
 /** Error type for completed shell commands. */
 public enum ShellError: ErrorType, Equatable {
@@ -123,13 +109,16 @@ extension NSTask {
 	}
 }
 
+
+// MARK: runAsync
+
 /** Output from the 'runAsync' methods. */
 public struct AsyncShellTask {
 	public let stdout: NSFileHandle
 	public let stderror: NSFileHandle
 	private let task: NSTask
 
-	private init (task: NSTask) {
+	init (task: NSTask) {
 		self.task = task
 
 		let outpipe = NSPipe()
@@ -178,16 +167,6 @@ extension ShellContextType {
 	public func runAsync (executable: String, _ args: [String]) -> AsyncShellTask {
 		return AsyncShellTask(task: setupTask(executable, args: args))
 	}
-
-	/**
-   Run bash command and return before it is finished.
-
-   - parameter bashcommand: the bash shell command.
-   - returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
-	*/
-	public func runAsync (bash bashcommand: String) -> AsyncShellTask {
-		return AsyncShellTask(task: setupTask(bash: bashcommand))
-	}
 }
 
 
@@ -218,19 +197,8 @@ extension ShellContextType {
 		task.launch()
 		try task.finish()
 	}
-
-	/**
-	Run bash command and print output and errors.
-
-	- parameter bashcommand: the bash shell command.
-	- throws: a ShellError if the return code is anything but 0.
-	*/
-	public func runAndPrint (bash bashcommand: String) throws {
-		let task = setupTask(bash: bashcommand)
-		task.launch()
-		try task.finish()
-	}
 }
+
 
 // MARK: Global functions
 
@@ -256,16 +224,6 @@ public func run (executable: String, _ args: [String]) -> String {
 	return main.run(executable, args)
 }
 
-/**
-Shortcut for bash shell command, returns output and errors as a String.
-
-- parameter bashcommand: the bash shell command.
-- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
-*/
-public func run (bash bashcommand: String) -> String {
-	return main.run(bash: bashcommand)
-}
-
 
 /**
 Run executable and return before it is finished.
@@ -289,16 +247,6 @@ public func runAsync (executable: String, _ args: [String]) -> AsyncShellTask {
 	return main.runAsync(executable, args)
 }
 
-/**
-Run bash command and return before it is finished.
-
-- parameter bashcommand: the bash shell command.
-- returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
-*/
-public func runAsync (bash bashcommand: String) -> AsyncShellTask {
-	return main.runAsync(bash: bashcommand)
-}
-
 
 /**
 Run executable and print output and errors.
@@ -320,14 +268,4 @@ Run executable and print output and errors.
 */
 public func runAndPrint (executable: String, _ args: [String]) throws {
 	return try main.runAndPrint(executable, args)
-}
-
-/**
-Run bash command and print output and errors.
-
-- parameter bashcommand: the bash shell command.
-- throws: a ShellError if the return code is anything but 0.
-*/
-public func runAndPrint (bash bashcommand: String) throws {
-	return try main.runAndPrint(bash: bashcommand)
 }

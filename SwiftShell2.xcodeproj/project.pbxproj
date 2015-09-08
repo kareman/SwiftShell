@@ -24,6 +24,7 @@
 		BADB059A1B9792220076CE17 /* CatchingFire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BADB05991B9792220076CE17 /* CatchingFire.framework */; };
 		BADB059C1B9793950076CE17 /* CatchingFire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BADB05991B9792220076CE17 /* CatchingFire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAE03DBB1B5C6B7200D731A0 /* Context_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE03DBA1B5C6B7200D731A0 /* Context_Tests.swift */; };
+		BAE4F5681B9F838E00908543 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4F5671B9F838E00908543 /* Bash.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		BA2E3B4F1B5C450C001ED175 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		BADB05991B9792220076CE17 /* CatchingFire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CatchingFire.framework; path = ../Carthage/Build/Mac/CatchingFire.framework; sourceTree = "<group>"; };
 		BAE03DBA1B5C6B7200D731A0 /* Context_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Context_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		BAE4F5671B9F838E00908543 /* Bash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			children = (
 				BA2E3B4F1B5C450C001ED175 /* Context.swift */,
 				BA2E3B2D1B5C35CC001ED175 /* Command.swift */,
+				BAE4F5671B9F838E00908543 /* Bash.swift */,
 				BA2E3B2E1B5C35CC001ED175 /* FileHandle.swift */,
 				BA2E3B2F1B5C35CC001ED175 /* Files.swift */,
 				BA2E3B311B5C35CC001ED175 /* Stream.swift */,
@@ -257,6 +260,7 @@
 				BA2E3B501B5C450C001ED175 /* Context.swift in Sources */,
 				BA2E3B351B5C35CC001ED175 /* Files.swift in Sources */,
 				BA2E3B371B5C35CC001ED175 /* Stream.swift in Sources */,
+				BAE4F5681B9F838E00908543 /* Bash.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
