@@ -9,6 +9,11 @@
 import SwiftShell
 import XCTest
 
-class Files_Tests: XCTestCase {
+class UrlAppendationOperator: XCTestCase {
 
+	func testUrlSlashString () {
+		XCTAssertEqual( NSURL(fileURLWithPath: "dir") / "file.txt", NSURL(fileURLWithPath: "dir/file.txt"))
+		XCTAssertEqual( NSURL(fileURLWithPath: "dir/") / "/file.txt", NSURL(fileURLWithPath: "dir/file.txt"))
+		XCTAssertEqual( NSURL(string: "dir")! / "file.txt", NSURL(string: "dir/file.txt"))
+	}
 }

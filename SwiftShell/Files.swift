@@ -10,3 +10,7 @@ import Foundation
 /** The default NSFileManager */
 public let Files = NSFileManager.defaultManager()
 
+/** Append file or directory url to directory url */
+public func / (leftpath: NSURL, rightpath: String) -> NSURL {
+	return leftpath.URLByAppendingPathComponent(rightpath)
+}
