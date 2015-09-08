@@ -2,13 +2,10 @@
 
 import SwiftShell
 
-/*
-var i = 1
-for line in standardinput.lines() {
-	print("line \(i++): ")
-	println(line)
-}
-*/
+let result = main.stdin.read().characters.split("\n")
+	.enumerate().map { (linenr,line) in "line " + String(linenr+1) + ": " + String(line) }
 
-var i = 1
-standardinput.lines() |> map {line in "line \(i++): \(line)\n"} |>> standardoutput
+//  Swift demands we split this up.
+main.stdout.write(result.joinWithSeparator("\n")) 
+
+// TODO:  use .writeTo(&main.stdout)

@@ -2,5 +2,5 @@
 
 import SwiftShell
 
-let file = open("file which does not exist")
+try! runAndPrint("/bin/cat", "file which does not exist")
 print("this is not printed, the script has exited")
