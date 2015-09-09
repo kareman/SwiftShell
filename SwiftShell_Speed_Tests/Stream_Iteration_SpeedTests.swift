@@ -42,7 +42,7 @@ class Stream_Iteration_SpeedTests: XCTestCase {
 			let f = open(longtextpath)
 			let text = f.read()
 
-			var result = Swift.split(text.characters, allowEmptySlices: true, isSeparator: { $0 == "\n"})
+			let result = text.characters.split(allowEmptySlices: true, isSeparator: { $0 == "\n"})
 
 			XCTAssertEqual(result.count, self.numberoflines)
 
