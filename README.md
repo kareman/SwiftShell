@@ -1,8 +1,10 @@
-_This is the **Swift 2.0** (Xcode 7) branch. Use [master](https://github.com/kareman/SwiftShell/tree/master) for Swift 1.2._
+_Works with **Swift 2.0** (Xcode 7). Use [v0.2](https://github.com/kareman/SwiftShell/tree/v0.2) for Swift 1.2._
+
+_For the future of SwiftShell, check out [SwiftShell 2.0b](https://github.com/kareman/SwiftShell/tree/SwiftShell2)_
 
 # SwiftShell
 
-An OS X Framework for command line scripting in Swift. It supports joining together shell commands and Swift functions, like the pipe in shell commands and the pipe forward operator in F#.
+An OS X Framework for command line scripting in Swift. It supports joining together shell commands and Swift functions, like the pipe in shell commands and the pipe forward operator from functional programming.
 
 
 ## Usage
