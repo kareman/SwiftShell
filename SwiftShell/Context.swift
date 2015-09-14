@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol ShellContextType {
-	var encoding: UInt {get set}
+	var encoding: NSStringEncoding {get set}
 	var env: [String: String] {get set}
 
 	var stdin: NSFileHandle {get set}
