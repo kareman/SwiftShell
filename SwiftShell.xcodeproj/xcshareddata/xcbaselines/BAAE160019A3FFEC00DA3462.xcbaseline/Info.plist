@@ -6,6 +6,11 @@
 	<dict>
 		<key>1B067C7A-D05F-4C44-9FF6-36E33F8C02AB</key>
 		<dict>
+			<key>targetArchitecture</key>
+			<string>x86_64</string>
+		</dict>
+		<key>9D9DD517-35F9-471E-944C-50EFC94C8738</key>
+		<dict>
 			<key>localComputer</key>
 			<dict>
 				<key>busSpeedInMHz</key>
@@ -13,13 +18,13 @@
 				<key>cpuCount</key>
 				<integer>1</integer>
 				<key>cpuKind</key>
-				<string>Intel Core i5</string>
+				<string>Intel Core i7</string>
 				<key>cpuSpeedInMHz</key>
-				<integer>3100</integer>
+				<integer>2300</integer>
 				<key>logicalCPUCoresPerPackage</key>
-				<integer>4</integer>
+				<integer>8</integer>
 				<key>modelCode</key>
-				<string>iMac12,2</string>
+				<string>Macmini6,2</string>
 				<key>physicalCPUCoresPerPackage</key>
 				<integer>4</integer>
 				<key>platformIdentifier</key>

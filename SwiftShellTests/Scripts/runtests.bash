@@ -19,7 +19,7 @@ export DYLD_FRAMEWORK_PATH=$PROJECT_ROOT/build/Release/
 
 # Be aware the “assert” command does not check standard error output or exit code.
 
-assert "./print_arguments.swift 1 2" "[./print_arguments.swift, 1, 2]"
+assert "./print_arguments.swift 1 2" "[\"./print_arguments.swift\", \"1\", \"2\"]"
 assert_raises "./exitswhenopeningnon-existentfile.swift" 1
 assert "cat onetwothree.txt | ./print_linenumbers.swift" "line 1: one\nline 2: two\nline 3: three"
 assert "./stream_out.swift" "       3"

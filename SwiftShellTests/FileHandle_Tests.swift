@@ -13,7 +13,7 @@ class FileHandle_Tests: XCTestCase {
 
 	func notestOpenForReadingFileWhichDoesNotExist () {
 		// prints error message and stops execution.
-		let file = open("file which does not exist")
+		open("file which does not exist")
 	}
 	
 	func testReadFileLineByLine () {

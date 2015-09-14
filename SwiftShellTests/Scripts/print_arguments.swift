@@ -2,4 +2,4 @@
 
 import SwiftShell
 
-println(Process.arguments)
+print(Process.arguments)

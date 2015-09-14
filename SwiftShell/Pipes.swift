@@ -22,9 +22,9 @@ public func |> <T,U> (lhs: T, rhs: T -> U) -> U {
 public func filter <S : SequenceType>
 	(includeElement: (S.Generator.Element) -> Bool)
 	(source: S)
-	-> LazySequence<FilterSequenceView<S>> {
+	-> LazyFilterSequence<S> {
 
-		return lazy(source).filter(includeElement)
+		return source.lazy.filter(includeElement)
 }
 
 /**
@@ -38,16 +38,16 @@ public func sorted <S : SequenceType>
 	(source: S)
 	-> [S.Generator.Element] {
 
-		return sorted(source, isOrderedBefore)
+		return source.sort(isOrderedBefore)
 }
 
 /** Lazily return a sequence containing the results of mapping transform over source. */
 public func map <S: SequenceType, T>
 	(transform: (S.Generator.Element) -> T)
 	(source: S)
-	-> LazySequence<MapSequenceView<S, T>> {
+	-> LazyMapSequence<S,T> {
 
-		return lazy(source).map(transform)
+		return source.lazy.map(transform)
 }
 
 /**
@@ -59,21 +59,21 @@ public func reduce <S : SequenceType, U>
 	(sequence: S)
 	-> U {
 
-		return reduce(sequence, initial, combine)
+		return sequence.reduce(initial, combine: combine)
 }
 
 /** Split text over delimiter, returning an array. */
-public func split (_ delimiter: String = "\n")(text: String) -> [String] {
+public func split (delimiter delimiter: String = "\n")(text: String) -> [String] {
 	return text.componentsSeparatedByString(delimiter)
 }
 
 /** Insert separator between each item in elements. */
-public func join <C : ExtensibleCollectionType, S : SequenceType where S.Generator.Element == C>
+public func join <C : RangeReplaceableCollectionType, S : SequenceType where S.Generator.Element == C>
 	(separator: C)
 	(elements: S)
-	-> C {
+	-> JoinSequence<S> {
 
-		return join(separator, elements)
+		return elements.joinWithSeparator(separator)
 }
 
 /** Turn a sequence into an array. For use after the |> operator. */
@@ -85,9 +85,9 @@ public func toArray <S : SequenceType> (sequence: S) -> [S.Generator.Element] {
 public func drop <S : SequenceType, T : Equatable where S.Generator.Element == T>
 	(tobedropped: [T])
 	(sequence: S)
-	-> LazySequence<FilterSequenceView<S>> {
+	-> LazyFilterSequence<S> {
 		
-		return sequence |> filter { !contains(tobedropped, $0) }
+		return sequence |> filter { !tobedropped.contains($0) }
 }
 
 /** Return at most the first `numbertotake` elements of sequence */

@@ -20,10 +20,10 @@ class Files_Tests: XCTestCase {
 	}
 
 	func testWorkDirectory_CanChange () {
-		workdirectory = "/private/tmp"
+		workdirectory = "/tmp"
 
 		XCTAssertEqual( workdirectory, "/private/tmp" )
-		XCTAssertEqual( $("pwd"), "/private/tmp" )
+		XCTAssertEqual( $("pwd"), "/tmp" )
 	}
 
 	func testURLConcatenationOperator () {

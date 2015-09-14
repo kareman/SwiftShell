@@ -36,7 +36,7 @@ class Stream_Tests: XCTestCase {
 	}
 	
 	func testPrintStreamToStream () {
-		var (writable, readable) = streams()
+		let (writable, readable) = streams()
 		
 		stream("this goes in") |>> writable
 		
@@ -44,7 +44,7 @@ class Stream_Tests: XCTestCase {
 	}
 
 	func testPrintStreamToStreamInPieces () {
-		var (writable, readable) = streams()
+		let (writable, readable) = streams()
 		
 		stream(["this ", "goes", " in"]) |>> writable
 		
@@ -53,7 +53,7 @@ class Stream_Tests: XCTestCase {
 	}
 	
 	func testPrintStringToStream () {
-		var (writable, readable) = streams()
+		let (writable, readable) = streams()
 		
 		"this goes in" |>> writable
 		
@@ -61,7 +61,7 @@ class Stream_Tests: XCTestCase {
 	}
 
 	func testCommandChainToStream () {
-		var (writable, readable) = streams()
+		let (writable, readable) = streams()
 		
 		SwiftShell.run("echo this is streamed") |> SwiftShell.run("wc -w") |>> writable
 		
@@ -69,19 +69,19 @@ class Stream_Tests: XCTestCase {
 	}
 
 	func testSequenceOfStreamsToStream () {
-		var (writable, readable) = streams()
+		let (writable, readable) = streams()
 		
 		// make sure the array isn't printed as a Printable.
-		SequenceOf([stream("line 1"), stream("line 2"), stream("line 3")].generate()) |>> writable
+		AnySequence([stream("line 1"), stream("line 2"), stream("line 3")].generate()) |>> writable
 		
 		XCTAssertEqual( readable.readSome()!.trim(), "line 1line 2line 3" )
 	}
 
 	func testChainWithSequenceOfStreamsPrintedToStream () {
-		var (writable, readable) = streams()
+		let (writable, readable) = streams()
 		let dict = ["test":"line 1:line 2:line 3"]
 		
-		dict["test"]! |> split(":") 
+		dict["test"]! |> split(delimiter: ":") 
 			|> map { line in SwiftShell.run("echo \(line)") } 
 			|>> writable
 
@@ -89,7 +89,7 @@ class Stream_Tests: XCTestCase {
 	}
 	
 	func testChainWithSequenceOfStringsPrintedToStream () {
-		var (writable, readable) = streams()
+		let (writable, readable) = streams()
 		var i = 1
 		
 		stream("line 1\nline 2\nline 3").lines() |> map {line in "line \(i++): \(line)\n"} |>> writable

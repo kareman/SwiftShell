@@ -35,8 +35,8 @@ extension FileHandle: ReadableStreamType {
 		}
 	}
 
-	public func lines () -> SequenceOf<String> {
-		return split(delimiter: "\n")(stream: self)
+	public func lines () -> AnySequence<String> {
+		return split("\n")(stream: self)
 	}
 
 	public func writeTo <Target : OutputStreamType> (inout target: Target) {
@@ -66,32 +66,42 @@ extension FileHandle: WriteableStreamType {
 }
 
 /** Print message to standard error and halt execution. */
-@noreturn public func printErrorAndExit (errormessage: String) {
-	standarderror.writeln("SwiftShell: " + errormessage)
+@noreturn public func printErrorAndExit <T> (errormessage: T) {
+	standarderror.writeln("SwiftShell: \(errormessage)")
 	exit(EXIT_FAILURE)
+}
+
+/** Run a function which takes a NSErrorPointer. If an NSError occurs, throw it, otherwise return result. */
+func makeThrowable <T> (nserrorfunc: (NSErrorPointer) -> T) throws -> T {
+	var maybeerror: NSError?
+	let result = nserrorfunc(&maybeerror)
+	if let actualerror = maybeerror {
+		throw actualerror
+	}
+	return result
 }
 
 /** Open a file for reading, and exit if an error occurs. */
 public func open (path: String) -> ReadableStreamType {
 
 	let url = toURLOrError(path)
-	var error: NSError?
-	let filehandle = FileHandle(forReadingFromURL: url, error: &error)
-
-	if let error = error {
-		var fileaccesserror: NSError?
-		url.checkResourceIsReachableAndReturnError(&fileaccesserror)
-		printErrorAndExit( fileaccesserror?.localizedDescription ?? error.localizedDescription )
+	do {
+		return try FileHandle(forReadingFromURL: url)
+	} catch {
+		do {
+			try makeThrowable(url.checkResourceIsReachableAndReturnError)
+		} catch {
+			printErrorAndExit(error)
+		}
+		printErrorAndExit(error)
 	}
-
-	return filehandle!
 }
 
 /**
 Open a file for writing, create it if it doesn't exist, and exit if an error occurs.
 If the file already exists and overwrite=false, the writing will begin at the end of the file.
 
-:param: overwrite If true, replace the file if it exists.
+- parameter overwrite: If true, replace the file if it exists.
 */
 public func open (forWriting path: String, overwrite: Bool = false) -> WriteableStreamType {
 
@@ -100,21 +110,22 @@ public func open (forWriting path: String, overwrite: Bool = false) -> Writeable
 		File.createFileAtPath(url.path!, contents: nil, attributes: nil)
 	}
 
-	var error: NSError?
-	let filehandle = FileHandle(forWritingToURL: url, error: &error)
-
-	if let error = error {
-		var fileaccesserror: NSError?
-		url.checkResourceIsReachableAndReturnError(&fileaccesserror)
-		printErrorAndExit( fileaccesserror?.localizedDescription ?? error.localizedDescription )
-	} else {
-		filehandle!.seekToEndOfFile()
-		return filehandle!
+	do {
+		let filehandle = try FileHandle(forWritingToURL: url)
+		filehandle.seekToEndOfFile()
+		return filehandle
+	} catch {
+		do {
+			try makeThrowable(url.checkResourceIsReachableAndReturnError)
+		} catch {
+			printErrorAndExit(error)
+		}
+		printErrorAndExit(error)
 	}
 }
 
 
-public let environment		= NSProcessInfo.processInfo().environment as! [String: String]
+public let environment		= NSProcessInfo.processInfo().environment as [String: String]
 public let standardinput	= FileHandle.fileHandleWithStandardInput() as ReadableStreamType
 public let standardoutput	= FileHandle.fileHandleWithStandardOutput() as WriteableStreamType
 public let standarderror	= FileHandle.fileHandleWithStandardError() as WriteableStreamType

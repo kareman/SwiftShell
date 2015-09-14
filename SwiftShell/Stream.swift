@@ -19,7 +19,7 @@ public protocol ReadableStreamType : Streamable {
 	Whatever amount of text the stream feels like providing.
 	If the source is a file this will read everything at once.
 	
-	:returns: more text from the stream, or nil if we have reached the end.
+	- returns: more text from the stream, or nil if we have reached the end.
 	*/
 	func readSome () -> String?
 	
@@ -27,7 +27,7 @@ public protocol ReadableStreamType : Streamable {
 	func read () -> String
 	
 	/** Lazily split the stream into lines. */
-	func lines () -> SequenceOf<String>
+	func lines () -> AnySequence<String>
 	
 	/** Enable stream to be used by "println" and "toString". */
 	func writeTo <Target : OutputStreamType> (inout target: Target)
@@ -66,7 +66,7 @@ stream {
 	}
 }
 
-:returns: The output stream.
+- returns: The output stream.
 */
 public func stream ( closure:() -> () -> String? ) -> ReadableStreamType {
 	let getmoretext = closure()
@@ -138,8 +138,8 @@ struct StringStreamGenerator : GeneratorType {
 }
 
 /** Split a stream lazily */
-public func split (delimiter: String = "\n")(stream: ReadableStreamType) -> SequenceOf<String> {
-	return SequenceOf({StringStreamGenerator (stream: stream, delimiter: delimiter)})
+public func split (delimiter: String = "\n")(stream: ReadableStreamType) -> AnySequence<String> {
+	return AnySequence({StringStreamGenerator (stream: stream, delimiter: delimiter)})
 }
 
 
@@ -149,7 +149,7 @@ Write something to a stream.
 	something |> writeTo(writablestream)
 */
 public func writeTo <T> (stream: WriteableStreamType)(input: T) {
-	stream.write( toString(input) )
+	stream.write( String(input) )
 }
 
 // needed to avoid `writeTo(SequenceType)` being called instead,
