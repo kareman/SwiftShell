@@ -61,4 +61,4 @@ public final class MainShellContext: ShellContextType {
 	}
 }
 
-public var main = MainShellContext()
+public let main = MainShellContext()
