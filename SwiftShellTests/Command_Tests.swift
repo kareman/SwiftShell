@@ -28,8 +28,6 @@ class Run_Tests: XCTestCase {
 	}
 }
 
-import CatchingFire
-
 class RunAsync_Tests: XCTestCase {
 
 	func testReturnsStandardOutput () {
