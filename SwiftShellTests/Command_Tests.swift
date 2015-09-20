@@ -16,7 +16,8 @@ class Run_Tests: XCTestCase {
 	}
 
 	func testArgumentsFromArray () {
-		XCTAssertEqual( SwiftShell.run("/bin/echo", ["one", "two"]), "one two" )
+		let stringarray = ["one", "two"]
+		XCTAssertEqual( SwiftShell.run("/bin/echo", stringarray), "one two" )
 	}
 
 	func testSinglelineOutput () {

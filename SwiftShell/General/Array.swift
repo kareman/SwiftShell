@@ -10,17 +10,18 @@ private protocol AnyArrayType {
 }
 
 extension Array: AnyArrayType {
-	var anyValues: [Any] {
+	private var anyValues: [Any] {
 		return self.map { $0 as Any }
 	}
 }
 
 public extension Array where Element: Any {
+
 	func flatten () -> [Any] {
 		let result: [Any] = self.flatMap { x -> [Any] in
 			switch x {
 			case let anyarray as AnyArrayType:
-				return anyarray.anyValues
+				return anyarray.anyValues.flatten()
 			default:
 				return [x]
 			}
