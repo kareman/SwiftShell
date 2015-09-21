@@ -15,17 +15,15 @@ extension Array: AnyArrayType {
 	}
 }
 
-public extension Array where Element: Any {
+extension Array where Element: Any {
 
 	func flatten () -> [Any] {
-		let result: [Any] = self.flatMap { x -> [Any] in
-			switch x {
-			case let anyarray as AnyArrayType:
+		return self.flatMap { x -> [Any] in
+			if let anyarray = x as? AnyArrayType {
 				return anyarray.anyValues.flatten()
-			default:
+			} else {
 				return [x]
 			}
 		}
-		return result
 	}
 }
