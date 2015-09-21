@@ -18,7 +18,7 @@ public protocol ShellContextType {
 	/**
 	The current working directory.
 
-	Must be used instead of `run("cd ...")` because all the `run` commands are executed in a
+	Must be used instead of `run("cd", "...")` because all the `run` commands are executed in a
 	separate process and changing the directory there will not affect the rest of the Swift script.
 	*/
 	var currentdirectory: String {get set}
@@ -38,10 +38,10 @@ public final class MainShellContext: ShellContextType {
 	/**
 	The current working directory.
 
-	Must be used instead of `run("cd ...")` because all the `run` commands are executed in a
+	Must be used instead of `run("cd", "...")` because all the `run` commands are executed in a
 	separate process and changing the directory there will not affect the rest of the Swift script.
 
-	This directory is also used as the base for relative URL's.
+	This directory is also used as the base for relative NSURLs.
 	*/
 	public var currentdirectory: String {
 		get {	return Files.currentDirectoryPath }
