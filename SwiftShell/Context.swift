@@ -29,11 +29,11 @@ public final class MainShellContext: ShellContextType {
 
 	// TODO: get encoding from environmental variable LC_CTYPE
 	public var encoding = NSUTF8StringEncoding
-	public var env = NSProcessInfo.processInfo().environment as [String: String]
+	public lazy var env = NSProcessInfo.processInfo().environment as [String: String]
 
-	public var stdin    = NSFileHandle.fileHandleWithStandardInput() //as ReadableStreamType
-	public var stdout	  = NSFileHandle.fileHandleWithStandardOutput() //as WriteableStreamType
-	public var stderror = NSFileHandle.fileHandleWithStandardError() //as WriteableStreamType
+	public lazy var stdin    = NSFileHandle.fileHandleWithStandardInput() //as ReadableStreamType
+	public lazy var stdout   = NSFileHandle.fileHandleWithStandardOutput() //as WriteableStreamType
+	public lazy var stderror = NSFileHandle.fileHandleWithStandardError() //as WriteableStreamType
 
 	/**
 	The current working directory.
