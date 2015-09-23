@@ -24,6 +24,46 @@ public protocol ShellContextType {
 	var currentdirectory: String {get set}
 }
 
+public struct ShellContext: ShellContextType {
+	public var encoding: NSStringEncoding
+	public var env: [String: String]
+
+	public var stdin: NSFileHandle
+	public var stdout: NSFileHandle
+	public var stderror: NSFileHandle
+
+	/**
+	The current working directory.
+
+	Must be used instead of `run("cd", "...")` because all the `run` commands are executed in a
+	separate process and changing the directory there will not affect the rest of the Swift script.
+	*/
+	public var currentdirectory: String
+
+	/** Creates a blank ShellContext. */
+	public init () {
+		encoding = NSUTF8StringEncoding
+		env = [String:String]()
+
+		stdin =    NSFileHandle.fileHandleWithNullDevice()
+		stdout =   NSFileHandle.fileHandleWithNullDevice()
+		stderror = NSFileHandle.fileHandleWithNullDevice()
+
+		currentdirectory = main.currentdirectory
+	}
+
+	/** Creates a new ShellContext from another ShellContextType. */
+	public init (_ context: ShellContextType) {
+		encoding = context.encoding
+		env = context.env
+
+		stdin =    context.stdin
+		stdout =   context.stdout
+		stderror = context.stderror
+
+		currentdirectory = context.currentdirectory
+	}
+}
 
 public final class MainShellContext: ShellContextType {
 

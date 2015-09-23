@@ -22,4 +22,16 @@ class Context_Tests: XCTestCase {
 		XCTAssertEqual( main.run("/bin/pwd"), "/tmp" )
 		XCTAssertEqual( main.currentdirectory, NSFileManager.defaultManager().currentDirectoryPath )
 	}
+
+	func testBlankShellContext () {
+		let context = ShellContext()
+
+		XCTAssert( context.stdin === NSFileHandle.fileHandleWithNullDevice() )
+	}
+
+	func testCopiedShellContext () {
+		let context = ShellContext(main)
+
+		XCTAssert( context.stdin === main.stdin )
+	}
 }
