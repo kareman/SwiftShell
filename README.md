@@ -1,3 +1,5 @@
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 _This is the **SwiftShell 2.0** branch. Use [master](https://github.com/kareman/SwiftShell/tree/master) for SwiftShell 1._
 
 # SwiftShell
