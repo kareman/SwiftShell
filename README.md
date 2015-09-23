@@ -1,3 +1,5 @@
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 _Works with **Swift 2.0** (Xcode 7). Use [v0.2](https://github.com/kareman/SwiftShell/tree/v0.2) for Swift 1.2._
 
 _For the future of SwiftShell, check out [SwiftShell 2.0](https://github.com/kareman/SwiftShell/tree/SwiftShell2) (work in progress)._
