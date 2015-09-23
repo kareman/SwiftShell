@@ -20,12 +20,24 @@ Print message to standard error and halt execution.
 	exit(errorcode)
 }
 
+/** 
+If `executable` is not a path and a path for an executable file of that name can be found, return that path.
+Otherwise just return `executable`.
+*/
+func pathForExecutable (executable: String) -> String {
+	guard !executable.characters.contains("/") else {
+		return executable
+	}
+	let path = run("/usr/bin/which", executable)
+	return path.isEmpty ? executable : path
+}
+
 extension ShellContextType {
 
 	func setupTask (executable: String, args: [String]) -> NSTask {
 		let task = NSTask()
 		task.arguments = args
-		task.launchPath = executable
+		task.launchPath = pathForExecutable(executable)
 
 		task.environment = self.env
 		task.currentDirectoryPath = self.currentdirectory

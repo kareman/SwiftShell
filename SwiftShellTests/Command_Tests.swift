@@ -27,6 +27,10 @@ class Run_Tests: XCTestCase {
 	func testMultilineOutput () {
 		XCTAssertEqual( SwiftShell.run("/bin/echo", "one\ntwo"), "one\ntwo\n" )
 	}
+
+	func testExecutableWithoutPath () {
+		XCTAssertEqual( SwiftShell.run("echo", "one"), "one")
+	}
 }
 
 class RunAsync_Tests: XCTestCase {
