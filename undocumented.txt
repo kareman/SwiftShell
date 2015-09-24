@@ -9,14 +9,14 @@ FileHandle.swift
 	public typealias FileHandle = NSFileHandle
 	public func readSome () -> String?
 	public func read () -> String
-	public func lines () -> SequenceOf<String>
+	public func lines () -> AnySequence<String>
 	public func writeTo <Target : OutputStreamType> (inout target: Target)
 	public typealias FileHandle = NSFileHandle
 	public func write (string: String)
 	public func writeln (string: String)
 	public func writeln ()
 	public func closeStream ()
-	public let environment		= NSProcessInfo.processInfo().environment as! [String: String]
+	public let environment		= NSProcessInfo.processInfo().environment as [String: String]
 	public let standardinput	= FileHandle.fileHandleWithStandardInput() as ReadableStreamType
 	public let standardoutput	= FileHandle.fileHandleWithStandardOutput() as WriteableStreamType
 	public let standarderror	= FileHandle.fileHandleWithStandardError() as WriteableStreamType
@@ -25,3 +25,5 @@ Stream.swift
 	func write (string: String)
 	func writeln (string: String)
 	func writeln ()
+	public func |>> <T> (input: T, stream: WriteableStreamType)
+	public func |>> <S : SequenceType> (seq: S, stream: WriteableStreamType)

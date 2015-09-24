@@ -3,9 +3,9 @@
 <plist version="1.0">
   <dict>
     <key>CFBundleIdentifier</key>
-      <string>com.jazzy.</string>
+      <string>com.jazzy.swiftshell</string>
     <key>CFBundleName</key>
-      <string></string>
+      <string>SwiftShell</string>
     <key>DocSetPlatformFamily</key>
       <string>jazzy</string>
     <key>isDashDocset</key>
