@@ -26,6 +26,9 @@
 		BAE4F5681B9F838E00908543 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4F5671B9F838E00908543 /* Bash.swift */; settings = {ASSET_TAGS = (); }; };
 		BAE503881BAF1061005261A6 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE503871BAF1061005261A6 /* Array.swift */; settings = {ASSET_TAGS = (); }; };
 		BAE5038B1BAF1231005261A6 /* Array_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE5038A1BAF1231005261A6 /* Array_Tests.swift */; settings = {ASSET_TAGS = (); }; };
+		BAEDDA4C1BB3582B00BD28B2 /* NSTask+NSTask_Errors.h in Headers */ = {isa = PBXBuildFile; fileRef = BAEDDA4A1BB3582B00BD28B2 /* NSTask+NSTask_Errors.h */; settings = {ASSET_TAGS = (); }; };
+		BAEDDA4D1BB3582B00BD28B2 /* NSTask+NSTask_Errors.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEDDA4B1BB3582B00BD28B2 /* NSTask+NSTask_Errors.m */; settings = {ASSET_TAGS = (); }; };
+		BAEDDA4F1BB36EE200BD28B2 /* SwiftShell-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = BAEDDA4E1BB36EE200BD28B2 /* SwiftShell-Bridging-Header.h */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +65,9 @@
 		BAE4F5671B9F838E00908543 /* Bash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash.swift; sourceTree = "<group>"; };
 		BAE503871BAF1061005261A6 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array.swift; path = General/Array.swift; sourceTree = "<group>"; };
 		BAE5038A1BAF1231005261A6 /* Array_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Array_Tests.swift; path = General/Array_Tests.swift; sourceTree = "<group>"; };
+		BAEDDA4A1BB3582B00BD28B2 /* NSTask+NSTask_Errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTask+NSTask_Errors.h"; sourceTree = "<group>"; };
+		BAEDDA4B1BB3582B00BD28B2 /* NSTask+NSTask_Errors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTask+NSTask_Errors.m"; sourceTree = "<group>"; };
+		BAEDDA4E1BB36EE200BD28B2 /* SwiftShell-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SwiftShell-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +130,7 @@
 				BA2E3B311B5C35CC001ED175 /* Stream.swift */,
 				BAE503861BAF104C005261A6 /* General */,
 				BA2E3B1A1B5C34DD001ED175 /* Info.plist */,
+				BAEDDA501BB37B9200BD28B2 /* NSTask */,
 			);
 			path = SwiftShell;
 			sourceTree = "<group>";
@@ -160,6 +167,16 @@
 			name = General;
 			sourceTree = "<group>";
 		};
+		BAEDDA501BB37B9200BD28B2 /* NSTask */ = {
+			isa = PBXGroup;
+			children = (
+				BAEDDA4A1BB3582B00BD28B2 /* NSTask+NSTask_Errors.h */,
+				BAEDDA4B1BB3582B00BD28B2 /* NSTask+NSTask_Errors.m */,
+				BAEDDA4E1BB36EE200BD28B2 /* SwiftShell-Bridging-Header.h */,
+			);
+			name = NSTask;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -167,6 +184,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAEDDA4F1BB36EE200BD28B2 /* SwiftShell-Bridging-Header.h in Headers */,
+				BAEDDA4C1BB3582B00BD28B2 /* NSTask+NSTask_Errors.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +293,7 @@
 				BA2E3B501B5C450C001ED175 /* Context.swift in Sources */,
 				BA2E3B351B5C35CC001ED175 /* Files.swift in Sources */,
 				BAE503881BAF1061005261A6 /* Array.swift in Sources */,
+				BAEDDA4D1BB3582B00BD28B2 /* NSTask+NSTask_Errors.m in Sources */,
 				BA2E3B371B5C35CC001ED175 /* Stream.swift in Sources */,
 				BAE4F5681B9F838E00908543 /* Bash.swift in Sources */,
 			);
@@ -370,6 +390,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftShell/SwiftShell-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -421,6 +442,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftShell/SwiftShell-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

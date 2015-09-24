@@ -105,4 +105,10 @@ class RunAndPrint_Tests: XCTestCase {
 
 		XCTAssertEqual( test_stderr.readSome(), "errormessage\n" )
 	}
+
+	func testThrowsErrorOnInaccessibleExecutable () {
+		AssertThrows(ShellError.InAccessibleExecutable(path: "notachance")) {
+			try runAndPrint("notachance")
+		}
+	}
 }

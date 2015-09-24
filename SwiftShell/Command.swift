@@ -93,6 +93,7 @@ public enum ShellError: ErrorType, Equatable {
 
 	/** Exit code was not zero. */
 	case ReturnedErrorCode (errorcode: Int32)
+	//	case InAccessibleExecutable (path: String)
 }
 
 public func == (e1: ShellError, e2: ShellError) -> Bool {
@@ -176,7 +177,8 @@ extension ShellContextType {
 	public func runAndPrint (executable: String, _ args: Any ...) throws {
 		let stringargs = args.flatten().map { String($0) }
 		let task = setupTask(executable, args: stringargs)
-		task.launch()
+
+		try task.launchThrowably()
 		try task.finish()
 	}
 }
