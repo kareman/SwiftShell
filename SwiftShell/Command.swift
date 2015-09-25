@@ -20,6 +20,16 @@ Print message to standard error and halt execution.
 	exit(errorcode)
 }
 
+@noreturn public func exit (error: ErrorType) {
+	if let shellerror = error as? ShellError {
+		exit(errormessage: shellerror, errorcode: shellerror.errorcode)
+	} else {
+		let nserror = error as NSError
+		exit(errormessage: nserror, errorcode: Int32(nserror.code))
+	}
+}
+
+
 /** 
 If `executable` is not a path and a path for an executable file of that name can be found, return that path.
 Otherwise just return `executable`.
@@ -58,7 +68,11 @@ extension ShellContextType {
 		let output = NSPipe ()
 		task.standardOutput = output
 		task.standardError = output
-		task.launch()
+		do {
+			try task.launchThrowably()
+		} catch {
+			exit(error)
+		}
 		task.waitUntilExit()
 		var outputstring = output.fileHandleForReading.read(encoding: self.encoding)
 
@@ -93,13 +107,37 @@ public enum ShellError: ErrorType, Equatable {
 
 	/** Exit code was not zero. */
 	case ReturnedErrorCode (errorcode: Int32)
-	//	case InAccessibleExecutable (path: String)
+	case InAccessibleExecutable (path: String)
+
+	var errorcode: Int32 {
+		switch self {
+		case .ReturnedErrorCode(let code):
+			return code
+		case .InAccessibleExecutable:
+			return EXIT_FAILURE
+		}
+	}
+}
+
+extension ShellError: CustomStringConvertible {
+	public var description: String {
+		switch self {
+		case .InAccessibleExecutable(let path):
+			return "Could not execute file at path '\(path)'."
+		case .ReturnedErrorCode(let code):
+			return "Command returned with error code \(code)."
+		}
+	}
 }
 
 public func == (e1: ShellError, e2: ShellError) -> Bool {
 	switch (e1, e2) {
 	case (.ReturnedErrorCode(let c1), .ReturnedErrorCode(let c2)):
 		return c1 == c2
+	case (.InAccessibleExecutable(let c1), .InAccessibleExecutable(let c2)):
+		return c1 == c2
+	default:
+		return false
 	}
 }
 
@@ -108,6 +146,14 @@ extension NSTask {
 		self.waitUntilExit()
 		guard self.terminationStatus == 0 else {
 			throw ShellError.ReturnedErrorCode(errorcode: self.terminationStatus)
+		}
+	}
+
+	public func launchThrowably() throws {
+		do {
+			try launchWithNSError()
+		} catch {
+			throw ShellError.InAccessibleExecutable(path: self.launchPath!)
 		}
 	}
 }
@@ -132,7 +178,11 @@ public struct AsyncShellTask {
 		task.standardError = errorpipe
 		self.stderror = errorpipe.fileHandleForReading
 
-		task.launch()
+		do {
+			try task.launchThrowably()
+		} catch {
+			exit(error)
+		}
 	}
 
 	/** 
