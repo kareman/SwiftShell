@@ -114,7 +114,8 @@ public enum ShellError: ErrorType, Equatable {
 		case .ReturnedErrorCode(let code):
 			return code
 		case .InAccessibleExecutable:
-			return EXIT_FAILURE
+			// according to http://tldp.org/LDP/abs/html/exitcodes.html
+			return 127
 		}
 	}
 }
