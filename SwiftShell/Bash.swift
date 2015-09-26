@@ -21,8 +21,8 @@ extension ShellContextType {
 	- parameter bashcommand: the bash shell command.
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
-	public func run (bash bashcommand: String) -> String {
-		return outputFromRun(createTask(bash: bashcommand))
+	public func run (bash bashcommand: String, file: String = __FILE__, line: Int = __LINE__) -> String {
+		return outputFromRun(createTask(bash: bashcommand), file: file, line: line)
 	}
 
 	/**
@@ -54,8 +54,8 @@ Shortcut for bash shell command, returns output and errors as a String.
 - parameter bashcommand: the bash shell command.
 - returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 */
-public func run (bash bashcommand: String) -> String {
-	return main.run(bash: bashcommand)
+public func run (bash bashcommand: String, file: String = __FILE__, line: Int = __LINE__) -> String {
+	return main.run(bash: bashcommand, file: file, line: line)
 }
 
 /**

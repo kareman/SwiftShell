@@ -14,7 +14,8 @@ Print message to standard error and halt execution.
 - parameter errorcode: exit code for the entire program. Defaults to 1.
 - returns: not.
 */
-@noreturn public func exit <T> (errormessage errormessage: T, errorcode: Int32 = EXIT_FAILURE) {
+@noreturn public func exit <T> (errormessage errormessage: T, errorcode: Int32 = EXIT_FAILURE, file: String = __FILE__, line: Int = __LINE__) {
+	main.stderror.write(file + ":\(line): ")
 	main.stderror.writeln(errormessage)
 	exit(errorcode)
 }
@@ -25,12 +26,12 @@ Print error to standard error and halt execution.
 - parameter error: the error
 - returns: not.
 */
-@noreturn public func exit (error: ErrorType) {
+@noreturn public func exit (error: ErrorType, file: String = __FILE__, line: Int = __LINE__) {
 	if let shellerror = error as? ShellError {
-		exit(errormessage: shellerror, errorcode: shellerror.errorcode)
+		exit(errormessage: shellerror, errorcode: shellerror.errorcode, file: file, line: line)
 	} else {
 		let nserror = error as NSError
-		exit(errormessage: nserror, errorcode: Int32(nserror.code))
+		exit(errormessage: nserror, errorcode: Int32(nserror.code), file: file, line: line)
 	}
 }
 
@@ -111,6 +112,8 @@ public func == (e1: ShellError, e2: ShellError) -> Bool {
 	}
 }
 
+// MARK: NSTask
+
 extension NSTask {
 
 	/**
@@ -151,14 +154,14 @@ extension NSTask {
 
 extension ShellContextType {
 
-	func outputFromRun (task: NSTask) -> String {
+	func outputFromRun (task: NSTask, file: String, line: Int) -> String {
 		let output = NSPipe ()
 		task.standardOutput = output
 		task.standardError = output
 		do {
 			try task.launchThrowably()
 		} catch {
-			exit(error)
+			exit(error, file: file, line: line)
 		}
 		task.waitUntilExit()
 		var outputstring = output.fileHandleForReading.read(encoding: self.encoding)
@@ -180,9 +183,9 @@ extension ShellContextType {
    - parameter args: the arguments, one string for each.
    - returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
-	public func run (executable: String, _ args: Any ...) -> String {
+	public func run (executable: String, _ args: Any ..., file: String = __FILE__, line: Int = __LINE__) -> String {
 		let stringargs = args.flatten().map { String($0) }
-		return outputFromRun(createTask(executable, args: stringargs))
+		return outputFromRun(createTask(executable, args: stringargs), file: file, line: line)
 	}
 }
 
@@ -270,8 +273,8 @@ Shortcut for shell command, returns output and errors as a String.
 - parameter args: the arguments, one string for each.
 - returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 */
-public func run (executable: String, _ args: Any ...) -> String {
-	return main.run(executable, args)
+public func run (executable: String, _ args: Any ..., file: String = __FILE__, line: Int = __LINE__) -> String {
+	return main.run(executable, args, file: file, line: line)
 }
 
 /**
