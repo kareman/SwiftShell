@@ -49,7 +49,7 @@ func pathForExecutable (executable: String) -> String {
 
 extension ShellContextType {
 
-	func setupTask (executable: String, args: [String]) -> NSTask {
+	func createTask (executable: String, args: [String]) -> NSTask {
 		let task = NSTask()
 		task.arguments = args
 		task.launchPath = pathForExecutable(executable)
@@ -182,7 +182,7 @@ extension ShellContextType {
 	*/
 	public func run (executable: String, _ args: Any ...) -> String {
 		let stringargs = args.flatten().map { String($0) }
-		return outputFromRun(setupTask(executable, args: stringargs))
+		return outputFromRun(createTask(executable, args: stringargs))
 	}
 }
 
@@ -236,7 +236,7 @@ extension ShellContextType {
 	*/
 	public func runAsync (executable: String, _ args: Any ...) -> AsyncShellTask {
 		let stringargs = args.flatten().map { String($0) }
-		return AsyncShellTask(task: setupTask(executable, args: stringargs))
+		return AsyncShellTask(task: createTask(executable, args: stringargs))
 	}
 }
 
@@ -254,7 +254,7 @@ extension ShellContextType {
 	*/
 	public func runAndPrint (executable: String, _ args: Any ...) throws {
 		let stringargs = args.flatten().map { String($0) }
-		let task = setupTask(executable, args: stringargs)
+		let task = createTask(executable, args: stringargs)
 
 		try task.launchThrowably()
 		try task.finish()

@@ -11,8 +11,8 @@ import Foundation
 
 extension ShellContextType {
 
-	func setupTask (bash bashcommand: String) -> NSTask {
-		return setupTask("/bin/bash", args: ["-c", bashcommand])
+	func createTask (bash bashcommand: String) -> NSTask {
+		return createTask("/bin/bash", args: ["-c", bashcommand])
 	}
 
 	/**
@@ -22,7 +22,7 @@ extension ShellContextType {
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
 	public func run (bash bashcommand: String) -> String {
-		return outputFromRun(setupTask(bash: bashcommand))
+		return outputFromRun(createTask(bash: bashcommand))
 	}
 
 	/**
@@ -32,7 +32,7 @@ extension ShellContextType {
 	- returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
 	*/
 	public func runAsync (bash bashcommand: String) -> AsyncShellTask {
-		return AsyncShellTask(task: setupTask(bash: bashcommand))
+		return AsyncShellTask(task: createTask(bash: bashcommand))
 	}
 
 	/**
@@ -42,7 +42,7 @@ extension ShellContextType {
 	- throws: a ShellError if the return code is anything but 0.
 	*/
 	public func runAndPrint (bash bashcommand: String) throws {
-		let task = setupTask(bash: bashcommand)
+		let task = createTask(bash: bashcommand)
 		task.launch()
 		try task.finish()
 	}
