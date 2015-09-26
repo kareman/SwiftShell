@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 /**
 Print message to standard error and halt execution.
 
@@ -20,6 +19,12 @@ Print message to standard error and halt execution.
 	exit(errorcode)
 }
 
+/**
+Print error to standard error and halt execution.
+
+- parameter error: the error
+- returns: not.
+*/
 @noreturn public func exit (error: ErrorType) {
 	if let shellerror = error as? ShellError {
 		exit(errormessage: shellerror, errorcode: shellerror.errorcode)
@@ -60,55 +65,19 @@ extension ShellContextType {
 	}
 }
 
-// MARK: run
-
-extension ShellContextType {
-
-	func outputFromRun (task: NSTask) -> String {
-		let output = NSPipe ()
-		task.standardOutput = output
-		task.standardError = output
-		do {
-			try task.launchThrowably()
-		} catch {
-			exit(error)
-		}
-		task.waitUntilExit()
-		var outputstring = output.fileHandleForReading.read(encoding: self.encoding)
-
-		// if output is single-line, trim it.
-		let firstnewline = outputstring.characters.indexOf("\n")
-		if firstnewline == nil ||
-			firstnewline == outputstring.endIndex.predecessor() {
-				outputstring = outputstring.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
-		}
-
-		return outputstring
-	}
-
-	/**
-	Shortcut for shell command, returns output and errors as a String.
-
-	- parameter executable: path to an executable file.
-	- parameter args: the arguments, one string for each.
-	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
-	*/
-	public func run (executable: String, _ args: Any ...) -> String {
-		let stringargs = args.flatten().map { String($0) }
-		return outputFromRun(setupTask(executable, args: stringargs))
-	}
-}
-
 
 // MARK: ShellError
 
-/** Error type for completed shell commands. */
+/** Error type for shell commands. */
 public enum ShellError: ErrorType, Equatable {
 
 	/** Exit code was not zero. */
 	case ReturnedErrorCode (errorcode: Int32)
+
+	/** Command could not be executed. */
 	case InAccessibleExecutable (path: String)
 
+	/** Exit code for this error. */
 	var errorcode: Int32 {
 		switch self {
 		case .ReturnedErrorCode(let code):
@@ -143,19 +112,69 @@ public func == (e1: ShellError, e2: ShellError) -> Bool {
 }
 
 extension NSTask {
-	public func finish() throws {
-		self.waitUntilExit()
-		guard self.terminationStatus == 0 else {
-			throw ShellError.ReturnedErrorCode(errorcode: self.terminationStatus)
-		}
-	}
 
+	/**
+   Launch task.
+
+   - throws: ShellError.InAccessibleExecutable if command could not be executed.
+	*/
 	public func launchThrowably() throws {
 		do {
 			try launchWithNSError()
 		} catch {
 			throw ShellError.InAccessibleExecutable(path: self.launchPath!)
 		}
+	}
+
+	/**
+   Wait until task is finished.
+
+   - throws: ShellError.ReturnedErrorCode if exit code is not zero.
+	*/
+	public func finish() throws {
+		self.waitUntilExit()
+		guard self.terminationStatus == 0 else {
+			throw ShellError.ReturnedErrorCode(errorcode: self.terminationStatus)
+		}
+	}
+}
+
+// MARK: run
+
+extension ShellContextType {
+
+	func outputFromRun (task: NSTask) -> String {
+		let output = NSPipe ()
+		task.standardOutput = output
+		task.standardError = output
+		do {
+			try task.launchThrowably()
+		} catch {
+			exit(error)
+		}
+		task.waitUntilExit()
+		var outputstring = output.fileHandleForReading.read(encoding: self.encoding)
+
+		// if output is single-line, trim it.
+		let firstnewline = outputstring.characters.indexOf("\n")
+		if firstnewline == nil ||
+			firstnewline == outputstring.endIndex.predecessor() {
+				outputstring = outputstring.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
+		}
+
+		return outputstring
+	}
+
+	/**
+   Shortcut for shell command, returns output and errors as a String.
+
+   - parameter executable: path to an executable file.
+   - parameter args: the arguments, one string for each.
+   - returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
+	*/
+	public func run (executable: String, _ args: Any ...) -> String {
+		let stringargs = args.flatten().map { String($0) }
+		return outputFromRun(setupTask(executable, args: stringargs))
 	}
 }
 
@@ -190,7 +209,7 @@ public struct AsyncShellTask {
    Wait for this shell task to finish.
 
    - returns: itself
-   - throws: a ShellError if the return code is anything but 0.
+   - throws: a ShellError.ReturnedErrorCode if the return code is not 0.
 	*/
 	public func finish() throws -> AsyncShellTask {
 		try task.finish()
@@ -203,9 +222,9 @@ extension ShellContextType {
 	/**
    Run executable and return before it is finished.
 
-   - parameter executable: path to an executable file.
-   - parameter args: arguments to the executable.
-   - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
+   - parameter executable: Path to an executable file. If not then exit.
+   - parameter args: Arguments to the executable.
+   - returns: An AsyncShellTask with standard output, standard error and a 'finish' function.
 	*/
 	public func runAsync (executable: String, _ args: Any ...) -> AsyncShellTask {
 		let stringargs = args.flatten().map { String($0) }
