@@ -72,7 +72,7 @@ extension ShellContextType {
 public enum ShellError: ErrorType, Equatable {
 
 	/** Exit code was not zero. */
-	case ReturnedErrorCode (errorcode: Int32)
+	case ReturnedErrorCode (command: String, errorcode: Int32)
 
 	/** Command could not be executed. */
 	case InAccessibleExecutable (path: String)
@@ -80,7 +80,7 @@ public enum ShellError: ErrorType, Equatable {
 	/** Exit code for this error. */
 	var errorcode: Int32 {
 		switch self {
-		case .ReturnedErrorCode(let code):
+		case .ReturnedErrorCode(_, let code):
 			return code
 		case .InAccessibleExecutable:
 			// according to http://tldp.org/LDP/abs/html/exitcodes.html
@@ -94,8 +94,8 @@ extension ShellError: CustomStringConvertible {
 		switch self {
 		case .InAccessibleExecutable(let path):
 			return "Could not execute file at path '\(path)'."
-		case .ReturnedErrorCode(let code):
-			return "Command returned with error code \(code)."
+		case .ReturnedErrorCode(let command, let code):
+			return "Command '\(command)' returned with error code \(code)."
 		}
 	}
 }
@@ -103,7 +103,7 @@ extension ShellError: CustomStringConvertible {
 public func == (e1: ShellError, e2: ShellError) -> Bool {
 	switch (e1, e2) {
 	case (.ReturnedErrorCode(let c1), .ReturnedErrorCode(let c2)):
-		return c1 == c2
+		return c1.errorcode == c2.errorcode && c1.command == c2.command
 	case (.InAccessibleExecutable(let c1), .InAccessibleExecutable(let c2)):
 		return c1 == c2
 	default:
@@ -134,7 +134,15 @@ extension NSTask {
 	public func finish() throws {
 		self.waitUntilExit()
 		guard self.terminationStatus == 0 else {
-			throw ShellError.ReturnedErrorCode(errorcode: self.terminationStatus)
+			throw ShellError.ReturnedErrorCode(command: commandAsString()!, errorcode: self.terminationStatus)
+		}
+	}
+
+	/** The full path to the executable + all arguments, each one quoted if it contains a space. */
+	func commandAsString () -> String? {
+		guard let path = self.launchPath else { return nil }
+		return self.arguments?.reduce(path) { acc, arg  in
+			return acc + " " + ( arg.characters.contains(" ") ? ("\"" + arg + "\"") : arg )
 		}
 	}
 }

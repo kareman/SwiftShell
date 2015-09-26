@@ -61,7 +61,8 @@ class RunAsync_Tests: XCTestCase {
 	func testThrowsErrorOnExitcodeNotZero () {
 		let asynctask = runAsync(bash: "echo errormessage > /dev/stderr; exit 1" )
 
-		AssertThrows(ShellError.ReturnedErrorCode(errorcode: 1)) { try asynctask.finish() }
+		AssertThrows(ShellError.ReturnedErrorCode(command: "/bin/bash -c \"echo errormessage > /dev/stderr; exit 1\"", errorcode: 1))
+			{ try asynctask.finish() }
 		XCTAssertEqual( asynctask.stderror.read(), "errormessage\n" )
 	}
 }
@@ -100,15 +101,12 @@ class RunAndPrint_Tests: XCTestCase {
 	}
 
 	func testThrowsErrorOnExitcodeNotZero () {
-		AssertThrows(ShellError.ReturnedErrorCode(errorcode: 1))
-			{ try runAndPrint(bash: "echo errormessage > /dev/stderr; exit 1" ) }
-
-		XCTAssertEqual( test_stderr.readSome(), "errormessage\n" )
+		AssertThrows(ShellError.ReturnedErrorCode(command: "/bin/test \"1 1\" = \"2 2\"", errorcode: 1))
+			{ try runAndPrint("test", "1 1", "=", "2 2") }
 	}
 
 	func testThrowsErrorOnInaccessibleExecutable () {
-		AssertThrows(ShellError.InAccessibleExecutable(path: "notachance")) {
-			try runAndPrint("notachance")
-		}
+		AssertThrows(ShellError.InAccessibleExecutable(path: "notachance"))
+			{ try runAndPrint("notachance") }
 	}
 }
