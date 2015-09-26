@@ -39,7 +39,7 @@ extension ShellContextType {
 	Run bash command and print output and errors.
 
 	- parameter bashcommand: the bash shell command.
-	- throws: a ShellError if the return code is anything but 0.
+	- throws: a ShellError.ReturnedErrorCode if the return code is anything but 0.
 	*/
 	public func runAndPrint (bash bashcommand: String) throws {
 		let task = createTask(bash: bashcommand)
@@ -72,7 +72,7 @@ public func runAsync (bash bashcommand: String) -> AsyncShellTask {
 Run bash command and print output and errors.
 
 - parameter bashcommand: the bash shell command.
-- throws: a ShellError if the return code is anything but 0.
+- throws: a ShellError.ReturnedErrorCode if the return code is anything but 0.
 */
 public func runAndPrint (bash bashcommand: String) throws {
 	return try main.runAndPrint(bash: bashcommand)
