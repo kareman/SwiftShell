@@ -198,7 +198,7 @@ public struct AsyncShellTask {
 	public let stderror: NSFileHandle
 	private let task: NSTask
 
-	init (task: NSTask) {
+	init (task: NSTask, file: String = __FILE__, line: Int = __LINE__) {
 		self.task = task
 
 		let outpipe = NSPipe()
@@ -212,7 +212,7 @@ public struct AsyncShellTask {
 		do {
 			try task.launchThrowably()
 		} catch {
-			exit(error)
+			exit(error, file: file, line: line)
 		}
 	}
 
@@ -237,9 +237,9 @@ extension ShellContextType {
    - parameter args: Arguments to the executable.
    - returns: An AsyncShellTask with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync (executable: String, _ args: Any ...) -> AsyncShellTask {
+	public func runAsync (executable: String, _ args: Any ..., file: String = __FILE__, line: Int = __LINE__) -> AsyncShellTask {
 		let stringargs = args.flatten().map { String($0) }
-		return AsyncShellTask(task: createTask(executable, args: stringargs))
+		return AsyncShellTask(task: createTask(executable, args: stringargs), file: file, line: line)
 	}
 }
 
@@ -284,8 +284,8 @@ Run executable and return before it is finished.
 - parameter args: arguments to the executable.
 - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
 */
-public func runAsync (executable: String, _ args: Any ...) -> AsyncShellTask {
-	return main.runAsync(executable, args)
+public func runAsync (executable: String, _ args: Any ..., file: String = __FILE__, line: Int = __LINE__) -> AsyncShellTask {
+	return main.runAsync(executable, args, file: file, line: line)
 }
 
 /**
