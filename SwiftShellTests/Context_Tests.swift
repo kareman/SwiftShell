@@ -24,12 +24,14 @@ class MainContext_Tests: XCTestCase {
 	}
 }
 
-class ShellContext_Tests: XCTestCase {
+class BlankShellContext_Tests: XCTestCase {
 
-	func testBlankShellContext () {
+	func testIsBlank () {
 		let context = ShellContext()
 
 		XCTAssert( context.stdin === NSFileHandle.fileHandleWithNullDevice() )
+		XCTAssert( context.stdout === NSFileHandle.fileHandleWithNullDevice() )
+		XCTAssert( context.stderror === NSFileHandle.fileHandleWithNullDevice() )
 	}
 
 	func testCopiedShellContext () {
@@ -38,15 +40,23 @@ class ShellContext_Tests: XCTestCase {
 		XCTAssert( context.stdin === main.stdin )
 	}
 
+	func testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable () {
+		let context = ShellContext() // everything is empty, including .env
+
+		AssertThrows(ShellError.InAccessibleExecutable(path: "echo")) {
+			try context.runAndPrint("echo", "one")
+		}
+	}
+
 	func testRunCommand () {
 		let context = ShellContext()
 
-		XCTAssertEqual(context.run("echo", "one"), "one")
+		XCTAssertEqual(context.run("/bin/echo", "one"), "one")
 	}
 
 	func testRunAsyncCommand () {
 		let context = ShellContext()
-		let task = context.runAsync("echo", "one")
+		let task = context.runAsync("/bin/echo", "one")
 
 		XCTAssertEqual(task.stdout.read(), "one\n")
 	}
@@ -55,7 +65,7 @@ class ShellContext_Tests: XCTestCase {
 		var context = ShellContext()
 
 		AssertNoThrow {
-			try context.runAndPrint("echo", "one") // sent to null
+			try context.runAndPrint("/bin/echo", "one") // sent to null
 		}
 
 		let outputpipe = NSPipe()
@@ -63,7 +73,7 @@ class ShellContext_Tests: XCTestCase {
 		let output = outputpipe.fileHandleForReading
 
 		AssertNoThrow {
-			try context.runAndPrint("echo", "two")
+			try context.runAndPrint("/bin/echo", "two")
 		}
 		XCTAssertEqual(output.readSome(), "two\n")
 	}
