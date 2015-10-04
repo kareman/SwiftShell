@@ -24,6 +24,7 @@ public protocol ShellContextType {
 	var currentdirectory: String {get set}
 }
 
+
 public struct ShellContext: ShellContextType {
 	public var encoding: NSStringEncoding
 	public var env: [String: String]
@@ -65,6 +66,11 @@ public struct ShellContext: ShellContextType {
 	}
 }
 
+extension ShellContext: ShellRunnable {
+	public var shellcontext: ShellContextType { return self }
+}
+
+
 public final class MainShellContext: ShellContextType {
 
 	// TODO: get encoding from environmental variable LC_CTYPE
@@ -99,6 +105,10 @@ public final class MainShellContext: ShellContextType {
 	private init() {
 
 	}
+}
+
+extension MainShellContext: ShellRunnable {
+	public var shellcontext: ShellContextType { return self }
 }
 
 public let main = MainShellContext()

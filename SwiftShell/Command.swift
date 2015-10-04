@@ -36,11 +36,17 @@ Print error to standard error and halt execution.
 }
 
 
-/** 
+//	MARK: ShellRunnable
+
+public protocol ShellRunnable {
+	var shellcontext: ShellContextType { get }
+}
+
+/**
 If `executable` is not a path and a path for an executable file of that name can be found, return that path.
 Otherwise just return `executable`.
 */
-func pathForExecutable (executable: String) -> String {
+private func pathForExecutable (executable: String) -> String {
 	guard !executable.characters.contains("/") else {
 		return executable
 	}
@@ -48,19 +54,19 @@ func pathForExecutable (executable: String) -> String {
 	return path.isEmpty ? executable : path
 }
 
-extension ShellContextType {
+extension ShellRunnable {
 
 	func createTask (executable: String, args: [String]) -> NSTask {
 		let task = NSTask()
 		task.arguments = args
 		task.launchPath = pathForExecutable(executable)
 
-		task.environment = self.env
-		task.currentDirectoryPath = self.currentdirectory
+		task.environment = shellcontext.env
+		task.currentDirectoryPath = shellcontext.currentdirectory
 
-		task.standardInput = self.stdin
-		task.standardOutput = self.stdout
-		task.standardError = self.stderror
+		task.standardInput = shellcontext.stdin
+		task.standardOutput = shellcontext.stdout
+		task.standardError = shellcontext.stderror
 
 		return task
 	}
@@ -152,7 +158,7 @@ extension NSTask {
 
 // MARK: run
 
-extension ShellContextType {
+extension ShellRunnable {
 
 	func outputFromRun (task: NSTask, file: String, line: Int) -> String {
 		let output = NSPipe ()
@@ -164,7 +170,7 @@ extension ShellContextType {
 			exit(error, file: file, line: line)
 		}
 		task.waitUntilExit()
-		var outputstring = output.fileHandleForReading.read(encoding: self.encoding)
+		var outputstring = output.fileHandleForReading.read(encoding: shellcontext.encoding)
 
 		// if output is single-line, trim it.
 		let firstnewline = outputstring.characters.indexOf("\n")
@@ -228,7 +234,7 @@ public struct AsyncShellTask {
 	}
 }
 
-extension ShellContextType {
+extension ShellRunnable {
 
 	/**
    Run executable and return before it is finished.
@@ -246,7 +252,7 @@ extension ShellContextType {
 
 // MARK: runAndPrint
 
-extension ShellContextType {
+extension ShellRunnable {
 
 	/** 
    Run executable and print output and errors.

@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: Bash
 
-extension ShellContextType {
+extension ShellRunnable {
 
 	func createTask (bash bashcommand: String) -> NSTask {
 		return createTask("/bin/bash", args: ["-c", bashcommand])
