@@ -150,7 +150,7 @@ extension NSTask {
 	/** The full path to the executable + all arguments, each one quoted if it contains a space. */
 	func commandAsString () -> String? {
 		guard let path = self.launchPath else { return nil }
-		return self.arguments?.reduce(path) { acc, arg  in
+		return self.arguments?.reduce(path) { acc, arg in
 			return acc + " " + ( arg.characters.contains(" ") ? ("\"" + arg + "\"") : arg )
 		}
 	}
