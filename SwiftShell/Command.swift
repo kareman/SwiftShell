@@ -124,9 +124,9 @@ public func == (e1: ShellError, e2: ShellError) -> Bool {
 extension NSTask {
 
 	/**
-   Launch task.
+	Launch task.
 
-   - throws: ShellError.InAccessibleExecutable if command could not be executed.
+	- throws: ShellError.InAccessibleExecutable if command could not be executed.
 	*/
 	public func launchThrowably() throws {
 		do {
@@ -137,9 +137,9 @@ extension NSTask {
 	}
 
 	/**
-   Wait until task is finished.
+	Wait until task is finished.
 
-   - throws: ShellError.ReturnedErrorCode if exit code is not zero.
+	- throws: ShellError.ReturnedErrorCode if exit code is not zero.
 	*/
 	public func finish() throws {
 		self.waitUntilExit()
@@ -184,11 +184,11 @@ extension ShellRunnable {
 	}
 
 	/**
-   Shortcut for shell command, returns output and errors as a String.
+	Shortcut for shell command, returns output and errors as a String.
 
-   - parameter executable: path to an executable file.
-   - parameter args: the arguments, one string for each.
-   - returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
+	- parameter executable: path to an executable file.
+	- parameter args: the arguments, one string for each.
+	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
 	public func run (executable: String, _ args: Any ..., file: String = __FILE__, line: Int = __LINE__) -> String {
 		let stringargs = args.flatten().map { String($0) }
@@ -223,11 +223,11 @@ public struct AsyncShellTask {
 		}
 	}
 
-	/** 
-   Wait for this shell task to finish.
+	/**
+	Wait for this shell task to finish.
 
-   - returns: itself
-   - throws: a ShellError.ReturnedErrorCode if the return code is not 0.
+	- returns: itself
+	- throws: a ShellError.ReturnedErrorCode if the return code is not 0.
 	*/
 	public func finish() throws -> AsyncShellTask {
 		try task.finish()
@@ -238,11 +238,11 @@ public struct AsyncShellTask {
 extension ShellRunnable {
 
 	/**
-   Run executable and return before it is finished.
+	Run executable and return before it is finished.
 
-   - parameter executable: Path to an executable file. If not then exit.
-   - parameter args: Arguments to the executable.
-   - returns: An AsyncShellTask with standard output, standard error and a 'finish' function.
+	- parameter executable: Path to an executable file. If not then exit.
+	- parameter args: Arguments to the executable.
+	- returns: An AsyncShellTask with standard output, standard error and a 'finish' function.
 	*/
 	public func runAsync (executable: String, _ args: Any ..., file: String = __FILE__, line: Int = __LINE__) -> AsyncShellTask {
 		let stringargs = args.flatten().map { String($0) }
@@ -255,12 +255,12 @@ extension ShellRunnable {
 
 extension ShellRunnable {
 
-	/** 
-   Run executable and print output and errors.
+	/**
+	Run executable and print output and errors.
 
-   - parameter executable: path to an executable file.
-   - parameter args: arguments to the executable.
-   - throws: a ShellError if the return code is anything but 0.
+	- parameter executable: path to an executable file.
+	- parameter args: arguments to the executable.
+	- throws: a ShellError if the return code is anything but 0.
 	*/
 	public func runAndPrint (executable: String, _ args: Any ...) throws {
 		let stringargs = args.flatten().map { String($0) }
@@ -300,7 +300,7 @@ Run executable and print output and errors.
 
 - parameter executable: path to an executable file.
 - parameter args: arguments to the executable.
-- throws: a ShellError if the return code is anything but 0.
+- throws: a ShellError if the return code is anything but 0, or ‘executable’ could not be run.
 */
 public func runAndPrint (executable: String, _ args: Any ...) throws {
 	return try main.runAndPrint(executable, args)

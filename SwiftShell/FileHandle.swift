@@ -22,7 +22,7 @@ extension NSFileHandle {
 
 	public func read (encoding encoding: NSStringEncoding = main.encoding) -> String {
 		let data: NSData = self.readDataToEndOfFile()
-		
+
 		guard let result = NSString(data: data, encoding: encoding) else {
 			exit(errormessage: "Could not convert binary data to text.")
 		}
