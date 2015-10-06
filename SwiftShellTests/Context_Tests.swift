@@ -16,11 +16,40 @@ class MainContext_Tests: XCTestCase {
 	}
 
 	func testCurrentDirectory_CanChange () {
-		main.currentdirectory = "/tmp"
+		XCTAssertNotEqual( main.run("/bin/pwd"), "/private" )
+		main.currentdirectory = "/private"
 
-		XCTAssertEqual( main.currentdirectory, "/private/tmp" )
-		XCTAssertEqual( main.run("/bin/pwd"), "/tmp" )
-		XCTAssertEqual( main.currentdirectory, NSFileManager.defaultManager().currentDirectoryPath )
+		XCTAssertEqual( main.run("/bin/pwd"), "/private" )
+		XCTAssertEqual( main.currentdirectory, "/private" )
+	}
+
+	func testCurrentDirectory_AffectsNSURLBase () {
+		let originalcurrentdirectory = main.currentdirectory
+		XCTAssertNotEqual(NSURL(fileURLWithPath: "file").baseURL, NSURL(fileURLWithPath: "/private") )
+
+		main.currentdirectory = "/private"
+
+		XCTAssertEqual(NSURL(fileURLWithPath: "file").baseURL, NSURL(fileURLWithPath: "/private") )
+		main.currentdirectory = originalcurrentdirectory
+	}
+}
+
+class CopiedShellContext_Tests: XCTestCase {
+
+	func testCopies () {
+		let context = ShellContext(main)
+
+		XCTAssert( context.stdin === main.stdin )
+		XCTAssertEqual(context.env, main.env)
+	}
+
+	func testCurrentDirectory_DoesNotAffectNSURLBase () {
+		let originalnsurlbaseurl = NSURL(fileURLWithPath: "file").baseURL
+
+		var context = ShellContext(main)
+		context.currentdirectory = "/private"
+
+		XCTAssertEqual(NSURL(fileURLWithPath: "file").baseURL, originalnsurlbaseurl )
 	}
 }
 
@@ -32,12 +61,6 @@ class BlankShellContext_Tests: XCTestCase {
 		XCTAssert( context.stdin === NSFileHandle.fileHandleWithNullDevice() )
 		XCTAssert( context.stdout === NSFileHandle.fileHandleWithNullDevice() )
 		XCTAssert( context.stderror === NSFileHandle.fileHandleWithNullDevice() )
-	}
-
-	func testCopiedShellContext () {
-		let context = ShellContext(main)
-
-		XCTAssert( context.stdin === main.stdin )
 	}
 
 	func testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable () {
