@@ -44,19 +44,20 @@ public protocol ShellRunnable {
 
 extension ShellRunnable {
 
-	/**
-	If `executable` is not a path and a path for an executable file of that name can be found, return that path.
-	Otherwise just return `executable`.
-	*/
-	private func pathForExecutable (executable: String) -> String {
-		guard !executable.characters.contains("/") else {
-			return executable
-		}
-		let path = self.run("/usr/bin/which", executable)
-		return path.isEmpty ? executable : path
-	}
-
 	func createTask (executable: String, args: [String]) -> NSTask {
+
+		/**
+		If `executable` is not a path and a path for an executable file of that name can be found, return that path.
+		Otherwise just return `executable`.
+		*/
+		func pathForExecutable (executable: String) -> String {
+			guard !executable.characters.contains("/") else {
+				return executable
+			}
+			let path = self.run("/usr/bin/which", executable)
+			return path.isEmpty ? executable : path
+		}
+
 		let task = NSTask()
 		task.arguments = args
 		task.launchPath = pathForExecutable(executable)
