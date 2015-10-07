@@ -43,4 +43,23 @@ class Stream_Tests: XCTestCase {
 
 		XCTAssertEqual(reader.runAsync("cat").stdout.read(), "one")
 	}
+
+	func testPrintStream () {
+		let (writer,reader) = streams()
+		writer.write("one")
+		writer.close()
+
+		var string = ""
+		print(reader, toStream: &string)
+		
+		XCTAssertEqual(string, "one\n")
+	}
+
+	func testPrintToStream () {
+		var (writer,reader) = streams()
+
+		print("one", toStream: &writer)
+
+		XCTAssertEqual(reader.readSome(), "one\n")
+	}
 }
