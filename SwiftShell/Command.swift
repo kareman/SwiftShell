@@ -201,8 +201,8 @@ extension ShellRunnable {
 
 /** Output from the 'runAsync' methods. */
 public struct AsyncShellTask {
-	public let stdout: NSFileHandle
-	public let stderror: NSFileHandle
+	public let stdout: ReadableStream
+	public let stderror: ReadableStream
 	private let task: NSTask
 
 	init (task: NSTask, file: String = __FILE__, line: Int = __LINE__) {
@@ -210,11 +210,11 @@ public struct AsyncShellTask {
 
 		let outpipe = NSPipe()
 		task.standardOutput = outpipe
-		self.stdout = outpipe.fileHandleForReading
+		self.stdout = ReadableStream(outpipe.fileHandleForReading)
 
 		let errorpipe = NSPipe()
 		task.standardError = errorpipe
-		self.stderror = errorpipe.fileHandleForReading
+		self.stderror = ReadableStream(errorpipe.fileHandleForReading)
 
 		do {
 			try task.launchThrowably()
