@@ -59,7 +59,7 @@ class BlankShellContext_Tests: XCTestCase {
 		let context = ShellContext()
 
 		XCTAssert( context.stdin === NSFileHandle.fileHandleWithNullDevice() )
-		XCTAssert( context.stdout === NSFileHandle.fileHandleWithNullDevice() )
+		XCTAssert( context.stdout.filehandle === NSFileHandle.fileHandleWithNullDevice() )
 		XCTAssert( context.stderror === NSFileHandle.fileHandleWithNullDevice() )
 	}
 
@@ -92,7 +92,7 @@ class BlankShellContext_Tests: XCTestCase {
 		}
 
 		let outputpipe = NSPipe()
-		context.stdout = outputpipe.fileHandleForWriting
+		context.stdout = WriteableStream(outputpipe.fileHandleForWriting)
 		let output = outputpipe.fileHandleForReading
 
 		AssertNoThrow {

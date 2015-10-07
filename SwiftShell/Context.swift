@@ -12,7 +12,7 @@ public protocol ShellContextType {
 	var env: [String: String] {get set}
 
 	var stdin: NSFileHandle {get set}
-	var stdout: NSFileHandle {get set}
+	var stdout: WriteableStream {get set}
 	var stderror: NSFileHandle {get set}
 
 	/**
@@ -30,7 +30,7 @@ public struct ShellContext: ShellContextType {
 	public var env: [String: String]
 
 	public var stdin: NSFileHandle
-	public var stdout: NSFileHandle
+	public var stdout: WriteableStream
 	public var stderror: NSFileHandle
 
 	/**
@@ -47,7 +47,7 @@ public struct ShellContext: ShellContextType {
 		env = [String:String]()
 
 		stdin =    NSFileHandle.fileHandleWithNullDevice()
-		stdout =   NSFileHandle.fileHandleWithNullDevice()
+		stdout =   WriteableStream(NSFileHandle.fileHandleWithNullDevice(), encoding: encoding)
 		stderror = NSFileHandle.fileHandleWithNullDevice()
 
 		currentdirectory = main.currentdirectory
@@ -78,7 +78,7 @@ public final class MainShellContext: ShellContextType {
 	public lazy var env = NSProcessInfo.processInfo().environment as [String: String]
 
 	public lazy var stdin    = NSFileHandle.fileHandleWithStandardInput() //as ReadableStreamType
-	public lazy var stdout   = NSFileHandle.fileHandleWithStandardOutput() //as WriteableStreamType
+	public lazy var stdout: WriteableStream = { WriteableStream(NSFileHandle.fileHandleWithStandardOutput(), encoding: self.encoding) }()
 	public lazy var stderror = NSFileHandle.fileHandleWithStandardError() //as WriteableStreamType
 
 	/**
@@ -103,7 +103,6 @@ public final class MainShellContext: ShellContextType {
 	public lazy var name: String = Process.arguments.first.map(NSURL.init)?.lastPathComponent ?? ""
 
 	private init() {
-
 	}
 }
 

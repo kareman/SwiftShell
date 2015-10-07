@@ -74,7 +74,7 @@ class RunAndPrint_Tests: XCTestCase {
 
 	override func setUp () {
 		let outputpipe = NSPipe()
-		main.stdout = outputpipe.fileHandleForWriting
+		main.stdout = WriteableStream(outputpipe.fileHandleForWriting)
 		test_stdout = outputpipe.fileHandleForReading
 
 		let errorpipe = NSPipe()
