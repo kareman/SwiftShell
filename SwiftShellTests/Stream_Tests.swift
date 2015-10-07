@@ -11,4 +11,18 @@ import XCTest
 
 class Stream_Tests: XCTestCase {
 
+	func testStreams () {
+		let (writer,reader) = streams()
+
+		writer.write("one")
+		XCTAssertEqual(reader.readSome(), "one")
+
+		writer.writeln()
+		writer.writeln("two")
+		XCTAssertEqual(reader.readSome(), "\ntwo\n")
+
+		writer.write("three")
+		writer.close()
+		XCTAssertEqual(reader.read(), "three")
+	}
 }

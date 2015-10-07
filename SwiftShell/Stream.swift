@@ -7,6 +7,38 @@
 
 import Foundation
 
+/** A stream of text. Does as much as possible lazily. */
+public final class ReadableStream : Streamable {
+
+	public let filehandle: NSFileHandle
+	public let encoding: NSStringEncoding
+
+	/**
+	Whatever amount of text the stream feels like providing.
+	If the source is a file this will read everything at once.
+
+	- returns: more text from the stream, or nil if we have reached the end.
+	*/
+	public func readSome () -> String? {
+		return filehandle.readSome(encoding: encoding)
+	}
+
+	/** Read everything at once. */
+	public func read () -> String {
+		return filehandle.read(encoding: encoding)
+	}
+
+	/** Enable stream to be used by "print". */
+	public func writeTo <Target : OutputStreamType> (inout target: Target) {
+		while let text = self.readSome() { target.write(text) }
+	}
+
+	public init (_ filehandle: NSFileHandle, encoding: NSStringEncoding = main.encoding) {
+		self.filehandle = filehandle
+		self.encoding = encoding
+	}
+}
+
 /** An output stream, like standard output or a writeable file. */
 public final class WriteableStream : OutputStreamType {
 
@@ -21,8 +53,8 @@ public final class WriteableStream : OutputStreamType {
 		filehandle.writeln(x, encoding: encoding)
 	}
 
-	public func writeln (s: String = "") {
-		self.writeln(s)
+	public func writeln () {
+		filehandle.writeln("")
 	}
 
 	/** Must be called on local streams when finished writing. */
@@ -34,4 +66,10 @@ public final class WriteableStream : OutputStreamType {
 		self.filehandle = filehandle
 		self.encoding = encoding
 	}
+}
+
+/** Create a pair of streams. What is written to the 1st one can be read from the 2nd one. */
+public func streams () -> (WriteableStream, ReadableStream) {
+	let pipe = NSPipe()
+	return (WriteableStream(pipe.fileHandleForWriting), ReadableStream(pipe.fileHandleForReading))
 }
