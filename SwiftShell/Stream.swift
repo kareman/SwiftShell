@@ -39,6 +39,15 @@ public final class ReadableStream : Streamable {
 	}
 }
 
+/** Let ReadableStream run commands using itself as stdin. */
+extension ReadableStream: ShellRunnable {
+	public var shellcontext: ShellContextType {
+		var context = ShellContext(main)
+		context.stdin = self
+		return context
+	}
+}
+
 /** An output stream, like standard output or a writeable file. */
 public final class WriteableStream : OutputStreamType {
 

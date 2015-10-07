@@ -25,4 +25,22 @@ class Stream_Tests: XCTestCase {
 		writer.close()
 		XCTAssertEqual(reader.read(), "three")
 	}
+
+	func testReadableStreamRun () {
+		let (writer,reader) = streams()
+
+		writer.write("one")
+		writer.close()
+
+		XCTAssertEqual(reader.run("cat"), "one")
+	}
+
+	func testReadableStreamRunAsync () {
+		let (writer,reader) = streams()
+
+		writer.write("one")
+		writer.close()
+
+		XCTAssertEqual(reader.runAsync("cat").stdout.read(), "one")
+	}
 }
