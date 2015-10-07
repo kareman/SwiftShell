@@ -11,9 +11,9 @@ public protocol ShellContextType {
 	var encoding: NSStringEncoding {get set}
 	var env: [String: String] {get set}
 
-	var stdin: NSFileHandle {get set}
+	var stdin: ReadableStream {get set}
 	var stdout: WriteableStream {get set}
-	var stderror: NSFileHandle {get set}
+	var stderror: WriteableStream {get set}
 
 	/**
 	The current working directory.
@@ -29,9 +29,9 @@ public struct ShellContext: ShellContextType {
 	public var encoding: NSStringEncoding
 	public var env: [String: String]
 
-	public var stdin: NSFileHandle
+	public var stdin: ReadableStream
 	public var stdout: WriteableStream
-	public var stderror: NSFileHandle
+	public var stderror: WriteableStream
 
 	/**
 	The current working directory.
@@ -46,9 +46,9 @@ public struct ShellContext: ShellContextType {
 		encoding = NSUTF8StringEncoding
 		env = [String:String]()
 
-		stdin =    NSFileHandle.fileHandleWithNullDevice()
+		stdin =    ReadableStream(NSFileHandle.fileHandleWithNullDevice(), encoding: encoding)
 		stdout =   WriteableStream(NSFileHandle.fileHandleWithNullDevice(), encoding: encoding)
-		stderror = NSFileHandle.fileHandleWithNullDevice()
+		stderror = WriteableStream(NSFileHandle.fileHandleWithNullDevice(), encoding: encoding)
 
 		currentdirectory = main.currentdirectory
 	}
@@ -77,9 +77,9 @@ public final class MainShellContext: ShellContextType {
 	public var encoding = NSUTF8StringEncoding
 	public lazy var env = NSProcessInfo.processInfo().environment as [String: String]
 
-	public lazy var stdin    = NSFileHandle.fileHandleWithStandardInput() //as ReadableStreamType
+	public lazy var stdin: ReadableStream = { ReadableStream(NSFileHandle.fileHandleWithStandardInput(), encoding: self.encoding) }()
 	public lazy var stdout: WriteableStream = { WriteableStream(NSFileHandle.fileHandleWithStandardOutput(), encoding: self.encoding) }()
-	public lazy var stderror = NSFileHandle.fileHandleWithStandardError() //as WriteableStreamType
+	public lazy var stderror: WriteableStream = { WriteableStream(NSFileHandle.fileHandleWithStandardError(), encoding: self.encoding) }()
 
 	/**
 	The current working directory.

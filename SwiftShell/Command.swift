@@ -65,9 +65,9 @@ extension ShellRunnable {
 		task.environment = shellcontext.env
 		task.currentDirectoryPath = shellcontext.currentdirectory
 
-		task.standardInput = shellcontext.stdin
+		task.standardInput = shellcontext.stdin.filehandle
 		task.standardOutput = shellcontext.stdout.filehandle
-		task.standardError = shellcontext.stderror
+		task.standardError = shellcontext.stderror.filehandle
 
 		return task
 	}

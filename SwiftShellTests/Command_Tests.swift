@@ -78,7 +78,7 @@ class RunAndPrint_Tests: XCTestCase {
 		test_stdout = outputpipe.fileHandleForReading
 
 		let errorpipe = NSPipe()
-		main.stderror = errorpipe.fileHandleForWriting
+		main.stderror = WriteableStream(errorpipe.fileHandleForWriting)
 		test_stderr = errorpipe.fileHandleForReading
 	}
 
