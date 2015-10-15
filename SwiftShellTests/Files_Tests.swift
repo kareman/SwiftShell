@@ -17,3 +17,24 @@ class UrlAppendationOperator: XCTestCase {
 		XCTAssertEqual( NSURL(string: "dir")! / "file.txt", NSURL(string: "dir/file.txt"))
 	}
 }
+
+class Open: XCTestCase {
+
+	func testReadFile () {
+		let shorttextpath = pathForTestResource("shorttext", type: "txt")
+
+		AssertNoThrow {
+			let file = try open(shorttextpath)
+			XCTAssert(file.read().hasPrefix("Lorem ipsum dolor"))
+		}
+	}
+
+	func testReadFileWhichDoesNotExist () {
+		do {
+			let _ = try open("/nonexistingfile.txt")
+			XCTFail("Creating stream from non-existing file did not throw error")
+		} catch {
+
+		}
+	}
+}
