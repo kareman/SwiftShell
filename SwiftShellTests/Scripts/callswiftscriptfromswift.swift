@@ -2,4 +2,4 @@
 
 import SwiftShell
 
-run("cat onetwothree.txt") |> run("./print_linenumbers.swift") |>> standardoutput
+try! run("cat","onetwothree.txt").runAndPrint("./print_linenumbers.swift")
