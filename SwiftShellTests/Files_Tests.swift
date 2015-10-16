@@ -8,6 +8,7 @@
 
 import SwiftShell
 import XCTest
+import Foundation
 
 class UrlAppendationOperator: XCTestCase {
 
@@ -35,6 +36,60 @@ class Open: XCTestCase {
 			XCTFail("Creating stream from non-existing file did not throw error")
 		} catch {
 
+		}
+	}
+
+	func testOpenForWritingFileWhichDoesNotExist () {
+		let path = main.tempdirectory + "/testOpenForWritingFileWhichDoesNotExist.txt"
+
+		AssertNoThrow {
+			let file = try open(forWriting: path)
+			file.writeln("line 1")
+			file.close()
+
+			let contents = try String(contentsOfFile: path)
+			XCTAssertEqual( contents, "line 1\n" )
+		}
+	}
+
+	func testOpenForOverWritingFileWhichDoesNotExist () {
+		let path = main.tempdirectory + "/testOpenForOverWritingFileWhichDoesNotExist.txt"
+
+		AssertNoThrow {
+			let file = try open(forWriting: path, overwrite: true)
+			file.writeln("line 1")
+			file.close()
+
+			let contents = try String(contentsOfFile: path)
+			XCTAssertEqual( contents, "line 1\n" )
+		}
+	}
+
+	func testOpenForWritingExistingFile_AppendsFile () {
+		let path = main.tempdirectory + "/testOpenForWritingExistingFile_AppendsFile.txt"
+		SwiftShell.run(bash: "echo existing line > " + path)
+
+		AssertNoThrow {
+			let file = try open(forWriting: path)
+			file.writeln("new line")
+			file.close()
+
+			let contents = try String(contentsOfFile: path)
+			XCTAssertEqual( contents, "existing line\nnew line\n" )
+		}
+	}
+
+	func testOpenForOverWritingExistingFile () {
+		let path = main.tempdirectory + "/testOpenForOverWritingExistingFile.txt"
+		SwiftShell.run(bash: "echo existing line > " + path)
+
+		AssertNoThrow {
+			let file = try open(forWriting: path, overwrite: true)
+			file.writeln("new line")
+			file.close()
+
+			let contents = try String(contentsOfFile: path)
+			XCTAssertEqual( contents, "new line\n" )
 		}
 	}
 }

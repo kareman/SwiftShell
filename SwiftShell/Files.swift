@@ -35,3 +35,31 @@ public func open (path: NSURL, encoding: NSStringEncoding = main.encoding) throw
 	try makeThrowable(path.checkResourceIsReachableAndReturnError)
 	return ReadableStream(try NSFileHandle(forReadingFromURL: path), encoding: encoding)
 }
+
+/**
+Open a file for writing, create it first if it doesn't exist.
+If the file already exists and overwrite=false, the writing will begin at the end of the file.
+
+- parameter overwrite: If true, replace the file if it exists.
+*/
+public func open (forWriting path: NSURL, overwrite: Bool = false, encoding: NSStringEncoding = main.encoding) throws -> WriteableStream {
+
+	if overwrite || !Files.fileExistsAtPath(path.path!) {
+		Files.createFileAtPath(path.path!, contents: nil, attributes: nil)
+	}
+	try makeThrowable(path.checkResourceIsReachableAndReturnError)
+
+	let filehandle = try NSFileHandle(forWritingToURL: path)
+	filehandle.seekToEndOfFile()
+	return WriteableStream(filehandle, encoding: encoding)
+}
+
+/**
+Open a file for writing, create it first if it doesn't exist.
+If the file already exists and overwrite=false, the writing will begin at the end of the file.
+
+- parameter overwrite: If true, replace the file if it exists.
+*/
+public func open (forWriting path: String, overwrite: Bool = false, encoding: NSStringEncoding = main.encoding) throws -> WriteableStream {
+	return try open(forWriting:  NSURL(fileURLWithPath: path, isDirectory: false), overwrite: overwrite, encoding:  encoding)
+}
