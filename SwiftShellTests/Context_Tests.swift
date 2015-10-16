@@ -32,6 +32,11 @@ class MainContext_Tests: XCTestCase {
 		XCTAssertEqual(NSURL(fileURLWithPath: "file").baseURL, NSURL(fileURLWithPath: "/private") )
 		main.currentdirectory = originalcurrentdirectory
 	}
+
+	func testTempDirectory () {
+		XCTAssertEqual( main.tempdirectory, main.tempdirectory )
+		XCTAssert( Files.fileExistsAtPath(main.tempdirectory), "Temporary directory \(main.tempdirectory) does not exist" )
+	}
 }
 
 class CopiedShellContext_Tests: XCTestCase {

@@ -71,6 +71,18 @@ extension ShellContext: ShellRunnable {
 }
 
 
+private func createTempdirectory () -> String {
+	let tempdirectory = NSURL(fileURLWithPath:NSTemporaryDirectory()) / ("SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString)
+	do {
+		try Files.createDirectoryAtPath(tempdirectory.path!, withIntermediateDirectories: true, attributes: nil)
+		return tempdirectory.path!
+	} catch let error as NSError {
+		exit(errormessage: "Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
+	} catch {
+		exit(errormessage: "Unexpected error: \(error)")
+	}
+}
+
 public final class MainShellContext: ShellContextType {
 
 	// TODO: get encoding from environmental variable LC_CTYPE
@@ -98,6 +110,11 @@ public final class MainShellContext: ShellContextType {
 		}
 	}
 
+	/**
+	The tempdirectory is unique each time a script is run and is created the first time it is used.
+	It lies in the user's temporary directory and will be automatically deleted at some point.
+	*/
+	public lazy var tempdirectory: String = createTempdirectory()
 
 	public lazy var arguments: [String] = Process.arguments.count <= 1 ? [] : Array(Process.arguments.dropFirst())
 	public lazy var name: String = Process.arguments.first.map(NSURL.init)?.lastPathComponent ?? ""
