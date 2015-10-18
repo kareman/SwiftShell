@@ -75,7 +75,7 @@ private func createTempdirectory () -> String {
 	let tempdirectory = NSURL(fileURLWithPath:NSTemporaryDirectory()) / ("SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString)
 	do {
 		try Files.createDirectoryAtPath(tempdirectory.path!, withIntermediateDirectories: true, attributes: nil)
-		return tempdirectory.path!
+		return tempdirectory.path! +  "/"
 	} catch let error as NSError {
 		exit(errormessage: "Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
 	} catch {

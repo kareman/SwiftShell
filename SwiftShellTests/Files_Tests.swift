@@ -40,7 +40,7 @@ class Open: XCTestCase {
 	}
 
 	func testOpenForWritingFileWhichDoesNotExist () {
-		let path = main.tempdirectory + "/testOpenForWritingFileWhichDoesNotExist.txt"
+		let path = main.tempdirectory + "testOpenForWritingFileWhichDoesNotExist.txt"
 
 		AssertNoThrow {
 			let file = try open(forWriting: path)
@@ -53,7 +53,7 @@ class Open: XCTestCase {
 	}
 
 	func testOpenForOverWritingFileWhichDoesNotExist () {
-		let path = main.tempdirectory + "/testOpenForOverWritingFileWhichDoesNotExist.txt"
+		let path = main.tempdirectory + "testOpenForOverWritingFileWhichDoesNotExist.txt"
 
 		AssertNoThrow {
 			let file = try open(forWriting: path, overwrite: true)
@@ -66,7 +66,7 @@ class Open: XCTestCase {
 	}
 
 	func testOpenForWritingExistingFile_AppendsFile () {
-		let path = main.tempdirectory + "/testOpenForWritingExistingFile_AppendsFile.txt"
+		let path = main.tempdirectory + "testOpenForWritingExistingFile_AppendsFile.txt"
 		SwiftShell.run(bash: "echo existing line > " + path)
 
 		AssertNoThrow {
@@ -80,7 +80,7 @@ class Open: XCTestCase {
 	}
 
 	func testOpenForOverWritingExistingFile () {
-		let path = main.tempdirectory + "/testOpenForOverWritingExistingFile.txt"
+		let path = main.tempdirectory + "testOpenForOverWritingExistingFile.txt"
 		SwiftShell.run(bash: "echo existing line > " + path)
 
 		AssertNoThrow {

@@ -2,7 +2,7 @@
 
 import SwiftShell
 
-let filepath =  main.tempdirectory + "/newfile.txt"
+let filepath =  main.tempdirectory + "newfile.txt"
 
 // File doesn't exist. Create it.
 let file1 = try! open(forWriting: filepath)
