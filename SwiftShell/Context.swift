@@ -102,7 +102,7 @@ public final class MainShellContext: ShellContextType {
 	This directory is also used as the base for relative NSURLs.
 	*/
 	public var currentdirectory: String {
-		get {	return Files.currentDirectoryPath }
+		get {	return Files.currentDirectoryPath + "/" }
 		set {
 			if !Files.changeCurrentDirectoryPath(newValue) {
 				exit(errormessage: "Could not change the working directory to \(newValue)")

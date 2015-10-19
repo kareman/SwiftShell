@@ -12,7 +12,7 @@ import SwiftShell
 class MainContext_Tests: XCTestCase {
 
 	func testCurrentDirectory_IsCurrentDirectory () {
-		XCTAssertEqual( main.currentdirectory, NSFileManager.defaultManager().currentDirectoryPath )
+		XCTAssertEqual( main.currentdirectory, NSFileManager.defaultManager().currentDirectoryPath + "/")
 	}
 
 	func testCurrentDirectory_CanChange () {
@@ -20,7 +20,7 @@ class MainContext_Tests: XCTestCase {
 		main.currentdirectory = "/private"
 
 		XCTAssertEqual( main.run("/bin/pwd"), "/private" )
-		XCTAssertEqual( main.currentdirectory, "/private" )
+		XCTAssertEqual( main.currentdirectory, "/private/" )
 	}
 
 	func testCurrentDirectory_AffectsNSURLBase () {
