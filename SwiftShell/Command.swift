@@ -31,7 +31,7 @@ Print error to standard error and halt execution.
 		exit(errormessage: shellerror, errorcode: shellerror.errorcode, file: file, line: line)
 	} else {
 		let nserror = error as NSError
-		exit(errormessage: nserror, errorcode: Int32(nserror.code), file: file, line: line)
+		exit(errormessage: nserror.localizedDescription, errorcode: Int32(nserror.code), file: file, line: line)
 	}
 }
 
