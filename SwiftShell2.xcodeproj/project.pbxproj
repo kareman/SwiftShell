@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA1362181BADCA0C009ACCC9 /* CatchingFire.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1362171BADCA0C009ACCC9 /* CatchingFire.swift */; settings = {ASSET_TAGS = (); }; };
+		BA1362181BADCA0C009ACCC9 /* CatchingFire.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1362171BADCA0C009ACCC9 /* CatchingFire.swift */; };
 		BA2E3B201B5C34DD001ED175 /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA2E3B151B5C34DD001ED175 /* SwiftShell.framework */; };
 		BA2E3B331B5C35CC001ED175 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B2D1B5C35CC001ED175 /* Command.swift */; };
 		BA2E3B341B5C35CC001ED175 /* FileHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B2E1B5C35CC001ED175 /* FileHandle.swift */; };
@@ -23,12 +23,12 @@
 		BA2E3B4C1B5C3635001ED175 /* XCTestCase_Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B421B5C3635001ED175 /* XCTestCase_Additions.swift */; };
 		BA2E3B501B5C450C001ED175 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E3B4F1B5C450C001ED175 /* Context.swift */; };
 		BAE03DBB1B5C6B7200D731A0 /* Context_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE03DBA1B5C6B7200D731A0 /* Context_Tests.swift */; };
-		BAE4F5681B9F838E00908543 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4F5671B9F838E00908543 /* Bash.swift */; settings = {ASSET_TAGS = (); }; };
-		BAE503881BAF1061005261A6 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE503871BAF1061005261A6 /* Array.swift */; settings = {ASSET_TAGS = (); }; };
-		BAE5038B1BAF1231005261A6 /* Array_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE5038A1BAF1231005261A6 /* Array_Tests.swift */; settings = {ASSET_TAGS = (); }; };
-		BAEDDA4C1BB3582B00BD28B2 /* NSTask+NSTask_Errors.h in Headers */ = {isa = PBXBuildFile; fileRef = BAEDDA4A1BB3582B00BD28B2 /* NSTask+NSTask_Errors.h */; settings = {ASSET_TAGS = (); }; };
-		BAEDDA4D1BB3582B00BD28B2 /* NSTask+NSTask_Errors.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEDDA4B1BB3582B00BD28B2 /* NSTask+NSTask_Errors.m */; settings = {ASSET_TAGS = (); }; };
-		BAEDDA4F1BB36EE200BD28B2 /* SwiftShell-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = BAEDDA4E1BB36EE200BD28B2 /* SwiftShell-Bridging-Header.h */; settings = {ASSET_TAGS = (); }; };
+		BAE4F5681B9F838E00908543 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE4F5671B9F838E00908543 /* Bash.swift */; };
+		BAE503881BAF1061005261A6 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE503871BAF1061005261A6 /* Array.swift */; };
+		BAE5038B1BAF1231005261A6 /* Array_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE5038A1BAF1231005261A6 /* Array_Tests.swift */; };
+		BAEDDA4C1BB3582B00BD28B2 /* NSTask+NSTask_Errors.h in Headers */ = {isa = PBXBuildFile; fileRef = BAEDDA4A1BB3582B00BD28B2 /* NSTask+NSTask_Errors.h */; };
+		BAEDDA4D1BB3582B00BD28B2 /* NSTask+NSTask_Errors.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEDDA4B1BB3582B00BD28B2 /* NSTask+NSTask_Errors.m */; };
+		BAEDDA4F1BB36EE200BD28B2 /* SwiftShell-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = BAEDDA4E1BB36EE200BD28B2 /* SwiftShell-Bridging-Header.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,7 +235,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					BA2E3B141B5C34DD001ED175 = {
@@ -329,7 +329,9 @@
 		BA2E3B0E1B5C34BB001ED175 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
