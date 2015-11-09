@@ -9,15 +9,20 @@ An OS X Framework for command line scripting in Swift. It supports joining toget
 
 ## Usage
 
-#### Commands
-
-Shell commands return readable streams, which can be read all at once with "read()" or read lazily (as in piece by piece) with "readSome()". The latter is useful for long texts.
+Put this at the beginning of each script file:
 
 ```swift
 #!/usr/bin/env swiftshell
 
 import SwiftShell
+```
 
+
+#### Commands
+
+Shell commands return readable streams, which can be read all at once with "read()" or read lazily (as in piece by piece) with "readSome()". The latter is useful for long texts.
+
+```swift
 let result = run("some shell command").read()
 ```
 
