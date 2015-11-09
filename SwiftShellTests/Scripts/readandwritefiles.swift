@@ -2,7 +2,7 @@
 
 import SwiftShell
 
-let filepath =  main.tempdirectory + "newfile.txt"
+let filepath = main.tempdirectory + "newfile.txt"
 
 // File doesn't exist. Create it.
 let file1 = try! open(forWriting: filepath)
@@ -10,7 +10,7 @@ file1.writeln("line 1")
 file1.close()
 
 // File does exist. Append it.
-let file2 =  try! open(forWriting: filepath)
+let file2 = try! open(forWriting: filepath)
 file2.writeln("line 2")
 file2.close()
 
