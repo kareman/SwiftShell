@@ -12,7 +12,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Make sure the swiftshell script will use the newly built framework.
-export DYLD_FRAMEWORK_PATH=$PROJECT_ROOT/build/Release/
+export SWIFTSHELL_FRAMEWORK_PATH=$PROJECT_ROOT/build/Release/
 
 # Import the unit testing script.
 . assert.sh

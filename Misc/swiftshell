@@ -6,7 +6,7 @@
 
 # The folders where Swift can find the frameworks it imports as modules.
 # SwiftShell.framework must be in one of these.
-FRAMEWORKS_PATH=$DYLD_FRAMEWORK_PATH:~/Library/Frameworks:/Library/Frameworks
+FRAMEWORKS_PATH=$SWIFTSHELL_FRAMEWORK_PATH:~/Library/Frameworks:/Library/Frameworks
 
 # Add a : to the beginning if not already there
 if [[ $FRAMEWORKS_PATH != :* ]] 
