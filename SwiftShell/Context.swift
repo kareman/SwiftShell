@@ -116,7 +116,8 @@ public final class MainShellContext: ShellContextType {
 	*/
 	public lazy var tempdirectory: String = createTempdirectory()
 
-	public lazy var arguments: [String] = Process.arguments.count <= 1 ? [] : Array(Process.arguments.dropFirst())
+	/** The arguments this executable was launched with. Use main.path to get the path. */
+	public lazy var arguments: [String] = Array(Process.arguments.dropFirst())
 
 	/** The path to the currently running executable. Will be empty in playgrounds. */
 	public lazy var path: String = Process.arguments.first ?? ""
