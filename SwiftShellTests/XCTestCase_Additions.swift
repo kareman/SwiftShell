@@ -6,18 +6,15 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
-import SwiftShell
 import XCTest
 import Foundation
 
 extension XCTestCase {
-	
+
 	func pathForTestResource (filename: String, type: String) -> String {
-		let path = NSBundle(forClass: self.dynamicType).pathForResource(filename, ofType: type) 
-		assert(path != nil, "resource \(filename).\(type) not found") 
-		
-		return path!
+		guard let path = NSBundle(forClass: self.dynamicType).pathForResource(filename, ofType: type) else {
+			preconditionFailure("resource \(filename).\(type) not found")
+		}
+		return path
 	}
-
 }
-
