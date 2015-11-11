@@ -117,7 +117,9 @@ public final class MainShellContext: ShellContextType {
 	public lazy var tempdirectory: String = createTempdirectory()
 
 	public lazy var arguments: [String] = Process.arguments.count <= 1 ? [] : Array(Process.arguments.dropFirst())
-	public lazy var name: String = Process.arguments.first.map(NSURL.init)?.lastPathComponent ?? ""
+
+	/** The path to the currently running executable. Will be empty in playgrounds. */
+	public lazy var path: String = Process.arguments.first ?? ""
 
 	private init() {
 	}

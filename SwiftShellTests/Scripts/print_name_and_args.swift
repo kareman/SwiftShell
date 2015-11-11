@@ -2,4 +2,4 @@
 
 import SwiftShell
 
-print(main.name, main.arguments.map {"\""+($0)+"\""} .joinWithSeparator(" "))
+print(NSURL(fileURLWithPath: main.path).lastPathComponent!, main.arguments.map {"\""+($0)+"\""} .joinWithSeparator(" "))

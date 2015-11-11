@@ -21,9 +21,9 @@ export SWIFTSHELL_FRAMEWORK_PATH=$PROJECT_ROOT/build/Release/
 
 assert "./print_name_and_args.swift 1 2" "print_name_and_args.swift \"1\" \"2\""
 assert_raises "./exitswhenopeningnon-existentfile.swift" 132
-assert "cat onetwothree.txt | ./print_linenumbers.swift" "line 1: one\nline 2: two\nline 3: three"
+assert "cat onetwothree.txt | ./print_linenumbers.swift" "1: one\n2: two\n3: three"
 assert "./stream_out.swift" "       3"
-assert "./callswiftscriptfromswift.swift" "line 1: one\nline 2: two\nline 3: three"
+assert "./callswiftscriptfromswift.swift" "1: one\n2: two\n3: three"
 assert "./readfilelinebyline.swift" "one\ntwo\nthree"
 assert_raises "./readandwritefiles.swift" 0
 
