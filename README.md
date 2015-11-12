@@ -115,6 +115,27 @@ lazy var name: String
 
 Everything is mutable, so you can set e.g. the text encoding or reroute standard error to a file.
 
+## Examples
+
+### Print line numbers
+
+```swift
+do {
+	let input = try main.arguments.first.flatMap {try open($0)} ?? main.stdin
+
+	input.read().characters.split("\n")
+		.enumerate().map { (linenr,line) in "\(linenr+1): " + String(line) }
+		.joinWithSeparator("\n").writeTo(&main.stdout)
+
+	// add a newline at the end
+	print("")
+} catch {
+	exit(error)
+}
+```
+
+Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumbers.swift long.txt` this will print the line number at the beginning of each line.
+
 ## Installation
 
 - In the Terminal, go to where you want to download SwiftShell.
