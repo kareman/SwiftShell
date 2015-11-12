@@ -121,7 +121,7 @@ Everything is mutable, so you can set e.g. the text encoding or reroute standard
 
 ```swift
 do {
-	let input = try main.arguments.first.flatMap {try open($0)} ?? main.stdin
+	let input = try main.arguments.first.map {try open($0)} ?? main.stdin
 
 	input.read().characters.split("\n")
 		.enumerate().map { (linenr,line) in "\(linenr+1): " + String(line) }
