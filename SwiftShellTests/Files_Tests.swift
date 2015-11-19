@@ -12,10 +12,10 @@ import Foundation
 
 class UrlAppendationOperator: XCTestCase {
 
-	func testUrlSlashString () {
-		XCTAssertEqual( NSURL(fileURLWithPath: "dir") / "file.txt", NSURL(fileURLWithPath: "dir/file.txt"))
-		XCTAssertEqual( NSURL(fileURLWithPath: "dir/") / "/file.txt", NSURL(fileURLWithPath: "dir/file.txt"))
-		XCTAssertEqual( NSURL(string: "dir")! / "file.txt", NSURL(string: "dir/file.txt"))
+	func testUrlPlusString () {
+		XCTAssertEqual( NSURL(fileURLWithPath: "dir") + "file.txt", NSURL(fileURLWithPath: "dir/file.txt"))
+		XCTAssertEqual( NSURL(fileURLWithPath: "dir/") + "/file.txt", NSURL(fileURLWithPath: "dir/file.txt"))
+		XCTAssertEqual( NSURL(string: "dir")! + "file.txt", NSURL(string: "dir/file.txt"))
 	}
 }
 

@@ -72,7 +72,7 @@ extension ShellContext: ShellRunnable {
 
 
 private func createTempdirectory () -> String {
-	let tempdirectory = NSURL(fileURLWithPath:NSTemporaryDirectory()) / ("SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString)
+	let tempdirectory = NSURL(fileURLWithPath:NSTemporaryDirectory()) + ("SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString)
 	do {
 		try Files.createDirectoryAtPath(tempdirectory.path!, withIntermediateDirectories: true, attributes: nil)
 		return tempdirectory.path! +  "/"
