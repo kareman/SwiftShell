@@ -2,4 +2,4 @@
 
 import SwiftShell
 
- try! run("echo","this is streamed").runAndPrint("wc", "-w")
+try! run("echo","this is streamed").runAndPrint("wc", "-w")
