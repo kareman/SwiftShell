@@ -18,28 +18,24 @@ public struct LazySplitSequence <Base: CollectionType where Base.Generator.Eleme
 		self.allowEmptySlices = allowEmptySlices
 	}
 
-	public mutating func next() -> Base.SubSequence? {
+	public mutating func next () -> Base.SubSequence? {
 		guard let remaining = self.remaining else { return nil }
-		let (head,tail) = remaining.splitOnce(separator, allowEmptySlices: allowEmptySlices)
+		let (head, tail) = remaining.splitOnce(separator)
 		self.remaining = tail
-		return head
+		return (!allowEmptySlices && head.isEmpty) ? next() : head
 	}
-
-	public func generate() -> LazySplitSequence { return self }
 }
 
-extension CollectionType where Generator.Element: Equatable, SubSequence: CollectionType, SubSequence.Generator.Element==Generator.Element, SubSequence==SubSequence.SubSequence {
+extension CollectionType where Generator.Element: Equatable {
 
-	public func splitOnce (separator: Generator.Element, allowEmptySlices: Bool = false) -> (head: SubSequence, tail: SubSequence?) {
+	public func splitOnce (separator: Generator.Element) -> (head: SubSequence, tail: SubSequence?) {
 		guard let nextindex = indexOf(separator) else { return (self[startIndex..<endIndex], nil) }
-		let head = self[startIndex..<nextindex]
-		let tail = self[nextindex.successor()..<endIndex]
-		if !allowEmptySlices && head.isEmpty { return tail.splitOnce(separator, allowEmptySlices: false) }
-		return (head, tail.isEmpty && !allowEmptySlices ? nil : tail)
+		return (self[startIndex..<nextindex], self[nextindex.successor()..<endIndex])
 	}
 }
 
-extension LazyCollectionType where Elements.Generator.Element: Equatable, Elements.SubSequence: CollectionType, Elements.SubSequence.Generator.Element==Elements.Generator.Element, Elements.SubSequence==Elements.SubSequence.SubSequence {
+extension LazyCollectionType where Elements.Generator.Element: Equatable, Elements.SubSequence: CollectionType,
+	Elements.SubSequence.Generator.Element==Elements.Generator.Element, Elements.SubSequence==Elements.SubSequence.SubSequence {
 
 	public func split (separator: Self.Elements.Generator.Element, allowEmptySlices: Bool = false) -> LazySplitSequence<Self.Elements> {
 		 return LazySplitSequence(base: self.elements, separator: separator, allowEmptySlices: allowEmptySlices)
