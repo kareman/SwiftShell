@@ -11,24 +11,69 @@ import XCTest
 
 class LazySplitGenerator_Tests: XCTestCase {
 
-	func splitToArray (s: String) -> [String] {
-		let g = LazySplitGenerator(base: s.characters, separator: " " as Character)
-		return AnySequence {g} .map {String($0)}
+	func lazySplitToArray (allowEmptySlices allowEmptySlices: Bool) (_ s: String) -> [String] {
+		let seq: LazySplitSequence = s.characters.lazy.split("," as Character, allowEmptySlices: allowEmptySlices)
+		return seq.map {String($0)}
 	}
 
-	func testStrings () {
-		XCTAssertEqual(splitToArray("abc def"), ["abc","def"])
-		XCTAssertEqual(splitToArray(" a"),  ["","a"])
-		XCTAssertEqual(splitToArray("a "), ["a",""])
-		XCTAssertEqual(splitToArray("a  b"), ["a","","b"])
+	func testStringsLazySplit_AllowingEmptySlices () {
+		let split = lazySplitToArray(allowEmptySlices: true)
+
+		XCTAssertEqual(split("ab,c,de,f"), ["ab","c","de","f"])
+		XCTAssertEqual(split(",a"),        ["","a"])
+		XCTAssertEqual(split("a,"),        ["a",""])
+		XCTAssertEqual(split("a,,b,,,c"),  ["a","","b","","","c"])
+		XCTAssertEqual(split(""),          [""])
+		XCTAssertEqual(split(","),         ["",""])
+		XCTAssertEqual(split("ab"),        ["ab"])
 	}
 
-	func splitIntsToArray (s: [Int]) -> [[Int]] {
-		let g = LazySplitGenerator(base: s, separator: 0)
-		return AnySequence {g} .map {Array($0)}
+	func testCollectionTypeSplit_AllowingEmptySlices () {
+		let split = {(s: String) -> [String] in
+			s.characters.split(",", allowEmptySlices: true).map {String($0)}
+		}
+
+		XCTAssertEqual(split("ab,c,de,f"), ["ab","c","de","f"])
+		XCTAssertEqual(split(",a"),        ["","a"])
+		XCTAssertEqual(split("a,"),        ["a",""])
+		XCTAssertEqual(split("a,,b,,,c"),  ["a","","b","","","c"])
+		XCTAssertEqual(split(""),          [""])
+		XCTAssertEqual(split(","),         ["",""])
+		XCTAssertEqual(split("ab"),        ["ab"])
 	}
 
-	func testInts () {
-		XCTAssertEqual(splitIntsToArray([1,2,0,4,0,6,7,8,9]), [[1,2],[4],[6,7,8,9]])
+	func testStringsLazySplit_NoEmptySlices () {
+		let split = lazySplitToArray(allowEmptySlices: false)
+
+		XCTAssertEqual(split("ab,c,de,f"), ["ab","c","de","f"])
+		XCTAssertEqual(split(",a"),        ["a"])
+		XCTAssertEqual(split("a,"),        ["a"])
+		XCTAssertEqual(split("a,,b,,,c"),  ["a","b","c"])
+		XCTAssertEqual(split(""),          [])
+		XCTAssertEqual(split(","),         [])
+		XCTAssertEqual(split("ab"),        ["ab"])
+	}
+
+	func testCollectionTypeSplit_NoEmptySlices () {
+		let split = {(s: String) -> [String] in
+			s.characters.split(",", allowEmptySlices: false).map {String($0)}
+		}
+
+		XCTAssertEqual(split("ab,c,de,f"), ["ab","c","de","f"])
+		XCTAssertEqual(split(",a"),        ["a"])
+		XCTAssertEqual(split("a,"),        ["a"])
+		XCTAssertEqual(split("a,,b,,,c"),  ["a","b","c"])
+		XCTAssertEqual(split(""),          [])
+		XCTAssertEqual(split(","),         [])
+		XCTAssertEqual(split("ab"),        ["ab"])
+	}
+
+	func testIntsLazySplit_NoEmptySlices () {
+		let split = {(s: [Int]) -> [[Int]] in
+			s.lazy.split(0, allowEmptySlices: false).map {Array($0)}
+		}
+
+		XCTAssertEqual(split([1,2,0,4,0,6,7,8,9]), [[1,2],[4],[6,7,8,9]])
 	}
 }
+
