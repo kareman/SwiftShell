@@ -5,6 +5,15 @@
 *
 */
 
+extension CollectionType where Generator.Element: Equatable {
+
+	public func splitOnce (separator: Generator.Element) -> (head: SubSequence, tail: SubSequence?) {
+		guard let nextindex = indexOf(separator) else { return (self[startIndex..<endIndex], nil) }
+		return (self[startIndex..<nextindex], self[nextindex.successor()..<endIndex])
+	}
+}
+
+
 public struct LazySplitSequence <Base: CollectionType where Base.Generator.Element: Equatable, Base.SubSequence: CollectionType,
 	Base.SubSequence.Generator.Element==Base.Generator.Element, Base.SubSequence==Base.SubSequence.SubSequence>: GeneratorType, LazySequenceType {
 
@@ -23,14 +32,6 @@ public struct LazySplitSequence <Base: CollectionType where Base.Generator.Eleme
 		let (head, tail) = remaining.splitOnce(separator)
 		self.remaining = tail
 		return (!allowEmptySlices && head.isEmpty) ? next() : head
-	}
-}
-
-extension CollectionType where Generator.Element: Equatable {
-
-	public func splitOnce (separator: Generator.Element) -> (head: SubSequence, tail: SubSequence?) {
-		guard let nextindex = indexOf(separator) else { return (self[startIndex..<endIndex], nil) }
-		return (self[startIndex..<nextindex], self[nextindex.successor()..<endIndex])
 	}
 }
 
