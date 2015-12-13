@@ -130,7 +130,7 @@ Everything is mutable, so you can set e.g. the text encoding or reroute standard
 
 Installation depends on where you want to use SwiftShell from:
 
-### Shell script
+#### Shell script
 
 - In the Terminal, go to where you want to download SwiftShell.
 - Run
@@ -152,9 +152,9 @@ Then include this in the beginning of each script:
 import SwiftShell
 ```
 
-### OS X application
+#### OS X application
 
-#### Using [Carthage](https://github.com/Carthage/Carthage)
+##### Using [Carthage](https://github.com/Carthage/Carthage)
 
 Add this to your Cartfile:
 
@@ -166,7 +166,7 @@ Then run `carthage update` and add the resulting framework to the "Embedded Bina
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
-### Commandline application
+#### Commandline application
 
 Sadly it is not possible to include a framework in a commandline application. But you can import one. Set the build settings FRAMEWORK_SEARCH_PATHS and LD_RUNPATH_SEARCH_PATHS to include a folder containing the SwiftShell framework. Or if you want the command line application to be self-contained you can include all the source files from SwiftShell in the command line target itself, and add `"#import "NSTask+NSTask_Errors.h"` to the bridging header.
 
