@@ -2,6 +2,8 @@
 
 _This is the **SwiftShell 2.0** branch. Use [master](https://github.com/kareman/SwiftShell/tree/master) for SwiftShell 1._
 
+_Not currently available for Linux, because [NSTask](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSTask.swift) and [NSFileHandle](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSFileHandle.swift) have not been ported yet._
+
 # SwiftShell
 
 An OS X Framework for command line scripting in Swift. 
