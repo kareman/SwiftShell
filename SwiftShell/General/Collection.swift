@@ -62,10 +62,10 @@ public struct PartialSourceLazySplitSequence <Base: CollectionType where Base.Ge
 			self.g = nextg
 			return next()
 		}
-		if let _ = g?.remaining {
-			return head
+		if g?.remaining == nil, let next = next() {
+			return head + next
 		} else {
-			return head + (next() ?? head[head.startIndex..<head.startIndex])
+			return head
 		}
 	}
 }
