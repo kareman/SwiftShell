@@ -58,9 +58,8 @@ public struct PartialSourceLazySplitSequence <Base: CollectionType where Base.Ge
 
 	public mutating func next() -> Base.SubSequence? {
 		guard let head = g?.next() else {
-			guard let nextg = self.gs.next() else { return nil }
-			self.g = nextg
-			return next()
+			self.g = self.gs.next()
+			return self.g == nil ? nil : next()
 		}
 		if g?.remaining == nil, let next = next() {
 			return head + next
