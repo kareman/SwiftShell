@@ -14,8 +14,9 @@ extension CollectionType where Generator.Element: Equatable {
 }
 
 
-public struct LazySplitSequence <Base: CollectionType where Base.Generator.Element: Equatable, Base.SubSequence: CollectionType,
-	Base.SubSequence.Generator.Element==Base.Generator.Element, Base.SubSequence==Base.SubSequence.SubSequence>: GeneratorType, LazySequenceType {
+public struct LazySplitSequence <Base: CollectionType where Base.Generator.Element: Equatable,
+	Base.SubSequence: CollectionType, Base.SubSequence.Generator.Element==Base.Generator.Element,
+	Base.SubSequence==Base.SubSequence.SubSequence>: GeneratorType, LazySequenceType {
 
 	private var remaining: Base.SubSequence?
 	private let separator: Base.Generator.Element
@@ -39,6 +40,32 @@ extension LazyCollectionType where Elements.Generator.Element: Equatable, Elemen
 	Elements.SubSequence.Generator.Element==Elements.Generator.Element, Elements.SubSequence==Elements.SubSequence.SubSequence {
 
 	public func split (separator: Self.Elements.Generator.Element, allowEmptySlices: Bool = false) -> LazySplitSequence<Self.Elements> {
-		 return LazySplitSequence(base: self.elements, separator: separator, allowEmptySlices: allowEmptySlices)
+		return LazySplitSequence(base: self.elements, separator: separator, allowEmptySlices: allowEmptySlices)
+	}
+}
+
+
+public struct PartialSourceLazySplitSequence <Base: CollectionType where Base.Generator.Element: Equatable,
+	Base.SubSequence: RangeReplaceableCollectionType, Base.SubSequence.Generator.Element==Base.Generator.Element,
+	Base.SubSequence==Base.SubSequence.SubSequence>: GeneratorType, LazySequenceType {
+
+	private var gs: LazyMapGenerator<AnyGenerator<Base>, LazySplitSequence<Base>>
+	private var g: LazySplitSequence<Base>?
+
+	public init (bases: ()->Base?, separator: Base.Generator.Element) {
+		gs = anyGenerator(bases).lazy.map {LazySplitSequence(base: $0, separator: separator, allowEmptySlices: true).generate()} .generate()
+	}
+
+	public mutating func next() -> Base.SubSequence? {
+		guard let head = g?.next() else {
+			guard let nextg = self.gs.next() else { return nil }
+			self.g = nextg
+			return next()
+		}
+		if let _ = g?.remaining {
+			return head
+		} else {
+			return head + (next() ?? head[head.startIndex..<head.startIndex])
+		}
 	}
 }

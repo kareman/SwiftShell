@@ -75,5 +75,28 @@ class LazySplitGenerator_Tests: XCTestCase {
 
 		XCTAssertEqual(split([1,2,0,4,0,6,7,8,9]), [[1,2],[4],[6,7,8,9]])
 	}
+
+	func testStringsLazySplit_AllowingEmptySlices2 () {
+		func split (s: String...) -> [String] {
+			var sg = s.map {$0.characters} .generate()
+			return PartialSourceLazySplitSequence(bases: {sg.next()}, separator: ",").map {String($0)}
+		}
+
+		XCTAssertEqual(split("ab,c",",de,f"), ["ab","c","de","f"])
+		XCTAssertEqual(split(",a"),        ["","a"])
+		XCTAssertEqual(split("a,"),        ["a",""])
+		XCTAssertEqual(split("a,",",","b,",",,c"),  ["a","","b","","","c"])
+		XCTAssertEqual(split(""),          [""])
+		XCTAssertEqual(split(","),         ["",""])
+		XCTAssertEqual(split("ab"),        ["ab"])
+
+		XCTAssertEqual(split(), [])
+		XCTAssertEqual(split("abc","def","g,","h"),       ["abcdefg","h"])
+		XCTAssertEqual(split(",abc","def","g","h,"),      ["","abcdefgh",""])
+		XCTAssertEqual(split("","abc","","def","g,","h"), ["abcdefg","h"])
+	}
 }
 
+extension String.CharacterView: CustomDebugStringConvertible {
+	public var debugDescription: String { return String(self) }
+}
