@@ -2,7 +2,7 @@
 
 import SwiftShell
 
-main.stdin.read().characters.split("\n")
+main.stdin.lines()
 	.enumerate().map { (linenr,line) in "\(linenr+1): " + String(line) }
 	.joinWithSeparator("\n").writeTo(&main.stdout)
 

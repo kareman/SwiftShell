@@ -2,7 +2,7 @@
 
 import SwiftShell
 
-for line in open("onetwothree.txt").lines() {
+for line in try open("onetwothree.txt").lines() {
 	// Do something with each line
 	print(line)
 }
