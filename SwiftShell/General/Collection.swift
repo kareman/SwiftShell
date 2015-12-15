@@ -22,7 +22,7 @@ public struct LazySplitSequence <Base: CollectionType where Base.Generator.Eleme
 	private let separator: Base.Generator.Element
 	private let allowEmptySlices: Bool
 
-	public init (base: Base, separator: Base.Generator.Element, allowEmptySlices: Bool = false) {
+	public init (_ base: Base, separator: Base.Generator.Element, allowEmptySlices: Bool = false) {
 		self.separator = separator
 		self.remaining = base[base.startIndex..<base.endIndex]
 		self.allowEmptySlices = allowEmptySlices
@@ -40,7 +40,7 @@ extension LazyCollectionType where Elements.Generator.Element: Equatable, Elemen
 	Elements.SubSequence.Generator.Element==Elements.Generator.Element, Elements.SubSequence==Elements.SubSequence.SubSequence {
 
 	public func split (separator: Self.Elements.Generator.Element, allowEmptySlices: Bool = false) -> LazySplitSequence<Self.Elements> {
-		return LazySplitSequence(base: self.elements, separator: separator, allowEmptySlices: allowEmptySlices)
+		return LazySplitSequence(self.elements, separator: separator, allowEmptySlices: allowEmptySlices)
 	}
 }
 
@@ -53,7 +53,7 @@ public struct PartialSourceLazySplitSequence <Base: CollectionType where Base.Ge
 	private var g: LazySplitSequence<Base>?
 
 	public init (bases: ()->Base?, separator: Base.Generator.Element) {
-		gs = anyGenerator(bases).lazy.map {LazySplitSequence(base: $0, separator: separator, allowEmptySlices: true).generate()} .generate()
+		gs = anyGenerator(bases).lazy.map {LazySplitSequence($0, separator: separator, allowEmptySlices: true).generate()} .generate()
 	}
 
 	public mutating func next() -> Base.SubSequence? {
