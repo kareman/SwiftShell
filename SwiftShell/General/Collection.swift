@@ -7,6 +7,12 @@
 
 extension CollectionType where Generator.Element: Equatable {
 
+	/** 
+	Return everything before the first occurrence of ‘separator’ as 'head', and everything after it as 'tail'.
+	Including empty sequences if ‘separator’ is first or last.
+	
+	If ‘separator’ is not found then ‘head’ contains everything and 'tail' is nil.
+	*/
 	public func splitOnce (separator: Generator.Element) -> (head: SubSequence, tail: SubSequence?) {
 		guard let nextindex = indexOf(separator) else { return (self[startIndex..<endIndex], nil) }
 		return (self[startIndex..<nextindex], self[nextindex.successor()..<endIndex])
