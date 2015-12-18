@@ -13,12 +13,13 @@ An OS X Framework for command line scripting in Swift.
 #### Print line numbers
 
 ```swift
+import SwiftShell
+
 do {
 	let input = try main.arguments.first.map {try open($0)} ?? main.stdin
 
-	input.read().characters.split("\n")
-		.enumerate().map { (linenr,line) in "\(linenr+1): " + String(line) }
-		.joinWithSeparator("\n").writeTo(&main.stdout)
+	input.lines()
+		.enumerate().forEach { (linenr,line) in print(linenr+1, ":", line) }
 
 	// add a newline at the end
 	print("")
