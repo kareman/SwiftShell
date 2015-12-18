@@ -24,7 +24,7 @@ assert_raises "./exitswhenopeningnon-existentfile.swift" 132
 assert "cat onetwothree.txt | ./print_linenumbers.swift" "1: one\n2: two\n3: three"
 assert "./stream_out.swift" "       3"
 assert "./callswiftscriptfromswift.swift" "1: one\n2: two\n3: three"
-# assert "./readfilelinebyline.swift" "one\ntwo\nthree"
+assert "./readfilelinebyline.swift" "one\ntwo\nthree"
 assert_raises "./readandwritefiles.swift" 0
 
 # end of test suite

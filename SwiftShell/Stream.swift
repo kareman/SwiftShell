@@ -37,6 +37,10 @@ public final class ReadableStream : Streamable {
 		self.filehandle = filehandle
 		self.encoding = encoding
 	}
+
+	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
+		return PartialSourceLazySplitSequence(bases: {self.readSome()?.characters}, separator: "\n").map { String($0) }
+	}
 }
 
 /** Let ReadableStream run commands using itself as stdin. */
