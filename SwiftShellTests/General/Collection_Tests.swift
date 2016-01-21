@@ -76,7 +76,7 @@ class LazySplitGenerator_Tests: XCTestCase {
 		XCTAssertEqual(split([1,2,0,4,0,6,7,8,9]), [[1,2],[4],[6,7,8,9]])
 	}
 
-	func testStringsLazySplit_AllowingEmptySlices2 () {
+	func testPartialSourceLazySplit_AllowingEmptySlices () {
 		func split (s: String...) -> [String] {
 			var sg = s.map {$0.characters} .generate()
 			return PartialSourceLazySplitSequence(bases: {sg.next()}, separator: ",").map {String($0)}

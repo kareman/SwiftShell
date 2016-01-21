@@ -38,6 +38,7 @@ public final class ReadableStream : Streamable {
 		self.encoding = encoding
 	}
 
+	/** Split stream lazily into lines. */
 	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
 		return PartialSourceLazySplitSequence(bases: {self.readSome()?.characters}, separator: "\n").map { String($0) }
 	}
@@ -58,19 +59,22 @@ public final class WriteableStream : OutputStreamType {
 	public let filehandle: NSFileHandle
 	let encoding: NSStringEncoding
 
+	/** Write anything to the stream, like ‘print()’. */
 	public func write <T> (x: T) {
 		filehandle.write(x, encoding: encoding)
 	}
 
+	/** Write anything to the stream, and add a new line. */
 	public func writeln <T> (x: T) {
 		filehandle.writeln(x, encoding: encoding)
 	}
 
+	/** Write a newline to the stream. */
 	public func writeln () {
 		filehandle.writeln("")
 	}
 
-	/** Must be called on local streams when finished writing. */
+	/** Close the stream. Must be called on local streams when finished writing. */
 	public func close () {
 		filehandle.closeFile()
 	}
