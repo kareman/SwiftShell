@@ -2,11 +2,14 @@
 .PHONY: build test clean
 
 build: 	
-	xcodebuild | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|===)' -
+	@xcodebuild | egrep '^(/.+:[0-9+:[0-9]+:.(error|warning):|fatal|===)' -
 
-test: 
-	xcodebuild test -scheme SwiftShell | egrep -v '^Test Suite|^Test Case|^\t Executed '
-	cd ./SwiftShellTests/Scripts/ && ./runtests.bash 
+test: build
+	@xcodebuild test -scheme SwiftShell | egrep -v '^Test Suite|^Test Case|^\t Executed '
+	
+	@echo "=== RUN SwiftShell TEST SCRIPTS (SwiftShellTests/Scripts/runtests.bash) ==="
+	@cd ./SwiftShellTests/Scripts/ && ./runtests.bash 
+	@echo
 
 clean:
 	-rm -rf build
