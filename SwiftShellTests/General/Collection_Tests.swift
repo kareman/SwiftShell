@@ -11,9 +11,11 @@ import XCTest
 
 class LazySplitGenerator_Tests: XCTestCase {
 
-	func lazySplitToArray (allowEmptySlices allowEmptySlices: Bool) (_ s: String) -> [String] {
-		let seq: LazySplitSequence = s.characters.lazy.split("," as Character, allowEmptySlices: allowEmptySlices)
-		return seq.map {String($0)}
+	func lazySplitToArray (allowEmptySlices allowEmptySlices: Bool) -> (String) -> [String] {
+		return { s in
+			let seq: LazySplitSequence = s.characters.lazy.split("," as Character, allowEmptySlices: allowEmptySlices)
+			return seq.map {String($0)}
+		}
 	}
 
 	func testStringsLazySplit_AllowingEmptySlices () {
