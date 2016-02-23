@@ -129,11 +129,15 @@ extension NSTask {
 	- throws: ShellError.InAccessibleExecutable if command could not be executed.
 	*/
 	public func launchThrowably() throws {
-		do {
-			try launchWithNSError()
-		} catch {
-			throw ShellError.InAccessibleExecutable(path: self.launchPath!)
-		}
+		#if SWIFT_PACKAGE
+			launch()
+		#else
+			do {
+				try launchWithNSError()
+			} catch {
+				throw ShellError.InAccessibleExecutable(path: self.launchPath!)
+			}
+		#endif
 	}
 
 	/**
@@ -175,9 +179,8 @@ extension ShellRunnable {
 
 		// if output is single-line, trim it.
 		let firstnewline = outputstring.characters.indexOf("\n")
-		if firstnewline == nil ||
-			firstnewline == outputstring.endIndex.predecessor() {
-				outputstring = outputstring.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
+		if firstnewline == nil || firstnewline == outputstring.endIndex.predecessor() {
+			outputstring = outputstring.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
 		}
 
 		return outputstring

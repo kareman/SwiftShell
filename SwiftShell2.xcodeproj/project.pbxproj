@@ -108,8 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				BA2E3B4E1B5C380C001ED175 /* Test area 2.playground */,
-				BA2E3B171B5C34DD001ED175 /* SwiftShell */,
-				BA2E3B231B5C34DD001ED175 /* SwiftShellTests */,
+				BA2E3B171B5C34DD001ED175 /* Sources */,
+				BA2E3B231B5C34DD001ED175 /* Tests */,
 				BA2E3B161B5C34DD001ED175 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,7 +123,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BA2E3B171B5C34DD001ED175 /* SwiftShell */ = {
+		BA2E3B171B5C34DD001ED175 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				BA2E3B4F1B5C450C001ED175 /* Context.swift */,
@@ -136,10 +136,11 @@
 				BA2E3B1A1B5C34DD001ED175 /* Info.plist */,
 				BAEDDA501BB37B9200BD28B2 /* NSTask */,
 			);
-			path = SwiftShell;
+			name = Sources;
+			path = Sources/SwiftShell;
 			sourceTree = "<group>";
 		};
-		BA2E3B231B5C34DD001ED175 /* SwiftShellTests */ = {
+		BA2E3B231B5C34DD001ED175 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				BAE03DBA1B5C6B7200D731A0 /* Context_Tests.swift */,
@@ -150,7 +151,7 @@
 				BAE503891BAF11DC005261A6 /* General */,
 				BA1362191BADCBF9009ACCC9 /* Helpers */,
 			);
-			path = SwiftShellTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		BAE503861BAF104C005261A6 /* General */ = {
@@ -393,7 +394,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = SwiftShell/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/SwiftShell/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -402,7 +403,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "SwiftShell/SwiftShell-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/SwiftShell/SwiftShell-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -446,7 +447,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = SwiftShell/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/SwiftShell/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -454,7 +455,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "SwiftShell/SwiftShell-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/SwiftShell/SwiftShell-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -498,7 +499,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = SwiftShellTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -541,7 +542,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = SwiftShellTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
