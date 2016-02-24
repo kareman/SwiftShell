@@ -4,7 +4,7 @@ _Not currently available for Linux, because [NSTask](https://github.com/apple/sw
 
 # SwiftShell
 
-An OS X Framework for command line scripting in Swift. 
+An OS X Framework for command-line scripting in Swift. 
 
 ## Example
 
@@ -129,8 +129,6 @@ Everything is mutable, so you can set e.g. the text encoding or reroute standard
 
 ## Setup
 
-Installation depends on where you want to use SwiftShell from:
-
 #### Shell script
 
 - In the Terminal, go to where you want to download SwiftShell.
@@ -152,9 +150,24 @@ Then include this in the beginning of each script:
 import SwiftShell
 ```
 
-#### OS X application
+#### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
-##### Using [Carthage](https://github.com/Carthage/Carthage)
+Add `.Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 2)` to your Package.swift:
+
+```swift
+import PackageDescription
+
+let package = Package(
+	name: "somecommandlineapp",
+	dependencies: [
+		.Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 2)
+		 ]
+)
+```
+
+and run `swift build`.
+
+#### [Carthage](https://github.com/Carthage/Carthage)
 
 Add this to your Cartfile:
 
@@ -166,9 +179,9 @@ Then run `carthage update` and add the resulting framework to the "Embedded Bina
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
-#### Xcode Commandline application
+#### Xcode command-line application
 
-Sadly it is not possible to include a framework in an Xcode commandline application. But you can import one. Set the build settings FRAMEWORK_SEARCH_PATHS and LD_RUNPATH_SEARCH_PATHS to include a folder containing the SwiftShell framework. Or if you want the command line application to be self-contained you can include all the source files from SwiftShell in the command line target itself, and add `"#import "NSTask+NSTask_Errors.h"` to the bridging header.
+Sadly it is not possible to include a framework in an Xcode command-line application. But you can import one. Set the build settings FRAMEWORK_SEARCH_PATHS and LD_RUNPATH_SEARCH_PATHS to include a folder containing the SwiftShell framework. Or if you want the command line application to be self-contained you can include all the source files from SwiftShell in the command line target itself, and add `"#import "NSTask+NSTask_Errors.h"` to the bridging header.
 
 ## License
 
