@@ -1,7 +1,5 @@
 [![Platform](http://img.shields.io/badge/platform-osx-lightgrey.svg?style=flat)](https://developer.apple.com/resources/) [![Language](http://img.shields.io/badge/language-swift-orange.svg?style=flat)](https://developer.apple.com/swift) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
 
-_This is the **SwiftShell 2.0** branch. Use [master](https://github.com/kareman/SwiftShell/tree/master) for SwiftShell 1._
-
 _Not currently available for Linux, because [NSTask](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSTask.swift) and [NSFileHandle](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSFileHandle.swift) have not been ported yet._
 
 # SwiftShell
@@ -140,7 +138,6 @@ Installation depends on where you want to use SwiftShell from:
 
         git clone https://github.com/kareman/SwiftShell.git
         cd SwiftShell
-        git checkout SwiftShell2
 
 - Copy/link `Misc/swiftshell` to your bin folder or anywhere in your PATH.
 - To install the framework itself, either:
@@ -162,16 +159,16 @@ import SwiftShell
 Add this to your Cartfile:
 
 ```
-github "kareman/SwiftShell" "SwiftShell2"
+github "kareman/SwiftShell"
 ```
 
 Then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for instructions.
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
-#### Commandline application
+#### Xcode Commandline application
 
-Sadly it is not possible to include a framework in a commandline application. But you can import one. Set the build settings FRAMEWORK_SEARCH_PATHS and LD_RUNPATH_SEARCH_PATHS to include a folder containing the SwiftShell framework. Or if you want the command line application to be self-contained you can include all the source files from SwiftShell in the command line target itself, and add `"#import "NSTask+NSTask_Errors.h"` to the bridging header.
+Sadly it is not possible to include a framework in an Xcode commandline application. But you can import one. Set the build settings FRAMEWORK_SEARCH_PATHS and LD_RUNPATH_SEARCH_PATHS to include a folder containing the SwiftShell framework. Or if you want the command line application to be self-contained you can include all the source files from SwiftShell in the command line target itself, and add `"#import "NSTask+NSTask_Errors.h"` to the bridging header.
 
 ## License
 
