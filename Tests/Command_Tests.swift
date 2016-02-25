@@ -58,13 +58,20 @@ class RunAsync_Tests: XCTestCase {
 		}
 	}
 
-	func testThrowsErrorOnExitcodeNotZero () {
+	func testFinishThrowsErrorOnExitcodeNotZero () {
 		let asynctask = runAsync(bash: "echo errormessage > /dev/stderr; exit 1" )
 
 		AssertThrows(ShellError.ReturnedErrorCode(command: "/bin/bash -c \"echo errormessage > /dev/stderr; exit 1\"", errorcode: 1))
 			{ try asynctask.finish() }
 		XCTAssertEqual( asynctask.stderror.read(), "errormessage\n" )
 	}
+
+	func testExitCode () {
+		let asynctask = runAsync(bash: "exit 1" )
+
+		XCTAssertEqual( asynctask.exitcode(), 1 )
+	}
+
 }
 
 class RunAndPrint_Tests: XCTestCase {

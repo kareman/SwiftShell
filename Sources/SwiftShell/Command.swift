@@ -236,6 +236,12 @@ public struct AsyncShellTask {
 		try task.finish()
 		return self
 	}
+
+	/** Wait for command to finish, then return with exit code. */
+	public func exitcode () -> Int32 {
+		task.waitUntilExit()
+		return task.terminationStatus
+	}
 }
 
 extension ShellRunnable {
