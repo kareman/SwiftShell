@@ -11,7 +11,10 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-# Make sure the swiftshell script will use the newly built framework.
+# Add the swiftshell script to the path
+export PATH=$PROJECT_ROOT/Misc:$PATH
+
+# ... and make sure it uses the newly built framework.
 export SWIFTSHELL_FRAMEWORK_PATH=$PROJECT_ROOT/build/Release/
 
 # Import the unit testing script.
