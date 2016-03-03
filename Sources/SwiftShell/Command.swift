@@ -174,8 +174,8 @@ extension ShellRunnable {
 		} catch {
 			exit(error, file: file, line: line)
 		}
-		task.waitUntilExit()
 		var outputstring = output.fileHandleForReading.read(encoding: shellcontext.encoding)
+		task.waitUntilExit()
 
 		// if output is single-line, trim it.
 		let firstnewline = outputstring.characters.indexOf("\n")
