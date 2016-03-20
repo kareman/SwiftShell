@@ -85,7 +85,11 @@ private func createTempdirectory () -> String {
 
 public final class MainShellContext: ShellContextType {
 
-	// TODO: get encoding from environmental variable LC_CTYPE
+	/** 
+	The default character encoding for SwiftShell.
+
+	TODO: get encoding from environmental variable LC_CTYPE.
+	*/
 	public var encoding = NSUTF8StringEncoding
 	public lazy var env = NSProcessInfo.processInfo().environment as [String: String]
 
@@ -96,8 +100,8 @@ public final class MainShellContext: ShellContextType {
 	/**
 	The current working directory.
 
-	Must be used instead of `run("cd", "...")` because all the `run` commands are executed in a
-	separate process and changing the directory there will not affect the rest of the Swift script.
+	Must be used instead of `run("cd", "...")` because all the `run` commands are executed in
+	separate processes and changing the directory there will not affect the rest of the Swift script.
 
 	This directory is also used as the base for relative NSURLs.
 	*/

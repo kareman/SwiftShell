@@ -59,12 +59,12 @@ public final class WriteableStream : OutputStreamType {
 	public let filehandle: NSFileHandle
 	let encoding: NSStringEncoding
 
-	/** Write anything to the stream, like ‘print()’. */
+	/** Write anything to the stream. */
 	public func write <T> (x: T) {
 		filehandle.write(x, encoding: encoding)
 	}
 
-	/** Write anything to the stream, and add a new line. */
+	/** Write anything to the stream, and add a newline. */
 	public func writeln <T> (x: T) {
 		filehandle.writeln(x, encoding: encoding)
 	}
