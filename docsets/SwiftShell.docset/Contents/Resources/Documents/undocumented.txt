@@ -1,29 +1,64 @@
 String.swift
-	public func replace (oldString: String, _ newString: String) -> String
-	public func split (sep: String) -> [String]
-	public func trim () -> String
-	public func countOccurrencesOf (substring: String) -> Int
-Pipes.swift
-	public func |> <T,U> (lhs: T, rhs: T -> U) -> U
+	public var shellcontext: ShellContextType
+Lazy-split.swift
+	public struct LazySplitSequence <Base: CollectionType where Base.Generator.Element: Equatable,
+	Base.SubSequence: CollectionType,
+	Base.SubSequence.Generator.Element==Base.Generator.Element,
+	Base.SubSequence==Base.SubSequence.SubSequence>: GeneratorType, LazySequenceType
+	public init (_ base: Base, separator: Base.Generator.Element, allowEmptySlices: Bool = false)
+	public mutating func next () -> Base.SubSequence?
+	public func split (
+		separator: Elements.Generator.Element,	allowEmptySlices: Bool = false
+		) -> LazySplitSequence<Elements>
+	public struct PartialSourceLazySplitSequence <Base: CollectionType where Base.Generator.Element: Equatable,
+	Base.SubSequence: RangeReplaceableCollectionType,
+	Base.SubSequence.Generator.Element==Base.Generator.Element,
+	Base.SubSequence==Base.SubSequence.SubSequence>: GeneratorType, LazySequenceType
+	public init (bases: ()->Base?, separator: Base.Generator.Element)
+	public mutating func next() -> Base.SubSequence?
+Command.swift
+	public protocol ShellRunnable
+	var shellcontext: ShellContextType { get }
+	public var description: String
+	public func == (e1: ShellError, e2: ShellError) -> Bool
+	public protocol ShellRunnable
+	public let stdout: ReadableStream
+	public let stderror: ReadableStream
+	public protocol ShellRunnable
+	public protocol ShellRunnable
+	public protocol ShellRunnable
 FileHandle.swift
-	public typealias FileHandle = NSFileHandle
-	public func readSome () -> String?
-	public func read () -> String
-	public func lines () -> AnySequence<String>
-	public func writeTo <Target : OutputStreamType> (inout target: Target)
-	public typealias FileHandle = NSFileHandle
-	public func write (string: String)
-	public func writeln (string: String)
-	public func writeln ()
-	public func closeStream ()
-	public let environment		= NSProcessInfo.processInfo().environment as [String: String]
-	public let standardinput	= FileHandle.fileHandleWithStandardInput() as ReadableStreamType
-	public let standardoutput	= FileHandle.fileHandleWithStandardOutput() as WriteableStreamType
-	public let standarderror	= FileHandle.fileHandleWithStandardError() as WriteableStreamType
+	public func readSome (encoding encoding: NSStringEncoding = main.encoding) -> String?
+	public func read (encoding encoding: NSStringEncoding = main.encoding) -> String
+	public func write <T> (x: T, encoding: NSStringEncoding = main.encoding)
+	public func writeln <T> (x: T, encoding: UInt = main.encoding)
+Context.swift
+	public protocol ShellContextType
+	var encoding: NSStringEncoding {get set}
+	var env: [String: String] {get set}
+	var stdin: ReadableStream {get set}
+	var stdout: WriteableStream {get set}
+	var stderror: WriteableStream {get set}
+	public struct ShellContext: ShellContextType
+	public var encoding: NSStringEncoding
+	public var env: [String: String]
+	public var stdin: ReadableStream
+	public var stdout: WriteableStream
+	public var stderror: WriteableStream
+	public struct ShellContext : ShellContextType
+	public var shellcontext: ShellContextType { return self }
+	public final class MainShellContext: ShellContextType
+	public lazy var env = NSProcessInfo.processInfo().environment as [String: String]
+	public lazy var stdin: ReadableStream = { ReadableStream(NSFileHandle.fileHandleWithStandardInput(), encoding: self.encoding) }()
+	public lazy var stdout: WriteableStream = { WriteableStream(NSFileHandle.fileHandleWithStandardOutput(), encoding: self.encoding) }()
+	public lazy var stderror: WriteableStream = { WriteableStream(NSFileHandle.fileHandleWithStandardError(), encoding: self.encoding) }()
+	public final class MainShellContext : ShellContextType
+	public var shellcontext: ShellContextType { return self }
+	public let main = MainShellContext()
 Stream.swift
-	public var streamencoding = NSUTF8StringEncoding
-	func write (string: String)
-	func writeln (string: String)
-	func writeln ()
-	public func |>> <T> (input: T, stream: WriteableStreamType)
-	public func |>> <S : SequenceType> (seq: S, stream: WriteableStreamType)
+	public let filehandle: NSFileHandle
+	public let encoding: NSStringEncoding
+	public init (_ filehandle: NSFileHandle, encoding: NSStringEncoding = main.encoding)
+	public var shellcontext: ShellContextType
+	public let filehandle: NSFileHandle
+	public init (_ filehandle: NSFileHandle, encoding: NSStringEncoding = main.encoding)

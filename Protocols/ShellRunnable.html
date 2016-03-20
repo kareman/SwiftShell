@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ShellRunnable Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/ShellRunnable" class="dashAnchor"></a>
+    <a title="ShellRunnable Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SwiftShell Docs</a> (51% documented)</p>
+        <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SwiftShell Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ShellRunnable Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/MainShellContext.html">MainShellContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ReadableStream.html">ReadableStream</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/WriteableStream.html">WriteableStream</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Global Variables.html">Global Variables</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v10SwiftShell5FilesCSo13NSFileManager">Files</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Global Variables.html#/s:v10SwiftShell4mainCS_16MainShellContext">main</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ShellError.html">ShellError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/CollectionType.html">CollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/LazyCollectionType.html">LazyCollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSFileHandle.html">NSFileHandle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/NSTask.html">NSTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF10SwiftShelloi1pFTCSo5NSURLSS_S0_">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell4exitFTPSs9ErrorType_4fileSS4lineSi_T_">exit(_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell4exiturFT12errormessageq_9errorcodeVSs5Int324fileSS4lineSi_T_">exit(errormessage:errorcode:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell4openFzTCSo5NSURL8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell4openFzTSS8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell4openFzT10forWritingCSo5NSURL9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_SS">run(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell3runFT4bashSS4fileSS4lineSi_SS">run(bash:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell11runAndPrintFztSSGSaP___T_">runAndPrint(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell11runAndPrintFzT4bashSS_T_">runAndPrint(bash:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_VS_14AsyncShellTask">runAsync(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS_VS_14AsyncShellTask">runAsync(bash:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F10SwiftShell7streamsFT_TCS_15WriteableStreamCS_14ReadableStream_">streams()</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ShellContextType.html">ShellContextType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ShellRunnable.html">ShellRunnable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AsyncShellTask.html">AsyncShellTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LazySplitSequence.html">LazySplitSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PartialSourceLazySplitSequence.html">PartialSourceLazySplitSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ShellContext.html">ShellContext</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ShellRunnable</h1>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vP10SwiftShell13ShellRunnable12shellcontextPS_16ShellContextType_"></a>
+                    <a name="//apple_ref/swift/Property/shellcontext" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP10SwiftShell13ShellRunnable12shellcontextPS_16ShellContextType_">shellcontext</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_3runuRq_S0__Fq_FTSSGSaP__4fileSS4lineSi_SS"></a>
+                    <a name="//apple_ref/swift/Method/run(_:_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_3runuRq_S0__Fq_FTSSGSaP__4fileSS4lineSi_SS">run(_:_:file:line:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Shortcut for shell command, returns output and errors as a String.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>executable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>path to an executable file.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the arguments, one string for each.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_8runAsyncuRq_S0__Fq_FTSSGSaP__4fileSS4lineSi_VS_14AsyncShellTask"></a>
+                    <a name="//apple_ref/swift/Method/runAsync(_:_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_8runAsyncuRq_S0__Fq_FTSSGSaP__4fileSS4lineSi_VS_14AsyncShellTask">runAsync(_:_:file:line:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Run executable and return before it is finished.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span> <span class="p">(</span><span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncShellTask</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>executable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Path to an executable file. If not then exit.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Arguments to the executable.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An AsyncShellTask with standard output, standard error and a &lsquo;finish&rsquo; function.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_11runAndPrintuRq_S0__Fq_FztSSGSaP___T_"></a>
+                    <a name="//apple_ref/swift/Method/runAndPrint(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_11runAndPrintuRq_S0__Fq_FztSSGSaP___T_">runAndPrint(_:_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Run executable and print output and errors.</p>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    a ShellError if the return code is anything but 0.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAndPrint</span> <span class="p">(</span><span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>executable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>path to an executable file.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>arguments to the executable.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_3runuRq_S0__Fq_FT4bashSS4fileSS4lineSi_SS"></a>
+                    <a name="//apple_ref/swift/Method/run(bash:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_3runuRq_S0__Fq_FT4bashSS4fileSS4lineSi_SS">run(bash:file:line:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Shortcut for bash shell command, returns output and errors as a String.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bashcommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the bash shell command.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_8runAsyncuRq_S0__Fq_FT4bashSS_VS_14AsyncShellTask"></a>
+                    <a name="//apple_ref/swift/Method/runAsync(bash:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_8runAsyncuRq_S0__Fq_FT4bashSS_VS_14AsyncShellTask">runAsync(bash:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Run bash command and return before it is finished.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncShellTask</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bashcommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the bash shell command.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>an AsyncShellTask struct with standard output, standard error and a &lsquo;finish&rsquo; function.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_11runAndPrintuRq_S0__Fq_FzT4bashSS_T_"></a>
+                    <a name="//apple_ref/swift/Method/runAndPrint(bash:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_11runAndPrintuRq_S0__Fq_FzT4bashSS_T_">runAndPrint(bash:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Run bash command and print output and errors.</p>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    a ShellError.ReturnedErrorCode if the return code is anything but 0.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAndPrint</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bashcommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the bash shell command.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-03-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.5.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

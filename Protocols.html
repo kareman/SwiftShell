@@ -7,12 +7,13 @@
     <meta charset='utf-8'>
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
+    
   </head>
   <body>
     <a title="Protocols  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftShell Docs</a> (62% documented)</p>
+        <p><a href="index.html">SwiftShell Docs</a> (51% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -27,39 +28,52 @@
       <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
-          <a href="Global Variables.html">Global Variables</a>
+            <a href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell4FileCSo13NSFileManager">File</a>
+                <a href="Classes/MainShellContext.html">MainShellContext</a>
               </li>
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell11environmentGVSs10DictionarySSSS_">environment</a>
+                <a href="Classes/ReadableStream.html">ReadableStream</a>
               </li>
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell13standarderrorPS_19WriteableStreamType_">standarderror</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell13standardinputPS_18ReadableStreamType_">standardinput</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell14standardoutputPS_19WriteableStreamType_">standardoutput</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell14streamencodingSu">streamencoding</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell13tempdirectorySS">tempdirectory</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell13workdirectorySS">workdirectory</a>
+                <a href="Classes/WriteableStream.html">WriteableStream</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-          <a href="Extensions.html">Extensions</a>
+            <a href="Global Variables.html">Global Variables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/FileHandle.html">FileHandle</a>
+                <a href="Global Variables.html#/s:v10SwiftShell5FilesCSo13NSFileManager">Files</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Global Variables.html#/s:v10SwiftShell4mainCS_16MainShellContext">main</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/ShellError.html">ShellError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/CollectionType.html">CollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/LazyCollectionType.html">LazyCollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/NSFileHandle.html">NSFileHandle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/NSTask.html">NSTask</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/String.html">String</a>
@@ -67,105 +81,80 @@
             </ul>
           </li>
           <li class="nav-group-name">
-          <a href="Functions.html">Functions</a>
+            <a href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell1$FSSSS">$(_:)</a>
+                <a href="Functions.html#/s:ZF10SwiftShelloi1pFTCSo5NSURLSS_S0_">+(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi1dFTSSSS_SS">/(_:_:)</a>
+                <a href="Functions.html#/s:ZF10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb">==(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4dropu0_Rq_Ss12SequenceTypeqqq_S0_9GeneratorSs13GeneratorType7ElementSs9Equatablezq0_qqq_S0_9GeneratorS1_7Element_FGSaq0__FT8sequenceq__GVSs18LazyFilterSequenceq__">drop(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4exitFTPSs9ErrorType_4fileSS4lineSi_T_">exit(_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6filteruRq_Ss12SequenceType_FFqqq_S0_9GeneratorSs13GeneratorType7ElementSbFT6sourceq__GVSs18LazyFilterSequenceq__">filter(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessageq_9errorcodeVSs5Int324fileSS4lineSi_T_">exit(errormessage:errorcode:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4joinu0_Rq_Ss30RangeReplaceableCollectionTypeq0_Ss12SequenceTypezq_qqq0_S1_9GeneratorSs13GeneratorType7Element_Fq_FT8elementsq0__GVSs12JoinSequenceq0__">join(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzTCSo5NSURL8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell3mapu0_Rq_Ss12SequenceType_FFqqq_S0_9GeneratorSs13GeneratorType7Elementq0_FT6sourceq__GVSs15LazyMapSequenceq_q0__">map(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzTSS8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFSSPS_18ReadableStreamType_">open(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFT10forWritingSS9overwriteSb_PS_19WriteableStreamType_">open(forWriting:overwrite:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingCSo5NSURL9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell10parametersuRq_Ss12SequenceType_Fq_SS">parameters(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_SS">run(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell17printErrorAndExiturFq_T_">printErrorAndExit(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell3runFT4bashSS4fileSS4lineSi_SS">run(bash:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6reduceu0_Rq_Ss12SequenceType_FTq0_7combineFTq0_qqq_S0_9GeneratorSs13GeneratorType7Element_q0__FT8sequenceq__q0_">reduce(_:combine:)</a>
+                <a href="Functions.html#/s:F10SwiftShell11runAndPrintFztSSGSaP___T_">runAndPrint(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell3runFSSPS_18ReadableStreamType_">run(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell11runAndPrintFzT4bashSS_T_">runAndPrint(bash:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6sorteduRq_Ss12SequenceType_FFTqqq_S0_9GeneratorSs13GeneratorType7Elementqqq_S0_9GeneratorS1_7Element_SbFT6sourceq__GSaqqq_S0_9GeneratorS1_7Element_">sorted(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_VS_14AsyncShellTask">runAsync(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell5splitFTSS_FT6streamPS_18ReadableStreamType__GVSs11AnySequenceSS_">split(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS_VS_14AsyncShellTask">runAsync(bash:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell5splitFT9delimiterSS_FT4textSS_GSaSS_">split(delimiter:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6streamuRq_Ss12SequenceTypezqqq_S0_9GeneratorSs13GeneratorType7ElementSS_Fq_PS_18ReadableStreamType_">stream(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6streamFSSPS_18ReadableStreamType_">stream(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6streamFFT_FT_GSqSS_PS_18ReadableStreamType_">stream(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell7streamsFT_TPS_19WriteableStreamType_PS_18ReadableStreamType__">streams()</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4takeu0_Rq_Ss12SequenceTypezq0_qqq_S0_9GeneratorSs13GeneratorType7Element_FSiFT8sequenceq__GSaq0__">take(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell7toArrayuRq_Ss12SequenceType_Fq_GSaqqq_S0_9GeneratorSs13GeneratorType7Element_">toArray(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell7writeTourFPS_19WriteableStreamType_FT5inputq__T_">writeTo(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell7writeTouRq_Ss12SequenceType_FPS_19WriteableStreamType_FT3seqq__T_">writeTo(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell7writeToFPS_19WriteableStreamType_FT5inputSS_T_">writeTo(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi2ogFTPS_18ReadableStreamType_KT_PS0___PS0__">|&gt;(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi2ogu0_rFTq_Fq_q0__q0_">|&gt;(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi3oggFTSSPS_19WriteableStreamType__T_">|&gt;&gt;(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions/|&gt;&gt;(_:_:).html">|&gt;&gt;(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions/|&gt;&gt;(_:_:).html">|&gt;&gt;(_:_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell7streamsFT_TCS_15WriteableStreamCS_14ReadableStream_">streams()</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-          <a href="Protocols.html">Protocols</a>
+            <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Protocols/ReadableStreamType.html">ReadableStreamType</a>
+                <a href="Protocols/ShellContextType.html">ShellContextType</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/WriteableStreamType.html">WriteableStreamType</a>
+                <a href="Protocols/ShellRunnable.html">ShellRunnable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/AsyncShellTask.html">AsyncShellTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LazySplitSequence.html">LazySplitSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PartialSourceLazySplitSequence.html">PartialSourceLazySplitSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ShellContext.html">ShellContext</a>
               </li>
             </ul>
           </li>
@@ -180,13 +169,20 @@
           </section>
           <section class="section task-group-section">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/ShellRunnable"></a>
+                <a name="//apple_ref/swift/Section/ShellRunnable" class="dashAnchor"></a>
+                <a href="#/ShellRunnable">
+                  <h3 class="section-name">ShellRunnable</h3>
+                </a>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:P10SwiftShell18ReadableStreamType"></a>
-                    <a name="//apple_ref/swift/Protocol/ReadableStreamType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P10SwiftShell18ReadableStreamType">ReadableStreamType</a>
+                    <a name="/s:P10SwiftShell13ShellRunnable"></a>
+                    <a name="//apple_ref/swift/Protocol/ShellRunnable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P10SwiftShell13ShellRunnable">ShellRunnable</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -194,27 +190,23 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A stream of text. Does as much as possible lazily.</p>
+                        <p>Undocumented</p>
 
-                        <a href="Protocols/ReadableStreamType.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ReadableStreamType</span> <span class="p">:</span> <span class="kt">Streamable</span></code></pre>
-
-                        </div>
+                        <a href="Protocols/ShellRunnable.html" class="slightly-smaller">See more</a>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:P10SwiftShell19WriteableStreamType"></a>
-                    <a name="//apple_ref/swift/Protocol/WriteableStreamType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:P10SwiftShell19WriteableStreamType">WriteableStreamType</a>
+                    <a name="/s:P10SwiftShell16ShellContextType"></a>
+                    <a name="//apple_ref/swift/Protocol/ShellContextType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:P10SwiftShell16ShellContextType">ShellContextType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -222,17 +214,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An output stream, like standard output and standard error.</p>
+                        <p>Undocumented</p>
 
-                        <a href="Protocols/WriteableStreamType.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">WriteableStreamType</span> <span class="p">:</span> <span class="kt">OutputStreamType</span></code></pre>
-
-                        </div>
+                        <a href="Protocols/ShellContextType.html" class="slightly-smaller">See more</a>
                       </div>
                     </section>
                   </div>
@@ -242,8 +226,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2015-09-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-03-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.5.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

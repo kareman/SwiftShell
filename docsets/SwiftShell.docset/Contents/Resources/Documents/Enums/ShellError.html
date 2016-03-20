@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>String Extension Reference</title>
+    <title>ShellError Enum Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/String" class="dashAnchor"></a>
-    <a title="String Extension Reference"></a>
+    <a name="//apple_ref/swift/Enum/ShellError" class="dashAnchor"></a>
+    <a title="ShellError Enum Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">SwiftShell Docs</a> (51% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">SwiftShell Reference</a>
         <img id="carat" src="../img/carat.png" />
-        String Extension Reference
+        ShellError Enum Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -164,14 +164,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>String</h1>
+            <h1>ShellError</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">String</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ShellError</span><span class="p">:</span> <span class="kt">ErrorType</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                 </div>
               </div>
-            <p>Let Strings run commands using itself as stdin.</p>
+            <p>Error type for shell commands.</p>
 
           </section>
           <section class="section task-group-section">
@@ -180,9 +180,71 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vE10SwiftShellSS12shellcontextPS_16ShellContextType_"></a>
-                    <a name="//apple_ref/swift/Property/shellcontext" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vE10SwiftShellSS12shellcontextPS_16ShellContextType_">shellcontext</a>
+                    <a name="/s:FO10SwiftShell10ShellError17ReturnedErrorCodeFMS0_FT7commandSS9errorcodeVSs5Int32_S0_"></a>
+                    <a name="//apple_ref/swift/Element/ReturnedErrorCode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FO10SwiftShell10ShellError17ReturnedErrorCodeFMS0_FT7commandSS9errorcodeVSs5Int32_S0_">ReturnedErrorCode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Exit code was not zero.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">ReturnedErrorCode</span> <span class="p">(</span><span class="nv">command</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">errorcode</span><span class="p">:</span> <span class="kt">Int32</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FO10SwiftShell10ShellError22InAccessibleExecutableFMS0_FT4pathSS_S0_"></a>
+                    <a name="//apple_ref/swift/Element/InAccessibleExecutable" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FO10SwiftShell10ShellError22InAccessibleExecutableFMS0_FT4pathSS_S0_">InAccessibleExecutable</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Command could not be executed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="kt">InAccessibleExecutable</span> <span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vO10SwiftShell10ShellError11descriptionSS"></a>
+                    <a name="//apple_ref/swift/Property/description" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vO10SwiftShell10ShellError11descriptionSS">description</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -197,7 +259,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ShellError</span><span class="p">:</span> <span class="kt">ErrorType</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>

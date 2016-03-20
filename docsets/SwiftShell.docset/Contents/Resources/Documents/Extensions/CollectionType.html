@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>String Extension Reference</title>
+    <title>CollectionType Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/String" class="dashAnchor"></a>
-    <a title="String Extension Reference"></a>
+    <a name="//apple_ref/swift/Extension/CollectionType" class="dashAnchor"></a>
+    <a title="CollectionType Extension Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">SwiftShell Docs</a> (51% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">SwiftShell Reference</a>
         <img id="carat" src="../img/carat.png" />
-        String Extension Reference
+        CollectionType Extension Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -164,15 +164,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>String</h1>
+            <h1>CollectionType</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">String</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">CollectionType</span> <span class="p">:</span> <span class="kt">Indexable</span><span class="p">,</span> <span class="kt">SequenceType</span></code></pre>
 
                 </div>
               </div>
-            <p>Let Strings run commands using itself as stdin.</p>
-
+            
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -180,9 +179,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vE10SwiftShellSS12shellcontextPS_16ShellContextType_"></a>
-                    <a name="//apple_ref/swift/Property/shellcontext" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vE10SwiftShellSS12shellcontextPS_16ShellContextType_">shellcontext</a>
+                    <a name="/s:FeRq_Ss14CollectionTypeqqq_S_9GeneratorSs13GeneratorType7ElementSs9Equatable_10SwiftShellS_9splitOnceuRq_S_qqq_S_9GeneratorS0_7ElementS1__Fq_Fqqq_S_9GeneratorS0_7ElementT4headqq_S_11SubSequence4tailGSqqq_S_11SubSequence__"></a>
+                    <a name="//apple_ref/swift/Method/splitOnce(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FeRq_Ss14CollectionTypeqqq_S_9GeneratorSs13GeneratorType7ElementSs9Equatable_10SwiftShellS_9splitOnceuRq_S_qqq_S_9GeneratorS0_7ElementS1__Fq_Fqqq_S_9GeneratorS0_7ElementT4headqq_S_11SubSequence4tailGSqqq_S_11SubSequence__">splitOnce(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -190,14 +189,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Return everything before the first occurrence of ‘separator’ as &lsquo;head&rsquo;, and everything after it as &lsquo;tail&rsquo;.
+Including empty sequences if ‘separator’ is first or last.</p>
+
+<p>If ‘separator’ is not found then ‘head’ contains everything and &#39;tail&rsquo; is nil.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">splitOnce</span> <span class="p">(</span><span class="nv">separator</span><span class="p">:</span> <span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nv">head</span><span class="p">:</span> <span class="kt">SubSequence</span><span class="p">,</span> <span class="nv">tail</span><span class="p">:</span> <span class="kt">SubSequence</span><span class="p">?)</span></code></pre>
 
                         </div>
                       </div>

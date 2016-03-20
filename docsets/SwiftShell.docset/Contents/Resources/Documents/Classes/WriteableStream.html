@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>String Extension Reference</title>
+    <title>WriteableStream Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/String" class="dashAnchor"></a>
-    <a title="String Extension Reference"></a>
+    <a name="//apple_ref/swift/Class/WriteableStream" class="dashAnchor"></a>
+    <a title="WriteableStream Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">SwiftShell Docs</a> (51% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">SwiftShell Reference</a>
         <img id="carat" src="../img/carat.png" />
-        String Extension Reference
+        WriteableStream Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -164,14 +164,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>String</h1>
+            <h1>WriteableStream</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">String</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">WriteableStream</span> <span class="p">:</span> <span class="kt">OutputStreamType</span></code></pre>
 
                 </div>
               </div>
-            <p>Let Strings run commands using itself as stdin.</p>
+            <p>An output stream, like standard output or a writeable file.</p>
 
           </section>
           <section class="section task-group-section">
@@ -180,9 +180,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vE10SwiftShellSS12shellcontextPS_16ShellContextType_"></a>
-                    <a name="//apple_ref/swift/Property/shellcontext" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vE10SwiftShellSS12shellcontextPS_16ShellContextType_">shellcontext</a>
+                    <a name="/s:vC10SwiftShell15WriteableStream10filehandleCSo12NSFileHandle"></a>
+                    <a name="//apple_ref/swift/Property/filehandle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10SwiftShell15WriteableStream10filehandleCSo12NSFileHandle">filehandle</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -197,7 +197,142 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">struct</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">WriteableStream</span> <span class="p">:</span> <span class="kt">OutputStreamType</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10SwiftShell15WriteableStream5writeurFS0_Fq_T_"></a>
+                    <a name="//apple_ref/swift/Method/write(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10SwiftShell15WriteableStream5writeurFS0_Fq_T_">write(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Write anything to the stream.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">write</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10SwiftShell15WriteableStream7writelnurFS0_Fq_T_"></a>
+                    <a name="//apple_ref/swift/Method/writeln(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10SwiftShell15WriteableStream7writelnurFS0_Fq_T_">writeln(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Write anything to the stream, and add a newline.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">writeln</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10SwiftShell15WriteableStream7writelnFS0_FT_T_"></a>
+                    <a name="//apple_ref/swift/Method/writeln()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10SwiftShell15WriteableStream7writelnFS0_FT_T_">writeln()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Write a newline to the stream.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">writeln</span> <span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10SwiftShell15WriteableStream5closeFS0_FT_T_"></a>
+                    <a name="//apple_ref/swift/Method/close()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10SwiftShell15WriteableStream5closeFS0_FT_T_">close()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Close the stream. Must be called on local streams when finished writing.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">close</span> <span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10SwiftShell15WriteableStreamcFMS0_FTCSo12NSFileHandle8encodingSu_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(_:encoding:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10SwiftShell15WriteableStreamcFMS0_FTCSo12NSFileHandle8encodingSu_S0_">init(_:encoding:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">WriteableStream</span> <span class="p">:</span> <span class="kt">OutputStreamType</span></code></pre>
 
                         </div>
                       </div>

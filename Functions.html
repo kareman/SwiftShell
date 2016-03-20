@@ -7,12 +7,13 @@
     <meta charset='utf-8'>
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
+    
   </head>
   <body>
     <a title="Functions  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftShell Docs</a> (62% documented)</p>
+        <p><a href="index.html">SwiftShell Docs</a> (51% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -27,39 +28,52 @@
       <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
-          <a href="Global Variables.html">Global Variables</a>
+            <a href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell4FileCSo13NSFileManager">File</a>
+                <a href="Classes/MainShellContext.html">MainShellContext</a>
               </li>
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell11environmentGVSs10DictionarySSSS_">environment</a>
+                <a href="Classes/ReadableStream.html">ReadableStream</a>
               </li>
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell13standarderrorPS_19WriteableStreamType_">standarderror</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell13standardinputPS_18ReadableStreamType_">standardinput</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell14standardoutputPS_19WriteableStreamType_">standardoutput</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell14streamencodingSu">streamencoding</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell13tempdirectorySS">tempdirectory</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell13workdirectorySS">workdirectory</a>
+                <a href="Classes/WriteableStream.html">WriteableStream</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-          <a href="Extensions.html">Extensions</a>
+            <a href="Global Variables.html">Global Variables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/FileHandle.html">FileHandle</a>
+                <a href="Global Variables.html#/s:v10SwiftShell5FilesCSo13NSFileManager">Files</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Global Variables.html#/s:v10SwiftShell4mainCS_16MainShellContext">main</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/ShellError.html">ShellError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/CollectionType.html">CollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/LazyCollectionType.html">LazyCollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/NSFileHandle.html">NSFileHandle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/NSTask.html">NSTask</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/String.html">String</a>
@@ -67,105 +81,80 @@
             </ul>
           </li>
           <li class="nav-group-name">
-          <a href="Functions.html">Functions</a>
+            <a href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell1$FSSSS">$(_:)</a>
+                <a href="Functions.html#/s:ZF10SwiftShelloi1pFTCSo5NSURLSS_S0_">+(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi1dFTSSSS_SS">/(_:_:)</a>
+                <a href="Functions.html#/s:ZF10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb">==(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4dropu0_Rq_Ss12SequenceTypeqqq_S0_9GeneratorSs13GeneratorType7ElementSs9Equatablezq0_qqq_S0_9GeneratorS1_7Element_FGSaq0__FT8sequenceq__GVSs18LazyFilterSequenceq__">drop(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4exitFTPSs9ErrorType_4fileSS4lineSi_T_">exit(_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6filteruRq_Ss12SequenceType_FFqqq_S0_9GeneratorSs13GeneratorType7ElementSbFT6sourceq__GVSs18LazyFilterSequenceq__">filter(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessageq_9errorcodeVSs5Int324fileSS4lineSi_T_">exit(errormessage:errorcode:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4joinu0_Rq_Ss30RangeReplaceableCollectionTypeq0_Ss12SequenceTypezq_qqq0_S1_9GeneratorSs13GeneratorType7Element_Fq_FT8elementsq0__GVSs12JoinSequenceq0__">join(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzTCSo5NSURL8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell3mapu0_Rq_Ss12SequenceType_FFqqq_S0_9GeneratorSs13GeneratorType7Elementq0_FT6sourceq__GVSs15LazyMapSequenceq_q0__">map(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzTSS8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFSSPS_18ReadableStreamType_">open(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFT10forWritingSS9overwriteSb_PS_19WriteableStreamType_">open(forWriting:overwrite:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingCSo5NSURL9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell10parametersuRq_Ss12SequenceType_Fq_SS">parameters(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_SS">run(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell17printErrorAndExiturFq_T_">printErrorAndExit(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell3runFT4bashSS4fileSS4lineSi_SS">run(bash:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6reduceu0_Rq_Ss12SequenceType_FTq0_7combineFTq0_qqq_S0_9GeneratorSs13GeneratorType7Element_q0__FT8sequenceq__q0_">reduce(_:combine:)</a>
+                <a href="Functions.html#/s:F10SwiftShell11runAndPrintFztSSGSaP___T_">runAndPrint(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell3runFSSPS_18ReadableStreamType_">run(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell11runAndPrintFzT4bashSS_T_">runAndPrint(bash:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6sorteduRq_Ss12SequenceType_FFTqqq_S0_9GeneratorSs13GeneratorType7Elementqqq_S0_9GeneratorS1_7Element_SbFT6sourceq__GSaqqq_S0_9GeneratorS1_7Element_">sorted(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_VS_14AsyncShellTask">runAsync(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell5splitFTSS_FT6streamPS_18ReadableStreamType__GVSs11AnySequenceSS_">split(_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS_VS_14AsyncShellTask">runAsync(bash:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell5splitFT9delimiterSS_FT4textSS_GSaSS_">split(delimiter:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6streamuRq_Ss12SequenceTypezqqq_S0_9GeneratorSs13GeneratorType7ElementSS_Fq_PS_18ReadableStreamType_">stream(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6streamFSSPS_18ReadableStreamType_">stream(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell6streamFFT_FT_GSqSS_PS_18ReadableStreamType_">stream(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell7streamsFT_TPS_19WriteableStreamType_PS_18ReadableStreamType__">streams()</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4takeu0_Rq_Ss12SequenceTypezq0_qqq_S0_9GeneratorSs13GeneratorType7Element_FSiFT8sequenceq__GSaq0__">take(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell7toArrayuRq_Ss12SequenceType_Fq_GSaqqq_S0_9GeneratorSs13GeneratorType7Element_">toArray(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell7writeTourFPS_19WriteableStreamType_FT5inputq__T_">writeTo(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell7writeTouRq_Ss12SequenceType_FPS_19WriteableStreamType_FT3seqq__T_">writeTo(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell7writeToFPS_19WriteableStreamType_FT5inputSS_T_">writeTo(_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi2ogFTPS_18ReadableStreamType_KT_PS0___PS0__">|&gt;(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi2ogu0_rFTq_Fq_q0__q0_">|&gt;(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi3oggFTSSPS_19WriteableStreamType__T_">|&gt;&gt;(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions/|&gt;&gt;(_:_:).html">|&gt;&gt;(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions/|&gt;&gt;(_:_:).html">|&gt;&gt;(_:_:)</a>
+                <a href="Functions.html#/s:F10SwiftShell7streamsFT_TCS_15WriteableStreamCS_14ReadableStream_">streams()</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-          <a href="Protocols.html">Protocols</a>
+            <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Protocols/ReadableStreamType.html">ReadableStreamType</a>
+                <a href="Protocols/ShellContextType.html">ShellContextType</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/WriteableStreamType.html">WriteableStreamType</a>
+                <a href="Protocols/ShellRunnable.html">ShellRunnable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/AsyncShellTask.html">AsyncShellTask</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LazySplitSequence.html">LazySplitSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PartialSourceLazySplitSequence.html">PartialSourceLazySplitSequence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ShellContext.html">ShellContext</a>
               </li>
             </ul>
           </li>
@@ -184,9 +173,137 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZF10SwiftShelloi2ogu0_rFTq_Fq_q0__q0_"></a>
-                    <a name="//apple_ref/swift/Function/|&gt;(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZF10SwiftShelloi2ogu0_rFTq_Fq_q0__q0_">|&gt;(_:_:)</a>
+                    <a name="/s:F10SwiftShell4exiturFT12errormessageq_9errorcodeVSs5Int324fileSS4lineSi_T_"></a>
+                    <a name="//apple_ref/swift/Function/exit(errormessage:errorcode:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell4exiturFT12errormessageq_9errorcodeVSs5Int324fileSS4lineSi_T_">exit(errormessage:errorcode:file:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Print message to standard error and halt execution.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@noreturn</span> <span class="kd">public</span> <span class="kd">func</span> <span class="n">exit</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">errormessage</span> <span class="nv">errormessage</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">errorcode</span><span class="p">:</span> <span class="kt">Int32</span> <span class="o">=</span> <span class="kt">EXIT_FAILURE</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>errormessage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the error message.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>errorcode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>exit code for the entire program. Defaults to 1.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>not.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:F10SwiftShell4exitFTPSs9ErrorType_4fileSS4lineSi_T_"></a>
+                    <a name="//apple_ref/swift/Function/exit(_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell4exitFTPSs9ErrorType_4fileSS4lineSi_T_">exit(_:file:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Print error to standard error and halt execution.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">@noreturn</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">exit</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">ErrorType</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the error</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>not.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/ShellError"></a>
+                <a name="//apple_ref/swift/Section/ShellError" class="dashAnchor"></a>
+                <a href="#/ShellError">
+                  <h3 class="section-name">ShellError</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZF10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb"></a>
+                    <a name="//apple_ref/swift/Function/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZF10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb">==(_:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -200,12 +317,23 @@
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Global%20functions"></a>
+                <a name="//apple_ref/swift/Section/Global functions" class="dashAnchor"></a>
+                <a href="#/Global%20functions">
+                  <h3 class="section-name">Global functions</h3>
+                </a>
+              </div>
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:F10SwiftShell6filteruRq_Ss12SequenceType_FFqqq_S0_9GeneratorSs13GeneratorType7ElementSbFT6sourceq__GVSs18LazyFilterSequenceq__"></a>
-                    <a name="//apple_ref/swift/Function/filter(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell6filteruRq_Ss12SequenceType_FFqqq_S0_9GeneratorSs13GeneratorType7ElementSbFT6sourceq__GVSs18LazyFilterSequenceq__">filter(_:)</a>
+                    <a name="/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_SS"></a>
+                    <a name="//apple_ref/swift/Function/run(_:_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_SS">run(_:_:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -213,19 +341,54 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Lazily return a sequence containing the elements of source, in order, that satisfy the predicate includeElement</p>
+                        <p>Shortcut for shell command, returns output and errors as a String.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
-                        <div class="Swift">
+                        <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">filter</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SequenceType</span><span class="o">&gt;</span>
-	<span class="p">(</span><span class="nv">includeElement</span><span class="p">:</span> <span class="p">(</span><span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span>
-	<span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span>
-	<span class="o">-&gt;</span> <span class="kt">LazyFilterSequence</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>executable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>path to an executable file.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the arguments, one string for each.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.</p>
+
                       </div>
                     </section>
                   </div>
@@ -233,9 +396,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:F10SwiftShell6sorteduRq_Ss12SequenceType_FFTqqq_S0_9GeneratorSs13GeneratorType7Elementqqq_S0_9GeneratorS1_7Element_SbFT6sourceq__GSaqqq_S0_9GeneratorS1_7Element_"></a>
-                    <a name="//apple_ref/swift/Function/sorted(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell6sorteduRq_Ss12SequenceType_FFTqqq_S0_9GeneratorSs13GeneratorType7Elementqqq_S0_9GeneratorS1_7Element_SbFT6sourceq__GSaqqq_S0_9GeneratorS1_7Element_">sorted(_:)</a>
+                    <a name="/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_VS_14AsyncShellTask"></a>
+                    <a name="//apple_ref/swift/Function/runAsync(_:_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_VS_14AsyncShellTask">runAsync(_:_:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -243,22 +406,54 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Return an <code>Array</code> containing the sorted elements of <code>source</code> according to &lsquo;isOrderedBefore&rsquo;.</p>
-
-<p>Requires: <code>isOrderedBefore</code> is a <code>strict weak ordering
-&lt;http://en.wikipedia.org/wiki/Strict_weak_order#Strict_weak_orderings&gt;</code> over <code>elements</code>.</p>
+                        <p>Run executable and return before it is finished.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
-                        <div class="Swift">
+                        <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">sorted</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SequenceType</span><span class="o">&gt;</span>
-	<span class="p">(</span><span class="nv">isOrderedBefore</span><span class="p">:</span> <span class="p">(</span><span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span>
-	<span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span>
-	<span class="o">-&gt;</span> <span class="p">[</span><span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span><span class="p">]</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span> <span class="p">(</span><span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncShellTask</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>executable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>path to an executable file.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>arguments to the executable.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>an AsyncShellTask with standard output, standard error and a &lsquo;finish&rsquo; function.</p>
+
                       </div>
                     </section>
                   </div>
@@ -266,9 +461,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:F10SwiftShell3mapu0_Rq_Ss12SequenceType_FFqqq_S0_9GeneratorSs13GeneratorType7Elementq0_FT6sourceq__GVSs15LazyMapSequenceq_q0__"></a>
-                    <a name="//apple_ref/swift/Function/map(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell3mapu0_Rq_Ss12SequenceType_FFqqq_S0_9GeneratorSs13GeneratorType7Elementq0_FT6sourceq__GVSs15LazyMapSequenceq_q0__">map(_:)</a>
+                    <a name="/s:F10SwiftShell11runAndPrintFztSSGSaP___T_"></a>
+                    <a name="//apple_ref/swift/Function/runAndPrint(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell11runAndPrintFztSSGSaP___T_">runAndPrint(_:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -276,192 +471,55 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Lazily return a sequence containing the results of mapping transform over source.</p>
+                        <p>Run executable and print output and errors.</p>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    a ShellError if the return code is anything but 0, or ‘executable’ could not be run.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
-                        <div class="Swift">
+                        <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">map</span> <span class="o">&lt;</span><span class="kt">S</span><span class="p">:</span> <span class="kt">SequenceType</span><span class="p">,</span> <span class="kt">T</span><span class="o">&gt;</span>
-	<span class="p">(</span><span class="nv">transform</span><span class="p">:</span> <span class="p">(</span><span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">T</span><span class="p">)</span>
-	<span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span>
-	<span class="o">-&gt;</span> <span class="kt">LazyMapSequence</span><span class="o">&lt;</span><span class="kt">S</span><span class="p">,</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAndPrint</span> <span class="p">(</span><span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell6reduceu0_Rq_Ss12SequenceType_FTq0_7combineFTq0_qqq_S0_9GeneratorSs13GeneratorType7Element_q0__FT8sequenceq__q0_"></a>
-                    <a name="//apple_ref/swift/Function/reduce(_:combine:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell6reduceu0_Rq_Ss12SequenceType_FTq0_7combineFTq0_qqq_S0_9GeneratorSs13GeneratorType7Element_q0__FT8sequenceq__q0_">reduce(_:combine:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Return the result of repeatedly calling combine with an accumulated value
-initialized to initial and each element of sequence, in turn.</p>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>executable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>path to an executable file.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">reduce</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SequenceType</span><span class="p">,</span> <span class="kt">U</span><span class="o">&gt;</span>
-	<span class="p">(</span><span class="nv">initial</span><span class="p">:</span> <span class="kt">U</span><span class="p">,</span> <span class="nv">combine</span><span class="p">:</span> <span class="p">(</span><span class="kt">U</span><span class="p">,</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">U</span><span class="p">)</span>
-	<span class="p">(</span><span class="nv">sequence</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span>
-	<span class="o">-&gt;</span> <span class="kt">U</span></code></pre>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>arguments to the executable.</p>
 
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell5splitFT9delimiterSS_FT4textSS_GSaSS_"></a>
-                    <a name="//apple_ref/swift/Function/split(delimiter:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell5splitFT9delimiterSS_FT4textSS_GSaSS_">split(delimiter:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Split text over delimiter, returning an array.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">split</span> <span class="p">(</span><span class="n">delimiter</span> <span class="nv">delimiter</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)(</span><span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell4joinu0_Rq_Ss30RangeReplaceableCollectionTypeq0_Ss12SequenceTypezq_qqq0_S1_9GeneratorSs13GeneratorType7Element_Fq_FT8elementsq0__GVSs12JoinSequenceq0__"></a>
-                    <a name="//apple_ref/swift/Function/join(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell4joinu0_Rq_Ss30RangeReplaceableCollectionTypeq0_Ss12SequenceTypezq_qqq0_S1_9GeneratorSs13GeneratorType7Element_Fq_FT8elementsq0__GVSs12JoinSequenceq0__">join(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Insert separator between each item in elements.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">join</span> <span class="o">&lt;</span><span class="kt">C</span> <span class="p">:</span> <span class="kt">RangeReplaceableCollectionType</span><span class="p">,</span> <span class="kt">S</span> <span class="p">:</span> <span class="kt">SequenceType</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">C</span><span class="o">&gt;</span>
-	<span class="p">(</span><span class="nv">separator</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span>
-	<span class="p">(</span><span class="nv">elements</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span>
-	<span class="o">-&gt;</span> <span class="kt">JoinSequence</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell7toArrayuRq_Ss12SequenceType_Fq_GSaqqq_S0_9GeneratorSs13GeneratorType7Element_"></a>
-                    <a name="//apple_ref/swift/Function/toArray(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell7toArrayuRq_Ss12SequenceType_Fq_GSaqqq_S0_9GeneratorSs13GeneratorType7Element_">toArray(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Turn a sequence into an array. For use after the |&gt; operator.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">toArray</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SequenceType</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">sequence</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span><span class="p">]</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell4dropu0_Rq_Ss12SequenceTypeqqq_S0_9GeneratorSs13GeneratorType7ElementSs9Equatablezq0_qqq_S0_9GeneratorS1_7Element_FGSaq0__FT8sequenceq__GVSs18LazyFilterSequenceq__"></a>
-                    <a name="//apple_ref/swift/Function/drop(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell4dropu0_Rq_Ss12SequenceTypeqqq_S0_9GeneratorSs13GeneratorType7ElementSs9Equatablezq0_qqq_S0_9GeneratorS1_7Element_FGSaq0__FT8sequenceq__GVSs18LazyFilterSequenceq__">drop(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Discard all elements in <code>tobedropped</code> from sequence.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">drop</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SequenceType</span><span class="p">,</span> <span class="kt">T</span> <span class="p">:</span> <span class="kt">Equatable</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">T</span><span class="o">&gt;</span>
-	<span class="p">(</span><span class="nv">tobedropped</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">])</span>
-	<span class="p">(</span><span class="nv">sequence</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span>
-	<span class="o">-&gt;</span> <span class="kt">LazyFilterSequence</span><span class="o">&lt;</span><span class="kt">S</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell4takeu0_Rq_Ss12SequenceTypezq0_qqq_S0_9GeneratorSs13GeneratorType7Element_FSiFT8sequenceq__GSaq0__"></a>
-                    <a name="//apple_ref/swift/Function/take(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell4takeu0_Rq_Ss12SequenceTypezq0_qqq_S0_9GeneratorSs13GeneratorType7Element_FSiFT8sequenceq__GSaq0__">take(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Return at most the first <code>numbertotake</code> elements of sequence</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">take</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SequenceType</span><span class="p">,</span> <span class="kt">T</span> <span class="k">where</span> <span class="kt">S</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">T</span><span class="o">&gt;</span>
-	<span class="p">(</span><span class="nv">numbertotake</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)(</span><span class="nv">sequence</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span></code></pre>
-
-                        </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -473,9 +531,9 @@ initialized to initial and each element of sequence, in turn.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:F10SwiftShell17printErrorAndExiturFq_T_"></a>
-                    <a name="//apple_ref/swift/Function/printErrorAndExit(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell17printErrorAndExiturFq_T_">printErrorAndExit(_:)</a>
+                    <a name="/s:ZF10SwiftShelloi1pFTCSo5NSURLSS_S0_"></a>
+                    <a name="//apple_ref/swift/Function/+(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZF10SwiftShelloi1pFTCSo5NSURLSS_S0_">+(_:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -483,14 +541,14 @@ initialized to initial and each element of sequence, in turn.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Print message to standard error and halt execution.</p>
+                        <p>Append file or directory url to directory url</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
-                        <div class="Swift">
+                        <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">@noreturn</span> <span class="kd">public</span> <span class="kd">func</span> <span class="n">printErrorAndExit</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">errormessage</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">+</span> <span class="p">(</span><span class="nv">leftpath</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">,</span> <span class="nv">rightpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSURL</span></code></pre>
 
                         </div>
                       </div>
@@ -500,9 +558,9 @@ initialized to initial and each element of sequence, in turn.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:F10SwiftShell4openFSSPS_18ReadableStreamType_"></a>
-                    <a name="//apple_ref/swift/Function/open(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell4openFSSPS_18ReadableStreamType_">open(_:)</a>
+                    <a name="/s:F10SwiftShell4openFzTSS8encodingSu_CS_14ReadableStream"></a>
+                    <a name="//apple_ref/swift/Function/open(_:encoding:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell4openFzTSS8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -510,14 +568,14 @@ initialized to initial and each element of sequence, in turn.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Open a file for reading, and exit if an error occurs.</p>
+                        <p>Open a file for reading, throw if an error occurs.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
-                        <div class="Swift">
+                        <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span> <span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ReadableStreamType</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span> <span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSStringEncoding</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ReadableStream</span></code></pre>
 
                         </div>
                       </div>
@@ -527,9 +585,9 @@ initialized to initial and each element of sequence, in turn.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:F10SwiftShell4openFT10forWritingSS9overwriteSb_PS_19WriteableStreamType_"></a>
-                    <a name="//apple_ref/swift/Function/open(forWriting:overwrite:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell4openFT10forWritingSS9overwriteSb_PS_19WriteableStreamType_">open(forWriting:overwrite:)</a>
+                    <a name="/s:F10SwiftShell4openFzTCSo5NSURL8encodingSu_CS_14ReadableStream"></a>
+                    <a name="//apple_ref/swift/Function/open(_:encoding:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell4openFzTCSo5NSURL8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -537,15 +595,90 @@ initialized to initial and each element of sequence, in turn.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Open a file for writing, create it if it doesn&rsquo;t exist, and exit if an error occurs.
+                        <p>Open a file for reading, throw if an error occurs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span> <span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSStringEncoding</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">ReadableStream</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:F10SwiftShell4openFzT10forWritingCSo5NSURL9overwriteSb8encodingSu_CS_15WriteableStream"></a>
+                    <a name="//apple_ref/swift/Function/open(forWriting:overwrite:encoding:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell4openFzT10forWritingCSo5NSURL9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Open a file for writing, create it first if it doesn&rsquo;t exist.
 If the file already exists and overwrite=false, the writing will begin at the end of the file.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
-                        <div class="Swift">
+                        <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span> <span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">WriteableStreamType</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span> <span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSStringEncoding</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">WriteableStream</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>overwrite</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If true, replace the file if it exists.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingSu_CS_15WriteableStream"></a>
+                    <a name="//apple_ref/swift/Function/open(forWriting:overwrite:encoding:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Open a file for writing, create it first if it doesn&rsquo;t exist.
+If the file already exists and overwrite=false, the writing will begin at the end of the file.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span> <span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSStringEncoding</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">WriteableStream</span></code></pre>
 
                         </div>
                       </div>
@@ -579,103 +712,9 @@ If the file already exists and overwrite=false, the writing will begin at the en
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:F10SwiftShell6streamFSSPS_18ReadableStreamType_"></a>
-                    <a name="//apple_ref/swift/Function/stream(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell6streamFSSPS_18ReadableStreamType_">stream(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create a stream from a String.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stream</span> <span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ReadableStreamType</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell6streamFFT_FT_GSqSS_PS_18ReadableStreamType_"></a>
-                    <a name="//apple_ref/swift/Function/stream(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell6streamFFT_FT_GSqSS_PS_18ReadableStreamType_">stream(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create a stream from a function returning a generator function, which is called every time the stream is asked for more text.</p>
-
-<p>stream {
-    // initialisation&hellip;
-    return {
-        // called repeatedly by the resulting stream
-        // return text, or return nil when done.
-    }
-}</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stream</span> <span class="p">(</span> <span class="nv">closure</span><span class="p">:()</span> <span class="o">-&gt;</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ReadableStreamType</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>The output stream.</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell6streamuRq_Ss12SequenceTypezqqq_S0_9GeneratorSs13GeneratorType7ElementSS_Fq_PS_18ReadableStreamType_"></a>
-                    <a name="//apple_ref/swift/Function/stream(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell6streamuRq_Ss12SequenceTypezqqq_S0_9GeneratorSs13GeneratorType7ElementSS_Fq_PS_18ReadableStreamType_">stream(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create a stream from a sequence of Strings.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="kt">Seq</span> <span class="p">:</span> <span class="kt">SequenceType</span> <span class="k">where</span> <span class="kt">Seq</span><span class="o">.</span><span class="kt">Generator</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">String</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">sequence</span><span class="p">:</span> <span class="kt">Seq</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ReadableStreamType</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell7streamsFT_TPS_19WriteableStreamType_PS_18ReadableStreamType__"></a>
+                    <a name="/s:F10SwiftShell7streamsFT_TCS_15WriteableStreamCS_14ReadableStream_"></a>
                     <a name="//apple_ref/swift/Function/streams()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell7streamsFT_TPS_19WriteableStreamType_PS_18ReadableStreamType__">streams()</a>
+                    <a class="token" href="#/s:F10SwiftShell7streamsFT_TCS_15WriteableStreamCS_14ReadableStream_">streams()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -683,211 +722,14 @@ If the file already exists and overwrite=false, the writing will begin at the en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Return a writable stream and a readable stream. What you write to the 1st one can be read from the 2nd one.
-Make sure to call closeStream() on the writable stream before you call read() on the readable one.</p>
+                        <p>Create a pair of streams. What is written to the 1st one can be read from the 2nd one.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
-                        <div class="Swift">
+                        <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">streams</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">WriteableStreamType</span><span class="p">,</span> <span class="kt">ReadableStreamType</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell5splitFTSS_FT6streamPS_18ReadableStreamType__GVSs11AnySequenceSS_"></a>
-                    <a name="//apple_ref/swift/Function/split(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell5splitFTSS_FT6streamPS_18ReadableStreamType__GVSs11AnySequenceSS_">split(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Split a stream lazily</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">split</span> <span class="p">(</span><span class="nv">delimiter</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">ReadableStreamType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AnySequence</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell7writeTourFPS_19WriteableStreamType_FT5inputq__T_"></a>
-                    <a name="//apple_ref/swift/Function/writeTo(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell7writeTourFPS_19WriteableStreamType_FT5inputq__T_">writeTo(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Write something to a stream.</p>
-
-<pre class="highlight plaintext"><code>something |&gt; writeTo(writablestream)
-</code></pre>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">writeTo</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">WriteableStreamType</span><span class="p">)(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell7writeToFPS_19WriteableStreamType_FT5inputSS_T_"></a>
-                    <a name="//apple_ref/swift/Function/writeTo(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell7writeToFPS_19WriteableStreamType_FT5inputSS_T_">writeTo(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Write a String to a writable stream.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">writeTo</span> <span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">WriteableStreamType</span><span class="p">)(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell7writeTouRq_Ss12SequenceType_FPS_19WriteableStreamType_FT3seqq__T_"></a>
-                    <a name="//apple_ref/swift/Function/writeTo(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell7writeTouRq_Ss12SequenceType_FPS_19WriteableStreamType_FT3seqq__T_">writeTo(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Write a sequence to a stream.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">writeTo</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SequenceType</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">stream</span><span class="p">:</span> <span class="kt">WriteableStreamType</span><span class="p">)(</span><span class="nv">seq</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:ZF10SwiftShelloi3oggurFTq_PS_19WriteableStreamType__T_"></a>
-                    <a name="//apple_ref/swift/Function/|&gt;&gt;(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZF10SwiftShelloi3oggurFTq_PS_19WriteableStreamType__T_">|&gt;&gt;(_:_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Write something to a stream.</p>
-
-<p>something |&gt;&gt; writablestream</p>
-
-                        <a href="Functions/|>>(_:_:).html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">|&gt;&gt;</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">input</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">stream</span><span class="p">:</span> <span class="kt">WriteableStreamType</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:ZF10SwiftShelloi3oggFTSSPS_19WriteableStreamType__T_"></a>
-                    <a name="//apple_ref/swift/Function/|&gt;&gt;(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZF10SwiftShelloi3oggFTSSPS_19WriteableStreamType__T_">|&gt;&gt;(_:_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Write a String to a writable stream.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">|&gt;&gt;</span> <span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">stream</span><span class="p">:</span> <span class="kt">WriteableStreamType</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:ZF10SwiftShelloi3ogguRq_Ss12SequenceType_FTq_PS_19WriteableStreamType__T_"></a>
-                    <a name="//apple_ref/swift/Function/|&gt;&gt;(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZF10SwiftShelloi3ogguRq_Ss12SequenceType_FTq_PS_19WriteableStreamType__T_">|&gt;&gt;(_:_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Write a sequence to a stream.</p>
-
-                        <a href="Functions/|>>(_:_:).html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">|&gt;&gt;</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SequenceType</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">seq</span><span class="p">:</span> <span class="kt">S</span><span class="p">,</span> <span class="nv">stream</span><span class="p">:</span> <span class="kt">WriteableStreamType</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">streams</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt">WriteableStream</span><span class="p">,</span> <span class="kt">ReadableStream</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -897,13 +739,20 @@ Make sure to call closeStream() on the writable stream before you call read() on
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Bash"></a>
+                <a name="//apple_ref/swift/Section/Bash" class="dashAnchor"></a>
+                <a href="#/Bash">
+                  <h3 class="section-name">Bash</h3>
+                </a>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZF10SwiftShelloi2ogFTPS_18ReadableStreamType_KT_PS0___PS0__"></a>
-                    <a name="//apple_ref/swift/Function/|&gt;(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZF10SwiftShelloi2ogFTPS_18ReadableStreamType_KT_PS0___PS0__">|&gt;(_:_:)</a>
+                    <a name="/s:F10SwiftShell3runFT4bashSS4fileSS4lineSi_SS"></a>
+                    <a name="//apple_ref/swift/Function/run(bash:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell3runFT4bashSS4fileSS4lineSi_SS">run(bash:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -911,52 +760,40 @@ Make sure to call closeStream() on the writable stream before you call read() on
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Specific handling of func run (shellcommand: String) -&gt; ReadableStreamType on the right side using the stream on the 
-left side as standard input.</p>
-
-<p>Warning: is only meant to be used with the <q>run</q> command, but could also unintentionally catch other uses of
-<q>ReadableStreamType |> ReadableStreamType</q>, though that statement doesn&rsquo;t make any sense.</p>
+                        <p>Shortcut for bash shell command, returns output and errors as a String.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
-                        <div class="Swift">
+                        <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">|&gt;</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">ReadableStreamType</span><span class="p">,</span> <span class="k">@autoclosure</span> <span class="nv">rhs</span><span class="p">:</span>  <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">ReadableStreamType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ReadableStreamType</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:F10SwiftShell3runFSSPS_18ReadableStreamType_"></a>
-                    <a name="//apple_ref/swift/Function/run(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell3runFSSPS_18ReadableStreamType_">run(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Run a shell command synchronously with no standard input,
-or if to the right of a <q>ReadableStreamType |></q>, use the stream on the left side as standard input.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="nv">shellcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ReadableStreamType</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
                       <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bashcommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the bash shell command.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
                         <h4>Return Value</h4>
-                        <p>Standard output</p>
+                        <p>standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.</p>
 
                       </div>
                     </section>
@@ -965,9 +802,9 @@ or if to the right of a <q>ReadableStreamType |></q>, use the stream on the left
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:F10SwiftShell1$FSSSS"></a>
-                    <a name="//apple_ref/swift/Function/$(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell1$FSSSS">$(_:)</a>
+                    <a name="/s:F10SwiftShell8runAsyncFT4bashSS_VS_14AsyncShellTask"></a>
+                    <a name="//apple_ref/swift/Function/runAsync(bash:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell8runAsyncFT4bashSS_VS_14AsyncShellTask">runAsync(bash:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -975,16 +812,41 @@ or if to the right of a <q>ReadableStreamType |></q>, use the stream on the left
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Shortcut for in-line command, returns output as String.</p>
+                        <p>Run bash command and return before it is finished.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
-                        <div class="Swift">
+                        <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="err">$</span> <span class="p">(</span><span class="nv">shellcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncShellTask</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bashcommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the bash shell command.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>an AsyncShellTask struct with standard output, standard error and a &lsquo;finish&rsquo; function.</p>
+
                       </div>
                     </section>
                   </div>
@@ -992,9 +854,9 @@ or if to the right of a <q>ReadableStreamType |></q>, use the stream on the left
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:F10SwiftShell10parametersuRq_Ss12SequenceType_Fq_SS"></a>
-                    <a name="//apple_ref/swift/Function/parameters(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell10parametersuRq_Ss12SequenceType_Fq_SS">parameters(_:)</a>
+                    <a name="/s:F10SwiftShell11runAndPrintFzT4bashSS_T_"></a>
+                    <a name="//apple_ref/swift/Function/runAndPrint(bash:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:F10SwiftShell11runAndPrintFzT4bashSS_T_">runAndPrint(bash:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1002,47 +864,42 @@ or if to the right of a <q>ReadableStreamType |></q>, use the stream on the left
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Turn a sequence into valid parameters for a shell command, properly quoted</p>
+                        <p>Run bash command and print output and errors.</p>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    a ShellError.ReturnedErrorCode if the return code is anything but 0.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
-                        <div class="Swift">
+                        <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">parameters</span> <span class="o">&lt;</span><span class="kt">S</span> <span class="p">:</span> <span class="kt">SequenceType</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">sequence</span><span class="p">:</span> <span class="kt">S</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAndPrint</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:ZF10SwiftShelloi1dFTSSSS_SS"></a>
-                    <a name="//apple_ref/swift/Function//(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZF10SwiftShelloi1dFTSSSS_SS">/(_:_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Allows for <code>&quot;/directory&quot; / &quot;file.extension&quot;</code> etc.</p>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bashcommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the bash shell command.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="Swift">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">/</span> <span class="p">(</span><span class="nv">leftpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">rightpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
-
-                        </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -1052,8 +909,8 @@ or if to the right of a <q>ReadableStreamType |></q>, use the stream on the left
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2015-09-24)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-03-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.5.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
