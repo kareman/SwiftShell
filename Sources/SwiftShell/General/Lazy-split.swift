@@ -66,7 +66,7 @@ public struct PartialSourceLazySplitSequence <Base: CollectionType where Base.Ge
 	private var g: LazySplitSequence<Base>?
 
 	public init (bases: ()->Base?, separator: Base.Generator.Element) {
-		gs = anyGenerator(bases).lazy.map {
+		gs = AnyGenerator(body: bases).lazy.map {
 			LazySplitSequence($0, separator: separator, allowEmptySlices: true).generate()
 			}.generate()
 	}

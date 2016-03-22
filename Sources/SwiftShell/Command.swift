@@ -14,7 +14,7 @@ Print message to standard error and halt execution.
 - parameter errorcode: exit code for the entire program. Defaults to 1.
 - returns: not.
 */
-@noreturn public func exit <T> (errormessage errormessage: T, errorcode: Int32 = EXIT_FAILURE, file: String = __FILE__, line: Int = __LINE__) {
+@noreturn public func exit <T> (errormessage errormessage: T, errorcode: Int32 = EXIT_FAILURE, file: String = #file, line: Int = #line) {
 	main.stderror.write(file + ":\(line): ")
 	main.stderror.writeln(errormessage)
 	exit(errorcode)
@@ -26,7 +26,7 @@ Print error to standard error and halt execution.
 - parameter error: the error
 - returns: not.
 */
-@noreturn public func exit (error: ErrorType, file: String = __FILE__, line: Int = __LINE__) {
+@noreturn public func exit (error: ErrorType, file: String = #file, line: Int = #line) {
 	if let shellerror = error as? ShellError {
 		exit(errormessage: shellerror, errorcode: shellerror.errorcode, file: file, line: line)
 	} else {
@@ -193,7 +193,7 @@ extension ShellRunnable {
 	- parameter args: the arguments, one string for each.
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
-	public func run (executable: String, _ args: Any ..., file: String = __FILE__, line: Int = __LINE__) -> String {
+	public func run (executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
 		let stringargs = args.flatten().map { String($0) }
 		return outputFromRun(createTask(executable, args: stringargs), file: file, line: line)
 	}
@@ -208,7 +208,7 @@ public struct AsyncShellTask {
 	public let stderror: ReadableStream
 	private let task: NSTask
 
-	init (task: NSTask, file: String = __FILE__, line: Int = __LINE__) {
+	init (task: NSTask, file: String = #file, line: Int = #line) {
 		self.task = task
 
 		let outpipe = NSPipe()
@@ -253,7 +253,7 @@ extension ShellRunnable {
 	- parameter args: Arguments to the executable.
 	- returns: An AsyncShellTask with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync (executable: String, _ args: Any ..., file: String = __FILE__, line: Int = __LINE__) -> AsyncShellTask {
+	public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncShellTask {
 		let stringargs = args.flatten().map { String($0) }
 		return AsyncShellTask(task: createTask(executable, args: stringargs), file: file, line: line)
 	}
@@ -289,7 +289,7 @@ Shortcut for shell command, returns output and errors as a String.
 - parameter args: the arguments, one string for each.
 - returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 */
-public func run (executable: String, _ args: Any ..., file: String = __FILE__, line: Int = __LINE__) -> String {
+public func run (executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
 	return main.run(executable, args, file: file, line: line)
 }
 
@@ -300,7 +300,7 @@ Run executable and return before it is finished.
 - parameter args: arguments to the executable.
 - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
 */
-public func runAsync (executable: String, _ args: Any ..., file: String = __FILE__, line: Int = __LINE__) -> AsyncShellTask {
+public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncShellTask {
 	return main.runAsync(executable, args, file: file, line: line)
 }
 
