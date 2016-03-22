@@ -19,12 +19,13 @@ An OS X Framework for command-line scripting in Swift.
 import SwiftShell
 
 do {
+	// If there is an argument, try opening it as a file. Otherwise use standard input.
 	let input = try main.arguments.first.map {try open($0)} ?? main.stdin
 
 	input.lines()
 		.enumerate().forEach { (linenr,line) in print(linenr+1, ":", line) }
 
-	// add a newline at the end
+	// Add a newline at the end
 	print("")
 } catch {
 	exit(error)
@@ -147,7 +148,7 @@ Everything is mutable, so you can set e.g. the text encoding or reroute standard
   - run `xcodebuild install` from the project's root folder. This will install the SwiftShell framework in ~/Library/Frameworks.
   - _or_ run `xcodebuild` and copy the resulting framework from the build folder to your library folder of choice. If that is not "~/Library/Frameworks" or "/Library/Frameworks"  then make sure the folder is listed in $SWIFTSHELL_FRAMEWORK_PATH.
 
-Then include this in the of each script:
+Then include this in the beginning of each script:
 
 ```swift
 #!/usr/bin/env swiftshell
@@ -156,6 +157,8 @@ import SwiftShell
 ```
 
 #### [Swift Package Manager](https://github.com/apple/swift-package-manager)
+
+_Will not work with swift-DEVELOPMENT-SNAPSHOT-2016-03-16-a or newer because of changes for Swift 3.0 that are incompatible with Swift 2.2._
 
 Add `.Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 2)` to your Package.swift:
 
