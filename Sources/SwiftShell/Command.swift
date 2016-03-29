@@ -143,7 +143,7 @@ extension NSTask {
 	/**
 	Wait until task is finished.
 
-	- throws: ShellError.ReturnedErrorCode if exit code is not zero.
+	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
 	*/
 	public func finish() throws {
 		self.waitUntilExit()
@@ -230,7 +230,7 @@ public struct AsyncShellTask {
 	Wait for this shell task to finish.
 
 	- returns: itself
-	- throws: a ShellError.ReturnedErrorCode if the return code is not 0.
+	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
 	*/
 	public func finish() throws -> AsyncShellTask {
 		try task.finish()
@@ -269,7 +269,9 @@ extension ShellRunnable {
 
 	- parameter executable: path to an executable file.
 	- parameter args: arguments to the executable.
-	- throws: a ShellError if the return code is anything but 0.
+	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
+
+		`ShellError.InAccessibleExecutable (path: String)` if 'executable’ turned out to be not so executable after all.
 	*/
 	public func runAndPrint (executable: String, _ args: Any ...) throws {
 		let stringargs = args.flatten().map { String($0) }
@@ -309,7 +311,9 @@ Run executable and print output and errors.
 
 - parameter executable: path to an executable file.
 - parameter args: arguments to the executable.
-- throws: a ShellError if the return code is anything but 0, or ‘executable’ could not be run.
+- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
+
+	`ShellError.InAccessibleExecutable (path: String)` if 'executable’ turned out to be not so executable after all.
 */
 public func runAndPrint (executable: String, _ args: Any ...) throws {
 	return try main.runAndPrint(executable, args)
