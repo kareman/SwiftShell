@@ -9,4 +9,4 @@ If it's a sizeable change or will break backwards compatibility it's probably be
 #### Testing
 
 - Unit tests are awesome. Please create new ones to test the changes you make.
-- If you make changes to the public API feel free to add a new test script to [/SwiftShellTests/Scripts](https://github.com/kareman/SwiftShell/tree/master/SwiftShellTests/Scripts) and write a test for that script in [/SwiftShellTests/Scripts/runtests.bash](https://github.com/kareman/SwiftShell/blob/master/SwiftShellTests/Scripts/runtests.bash).
+- If you make changes to the public API feel free to add a new test script to [/Tests/Scripts](https://github.com/kareman/SwiftShell/tree/master/Tests/Scripts) and write a test for that script in [/Tests/Scripts/runtests.bash](https://github.com/kareman/SwiftShell/blob/master/Tests/Scripts/runtests.bash).
