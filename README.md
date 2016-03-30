@@ -42,9 +42,7 @@ Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumber
 try runAndPrint(bash: "cmd1 arg | cmd2 arg") 
 ```
 
-Runs a shell command just like you would in the terminal. If the command returns with a non-zero exit code it will throw a ShellError.
-
-_The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to._
+Run a shell command just like you would in the terminal. The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.
 
 #### In-line
 
@@ -60,11 +58,7 @@ Similar to `$(cmd)` in bash, this just returns the output from the command as a 
 ```swift
 let command = runAsync("cmd", "-n", 245)
 // do something with command.stderror or command.stdout
-do {
-	try command.finish()
-} catch {
-	// deal with errors. or not.
-}
+try command.finish()
 ```
 
 Launch a command and continue before it's finished. You can process standard output and standard error, and optionally wait until it's finished and handle any errors.
@@ -93,6 +87,50 @@ run("echo", array, array.count + 2, "arguments")
 **(bash bashcommand: String)**
 
 These are the commands you normally use in the Terminal. You can use pipes and redirection and all that good stuff. Support for other shell interpreters can easily be added.
+
+#### Errors
+
+If the command provided to `runAsync` could not be launched for any reason the program will print the error to standard error and exit, as is usual in scripts (it is quite possible SwiftShell should be less usual here).
+
+The `runAsync("cmd").finish()` method on the other hand throws an error if the exit code of the command is anything but 0:
+
+```swift
+let command = runAsync("cmd", "-n", 245)
+// do something with command.stderror or command.stdout
+do {
+	try command.finish()
+} catch ShellError.ReturnedErrorCode(let error) {
+	// use error.command or error.errorcode
+}
+```
+
+The `runAndPrint` command can also throw this error, in addition to this one if the command could not be launched:
+
+```swift
+} catch ShellError.InAccessibleExecutable(let path) {
+	// ‘path’ is the full path to the executable
+}
+```
+
+Instead of dealing with the values from these errors you can just print them:
+
+```swift
+} catch {
+	print(error)
+}
+```
+
+... or if they are sufficiently serious you can print them to standard error and exit:
+
+```swift
+} catch {
+	exit(error)
+}
+```
+
+&nbsp;
+
+When launched from the top level you don't need to catch any errors, but you still have to use `try`.
 
 ## Output
 
