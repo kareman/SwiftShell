@@ -72,7 +72,8 @@ extension ShellContext: ShellRunnable {
 
 
 private func createTempdirectory () -> String {
-	let tempdirectory = NSURL(fileURLWithPath:NSTemporaryDirectory()) + ("SwiftShell-" + NSProcessInfo.processInfo().globallyUniqueString)
+	let name = NSURL(fileURLWithPath: main.path).lastPathComponent ?? "SwiftShell"
+	let tempdirectory = NSURL(fileURLWithPath:NSTemporaryDirectory()) + (name + "-" + NSProcessInfo.processInfo().globallyUniqueString)
 	do {
 		try Files.createDirectoryAtPath(tempdirectory.path!, withIntermediateDirectories: true, attributes: nil)
 		return tempdirectory.path! +  "/"
