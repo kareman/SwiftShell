@@ -203,7 +203,7 @@ extension ShellRunnable {
 // MARK: runAsync
 
 /** Output from the 'runAsync' methods. */
-public struct AsyncShellTask {
+public final class AsyncShellTask {
 	public let stdout: ReadableStream
 	public let stderror: ReadableStream
 	private let task: NSTask
