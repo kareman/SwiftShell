@@ -32,6 +32,9 @@
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Classes/AsyncShellTask.html">AsyncShellTask</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/MainShellContext.html">MainShellContext</a>
               </li>
               <li class="nav-group-task">
@@ -91,10 +94,10 @@
                 <a href="../Functions.html#/s:ZF10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb">==(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell4exitFTPSs9ErrorType_4fileSS4lineSi_T_">exit(_:file:line:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell4exitFTPs9ErrorType_4fileSS4lineSi_T_">exit(_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell4exiturFT12errormessageq_9errorcodeVSs5Int324fileSS4lineSi_T_">exit(errormessage:errorcode:file:line:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeVs5Int324fileSS4lineSi_T_">exit(errormessage:errorcode:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F10SwiftShell4openFzTCSo5NSURL8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
@@ -121,10 +124,10 @@
                 <a href="../Functions.html#/s:F10SwiftShell11runAndPrintFzT4bashSS_T_">runAndPrint(bash:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_VS_14AsyncShellTask">runAsync(_:_:file:line:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_CS_14AsyncShellTask">runAsync(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS_VS_14AsyncShellTask">runAsync(bash:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS_CS_14AsyncShellTask">runAsync(bash:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F10SwiftShell7streamsFT_TCS_15WriteableStreamCS_14ReadableStream_">streams()</a>
@@ -145,9 +148,6 @@
           <li class="nav-group-name">
             <a href="../Structs.html">Structs</a>
             <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../Structs/AsyncShellTask.html">AsyncShellTask</a>
-              </li>
               <li class="nav-group-task">
                 <a href="../Structs/LazySplitSequence.html">LazySplitSequence</a>
               </li>
@@ -197,9 +197,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_3runuRq_S0__Fq_FTSSGSaP__4fileSS4lineSi_SS"></a>
+                    <a name="/s:FE10SwiftShellPS_13ShellRunnable3runFTSSGSaP__4fileSS4lineSi_SS"></a>
                     <a name="//apple_ref/swift/Method/run(_:_:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_3runuRq_S0__Fq_FTSSGSaP__4fileSS4lineSi_SS">run(_:_:file:line:)</a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_13ShellRunnable3runFTSSGSaP__4fileSS4lineSi_SS">run(_:_:file:line:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -212,12 +212,18 @@
                       <div class="abstract">
                         <p>Shortcut for shell command, returns output and errors as a String.</p>
 
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    will crash if ‘executable’ could not be launched.
+
+</div>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -269,9 +275,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_8runAsyncuRq_S0__Fq_FTSSGSaP__4fileSS4lineSi_VS_14AsyncShellTask"></a>
+                    <a name="/s:FE10SwiftShellPS_13ShellRunnable8runAsyncFTSSGSaP__4fileSS4lineSi_CS_14AsyncShellTask"></a>
                     <a name="//apple_ref/swift/Method/runAsync(_:_:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_8runAsyncuRq_S0__Fq_FTSSGSaP__4fileSS4lineSi_VS_14AsyncShellTask">runAsync(_:_:file:line:)</a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_13ShellRunnable8runAsyncFTSSGSaP__4fileSS4lineSi_CS_14AsyncShellTask">runAsync(_:_:file:line:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -284,12 +290,18 @@
                       <div class="abstract">
                         <p>Run executable and return before it is finished.</p>
 
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    will crash if ‘executable’ could not be launched.
+
+</div>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span> <span class="p">(</span><span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncShellTask</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span> <span class="p">(</span><span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncShellTask</span></code></pre>
 
                         </div>
                       </div>
@@ -341,9 +353,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_11runAndPrintuRq_S0__Fq_FztSSGSaP___T_"></a>
+                    <a name="/s:FE10SwiftShellPS_13ShellRunnable11runAndPrintFztSSGSaP___T_"></a>
                     <a name="//apple_ref/swift/Method/runAndPrint(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_11runAndPrintuRq_S0__Fq_FztSSGSaP___T_">runAndPrint(_:_:)</a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_13ShellRunnable11runAndPrintFztSSGSaP___T_">runAndPrint(_:_:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -358,7 +370,9 @@
 
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    a ShellError if the return code is anything but 0.
+    <p><code>ShellError.ReturnedErrorCode (command: String, errorcode: Int32)</code> if the exit code is anything but 0.</p>
+
+<p><code>ShellError.InAccessibleExecutable (path: String)</code> if &lsquo;executable’ turned out to be not so executable after all.</p>
 
 </div>
 
@@ -414,9 +428,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_3runuRq_S0__Fq_FT4bashSS4fileSS4lineSi_SS"></a>
+                    <a name="/s:FE10SwiftShellPS_13ShellRunnable3runFT4bashSS4fileSS4lineSi_SS"></a>
                     <a name="//apple_ref/swift/Method/run(bash:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_3runuRq_S0__Fq_FT4bashSS4fileSS4lineSi_SS">run(bash:file:line:)</a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_13ShellRunnable3runFT4bashSS4fileSS4lineSi_SS">run(bash:file:line:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -434,7 +448,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="k">__FILE__</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">__LINE__</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -469,9 +483,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_8runAsyncuRq_S0__Fq_FT4bashSS_VS_14AsyncShellTask"></a>
+                    <a name="/s:FE10SwiftShellPS_13ShellRunnable8runAsyncFT4bashSS_CS_14AsyncShellTask"></a>
                     <a name="//apple_ref/swift/Method/runAsync(bash:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_8runAsyncuRq_S0__Fq_FT4bashSS_VS_14AsyncShellTask">runAsync(bash:)</a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_13ShellRunnable8runAsyncFT4bashSS_CS_14AsyncShellTask">runAsync(bash:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -524,9 +538,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FeRq_10SwiftShell13ShellRunnable_S_S0_11runAndPrintuRq_S0__Fq_FzT4bashSS_T_"></a>
+                    <a name="/s:FE10SwiftShellPS_13ShellRunnable11runAndPrintFzT4bashSS_T_"></a>
                     <a name="//apple_ref/swift/Method/runAndPrint(bash:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FeRq_10SwiftShell13ShellRunnable_S_S0_11runAndPrintuRq_S0__Fq_FzT4bashSS_T_">runAndPrint(bash:)</a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_13ShellRunnable11runAndPrintFzT4bashSS_T_">runAndPrint(bash:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -582,7 +596,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-03-21)</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-03-31)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.5.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
