@@ -189,6 +189,7 @@ extension ShellRunnable {
 	/**
 	Shortcut for shell command, returns output and errors as a String.
 
+	- warning: will crash if ‘executable’ could not be launched.
 	- parameter executable: path to an executable file.
 	- parameter args: the arguments, one string for each.
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
@@ -249,6 +250,7 @@ extension ShellRunnable {
 	/**
 	Run executable and return before it is finished.
 
+	- warning: will crash if ‘executable’ could not be launched.
 	- parameter executable: Path to an executable file. If not then exit.
 	- parameter args: Arguments to the executable.
 	- returns: An AsyncShellTask with standard output, standard error and a 'finish' function.
@@ -287,6 +289,7 @@ extension ShellRunnable {
 /**
 Shortcut for shell command, returns output and errors as a String.
 
+- warning: will crash if ‘executable’ could not be launched.
 - parameter executable: path to an executable file.
 - parameter args: the arguments, one string for each.
 - returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
@@ -298,6 +301,7 @@ public func run (executable: String, _ args: Any ..., file: String = #file, line
 /**
 Run executable and return before it is finished.
 
+- warning: will crash if ‘executable’ could not be launched.
 - parameter executable: path to an executable file.
 - parameter args: arguments to the executable.
 - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
