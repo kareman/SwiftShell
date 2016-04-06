@@ -46,7 +46,8 @@ Print error to standard error and halt execution.
 		exit(errormessage: shellerror, errorcode: shellerror.errorcode, file: file, line: line)
 	} else {
 		let nserror = error as NSError
-		exit(errormessage: nserror.localizedDescription, errorcode: Int32(nserror.code), file: file, line: line)
+		// Cast to String to avoid compiler bug in release builds where the error message would not be printed.
+		exit(errormessage: String(nserror.localizedDescription), errorcode: nserror.code, file: file, line: line)
 	}
 }
 
