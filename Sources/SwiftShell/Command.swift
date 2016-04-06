@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: exit
+
 /**
 Print message to standard error and halt execution.
 
@@ -14,7 +16,20 @@ Print message to standard error and halt execution.
 - parameter errorcode: exit code for the entire program. Defaults to 1.
 - returns: not.
 */
-@noreturn public func exit <T> (errormessage errormessage: T, errorcode: Int32 = EXIT_FAILURE, file: String = #file, line: Int = #line) {
+@noreturn public func exit <T> (errormessage errormessage: T, errorcode: Int = 1, file: String = #file, line: Int = #line) {
+	main.stderror.write(file + ":\(line): ")
+	main.stderror.writeln(errormessage)
+	exit(Int32(errorcode))
+}
+
+/**
+Print message to standard error and halt execution.
+
+- parameter errormessage: the error message.
+- parameter errorcode: exit code for the entire program. Defaults to 1.
+- returns: not.
+*/
+@noreturn public func exit <T> (errormessage errormessage: T, errorcode: Int32, file: String = #file, line: Int = #line) {
 	main.stderror.write(file + ":\(line): ")
 	main.stderror.writeln(errormessage)
 	exit(errorcode)

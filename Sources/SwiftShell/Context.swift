@@ -78,7 +78,7 @@ private func createTempdirectory () -> String {
 		try Files.createDirectoryAtPath(tempdirectory.path!, withIntermediateDirectories: true, attributes: nil)
 		return tempdirectory.path! + "/"
 	} catch let error as NSError {
-		exit(errormessage: "Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)", errorcode: Int32(error.code))
+		exit(errormessage: "Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)", errorcode: error.code)
 	} catch {
 		exit(errormessage: "Unexpected error: \(error)")
 	}
