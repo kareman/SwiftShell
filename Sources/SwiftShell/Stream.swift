@@ -59,19 +59,27 @@ public final class WriteableStream : OutputStreamType {
 	public let filehandle: NSFileHandle
 	let encoding: NSStringEncoding
 
-	/** Write anything to the stream. */
+	/** Write the textual representation of `x` to the stream. */
 	public func write <T> (x: T) {
-		filehandle.write(x, encoding: encoding)
+		if filehandle.fileDescriptor == STDOUT_FILENO {
+			print(x, terminator: "")
+		} else {
+			filehandle.write(x, encoding: encoding)
+		}
 	}
 
-	/** Write anything to the stream, and add a newline. */
+	/** Write the textual representation of `x` to the stream, and add a newline. */
 	public func writeln <T> (x: T) {
-		filehandle.writeln(x, encoding: encoding)
+		if filehandle.fileDescriptor == STDOUT_FILENO {
+			print(x)
+		} else {
+			filehandle.writeln(x, encoding: encoding)
+		}
 	}
 
 	/** Write a newline to the stream. */
 	public func writeln () {
-		filehandle.writeln("")
+		writeln("")
 	}
 
 	/** Close the stream. Must be called on local streams when finished writing. */
