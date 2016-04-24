@@ -264,6 +264,11 @@ public final class AsyncShellTask {
 			exit(error, file: file, line: line)
 		}
 	}
+    
+    /** Terminate task early. */
+    public func stop(){
+        task.terminate()
+    }
 
 	/**
 	Wait for this shell task to finish.
@@ -277,9 +282,9 @@ public final class AsyncShellTask {
 	}
 
 	/** Wait for command to finish, then return with exit code. */
-	public func exitcode () -> Int32 {
+	public func exitcode () -> Int {
 		task.waitUntilExit()
-		return task.terminationStatus
+		return Int(task.terminationStatus)
 	}
 }
 
