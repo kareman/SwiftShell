@@ -295,7 +295,7 @@ extension ShellRunnable {
 	*/
 	public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line,outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
 		let stringargs = args.flatten().map { String($0) }
-		return AsyncShellTask(task: createTask(executable, args: stringargs), file: file, line: line,completionHandeler: completionHandeler)
+		return AsyncShellTask(task: createTask(executable, args: stringargs), file: file, line: line,outputHandeler: outputHandeler, errorHandeler: errorHandeler, completionHandeler: completionHandeler)
 	}
 }
 
@@ -348,7 +348,7 @@ Run executable and return before it is finished.
 - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
 */
 public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line,outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
-	return main.runAsync(executable, args, file: file, line: line,completionHandeler: completionHandeler)
+	return main.runAsync(executable, args, file: file, line: line, outputHandeler: outputHandeler, errorHandeler: errorHandeler, completionHandeler: completionHandeler)
 }
 
 /**
