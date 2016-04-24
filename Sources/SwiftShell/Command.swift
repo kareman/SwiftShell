@@ -242,6 +242,22 @@ public final class AsyncShellTask {
             }
         }
         
+        if let oh = outputHandeler{
+            self.stdout.filehandle.readabilityHandler = {(NSFileHandle) in
+                if let output = self.stdout.readSome(){
+                    oh(task: self, output: output)
+                }
+            }
+        }
+        
+        if let eh = errorHandeler{
+            self.stderror.filehandle.readabilityHandler = {(NSFileHandle) in
+                if let error = self.stderror.readSome(){
+                    eh(task: self, error: error)
+                }
+            }
+        }
+        
 		do {
 			try task.launchThrowably()
 		} catch {
