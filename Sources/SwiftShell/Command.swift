@@ -225,7 +225,7 @@ public final class AsyncShellTask {
 	public let stderror: ReadableStream
 	private let task: NSTask
 
-	init (task: NSTask, file: String = #file, line: Int = #line,outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) {
+	init (task: NSTask, file: String = #file, line: Int = #line,outputHandeler: ((sender: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((sender: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((sender: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) {
 		self.task = task
 
 		let outpipe = NSPipe()
@@ -238,14 +238,14 @@ public final class AsyncShellTask {
 
         if let ch = completionHandeler{
             task.terminationHandler = { (task:NSTask) in
-                ch(task: self, terminationStatus: Int(task.terminationStatus))
+                ch(sender: self, terminationStatus: Int(task.terminationStatus))
             }
         }
         
         if let oh = outputHandeler{
             self.stdout.filehandle.readabilityHandler = {(NSFileHandle) in
                 if let output = self.stdout.readSome(){
-                    oh(task: self, output: output)
+                    oh(sender: self, output: output)
                 }
             }
         }
@@ -253,7 +253,7 @@ public final class AsyncShellTask {
         if let eh = errorHandeler{
             self.stderror.filehandle.readabilityHandler = {(NSFileHandle) in
                 if let error = self.stderror.readSome(){
-                    eh(task: self, error: error)
+                    eh(sender: self, error: error)
                 }
             }
         }
@@ -293,7 +293,7 @@ extension ShellRunnable {
 	- parameter args: Arguments to the executable.
 	- returns: An AsyncShellTask with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line,outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
+	public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line,outputHandeler: ((sender: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((sender: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((sender: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
 		let stringargs = args.flatten().map { String($0) }
 		return AsyncShellTask(task: createTask(executable, args: stringargs), file: file, line: line,outputHandeler: outputHandeler, errorHandeler: errorHandeler, completionHandeler: completionHandeler)
 	}
@@ -347,7 +347,7 @@ Run executable and return before it is finished.
 - parameter completionHandeler: Optional closure callback when task terminates.
 - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
 */
-public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line,outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
+public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line,outputHandeler: ((sender: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((sender: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((sender: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
 	return main.runAsync(executable, args, file: file, line: line, outputHandeler: outputHandeler, errorHandeler: errorHandeler, completionHandeler: completionHandeler)
 }
 

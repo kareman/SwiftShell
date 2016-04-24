@@ -31,7 +31,7 @@ extension ShellRunnable {
 	- parameter bashcommand: the bash shell command.
 	- returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync (bash bashcommand: String,outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
+	public func runAsync (bash bashcommand: String,outputHandeler: ((sender: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((sender: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((sender: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
         return AsyncShellTask(task: createTask(bash: bashcommand),
                               outputHandeler: outputHandeler,
                               errorHandeler: errorHandeler,
@@ -71,7 +71,7 @@ Run bash command and return before it is finished.
  - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
 - returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
 */
-public func runAsync (bash bashcommand: String, outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
+public func runAsync (bash bashcommand: String, outputHandeler: ((sender: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((sender: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((sender: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
     return main.runAsync(bash: bashcommand,
                          outputHandeler: outputHandeler,
                          errorHandeler: errorHandeler,
