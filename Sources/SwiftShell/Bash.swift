@@ -31,8 +31,11 @@ extension ShellRunnable {
 	- parameter bashcommand: the bash shell command.
 	- returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync (bash bashcommand: String) -> AsyncShellTask {
-		return AsyncShellTask(task: createTask(bash: bashcommand))
+	public func runAsync (bash bashcommand: String,outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
+        return AsyncShellTask(task: createTask(bash: bashcommand),
+                              outputHandeler: outputHandeler,
+                              errorHandeler: errorHandeler,
+                              completionHandeler: completionHandeler)
 	}
 
 	/**
@@ -62,10 +65,17 @@ public func run (bash bashcommand: String, file: String = #file, line: Int = #li
 Run bash command and return before it is finished.
 
 - parameter bashcommand: the bash shell command.
+ - parameter outputHandeler: Optional closure callback when task outputs data.
+ - parameter errorHandeler: Optional closure callback when task outputs errors.
+ - parameter completionHandeler: Optional closure callback when task terminates.
+ - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
 - returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
 */
-public func runAsync (bash bashcommand: String) -> AsyncShellTask {
-	return main.runAsync(bash: bashcommand)
+public func runAsync (bash bashcommand: String, outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
+    return main.runAsync(bash: bashcommand,
+                         outputHandeler: outputHandeler,
+                         errorHandeler: errorHandeler,
+                         completionHandeler: completionHandeler)
 }
 
 /**

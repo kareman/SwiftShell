@@ -225,7 +225,7 @@ public final class AsyncShellTask {
 	public let stderror: ReadableStream
 	private let task: NSTask
 
-	init (task: NSTask, file: String = #file, line: Int = #line) {
+	init (task: NSTask, file: String = #file, line: Int = #line,outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) {
 		self.task = task
 
 		let outpipe = NSPipe()
@@ -236,6 +236,12 @@ public final class AsyncShellTask {
 		task.standardError = errorpipe
 		self.stderror = ReadableStream(errorpipe.fileHandleForReading)
 
+        if let ch = completionHandeler{
+            task.terminationHandler = { (task:NSTask) in
+                ch(task: self, terminationStatus: Int(task.terminationStatus))
+            }
+        }
+        
 		do {
 			try task.launchThrowably()
 		} catch {
@@ -271,9 +277,9 @@ extension ShellRunnable {
 	- parameter args: Arguments to the executable.
 	- returns: An AsyncShellTask with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncShellTask {
+	public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line,outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
 		let stringargs = args.flatten().map { String($0) }
-		return AsyncShellTask(task: createTask(executable, args: stringargs), file: file, line: line)
+		return AsyncShellTask(task: createTask(executable, args: stringargs), file: file, line: line,completionHandeler: completionHandeler)
 	}
 }
 
@@ -320,10 +326,13 @@ Run executable and return before it is finished.
 - warning: will crash if ‘executable’ could not be launched.
 - parameter executable: path to an executable file.
 - parameter args: arguments to the executable.
+- parameter outputHandeler: Optional closure callback when task outputs data.
+- parameter errorHandeler: Optional closure callback when task outputs errors.
+- parameter completionHandeler: Optional closure callback when task terminates.
 - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
 */
-public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncShellTask {
-	return main.runAsync(executable, args, file: file, line: line)
+public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line,outputHandeler: ((task: AsyncShellTask, output: String) -> Void)?=nil,errorHandeler: ((task: AsyncShellTask, error: String) -> Void)?=nil,completionHandeler: ((task: AsyncShellTask, terminationStatus: Int) -> Void)?=nil) -> AsyncShellTask {
+	return main.runAsync(executable, args, file: file, line: line,completionHandeler: completionHandeler)
 }
 
 /**
