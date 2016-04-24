@@ -96,13 +96,13 @@ extension ShellRunnable {
 public enum ShellError: ErrorType, Equatable {
 
 	/** Exit code was not zero. */
-	case ReturnedErrorCode (command: String, errorcode: Int32)
+	case ReturnedErrorCode (command: String, errorcode: Int)
 
 	/** Command could not be executed. */
 	case InAccessibleExecutable (path: String)
 
 	/** Exit code for this error. */
-	var errorcode: Int32 {
+	var errorcode: Int {
 		switch self {
 		case .ReturnedErrorCode(_, let code):
 			return code
@@ -164,7 +164,7 @@ extension NSTask {
 	public func finish() throws {
 		self.waitUntilExit()
 		guard self.terminationStatus == 0 else {
-			throw ShellError.ReturnedErrorCode(command: commandAsString()!, errorcode: self.terminationStatus)
+			throw ShellError.ReturnedErrorCode(command: commandAsString()!, errorcode: Int(self.terminationStatus))
 		}
 	}
 
