@@ -53,7 +53,7 @@ extension ReadableStream: ShellRunnable {
     }
 }
 
-/** Callback with when standardout has data.*/
+/** Callback with when ReadableStream has data.*/
 extension ReadableStream {
     public func onOutput ( handler: ((String) -> ())? ) {
         if let h = handler{
