@@ -46,11 +46,24 @@ public final class ReadableStream : Streamable {
 
 /** Let ReadableStream run commands using itself as stdin. */
 extension ReadableStream: ShellRunnable {
-	public var shellcontext: ShellContextType {
-		var context = ShellContext(main)
-		context.stdin = self
-		return context
-	}
+    public var shellcontext: ShellContextType {
+        var context = ShellContext(main)
+        context.stdin = self
+        return context
+    }
+}
+
+/** Callback with when standardout has data.*/
+extension ReadableStream {
+    public func onOutput ( handler: ((String) -> ())? ) {
+        if let h = handler{
+            filehandle.readabilityHandler = {(NSFileHandle) in
+                if let output = self.readSome(){
+                    h(output)
+                }
+            }
+        }
+    }
 }
 
 /** An output stream, like standard output or a writeable file. */
