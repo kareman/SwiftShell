@@ -62,4 +62,29 @@ class Stream_Tests: XCTestCase {
 
 		XCTAssertEqual(reader.readSome(), "one\n")
 	}
+
+	func testOnOutput () {
+		let (writer,reader) = streams()
+
+		let expectoutput = expectationWithDescription("onOutput will be called when output is available")
+		reader.onOutput { stream in
+			if stream.readSome() != nil {
+				expectoutput.fulfill()
+			}
+		}
+		writer.writeln()
+		waitForExpectationsWithTimeout(0.5, handler: nil)
+	}
+
+	func testOnStringOutput () {
+		let (writer,reader) = streams()
+
+		let expectoutput = expectationWithDescription("onOutput will be called when output is available")
+		reader.onStringOutput { string in
+			XCTAssertEqual(string, "hi")
+			expectoutput.fulfill()
+		}
+		writer.write("hi")
+		waitForExpectationsWithTimeout(0.5, handler: nil)
+	}
 }

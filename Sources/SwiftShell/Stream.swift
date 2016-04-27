@@ -55,13 +55,26 @@ extension ReadableStream: ShellRunnable {
 
 /** Callback with when ReadableStream has data.*/
 extension ReadableStream {
-	public func onOutput ( handler: ((String) -> ())? ) {
+
+	public func onOutput ( handler: ((ReadableStream) -> ())? ) {
+		guard let handler = handler else {
+			filehandle.readabilityHandler = nil
+			return
+		}
+		filehandle.readabilityHandler = { [unowned self] _ in
+			handler(self)
+		}
+	}
+
+	public func onStringOutput ( handler: ((String) -> ())? ) {
 		if let h = handler {
 			filehandle.readabilityHandler = { (NSFileHandle) in
 				if let output = self.readSome() {
 					h(output)
 				}
 			}
+		} else {
+			filehandle.readabilityHandler = nil
 		}
 	}
 }
