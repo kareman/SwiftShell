@@ -242,11 +242,11 @@ public final class AsyncShellTask {
 			exit(error, file: file, line: line)
 		}
 	}
-    
-    /** Terminate task early. */
-    public func stop(){
-        task.terminate()
-    }
+
+	/** Terminate task early. */
+	public func stop () {
+		task.terminate()
+	}
 
 	/**
 	Wait for this shell task to finish.
@@ -267,12 +267,12 @@ public final class AsyncShellTask {
 }
 
 extension AsyncShellTask {
-    public func onCompletion ( handler: ((AsyncShellTask) -> ())? ) -> AsyncShellTask {
-        task.terminationHandler = { (NSTask) in
-            handler?(self)
-        }
-        return self
-    }
+	public func onCompletion ( handler: ((AsyncShellTask) -> ())? ) -> AsyncShellTask {
+		task.terminationHandler = { (NSTask) in
+			handler?(self)
+		}
+		return self
+	}
 }
 
 extension ShellRunnable {
