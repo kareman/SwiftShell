@@ -53,9 +53,15 @@ extension ReadableStream: ShellRunnable {
 	}
 }
 
-/** Callback with when ReadableStream has data.*/
 extension ReadableStream {
 
+	/** 
+	`handler` will be called whenever there is new output available.
+	Pass `nil` to remove any preexisting handlers.
+
+	- note: if the stream is read from outside of the handler, or more than once inside
+	the handler, it may be called once when stream is closed and empty.
+	*/
 	public func onOutput ( handler: ((ReadableStream) -> ())? ) {
 		guard let handler = handler else {
 			filehandle.readabilityHandler = nil
@@ -66,6 +72,11 @@ extension ReadableStream {
 		}
 	}
 
+
+	/**
+	`handler` will be called whenever there is new text output available.
+	Pass `nil` to remove any preexisting handlers.
+	*/
 	public func onStringOutput ( handler: ((String) -> ())? ) {
 		if let h = handler {
 			filehandle.readabilityHandler = { (NSFileHandle) in
