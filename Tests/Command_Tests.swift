@@ -72,6 +72,13 @@ class RunAsync_Tests: XCTestCase {
 		XCTAssertEqual( asynctask.exitcode(), 1 )
 	}
 
+	func testOnCompletion () {
+		let expectcompletion = expectationWithDescription("onCompletion will be called when command has finished.")
+
+		runAsync("echo")
+			.onCompletion { _ in expectcompletion.fulfill()	}
+		waitForExpectationsWithTimeout(0.5, handler: nil)
+	}
 }
 
 class RunAndPrint_Tests: XCTestCase {
