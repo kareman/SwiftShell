@@ -9,7 +9,7 @@ import Foundation
 
 extension NSFileHandle {
 
-	public func readSome (encoding encoding: NSStringEncoding = main.encoding) -> String? {
+	public func readSome (encoding: NSStringEncoding = main.encoding) -> String? {
 		let data: NSData = self.availableData
 
 		guard data.length > 0 else { return nil }
@@ -20,7 +20,7 @@ extension NSFileHandle {
 		return result as String
 	}
 
-	public func read (encoding encoding: NSStringEncoding = main.encoding) -> String {
+	public func read (encoding: NSStringEncoding = main.encoding) -> String {
 		let data: NSData = self.readDataToEndOfFile()
 
 		guard let result = NSString(data: data, encoding: encoding) else {
@@ -33,14 +33,14 @@ extension NSFileHandle {
 
 extension NSFileHandle {
 
-	public func write <T> (x: T, encoding: NSStringEncoding = main.encoding) {
-		guard let data = String(x).dataUsingEncoding(encoding, allowLossyConversion:false) else {
+	public func write <T> (_ x: T, encoding: NSStringEncoding = main.encoding) {
+		guard let data = String(x).data(using: encoding, allowLossyConversion:false) else {
 			exit(errormessage: "Could not convert text to binary data.")
 		}
-		self.writeData(data)
+		self.write(data)
 	}
 
-	public func writeln <T> (x: T, encoding: UInt = main.encoding) {
+	public func writeln <T> (_ x: T, encoding: NSStringEncoding = main.encoding) {
 		self.write(x, encoding: encoding)
 		self.write("\n", encoding: encoding)
 	}

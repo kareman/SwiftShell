@@ -29,7 +29,7 @@ public final class ReadableStream : Streamable {
 	}
 
 	/** Enable stream to be used by "print". */
-	public func writeTo <Target : OutputStreamType> (inout target: Target) {
+	public func write<Target : OutputStream>(to target: inout Target) {
 		while let text = self.readSome() { target.write(text) }
 	}
 
@@ -91,13 +91,13 @@ extension ReadableStream {
 }
 
 /** An output stream, like standard output or a writeable file. */
-public final class WriteableStream : OutputStreamType {
+public final class WriteableStream : OutputStream {
 
 	public let filehandle: NSFileHandle
 	let encoding: NSStringEncoding
 
 	/** Write the textual representation of `x` to the stream. */
-	public func write <T> (x: T) {
+	public func write <T> (_ x: T) {
 		if filehandle.fileDescriptor == STDOUT_FILENO {
 			print(x, terminator: "")
 		} else {
@@ -106,7 +106,7 @@ public final class WriteableStream : OutputStreamType {
 	}
 
 	/** Write the textual representation of `x` to the stream, and add a newline. */
-	public func writeln <T> (x: T) {
+	public func writeln <T> (_ x: T) {
 		if filehandle.fileDescriptor == STDOUT_FILENO {
 			print(x)
 		} else {

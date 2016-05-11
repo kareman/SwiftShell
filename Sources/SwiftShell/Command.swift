@@ -16,7 +16,7 @@ Print message to standard error and halt execution.
 - parameter errorcode: exit code for the entire program. Defaults to 1.
 - returns: not.
 */
-@noreturn public func exit <T> (errormessage errormessage: T, errorcode: Int = 1, file: String = #file, line: Int = #line) {
+@noreturn public func exit <T> (errormessage: T, errorcode: Int = 1, file: String = #file, line: Int = #line) {
 	main.stderror.write(file + ":\(line): ")
 	main.stderror.writeln(errormessage)
 	exit(Int32(errorcode))
@@ -29,7 +29,7 @@ Print message to standard error and halt execution.
 - parameter errorcode: exit code for the entire program. Defaults to 1.
 - returns: not.
 */
-@noreturn public func exit <T> (errormessage errormessage: T, errorcode: Int32, file: String = #file, line: Int = #line) {
+@noreturn public func exit <T> (errormessage: T, errorcode: Int32, file: String = #file, line: Int = #line) {
 	main.stderror.write(file + ":\(line): ")
 	main.stderror.writeln(errormessage)
 	exit(errorcode)
@@ -41,7 +41,7 @@ Print error to standard error and halt execution.
 - parameter error: the error
 - returns: not.
 */
-@noreturn public func exit (error: ErrorType, file: String = #file, line: Int = #line) {
+@noreturn public func exit (_ error: ErrorProtocol, file: String = #file, line: Int = #line) {
 	if let shellerror = error as? ShellError {
 		exit(errormessage: shellerror, errorcode: shellerror.errorcode, file: file, line: line)
 	} else {
@@ -60,7 +60,7 @@ public protocol ShellRunnable {
 
 extension ShellRunnable {
 
-	func createTask (executable: String, args: [String]) -> NSTask {
+	func createTask (_ executable: String, args: [String]) -> NSTask {
 
 		/**
 		If `executable` is not a path and a path for an executable file of that name can be found, return that path.
@@ -70,13 +70,13 @@ extension ShellRunnable {
 			guard !executable.characters.contains("/") else {
 				return executable
 			}
-			let path = self.run("/usr/bin/which", executable)
+			let path = self.run(bash: "/usr/bin/which", file: executable)
 			return path.isEmpty ? executable : path
 		}
 
 		let task = NSTask()
 		task.arguments = args
-		task.launchPath = pathForExecutable(executable)
+		task.launchPath = pathForExecutable(executable: executable)
 
 		task.environment = shellcontext.env
 		task.currentDirectoryPath = shellcontext.currentdirectory
@@ -93,7 +93,7 @@ extension ShellRunnable {
 // MARK: ShellError
 
 /** Error type for shell commands. */
-public enum ShellError: ErrorType, Equatable {
+public enum ShellError: ErrorProtocol, Equatable {
 
 	/** Exit code was not zero. */
 	case ReturnedErrorCode (command: String, errorcode: Int32)
@@ -171,7 +171,7 @@ extension NSTask {
 	/** The full path to the executable + all arguments, each one quoted if it contains a space. */
 	func commandAsString () -> String? {
 		guard let path = self.launchPath else { return nil }
-		return self.arguments?.reduce(path) { acc, arg in
+		return self.arguments?.reduce(path) { (acc:String, arg:String) in
 			return acc + " " + ( arg.characters.contains(" ") ? ("\"" + arg + "\"") : arg )
 		}
 	}
@@ -181,7 +181,7 @@ extension NSTask {
 
 extension ShellRunnable {
 
-	func outputFromRun (task: NSTask, file: String, line: Int) -> String {
+	func outputFromRun (_ task: NSTask, file: String, line: Int) -> String {
 		let output = NSPipe ()
 		task.standardOutput = output
 		task.standardError = output
@@ -194,9 +194,9 @@ extension ShellRunnable {
 		task.waitUntilExit()
 
 		// if output is single-line, trim it.
-		let firstnewline = outputstring.characters.indexOf("\n")
-		if firstnewline == nil || firstnewline == outputstring.endIndex.predecessor() {
-			outputstring = outputstring.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet())
+		let firstnewline = outputstring.characters.index(of: "\n")
+		if firstnewline == nil || outputstring.characters.index(after: firstnewline!) == outputstring.endIndex {
+			outputstring = outputstring.trimmingCharacters(in: .whitespacesAndNewlines())
 		}
 
 		return outputstring
@@ -210,7 +210,7 @@ extension ShellRunnable {
 	- parameter args: the arguments, one string for each.
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
-	public func run (executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
+	public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
 		let stringargs = args.flatten().map { String($0) }
 		return outputFromRun(createTask(executable, args: stringargs), file: file, line: line)
 	}
@@ -285,7 +285,7 @@ extension ShellRunnable {
 	- parameter args: Arguments to the executable.
 	- returns: An AsyncShellTask with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncShellTask {
+	public func runAsync (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncShellTask {
 		let stringargs = args.flatten().map { String($0) }
 		return AsyncShellTask(task: createTask(executable, args: stringargs), file: file, line: line)
 	}
@@ -305,7 +305,7 @@ extension ShellRunnable {
 
 		`ShellError.InAccessibleExecutable (path: String)` if 'executable’ turned out to be not so executable after all.
 	*/
-	public func runAndPrint (executable: String, _ args: Any ...) throws {
+	public func runAndPrint (_ executable: String, _ args: Any ...) throws {
 		let stringargs = args.flatten().map { String($0) }
 		let task = createTask(executable, args: stringargs)
 
@@ -324,7 +324,7 @@ Shortcut for shell command, returns output and errors as a String.
 - parameter args: the arguments, one string for each.
 - returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 */
-public func run (executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
+public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
 	return main.run(executable, args, file: file, line: line)
 }
 
@@ -336,7 +336,7 @@ Run executable and return before it is finished.
 - parameter args: arguments to the executable.
 - returns: an AsyncShellTask with standard output, standard error and a 'finish' function.
 */
-public func runAsync (executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncShellTask {
+public func runAsync (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncShellTask {
 	return main.runAsync(executable, args, file: file, line: line)
 }
 
@@ -349,6 +349,6 @@ Run executable and print output and errors.
 
 	`ShellError.InAccessibleExecutable (path: String)` if 'executable’ turned out to be not so executable after all.
 */
-public func runAndPrint (executable: String, _ args: Any ...) throws {
+public func runAndPrint (_ executable: String, _ args: Any ...) throws {
 	return try main.runAndPrint(executable, args)
 }

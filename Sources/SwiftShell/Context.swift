@@ -46,9 +46,9 @@ public struct ShellContext: ShellContextType {
 		encoding = NSUTF8StringEncoding
 		env = [String:String]()
 
-		stdin =    ReadableStream(NSFileHandle.fileHandleWithNullDevice(), encoding: encoding)
-		stdout =   WriteableStream(NSFileHandle.fileHandleWithNullDevice(), encoding: encoding)
-		stderror = WriteableStream(NSFileHandle.fileHandleWithNullDevice(), encoding: encoding)
+		stdin =    ReadableStream(NSFileHandle.nullDevice(), encoding: encoding)
+		stdout =   WriteableStream(NSFileHandle.nullDevice(), encoding: encoding)
+		stderror = WriteableStream(NSFileHandle.nullDevice(), encoding: encoding)
 
 		currentdirectory = main.currentdirectory
 	}
@@ -75,7 +75,7 @@ private func createTempdirectory () -> String {
 	let name = NSURL(fileURLWithPath: main.path).lastPathComponent ?? "SwiftShell"
 	let tempdirectory = NSURL(fileURLWithPath:NSTemporaryDirectory()) + (name + "-" + NSProcessInfo.processInfo().globallyUniqueString)
 	do {
-		try Files.createDirectoryAtPath(tempdirectory.path!, withIntermediateDirectories: true, attributes: nil)
+		try Files.createDirectory(atPath: tempdirectory.path!, withIntermediateDirectories: true, attributes: nil)
 		return tempdirectory.path! + "/"
 	} catch let error as NSError {
 		exit(errormessage: "Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)", errorcode: error.code)
@@ -94,9 +94,9 @@ public final class MainShellContext: ShellContextType {
 	public var encoding = NSUTF8StringEncoding
 	public lazy var env = NSProcessInfo.processInfo().environment as [String: String]
 
-	public lazy var stdin: ReadableStream = { ReadableStream(NSFileHandle.fileHandleWithStandardInput(), encoding: self.encoding) }()
-	public lazy var stdout: WriteableStream = { WriteableStream(NSFileHandle.fileHandleWithStandardOutput(), encoding: self.encoding) }()
-	public lazy var stderror: WriteableStream = { WriteableStream(NSFileHandle.fileHandleWithStandardError(), encoding: self.encoding) }()
+	public lazy var stdin: ReadableStream = { ReadableStream(NSFileHandle.standardInput(), encoding: self.encoding) }()
+	public lazy var stdout: WriteableStream = { WriteableStream(NSFileHandle.standardOutput(), encoding: self.encoding) }()
+	public lazy var stderror: WriteableStream = { WriteableStream(NSFileHandle.standardError(), encoding: self.encoding) }()
 
 	/**
 	The current working directory.

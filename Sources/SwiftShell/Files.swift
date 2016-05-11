@@ -8,11 +8,11 @@
 import Foundation
 
 /** The default NSFileManager */
-public let Files = NSFileManager.defaultManager()
+public let Files = NSFileManager.default()
 
 /** Append file or directory url to directory url */
 public func + (leftpath: NSURL, rightpath: String) -> NSURL {
-	return leftpath.URLByAppendingPathComponent(rightpath)
+	return leftpath.appendingPathComponent(rightpath)
 }
 
 /** Run a function which takes a NSErrorPointer. If an NSError occurs, throw it, otherwise return result. */
@@ -26,14 +26,14 @@ func makeThrowable <T> (nserrorfunc: (NSErrorPointer) -> T) throws -> T {
 }
 
 /** Open a file for reading, throw if an error occurs. */
-public func open (path: String, encoding: NSStringEncoding = main.encoding) throws -> ReadableStream {
+public func open (_ path: String, encoding: NSStringEncoding = main.encoding) throws -> ReadableStream {
 	return try open(NSURL(fileURLWithPath: path, isDirectory: false), encoding: encoding)
 }
 
 /** Open a file for reading, throw if an error occurs. */
-public func open (path: NSURL, encoding: NSStringEncoding = main.encoding) throws -> ReadableStream {
-	try makeThrowable(path.checkResourceIsReachableAndReturnError)
-	return ReadableStream(try NSFileHandle(forReadingFromURL: path), encoding: encoding)
+public func open (_ path: NSURL, encoding: NSStringEncoding = main.encoding) throws -> ReadableStream {
+	try makeThrowable(nserrorfunc: path.checkResourceIsReachableAndReturnError)
+	return ReadableStream(try NSFileHandle(forReadingFrom: path), encoding: encoding)
 }
 
 /**
@@ -44,12 +44,12 @@ If the file already exists and overwrite=false, the writing will begin at the en
 */
 public func open (forWriting path: NSURL, overwrite: Bool = false, encoding: NSStringEncoding = main.encoding) throws -> WriteableStream {
 
-	if overwrite || !Files.fileExistsAtPath(path.path!) {
-		Files.createFileAtPath(path.path!, contents: nil, attributes: nil)
+	if overwrite || !Files.fileExists(atPath: path.path!) {
+		Files.createFile(atPath: path.path!, contents: nil, attributes: nil)
 	}
-	try makeThrowable(path.checkResourceIsReachableAndReturnError)
+	try makeThrowable(nserrorfunc: path.checkResourceIsReachableAndReturnError)
 
-	let filehandle = try NSFileHandle(forWritingToURL: path)
+	let filehandle = try NSFileHandle(forWritingTo: path)
 	filehandle.seekToEndOfFile()
 	return WriteableStream(filehandle, encoding: encoding)
 }

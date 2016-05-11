@@ -80,7 +80,7 @@ class LazySplitGenerator_Tests: XCTestCase {
 
 	func testPartialSourceLazySplit_AllowingEmptySlices () {
 		func split (s: String...) -> [String] {
-			var sg = s.map {$0.characters} .generate()
+			var sg = s.map {$0.characters} .makeIterator()
 			return PartialSourceLazySplitSequence(bases: {sg.next()}, separator: ",").map {String($0)}
 		}
 
