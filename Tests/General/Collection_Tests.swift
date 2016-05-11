@@ -11,9 +11,9 @@ import XCTest
 
 class LazySplitGenerator_Tests: XCTestCase {
 
-	func lazySplitToArray (allowEmptySlices allowEmptySlices: Bool) -> (String) -> [String] {
+	func lazySplitToArray (allowEmptySlices: Bool) -> (String) -> [String] {
 		return { s in
-			let seq: LazySplitSequence = s.characters.lazy.split("," as Character, allowEmptySlices: allowEmptySlices)
+			let seq: LazySplitSequence = s.characters.lazy.split(separator: "," as Character, allowEmptySlices: allowEmptySlices)
 			return seq.map {String($0)}
 		}
 	}
@@ -31,8 +31,8 @@ class LazySplitGenerator_Tests: XCTestCase {
 	}
 
 	func testCollectionTypeSplit_AllowingEmptySlices () {
-		let split = {(s: String) -> [String] in
-			s.characters.split(",", allowEmptySlices: true).map {String($0)}
+		let split = { (s: String) -> [String] in
+			s.characters.split(separator: ",", omittingEmptySubsequences: false).map(String.init)
 		}
 
 		XCTAssertEqual(split("ab,c,de,f"), ["ab","c","de","f"])
@@ -58,7 +58,7 @@ class LazySplitGenerator_Tests: XCTestCase {
 
 	func testCollectionTypeSplit_NoEmptySlices () {
 		let split = {(s: String) -> [String] in
-			s.characters.split(",", allowEmptySlices: false).map {String($0)}
+			s.characters.split(separator: ",", omittingEmptySubsequences: true).map(String.init)
 		}
 
 		XCTAssertEqual(split("ab,c,de,f"), ["ab","c","de","f"])
@@ -72,16 +72,16 @@ class LazySplitGenerator_Tests: XCTestCase {
 
 	func testIntsLazySplit_NoEmptySlices () {
 		let split = {(s: [Int]) -> [[Int]] in
-			s.lazy.split(0, allowEmptySlices: false).map {Array($0)}
+			s.lazy.split(separator: 0, omittingEmptySubsequences: true).map(Array.init)
 		}
 
 		XCTAssertEqual(split([1,2,0,4,0,6,7,8,9]), [[1,2],[4],[6,7,8,9]])
 	}
 
 	func testPartialSourceLazySplit_AllowingEmptySlices () {
-		func split (s: String...) -> [String] {
+		func split (_ s: String...) -> [String] {
 			var sg = s.map {$0.characters} .makeIterator()
-			return PartialSourceLazySplitSequence(bases: {sg.next()}, separator: ",").map {String($0)}
+			return PartialSourceLazySplitSequence({sg.next()}, separator: ",").map {String($0)}
 		}
 
 		XCTAssertEqual(split("ab,c",",de,f"), ["ab","c","de","f"])

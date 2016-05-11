@@ -12,7 +12,7 @@ import SwiftShell
 class MainContext_Tests: XCTestCase {
 
 	func testCurrentDirectory_IsCurrentDirectory () {
-		XCTAssertEqual( main.currentdirectory, NSFileManager.defaultManager().currentDirectoryPath + "/")
+		XCTAssertEqual( main.currentdirectory, NSFileManager.default().currentDirectoryPath + "/")
 	}
 
 	func testCurrentDirectory_CanChange () {
@@ -35,7 +35,7 @@ class MainContext_Tests: XCTestCase {
 
 	func testTempDirectory () {
 		XCTAssertEqual( main.tempdirectory, main.tempdirectory )
-		XCTAssert( Files.fileExistsAtPath(main.tempdirectory), "Temporary directory \(main.tempdirectory) does not exist" )
+		XCTAssert( Files.fileExists(atPath: main.tempdirectory), "Temporary directory \(main.tempdirectory) does not exist" )
 	}
 }
 
@@ -63,9 +63,9 @@ class BlankShellContext_Tests: XCTestCase {
 	func testIsBlank () {
 		let context = ShellContext()
 
-		XCTAssert( context.stdin.filehandle === NSFileHandle.fileHandleWithNullDevice() )
-		XCTAssert( context.stdout.filehandle === NSFileHandle.fileHandleWithNullDevice() )
-		XCTAssert( context.stderror.filehandle === NSFileHandle.fileHandleWithNullDevice() )
+		XCTAssert( context.stdin.filehandle === NSFileHandle.nullDevice() )
+		XCTAssert( context.stdout.filehandle === NSFileHandle.nullDevice() )
+		XCTAssert( context.stderror.filehandle === NSFileHandle.nullDevice() )
 	}
 
 	func testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable () {

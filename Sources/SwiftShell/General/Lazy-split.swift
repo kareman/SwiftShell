@@ -65,7 +65,7 @@ public struct PartialSourceLazySplitSequence <Base: Collection where Base.Iterat
 	private var gs: LazyMapIterator<AnyIterator<Base>, LazySplitSequence<Base>>
 	private var g: LazySplitSequence<Base>?
 
-	public init (bases: ()->Base?, separator: Base.Iterator.Element) {
+	public init (_ bases: ()->Base?, separator: Base.Iterator.Element) {
 		gs = AnyIterator(bases).lazy.map {
 			LazySplitSequence($0, separator: separator, allowEmptySlices: true).makeIterator()
 			}.makeIterator()

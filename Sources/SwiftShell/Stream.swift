@@ -40,7 +40,7 @@ public final class ReadableStream : Streamable {
 
 	/** Split stream lazily into lines. */
 	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
-		return PartialSourceLazySplitSequence(bases: {self.readSome()?.characters}, separator: "\n").map { String($0) }
+		return PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }
 	}
 }
 

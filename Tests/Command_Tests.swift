@@ -73,11 +73,11 @@ class RunAsync_Tests: XCTestCase {
 	}
 
 	func testOnCompletion () {
-		let expectcompletion = expectationWithDescription("onCompletion will be called when command has finished.")
+		let expectcompletion = expectation(withDescription: "onCompletion will be called when command has finished.")
 
 		runAsync("echo")
 			.onCompletion { _ in expectcompletion.fulfill()	}
-		waitForExpectationsWithTimeout(0.5, handler: nil)
+		waitForExpectations(withTimeout: 0.5, handler: nil)
 	}
 }
 
