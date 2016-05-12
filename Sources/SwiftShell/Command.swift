@@ -70,7 +70,7 @@ extension ShellRunnable {
 			guard !executable.characters.contains("/") else {
 				return executable
 			}
-			let path = self.run(bash: "/usr/bin/which", file: executable)
+			let path = self.run("/usr/bin/which", executable)
 			return path.isEmpty ? executable : path
 		}
 
