@@ -122,10 +122,10 @@ public final class MainShellContext: ShellContextType {
 	public lazy var tempdirectory: String = createTempdirectory()
 
 	/** The arguments this executable was launched with. Use main.path to get the path. */
-	public lazy var arguments: [String] = Array(Process.arguments.dropFirst())
+	public lazy var arguments: [String] = Array(NSProcessInfo.processInfo().arguments.dropFirst())
 
 	/** The path to the currently running executable. Will be empty in playgrounds. */
-	public lazy var path: String = Process.arguments.first ?? ""
+	public lazy var path: String = NSProcessInfo.processInfo().arguments.first ?? ""
 
 	private init() {
 	}
