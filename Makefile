@@ -8,10 +8,10 @@ endif
 .PHONY: build test clean
 
 build: 
-	@xcodebuild | ${BUILDCLEANER}
+	@xcodebuild TOOLCHAINS=swift | ${BUILDCLEANER}
 
 test: build
-	@xcodebuild test -scheme SwiftShell | ${TESTCLEANER}
+	@xcodebuild TOOLCHAINS=swift -scheme SwiftShell test | ${TESTCLEANER}
 	
 	@echo
 	@echo "=== RUN SwiftShell TEST SCRIPTS (SwiftShellTests/Scripts/runtests.bash) ==="
