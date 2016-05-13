@@ -84,6 +84,14 @@ private func createTempdirectory () -> String {
 	}
 }
 
+extension Process {
+
+	/** Workaround for nil crash in Process.arguments when run in Xcode. */
+	static var safeArguments: [String] {
+		return self.argc == 0 ? [] : self.arguments
+	}
+}
+
 public final class MainShellContext: ShellContextType {
 
 	/** 
@@ -122,10 +130,10 @@ public final class MainShellContext: ShellContextType {
 	public lazy var tempdirectory: String = createTempdirectory()
 
 	/** The arguments this executable was launched with. Use main.path to get the path. */
-	public lazy var arguments: [String] = Array(NSProcessInfo.processInfo().arguments.dropFirst())
+	public lazy var arguments: [String] = Array(Process.safeArguments.dropFirst())
 
 	/** The path to the currently running executable. Will be empty in playgrounds. */
-	public lazy var path: String = NSProcessInfo.processInfo().arguments.first ?? ""
+	public lazy var path: String = Process.safeArguments.first ?? ""
 
 	private init() {
 	}
