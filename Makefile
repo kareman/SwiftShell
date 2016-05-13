@@ -5,13 +5,15 @@ ifeq (,$(shell command -v xcpretty))
 	TESTCLEANER := egrep -v '^Test Suite|^Test Case|^\t Executed'
 endif
 
+export TOOLCHAINS=$(shell defaults read /Library/Developer/Toolchains/swift-`cat .swift-version`.xctoolchain/Info CFBundleIdentifier || echo swift)
+
 .PHONY: build test clean
 
 build: 
-	@xcodebuild TOOLCHAINS=swift | ${BUILDCLEANER}
+	@xcodebuild | ${BUILDCLEANER}
 
 test: build
-	@xcodebuild TOOLCHAINS=swift -scheme SwiftShell test | ${TESTCLEANER}
+	@xcodebuild -scheme SwiftShell test | ${TESTCLEANER}
 	
 	@echo
 	@echo "=== RUN SwiftShell TEST SCRIPTS (SwiftShellTests/Scripts/runtests.bash) ==="
