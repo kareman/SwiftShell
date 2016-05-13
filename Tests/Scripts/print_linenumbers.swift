@@ -3,8 +3,8 @@
 import SwiftShell
 
 main.stdin.lines()
-	.enumerate().map { (linenr,line) in "\(linenr+1): " + String(line) }
-	.joinWithSeparator("\n").writeTo(&main.stdout)
+	.enumerated().map { (linenr,line) in String(linenr+1) + ": " + String(line) }
+	.joined(separator: "\n").write(to: &main.stdout)
 
 // add a final newline at the end
 print("")
