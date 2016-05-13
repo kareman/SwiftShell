@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-PROJECT_ROOT=../..
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+cd $SCRIPT_DIR
+PROJECT_ROOT=$SCRIPT_DIR/../..
 
 # Build the framework and record any errors.
 BUILDERRORS=$(xcodebuild -project $PROJECT_ROOT/SwiftShell2.xcodeproj/ 2>&1 >/dev/null)
@@ -18,10 +20,9 @@ export PATH=$PROJECT_ROOT/Misc:$PATH
 export SWIFTSHELL_FRAMEWORK_PATH=$PROJECT_ROOT/build/Release/
 
 # Import the unit testing script.
-. assert.sh
+. $SCRIPT_DIR/assert.sh
 
 # Be aware the “assert” command does not check standard error output or exit code.
-
 assert "./print_name_and_args.swift 1 2" "print_name_and_args.swift \"1\" \"2\""
 assert_raises "./exitswhenopeningnon-existentfile.swift" 132
 assert "cat onetwothree.txt | ./print_linenumbers.swift" "1: one\n2: two\n3: three"
