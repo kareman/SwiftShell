@@ -12,6 +12,9 @@ An OS X Framework for command-line scripting in Swift.
 
 - [Documentation](http://kareman.github.io/SwiftShell) from the source code.
 - A [description](https://www.skilled.io/kare/swiftshell) of the project on [skilled.io](https://www.skilled.io).
+- Example scripts
+    - [Move files to the trash](http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/)
+    - [Combine markdown files and convert to HTML](http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/) (runs a shell command in the middle of a method chain)
 
 ## Example
 
