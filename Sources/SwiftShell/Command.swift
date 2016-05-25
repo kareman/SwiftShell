@@ -145,15 +145,10 @@ extension NSTask {
 	- throws: ShellError.InAccessibleExecutable if command could not be executed.
 	*/
 	public func launchThrowably() throws {
-		#if SWIFT_PACKAGE
-			launch()
-		#else
-			do {
-				try launchWithNSError()
-			} catch {
-				throw ShellError.InAccessibleExecutable(path: self.launchPath!)
-			}
-		#endif
+		guard Files.isExecutableFile(atPath: self.launchPath!) else {
+			throw ShellError.InAccessibleExecutable(path: self.launchPath!)
+		}
+		launch()
 	}
 
 	/**
