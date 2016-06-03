@@ -16,7 +16,7 @@ test: build
 	@xcodebuild -scheme SwiftShell test | ${TESTCLEANER}
 	
 	@echo
-	@echo "=== RUN SwiftShell TEST SCRIPTS (SwiftShellTests/Scripts/runtests.bash) ==="
+	@echo "=== RUN SwiftShell TEST SCRIPTS (Tests/Scripts/runtests.bash) ==="
 	@cd ./Tests/Scripts/ && ./runtests.bash 
 	@echo
 
