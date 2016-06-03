@@ -249,7 +249,7 @@ public final class AsyncShellTask {
 	- returns: itself
 	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
 	*/
-	public func finish() throws -> AsyncShellTask {
+	@discardableResult public func finish() throws -> AsyncShellTask {
 		try task.finish()
 		return self
 	}
@@ -262,7 +262,7 @@ public final class AsyncShellTask {
 }
 
 extension AsyncShellTask {
-	public func onCompletion ( handler: ((AsyncShellTask) -> ())? ) -> AsyncShellTask {
+	@discardableResult public func onCompletion ( handler: ((AsyncShellTask) -> ())? ) -> AsyncShellTask {
 		task.terminationHandler = { (NSTask) in
 			handler?(self)
 		}
