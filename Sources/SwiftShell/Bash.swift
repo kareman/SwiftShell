@@ -21,7 +21,7 @@ extension ShellRunnable {
 	- parameter bashcommand: the bash shell command.
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
-	public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
+	@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
 		return outputFromRun(createTask(bash: bashcommand), file: file, line: line)
 	}
 
@@ -54,7 +54,7 @@ Shortcut for bash shell command, returns output and errors as a String.
 - parameter bashcommand: the bash shell command.
 - returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 */
-public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
+@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
 	return main.run(bash: bashcommand, file: file, line: line)
 }
 
