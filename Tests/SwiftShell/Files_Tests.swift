@@ -22,10 +22,12 @@ class UrlAppendationOperator: XCTestCase {
 class Open: XCTestCase {
 
 	func testReadFile () {
-		let shorttextpath = pathForTestResource("shorttext", type: "txt")
+		let path = main.tempdirectory + "testReadFile.txt"
+		let _ = SwiftShell.run(bash: "echo Lorem ipsum dolor > " + path)
 
 		AssertNoThrow {
-			let file = try open(shorttextpath)
+			print(main.currentdirectory)
+			let file = try open(path)
 			XCTAssert(file.read().hasPrefix("Lorem ipsum dolor"))
 		}
 	}

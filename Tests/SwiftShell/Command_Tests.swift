@@ -6,6 +6,7 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
+@testable
 import SwiftShell
 import XCTest
 
