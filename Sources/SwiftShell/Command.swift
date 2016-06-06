@@ -45,11 +45,13 @@ Print error to standard error and halt execution.
 	if let shellerror = error as? ShellError {
 		exit(errormessage: shellerror, errorcode: shellerror.errorcode, file: file, line: line)
 	} else {
-		#if os(OSX)
-			let error = error as NSError
-		#endif
+#if os(OSX)
+		let error = error as NSError
 		// Cast to String to avoid compiler bug in release builds where the error message would not be printed.
 		exit(errormessage: String(error.localizedDescription), errorcode: error.code, file: file, line: line)
+#else
+		exit(errormessage: String(error), errorcode: error._code, file: file, line: line)
+#endif
 	}
 }
 

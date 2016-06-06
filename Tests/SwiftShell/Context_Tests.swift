@@ -8,11 +8,12 @@
 
 import XCTest
 import SwiftShell
+import Foundation
 
 class MainContext_Tests: XCTestCase {
 
 	func testCurrentDirectory_IsCurrentDirectory () {
-		XCTAssertEqual( main.currentdirectory, NSFileManager.default().currentDirectoryPath + "/")
+		XCTAssertEqual( main.currentdirectory, Files.currentDirectoryPath + "/")
 	}
 
 	func testCurrentDirectory_CanChange () {

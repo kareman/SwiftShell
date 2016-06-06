@@ -8,11 +8,20 @@
 import Foundation
 
 /** The default NSFileManager */
+#if os(OSX)
 public let Files = NSFileManager.default()
+#else
+public let Files = NSFileManager.defaultManager()
+#endif
 
 /** Append file or directory url to directory url */
 public func + (leftpath: NSURL, rightpath: String) -> NSURL {
+	#if os(OSX)
 	return leftpath.appendingPathComponent(rightpath)
+	#else
+	return leftpath.URLByAppendingPathComponent(rightpath)!
+	#endif
+
 }
 
 
@@ -61,12 +70,12 @@ If the file already exists and overwrite=false, the writing will begin at the en
 public func open (forWriting path: NSURL, overwrite: Bool = false, encoding: NSStringEncoding = main.encoding) throws -> WriteableStream {
 
 	if overwrite || !Files.fileExists(atPath: path.path!) {
-		Files.createFile(atPath: path.path!, contents: nil, attributes: nil)
+		_ = Files.createFile(atPath: path.path!, contents: nil, attributes: nil)
 	}
 
 	do {
 		let filehandle = try NSFileHandle(forWritingTo: path)
-		filehandle.seekToEndOfFile()
+		_ = filehandle.seekToEndOfFile()
 		return WriteableStream(filehandle, encoding: encoding)
 	} catch {
 		try FileError.checkFile(path.path!)

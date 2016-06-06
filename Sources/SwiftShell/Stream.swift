@@ -53,9 +53,10 @@ extension ReadableStream: ShellRunnable {
 	}
 }
 
+#if !os(Linux)
 extension ReadableStream {
 
-	/** 
+	/**
 	`handler` will be called whenever there is new output available.
 	Pass `nil` to remove any preexisting handlers.
 
@@ -89,6 +90,7 @@ extension ReadableStream {
 		}
 	}
 }
+#endif
 
 /** An output stream, like standard output or a writeable file. */
 public final class WriteableStream : OutputStream {

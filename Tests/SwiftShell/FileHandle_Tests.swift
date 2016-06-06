@@ -8,6 +8,7 @@
 
 import SwiftShell
 import XCTest
+import Foundation
 
 class FileHandle_Tests: XCTestCase {
 

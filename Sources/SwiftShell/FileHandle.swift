@@ -17,7 +17,7 @@ extension NSFileHandle {
 			exit(errormessage: "Could not convert binary data to text.")
 		}
 
-		return result as String
+		return String(result)
 	}
 
 	public func read (encoding: NSStringEncoding = main.encoding) -> String {
@@ -27,7 +27,7 @@ extension NSFileHandle {
 			exit(errormessage: "Could not convert binary data to text.")
 		}
 
-		return result as String
+		return String(result)
 	}
 }
 

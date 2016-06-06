@@ -9,6 +9,7 @@
 @testable
 import SwiftShell
 import XCTest
+import Foundation
 
 class Run_Tests: XCTestCase {
 
