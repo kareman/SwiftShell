@@ -13,7 +13,7 @@ import Foundation
 class FileHandle_Tests: XCTestCase {
 
 	func testWriteAndReadSome () {
-		let pipe = NSPipe()
+		let pipe = Pipe()
 		let writer = pipe.fileHandleForWriting
 		let reader = pipe.fileHandleForReading
 
@@ -29,7 +29,7 @@ class FileHandle_Tests: XCTestCase {
 	}
 
 	func testWritelnAndRead () {
-		let pipe = NSPipe()
+		let pipe = Pipe()
 		let writer = pipe.fileHandleForWriting
 		let reader = pipe.fileHandleForReading
 

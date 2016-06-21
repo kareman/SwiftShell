@@ -13,9 +13,9 @@ import Foundation
 class UrlAppendationOperator: XCTestCase {
 
 	func testUrlPlusString () {
-		XCTAssertEqual( NSURL(fileURLWithPath: "dir") + "file.txt", NSURL(fileURLWithPath: "dir/file.txt"))
-		XCTAssertEqual( NSURL(fileURLWithPath: "dir/") + "/file.txt", NSURL(fileURLWithPath: "dir/file.txt"))
-		XCTAssertEqual( NSURL(string: "dir")! + "file.txt", NSURL(string: "dir/file.txt"))
+		XCTAssertEqual( URL(fileURLWithPath: "dir") + "file.txt", URL(fileURLWithPath: "dir/file.txt"))
+		XCTAssertEqual( URL(fileURLWithPath: "dir/") + "/file.txt", URL(fileURLWithPath: "dir/file.txt"))
+		XCTAssertEqual( URL(string: "dir")! + "file.txt", URL(string: "dir/file.txt"))
 	}
 }
 

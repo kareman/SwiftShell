@@ -11,7 +11,7 @@ import Foundation
 
 extension ShellRunnable {
 
-	func createTask (bash bashcommand: String) -> NSTask {
+	func createTask (bash bashcommand: String) -> Task {
 		return createTask("/bin/bash", args: ["-c", bashcommand])
 	}
 

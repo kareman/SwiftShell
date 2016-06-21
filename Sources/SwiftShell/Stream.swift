@@ -10,8 +10,8 @@ import Foundation
 /** A stream of text. Does as much as possible lazily. */
 public final class ReadableStream : Streamable {
 
-	public let filehandle: NSFileHandle
-	public let encoding: NSStringEncoding
+	public let filehandle: FileHandle
+	public let encoding: String.Encoding
 
 	/**
 	Whatever amount of text the stream feels like providing.
@@ -33,7 +33,7 @@ public final class ReadableStream : Streamable {
 		while let text = self.readSome() { target.write(text) }
 	}
 
-	public init (_ filehandle: NSFileHandle, encoding: NSStringEncoding = main.encoding) {
+	public init (_ filehandle: FileHandle, encoding: String.Encoding = main.encoding) {
 		self.filehandle = filehandle
 		self.encoding = encoding
 	}
@@ -80,7 +80,7 @@ extension ReadableStream {
 	*/
 	public func onStringOutput ( handler: ((String) -> ())? ) {
 		if let h = handler {
-			filehandle.readabilityHandler = { (NSFileHandle) in
+			filehandle.readabilityHandler = { (FileHandle) in
 				if let output = self.readSome() {
 					h(output)
 				}
@@ -95,8 +95,8 @@ extension ReadableStream {
 /** An output stream, like standard output or a writeable file. */
 public final class WriteableStream : OutputStream {
 
-	public let filehandle: NSFileHandle
-	let encoding: NSStringEncoding
+	public let filehandle: FileHandle
+	let encoding: String.Encoding
 
 	/** Write the textual representation of `x` to the stream. */
 	public func write <T> (_ x: T) {
@@ -126,7 +126,7 @@ public final class WriteableStream : OutputStream {
 		filehandle.closeFile()
 	}
 
-	public init (_ filehandle: NSFileHandle, encoding: NSStringEncoding = main.encoding) {
+	public init (_ filehandle: FileHandle, encoding: String.Encoding = main.encoding) {
 		self.filehandle = filehandle
 		self.encoding = encoding
 	}
@@ -134,6 +134,6 @@ public final class WriteableStream : OutputStream {
 
 /** Create a pair of streams. What is written to the 1st one can be read from the 2nd one. */
 public func streams () -> (WriteableStream, ReadableStream) {
-	let pipe = NSPipe()
+	let pipe = Pipe()
 	return (WriteableStream(pipe.fileHandleForWriting), ReadableStream(pipe.fileHandleForReading))
 }

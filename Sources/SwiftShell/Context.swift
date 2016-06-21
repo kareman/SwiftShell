@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol ShellContextType {
-	var encoding: NSStringEncoding {get set}
+	var encoding: String.Encoding {get set}
 	var env: [String: String] {get set}
 
 	var stdin: ReadableStream {get set}
@@ -26,7 +26,7 @@ public protocol ShellContextType {
 
 
 public struct ShellContext: ShellContextType {
-	public var encoding: NSStringEncoding
+	public var encoding: String.Encoding
 	public var env: [String: String]
 
 	public var stdin: ReadableStream
@@ -43,12 +43,12 @@ public struct ShellContext: ShellContextType {
 
 	/** Creates a blank ShellContext. */
 	public init () {
-		encoding = NSUTF8StringEncoding
+		encoding = String.Encoding.utf8
 		env = [String:String]()
 
-		stdin =    ReadableStream(NSFileHandle.nullDevice(), encoding: encoding)
-		stdout =   WriteableStream(NSFileHandle.nullDevice(), encoding: encoding)
-		stderror = WriteableStream(NSFileHandle.nullDevice(), encoding: encoding)
+		stdin =    ReadableStream(FileHandle.nullDevice(), encoding: encoding)
+		stdout =   WriteableStream(FileHandle.nullDevice(), encoding: encoding)
+		stderror = WriteableStream(FileHandle.nullDevice(), encoding: encoding)
 
 		currentdirectory = main.currentdirectory
 	}
@@ -72,8 +72,8 @@ extension ShellContext: ShellRunnable {
 
 
 private func createTempdirectory () -> String {
-	let name = NSURL(fileURLWithPath: main.path).lastPathComponent ?? "SwiftShell"
-	let tempdirectory = NSURL(fileURLWithPath:NSTemporaryDirectory()) + (name + "-" + NSProcessInfo.processInfo().globallyUniqueString)
+	let name = URL(fileURLWithPath: main.path).lastPathComponent ?? "SwiftShell"
+	let tempdirectory = URL(fileURLWithPath:NSTemporaryDirectory()) + (name + "-" + ProcessInfo.processInfo().globallyUniqueString)
 	do {
 		try Files.createDirectory(atPath: tempdirectory.path!, withIntermediateDirectories: true, attributes: nil)
 		return tempdirectory.path! + "/"
@@ -99,12 +99,12 @@ public final class MainShellContext: ShellContextType {
 
 	TODO: get encoding from environmental variable LC_CTYPE.
 	*/
-	public var encoding = NSUTF8StringEncoding
-	public lazy var env = NSProcessInfo.processInfo().environment as [String: String]
+	public var encoding = String.Encoding.utf8
+	public lazy var env = ProcessInfo.processInfo().environment as [String: String]
 
-	public lazy var stdin: ReadableStream = { ReadableStream(NSFileHandle.standardInput(), encoding: self.encoding) }()
-	public lazy var stdout: WriteableStream = { WriteableStream(NSFileHandle.standardOutput(), encoding: self.encoding) }()
-	public lazy var stderror: WriteableStream = { WriteableStream(NSFileHandle.standardError(), encoding: self.encoding) }()
+	public lazy var stdin: ReadableStream = { ReadableStream(FileHandle.standardInput(), encoding: self.encoding) }()
+	public lazy var stdout: WriteableStream = { WriteableStream(FileHandle.standardOutput(), encoding: self.encoding) }()
+	public lazy var stderror: WriteableStream = { WriteableStream(FileHandle.standardError(), encoding: self.encoding) }()
 
 	/**
 	The current working directory.
@@ -112,7 +112,7 @@ public final class MainShellContext: ShellContextType {
 	Must be used instead of `run("cd", "...")` because all the `run` commands are executed in
 	separate processes and changing the directory there will not affect the rest of the Swift script.
 
-	This directory is also used as the base for relative NSURLs.
+	This directory is also used as the base for relative URLs.
 	*/
 	public var currentdirectory: String {
 		get {	return Files.currentDirectoryPath + "/" }

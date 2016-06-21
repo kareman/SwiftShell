@@ -7,17 +7,13 @@
 
 import Foundation
 
-/** The default NSFileManager */
-#if os(OSX)
-public let Files = NSFileManager.default()
-#else
-public let Files = NSFileManager.defaultManager()
-#endif
+/** The default FileManager */
+public let Files = FileManager.default()
 
 /** Append file or directory url to directory url */
-public func + (leftpath: NSURL, rightpath: String) -> NSURL {
+public func + (leftpath: URL, rightpath: String) -> URL {
 	#if os(OSX)
-	return leftpath.appendingPathComponent(rightpath)
+	return try! leftpath.appendingPathComponent(rightpath)
 	#else
 	return leftpath.URLByAppendingPathComponent(rightpath)!
 	#endif
@@ -47,14 +43,14 @@ extension FileError: CustomStringConvertible {
 }
 
 /** Open a file for reading, throw if an error occurs. */
-public func open (_ path: String, encoding: NSStringEncoding = main.encoding) throws -> ReadableStream {
-	return try open(NSURL(fileURLWithPath: path, isDirectory: false), encoding: encoding)
+public func open (_ path: String, encoding: String.Encoding = main.encoding) throws -> ReadableStream {
+	return try open(URL(fileURLWithPath: path, isDirectory: false), encoding: encoding)
 }
 
 /** Open a file for reading, throw if an error occurs. */
-public func open (_ path: NSURL, encoding: NSStringEncoding = main.encoding) throws -> ReadableStream {
+public func open (_ path: URL, encoding: String.Encoding = main.encoding) throws -> ReadableStream {
 	do {
-		return ReadableStream(try NSFileHandle(forReadingFrom: path), encoding: encoding)
+		return ReadableStream(try FileHandle(forReadingFrom: path), encoding: encoding)
 	} catch {
 		try FileError.checkFile(path.path!)
 		throw error
@@ -67,14 +63,14 @@ If the file already exists and overwrite=false, the writing will begin at the en
 
 - parameter overwrite: If true, replace the file if it exists.
 */
-public func open (forWriting path: NSURL, overwrite: Bool = false, encoding: NSStringEncoding = main.encoding) throws -> WriteableStream {
+public func open (forWriting path: URL, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WriteableStream {
 
 	if overwrite || !Files.fileExists(atPath: path.path!) {
 		_ = Files.createFile(atPath: path.path!, contents: nil, attributes: nil)
 	}
 
 	do {
-		let filehandle = try NSFileHandle(forWritingTo: path)
+		let filehandle = try FileHandle(forWritingTo: path)
 		_ = filehandle.seekToEndOfFile()
 		return WriteableStream(filehandle, encoding: encoding)
 	} catch {
@@ -89,6 +85,6 @@ If the file already exists and overwrite=false, the writing will begin at the en
 
 - parameter overwrite: If true, replace the file if it exists.
 */
-public func open (forWriting path: String, overwrite: Bool = false, encoding: NSStringEncoding = main.encoding) throws -> WriteableStream {
-	return try open(forWriting: NSURL(fileURLWithPath: path, isDirectory: false), overwrite: overwrite, encoding:  encoding)
+public func open (forWriting path: String, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WriteableStream {
+	return try open(forWriting: URL(fileURLWithPath: path, isDirectory: false), overwrite: overwrite, encoding:  encoding)
 }

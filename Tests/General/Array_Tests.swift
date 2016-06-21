@@ -35,3 +35,4 @@ class Array_Tests: XCTestCase {
 		XCTAssertEqual( (["1",[2,[3] as Any]] as [Any]).flatten().description, "[\"1\", 2, 3]")
 	}
 }
+

@@ -64,7 +64,7 @@ public protocol ShellRunnable {
 
 extension ShellRunnable {
 
-	func createTask (_ executable: String, args: [String]) -> NSTask {
+	func createTask (_ executable: String, args: [String]) -> Task {
 
 		/**
 		If `executable` is not a path and a path for an executable file of that name can be found, return that path.
@@ -78,7 +78,7 @@ extension ShellRunnable {
 			return path.isEmpty ? executable : path
 		}
 
-		let task = NSTask()
+		let task = Task()
 		task.arguments = args
 		task.launchPath = pathForExecutable(executable: executable)
 
@@ -139,9 +139,9 @@ public func == (e1: ShellError, e2: ShellError) -> Bool {
 	}
 }
 
-// MARK: NSTask
+// MARK: Task
 
-extension NSTask {
+extension Task {
 
 	/**
 	Launch task.
@@ -180,8 +180,8 @@ extension NSTask {
 
 extension ShellRunnable {
 
-	func outputFromRun (_ task: NSTask, file: String, line: Int) -> String {
-		let output = NSPipe ()
+	func outputFromRun (_ task: Task, file: String, line: Int) -> String {
+		let output = Pipe ()
 		task.standardOutput = output
 		task.standardError = output
 		do {
@@ -195,7 +195,7 @@ extension ShellRunnable {
 		// if output is single-line, trim it.
 		let firstnewline = outputstring.characters.index(of: "\n")
 		if firstnewline == nil || outputstring.characters.index(after: firstnewline!) == outputstring.endIndex {
-			outputstring = outputstring.trimmingCharacters(in: .whitespacesAndNewlines())
+			outputstring = outputstring.trimmingCharacters(in: .whitespacesAndNewlines)
 		}
 
 		return outputstring
@@ -222,16 +222,16 @@ extension ShellRunnable {
 public final class AsyncShellTask {
 	public let stdout: ReadableStream
 	public let stderror: ReadableStream
-	private let task: NSTask
+	private let task: Task
 
-	init (task: NSTask, file: String = #file, line: Int = #line) {
+	init (task: Task, file: String = #file, line: Int = #line) {
 		self.task = task
 
-		let outpipe = NSPipe()
+		let outpipe = Pipe()
 		task.standardOutput = outpipe
 		self.stdout = ReadableStream(outpipe.fileHandleForReading)
 
-		let errorpipe = NSPipe()
+		let errorpipe = Pipe()
 		task.standardError = errorpipe
 		self.stderror = ReadableStream(errorpipe.fileHandleForReading)
 
@@ -267,7 +267,7 @@ public final class AsyncShellTask {
 
 extension AsyncShellTask {
 	@discardableResult public func onCompletion ( handler: ((AsyncShellTask) -> ())? ) -> AsyncShellTask {
-		task.terminationHandler = { (NSTask) in
+		task.terminationHandler = { (Task) in
 			handler?(self)
 		}
 		return self

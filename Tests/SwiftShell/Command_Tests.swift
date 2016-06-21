@@ -85,15 +85,15 @@ class RunAsync_Tests: XCTestCase {
 
 class RunAndPrint_Tests: XCTestCase {
 
-	var test_stdout: NSFileHandle!
-	var test_stderr: NSFileHandle!
+	var test_stdout: FileHandle!
+	var test_stderr: FileHandle!
 
 	override func setUp () {
-		let outputpipe = NSPipe()
+		let outputpipe = Pipe()
 		main.stdout = WriteableStream(outputpipe.fileHandleForWriting)
 		test_stdout = outputpipe.fileHandleForReading
 
-		let errorpipe = NSPipe()
+		let errorpipe = Pipe()
 		main.stderror = WriteableStream(errorpipe.fileHandleForWriting)
 		test_stderr = errorpipe.fileHandleForReading
 	}

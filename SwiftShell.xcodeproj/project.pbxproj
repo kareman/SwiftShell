@@ -44,7 +44,7 @@
 		__PBXFileRef_GeneralTestSuite_Info.plist /* GeneralTestSuite_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = GeneralTestSuite_Info.plist; path = SwiftShell.xcodeproj/GeneralTestSuite_Info.plist; sourceTree = SOURCE_ROOT; };
 		__PBXFileRef_Package.swift /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Sources/SwiftShell/Bash.swift /* Bash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bash.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Sources/SwiftShell/Command.swift /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Sources/SwiftShell/Command.swift /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Command.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		__PBXFileRef_Sources/SwiftShell/Context.swift /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Sources/SwiftShell/FileHandle.swift /* FileHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandle.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Sources/SwiftShell/Files.swift /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
@@ -57,9 +57,9 @@
 		__PBXFileRef_Tests/General/Array_Tests.swift /* Array_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array_Tests.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Tests/General/Collection_Tests.swift /* Collection_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection_Tests.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Tests/SwiftShell/CatchingFire.swift /* CatchingFire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatchingFire.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Tests/SwiftShell/Command_Tests.swift /* Command_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command_Tests.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Tests/SwiftShell/Context_Tests.swift /* Context_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Context_Tests.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Tests/SwiftShell/FileHandle_Tests.swift /* FileHandle_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandle_Tests.swift; sourceTree = "<group>"; };
+		__PBXFileRef_Tests/SwiftShell/Command_Tests.swift /* Command_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Command_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		__PBXFileRef_Tests/SwiftShell/Context_Tests.swift /* Context_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Context_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		__PBXFileRef_Tests/SwiftShell/FileHandle_Tests.swift /* FileHandle_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FileHandle_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		__PBXFileRef_Tests/SwiftShell/Files_Tests.swift /* Files_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files_Tests.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Tests/SwiftShell/Stream_Tests.swift /* Stream_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stream_Tests.swift; sourceTree = "<group>"; };
 		"_____Product_GeneralTestSuite" /* GeneralTestSuite.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = GeneralTestSuite.xctest; sourceTree = BUILT_PRODUCTS_DIR; };

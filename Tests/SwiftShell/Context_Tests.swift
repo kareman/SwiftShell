@@ -26,11 +26,11 @@ class MainContext_Tests: XCTestCase {
 
 	func testCurrentDirectory_AffectsNSURLBase () {
 		let originalcurrentdirectory = main.currentdirectory
-		XCTAssertNotEqual(NSURL(fileURLWithPath: "file").baseURL, NSURL(fileURLWithPath: "/private") )
+		XCTAssertNotEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/private") )
 
 		main.currentdirectory = "/private"
 
-		XCTAssertEqual(NSURL(fileURLWithPath: "file").baseURL, NSURL(fileURLWithPath: "/private") )
+		XCTAssertEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/private") )
 		main.currentdirectory = originalcurrentdirectory
 	}
 
@@ -50,12 +50,12 @@ class CopiedShellContext_Tests: XCTestCase {
 	}
 
 	func testCurrentDirectory_DoesNotAffectNSURLBase () {
-		let originalnsurlbaseurl = NSURL(fileURLWithPath: "file").baseURL
+		let originalnsurlbaseurl = URL(fileURLWithPath: "file").baseURL
 
 		var context = ShellContext(main)
 		context.currentdirectory = "/private"
 
-		XCTAssertEqual(NSURL(fileURLWithPath: "file").baseURL, originalnsurlbaseurl )
+		XCTAssertEqual(URL(fileURLWithPath: "file").baseURL, originalnsurlbaseurl )
 	}
 }
 
@@ -64,9 +64,9 @@ class BlankShellContext_Tests: XCTestCase {
 	func testIsBlank () {
 		let context = ShellContext()
 
-		XCTAssert( context.stdin.filehandle === NSFileHandle.nullDevice() )
-		XCTAssert( context.stdout.filehandle === NSFileHandle.nullDevice() )
-		XCTAssert( context.stderror.filehandle === NSFileHandle.nullDevice() )
+		XCTAssert( context.stdin.filehandle === FileHandle.nullDevice() )
+		XCTAssert( context.stdout.filehandle === FileHandle.nullDevice() )
+		XCTAssert( context.stderror.filehandle === FileHandle.nullDevice() )
 	}
 
 	func testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable () {
@@ -97,7 +97,7 @@ class BlankShellContext_Tests: XCTestCase {
 			try context.runAndPrint("/bin/echo", "one") // sent to null
 		}
 
-		let outputpipe = NSPipe()
+		let outputpipe = Pipe()
 		context.stdout = WriteableStream(outputpipe.fileHandleForWriting)
 		let output = outputpipe.fileHandleForReading
 
