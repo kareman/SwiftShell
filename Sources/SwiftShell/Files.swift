@@ -12,12 +12,7 @@ public let Files = FileManager.default()
 
 /** Append file or directory url to directory url */
 public func + (leftpath: URL, rightpath: String) -> URL {
-	#if os(OSX)
 	return try! leftpath.appendingPathComponent(rightpath)
-	#else
-	return leftpath.URLByAppendingPathComponent(rightpath)!
-	#endif
-
 }
 
 
