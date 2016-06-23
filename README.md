@@ -6,7 +6,7 @@ _Not currently available for Linux, because [NSTask](https://github.com/apple/sw
 
 # SwiftShell
 
-An OS X Framework for command-line scripting in Swift.
+An OS X/macOS Framework for command-line scripting in Swift.
 
 #### See also
 
