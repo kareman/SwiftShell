@@ -64,9 +64,9 @@ class BlankShellContext_Tests: XCTestCase {
 	func testIsBlank () {
 		let context = ShellContext()
 
-		XCTAssert( context.stdin.filehandle === FileHandle.nullDevice() )
-		XCTAssert( context.stdout.filehandle === FileHandle.nullDevice() )
-		XCTAssert( context.stderror.filehandle === FileHandle.nullDevice() )
+		XCTAssert( context.stdin.filehandle === FileHandle.withNullDevice )
+		XCTAssert( context.stdout.filehandle === FileHandle.withNullDevice )
+		XCTAssert( context.stderror.filehandle === FileHandle.withNullDevice )
 	}
 
 	func testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable () {

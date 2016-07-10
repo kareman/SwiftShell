@@ -46,9 +46,9 @@ public struct ShellContext: ShellContextType {
 		encoding = String.Encoding.utf8
 		env = [String:String]()
 
-		stdin =    ReadableStream(FileHandle.nullDevice(), encoding: encoding)
-		stdout =   WriteableStream(FileHandle.nullDevice(), encoding: encoding)
-		stderror = WriteableStream(FileHandle.nullDevice(), encoding: encoding)
+		stdin =    ReadableStream(FileHandle.withNullDevice, encoding: encoding)
+		stdout =   WriteableStream(FileHandle.withNullDevice, encoding: encoding)
+		stderror = WriteableStream(FileHandle.withNullDevice, encoding: encoding)
 
 		currentdirectory = main.currentdirectory
 	}
@@ -73,7 +73,7 @@ extension ShellContext: ShellRunnable {
 
 private func createTempdirectory () -> String {
 	let name = URL(fileURLWithPath: main.path).lastPathComponent ?? "SwiftShell"
-	let tempdirectory = URL(fileURLWithPath:NSTemporaryDirectory()) + (name + "-" + ProcessInfo.processInfo().globallyUniqueString)
+	let tempdirectory = URL(fileURLWithPath:NSTemporaryDirectory()) + (name + "-" + ProcessInfo.processInfo.globallyUniqueString)
 	do {
 		try Files.createDirectory(atPath: tempdirectory.path!, withIntermediateDirectories: true, attributes: nil)
 		return tempdirectory.path! + "/"
@@ -100,11 +100,11 @@ public final class MainShellContext: ShellContextType {
 	TODO: get encoding from environmental variable LC_CTYPE.
 	*/
 	public var encoding = String.Encoding.utf8
-	public lazy var env = ProcessInfo.processInfo().environment as [String: String]
+	public lazy var env = ProcessInfo.processInfo.environment as [String: String]
 
-	public lazy var stdin: ReadableStream = { ReadableStream(FileHandle.standardInput(), encoding: self.encoding) }()
-	public lazy var stdout: WriteableStream = { WriteableStream(FileHandle.standardOutput(), encoding: self.encoding) }()
-	public lazy var stderror: WriteableStream = { WriteableStream(FileHandle.standardError(), encoding: self.encoding) }()
+	public lazy var stdin: ReadableStream = { ReadableStream(FileHandle.withStandardInput, encoding: self.encoding) }()
+	public lazy var stdout: WriteableStream = { WriteableStream(FileHandle.withStandardOutput, encoding: self.encoding) }()
+	public lazy var stderror: WriteableStream = { WriteableStream(FileHandle.withStandardError, encoding: self.encoding) }()
 
 	/**
 	The current working directory.

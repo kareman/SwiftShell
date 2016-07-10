@@ -8,7 +8,7 @@
 import Foundation
 
 /** The default FileManager */
-public let Files = FileManager.default()
+public let Files = FileManager.default
 
 /** Append file or directory url to directory url */
 public func + (leftpath: URL, rightpath: String) -> URL {
