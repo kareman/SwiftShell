@@ -16,7 +16,7 @@ Print message to standard error and halt execution.
 - parameter errorcode: exit code for the entire program. Defaults to 1.
 - returns: not.
 */
-@noreturn public func exit <T> (errormessage: T, errorcode: Int = 1, file: String = #file, line: Int = #line) {
+public func exit <T> (errormessage: T, errorcode: Int = 1, file: String = #file, line: Int = #line) -> Never  {
 	main.stderror.write(file + ":\(line): ")
 	main.stderror.writeln(errormessage)
 	exit(Int32(errorcode))
@@ -29,7 +29,7 @@ Print message to standard error and halt execution.
 - parameter errorcode: exit code for the entire program. Defaults to 1.
 - returns: not.
 */
-@noreturn public func exit <T> (errormessage: T, errorcode: Int32, file: String = #file, line: Int = #line) {
+public func exit <T> (errormessage: T, errorcode: Int32, file: String = #file, line: Int = #line) -> Never  {
 	main.stderror.write(file + ":\(line): ")
 	main.stderror.writeln(errormessage)
 	exit(errorcode)
@@ -41,7 +41,7 @@ Print error to standard error and halt execution.
 - parameter error: the error
 - returns: not.
 */
-@noreturn public func exit (_ error: ErrorProtocol, file: String = #file, line: Int = #line) {
+public func exit (_ error: Error, file: String = #file, line: Int = #line) -> Never  {
 	if let shellerror = error as? ShellError {
 		exit(errormessage: shellerror, errorcode: shellerror.errorcode, file: file, line: line)
 	} else {
@@ -64,7 +64,7 @@ public protocol ShellRunnable {
 
 extension ShellRunnable {
 
-	func createTask (_ executable: String, args: [String]) -> Task {
+	func createTask (_ executable: String, args: [String]) -> Process {
 
 		/**
 		If `executable` is not a path and a path for an executable file of that name can be found, return that path.
@@ -78,18 +78,18 @@ extension ShellRunnable {
 			return path.isEmpty ? executable : path
 		}
 
-		let task = Task()
-		task.arguments = args
-		task.launchPath = pathForExecutable(executable: executable)
+		let process = Process()
+		process.arguments = args
+		process.launchPath = pathForExecutable(executable: executable)
 
-		task.environment = shellcontext.env
-		task.currentDirectoryPath = shellcontext.currentdirectory
+		process.environment = shellcontext.env
+		process.currentDirectoryPath = shellcontext.currentdirectory
 
-		task.standardInput = shellcontext.stdin.filehandle
-		task.standardOutput = shellcontext.stdout.filehandle
-		task.standardError = shellcontext.stderror.filehandle
+		process.standardInput = shellcontext.stdin.filehandle
+		process.standardOutput = shellcontext.stdout.filehandle
+		process.standardError = shellcontext.stderror.filehandle
 
-		return task
+		return process
 	}
 }
 
@@ -97,7 +97,7 @@ extension ShellRunnable {
 // MARK: ShellError
 
 /** Error type for shell commands. */
-public enum ShellError: ErrorProtocol, Equatable {
+public enum ShellError: Error, Equatable {
 
 	/** Exit code was not zero. */
 	case ReturnedErrorCode (command: String, errorcode: Int32)
@@ -139,12 +139,12 @@ public func == (e1: ShellError, e2: ShellError) -> Bool {
 	}
 }
 
-// MARK: Task
+// MARK: Process
 
-extension Task {
+extension Process {
 
 	/**
-	Launch task.
+	Launch process.
 
 	- throws: ShellError.InAccessibleExecutable if command could not be executed.
 	*/
@@ -156,7 +156,7 @@ extension Task {
 	}
 
 	/**
-	Wait until task is finished.
+	Wait until process is finished.
 
 	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
 	*/
@@ -180,17 +180,17 @@ extension Task {
 
 extension ShellRunnable {
 
-	func outputFromRun (_ task: Task, file: String, line: Int) -> String {
+	func outputFromRun (_ process: Process, file: String, line: Int) -> String {
 		let output = Pipe ()
-		task.standardOutput = output
-		task.standardError = output
+		process.standardOutput = output
+		process.standardError = output
 		do {
-			try task.launchThrowably()
+			try process.launchThrowably()
 		} catch {
-			exit(error, file: file, line: line)
+			exit(errormessage: error, file: file, line: line)
 		}
 		var outputstring = output.fileHandleForReading.read(encoding: shellcontext.encoding)
-		task.waitUntilExit()
+		process.waitUntilExit()
 
 		// if output is single-line, trim it.
 		let firstnewline = outputstring.characters.index(of: "\n")
@@ -210,7 +210,7 @@ extension ShellRunnable {
 	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
 	@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
-		let stringargs = args.flatten().map { String($0) }
+		let stringargs = args.flatten().map(String.init(describing:))
 		return outputFromRun(createTask(executable, args: stringargs), file: file, line: line)
 	}
 }
@@ -222,52 +222,52 @@ extension ShellRunnable {
 public final class AsyncShellTask {
 	public let stdout: ReadableStream
 	public let stderror: ReadableStream
-	private let task: Task
+	fileprivate let process: Process
 
-	init (task: Task, file: String = #file, line: Int = #line) {
-		self.task = task
+	init (process: Process, file: String = #file, line: Int = #line) {
+		self.process = Process()
 
 		let outpipe = Pipe()
-		task.standardOutput = outpipe
+		process.standardOutput = outpipe
 		self.stdout = ReadableStream(outpipe.fileHandleForReading)
 
 		let errorpipe = Pipe()
-		task.standardError = errorpipe
+		process.standardError = errorpipe
 		self.stderror = ReadableStream(errorpipe.fileHandleForReading)
 
 		do {
-			try task.launchThrowably()
+			try process.launchThrowably()
 		} catch {
-			exit(error, file: file, line: line)
+			exit(errormessage: error, file: file, line: line)
 		}
 	}
 
-	/** Terminate task early. */
+	/** Terminate process early. */
 	public func stop () {
-		task.terminate()
+		process.terminate()
 	}
 
 	/**
-	Wait for this shell task to finish.
+	Wait for this shell process to finish.
 
 	- returns: itself
 	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
 	*/
 	@discardableResult public func finish() throws -> AsyncShellTask {
-		try task.finish()
+		try process.finish()
 		return self
 	}
 
 	/** Wait for command to finish, then return with exit code. */
 	public func exitcode () -> Int32 {
-		task.waitUntilExit()
-		return task.terminationStatus
+		process.waitUntilExit()
+		return process.terminationStatus
 	}
 }
 
 extension AsyncShellTask {
 	@discardableResult public func onCompletion ( handler: ((AsyncShellTask) -> ())? ) -> AsyncShellTask {
-		task.terminationHandler = { (Task) in
+		process.terminationHandler = { (Process) in
 			handler?(self)
 		}
 		return self
@@ -285,8 +285,8 @@ extension ShellRunnable {
 	- returns: An AsyncShellTask with standard output, standard error and a 'finish' function.
 	*/
 	public func runAsync (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncShellTask {
-		let stringargs = args.flatten().map { String($0) }
-		return AsyncShellTask(task: createTask(executable, args: stringargs), file: file, line: line)
+		let stringargs = args.flatten().map(String.init(describing:))
+		return AsyncShellTask(process: createTask(executable, args: stringargs), file: file, line: line)
 	}
 }
 
@@ -300,16 +300,17 @@ extension ShellRunnable {
 
 	- parameter executable: path to an executable file.
 	- parameter args: arguments to the executable.
-	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
+	- throws: 
+		`ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
 
 		`ShellError.InAccessibleExecutable (path: String)` if 'executable’ turned out to be not so executable after all.
 	*/
 	public func runAndPrint (_ executable: String, _ args: Any ...) throws {
-		let stringargs = args.flatten().map { String($0) }
-		let task = createTask(executable, args: stringargs)
+		let stringargs = args.flatten().map(String.init(describing:))
+		let process = createTask(executable, args: stringargs)
 
-		try task.launchThrowably()
-		try task.finish()
+		try process.launchThrowably()
+		try process.finish()
 	}
 }
 

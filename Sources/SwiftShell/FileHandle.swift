@@ -34,7 +34,7 @@ extension FileHandle {
 extension FileHandle {
 
 	public func write <T> (_ x: T, encoding: String.Encoding = main.encoding) {
-		guard let data = String(x).data(using: encoding, allowLossyConversion:false) else {
+		guard let data = String(describing: x).data(using: encoding, allowLossyConversion:false) else {
 			exit(errormessage: "Could not convert text to binary data.")
 		}
 		self.write(data)

@@ -64,9 +64,9 @@ class BlankShellContext_Tests: XCTestCase {
 	func testIsBlank () {
 		let context = ShellContext()
 
-		XCTAssert( context.stdin.filehandle === FileHandle.withNullDevice )
-		XCTAssert( context.stdout.filehandle === FileHandle.withNullDevice )
-		XCTAssert( context.stderror.filehandle === FileHandle.withNullDevice )
+		XCTAssert( context.stdin.filehandle === FileHandle.nullDevice )
+		XCTAssert( context.stdout.filehandle === FileHandle.nullDevice )
+		XCTAssert( context.stderror.filehandle === FileHandle.nullDevice )
 	}
 
 	func testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable () {
@@ -85,9 +85,9 @@ class BlankShellContext_Tests: XCTestCase {
 
 	func testRunAsyncCommand () {
 		let context = ShellContext()
-		let task = context.runAsync("/bin/echo", "one")
+		let process = context.runAsync("/bin/echo", "one")
 
-		XCTAssertEqual(task.stdout.read(), "one\n")
+		XCTAssertEqual(process.stdout.read(), "one\n")
 	}
 
 	func testRunAndPrintCommand () {

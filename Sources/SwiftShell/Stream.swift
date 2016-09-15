@@ -8,7 +8,7 @@
 import Foundation
 
 /** A stream of text. Does as much as possible lazily. */
-public final class ReadableStream : Streamable {
+public final class ReadableStream : TextOutputStreamable {
 
 	public let filehandle: FileHandle
 	public let encoding: String.Encoding
@@ -29,7 +29,7 @@ public final class ReadableStream : Streamable {
 	}
 
 	/** Enable stream to be used by "print". */
-	public func write<Target : OutputStream>(to target: inout Target) {
+	public func write<Target : TextOutputStream>(to target: inout Target) {
 		while let text = self.readSome() { target.write(text) }
 	}
 
@@ -93,7 +93,7 @@ extension ReadableStream {
 #endif
 
 /** An output stream, like standard output or a writeable file. */
-public final class WriteableStream : OutputStream {
+public final class WriteableStream : TextOutputStream {
 
 	public let filehandle: FileHandle
 	let encoding: String.Encoding

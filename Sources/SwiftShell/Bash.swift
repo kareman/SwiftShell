@@ -11,7 +11,7 @@ import Foundation
 
 extension ShellRunnable {
 
-	func createTask (bash bashcommand: String) -> Task {
+	func createTask (bash bashcommand: String) -> Process {
 		return createTask("/bin/bash", args: ["-c", bashcommand])
 	}
 
@@ -32,7 +32,7 @@ extension ShellRunnable {
 	- returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
 	*/
 	public func runAsync (bash bashcommand: String) -> AsyncShellTask {
-		return AsyncShellTask(task: createTask(bash: bashcommand))
+		return AsyncShellTask(process: createTask(bash: bashcommand))
 	}
 
 	/**
@@ -42,9 +42,9 @@ extension ShellRunnable {
 	- throws: a ShellError.ReturnedErrorCode if the return code is anything but 0.
 	*/
 	public func runAndPrint (bash bashcommand: String) throws {
-		let task = createTask(bash: bashcommand)
-		task.launch()
-		try task.finish()
+		let process = createTask(bash: bashcommand)
+		process.launch()
+		try process.finish()
 	}
 }
 

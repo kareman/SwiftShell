@@ -12,12 +12,12 @@ public let Files = FileManager.default
 
 /** Append file or directory url to directory url */
 public func + (leftpath: URL, rightpath: String) -> URL {
-	return try! leftpath.appendingPathComponent(rightpath)
+	return leftpath.appendingPathComponent(rightpath)
 }
 
 
 /** Error type for file commands. */
-public enum FileError: ErrorProtocol {
+public enum FileError: Error {
 
 	case notFound (path: String)
 
@@ -47,7 +47,7 @@ public func open (_ path: URL, encoding: String.Encoding = main.encoding) throws
 	do {
 		return ReadableStream(try FileHandle(forReadingFrom: path), encoding: encoding)
 	} catch {
-		try FileError.checkFile(path.path!)
+		try FileError.checkFile(path.path)
 		throw error
 	}
 }
@@ -60,8 +60,8 @@ If the file already exists and overwrite=false, the writing will begin at the en
 */
 public func open (forWriting path: URL, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WriteableStream {
 
-	if overwrite || !Files.fileExists(atPath: path.path!) {
-		_ = Files.createFile(atPath: path.path!, contents: nil, attributes: nil)
+	if overwrite || !Files.fileExists(atPath: path.path) {
+		_ = Files.createFile(atPath: path.path, contents: nil, attributes: nil)
 	}
 
 	do {
@@ -69,7 +69,7 @@ public func open (forWriting path: URL, overwrite: Bool = false, encoding: Strin
 		_ = filehandle.seekToEndOfFile()
 		return WriteableStream(filehandle, encoding: encoding)
 	} catch {
-		try FileError.checkFile(path.path!)
+		try FileError.checkFile(path.path)
 		throw error
 	}
 }

@@ -46,9 +46,9 @@ public struct ShellContext: ShellContextType {
 		encoding = String.Encoding.utf8
 		env = [String:String]()
 
-		stdin =    ReadableStream(FileHandle.withNullDevice, encoding: encoding)
-		stdout =   WriteableStream(FileHandle.withNullDevice, encoding: encoding)
-		stderror = WriteableStream(FileHandle.withNullDevice, encoding: encoding)
+		stdin =    ReadableStream(FileHandle.nullDevice, encoding: encoding)
+		stdout =   WriteableStream(FileHandle.nullDevice, encoding: encoding)
+		stderror = WriteableStream(FileHandle.nullDevice, encoding: encoding)
 
 		currentdirectory = main.currentdirectory
 	}
@@ -72,11 +72,11 @@ extension ShellContext: ShellRunnable {
 
 
 private func createTempdirectory () -> String {
-	let name = URL(fileURLWithPath: main.path).lastPathComponent ?? "SwiftShell"
+	let name = URL(fileURLWithPath: main.path).lastPathComponent
 	let tempdirectory = URL(fileURLWithPath:NSTemporaryDirectory()) + (name + "-" + ProcessInfo.processInfo.globallyUniqueString)
 	do {
-		try Files.createDirectory(atPath: tempdirectory.path!, withIntermediateDirectories: true, attributes: nil)
-		return tempdirectory.path! + "/"
+		try Files.createDirectory(atPath: tempdirectory.path, withIntermediateDirectories: true, attributes: nil)
+		return tempdirectory.path + "/"
 	} catch let error as NSError {
 		exit(errormessage: "Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)", errorcode: error.code)
 	} catch {
@@ -84,9 +84,9 @@ private func createTempdirectory () -> String {
 	}
 }
 
-extension Process {
+extension CommandLine {
 
-	/** Workaround for nil crash in Process.arguments when run in Xcode. */
+	/** Workaround for nil crash in CommandLine.arguments when run in Xcode. */
 	static var safeArguments: [String] {
 		return self.argc == 0 ? [] : self.arguments
 	}
@@ -102,9 +102,9 @@ public final class MainShellContext: ShellContextType {
 	public var encoding = String.Encoding.utf8
 	public lazy var env = ProcessInfo.processInfo.environment as [String: String]
 
-	public lazy var stdin: ReadableStream = { ReadableStream(FileHandle.withStandardInput, encoding: self.encoding) }()
-	public lazy var stdout: WriteableStream = { WriteableStream(FileHandle.withStandardOutput, encoding: self.encoding) }()
-	public lazy var stderror: WriteableStream = { WriteableStream(FileHandle.withStandardError, encoding: self.encoding) }()
+	public lazy var stdin: ReadableStream = { ReadableStream(FileHandle.standardInput, encoding: self.encoding) }()
+	public lazy var stdout: WriteableStream = { WriteableStream(FileHandle.standardOutput, encoding: self.encoding) }()
+	public lazy var stderror: WriteableStream = { WriteableStream(FileHandle.standardError, encoding: self.encoding) }()
 
 	/**
 	The current working directory.
@@ -130,12 +130,12 @@ public final class MainShellContext: ShellContextType {
 	public lazy var tempdirectory: String = createTempdirectory()
 
 	/** The arguments this executable was launched with. Use main.path to get the path. */
-	public lazy var arguments: [String] = Array(Process.safeArguments.dropFirst())
+	public lazy var arguments: [String] = Array(CommandLine.safeArguments.dropFirst())
 
 	/** The path to the currently running executable. Will be empty in playgrounds. */
-	public lazy var path: String = Process.safeArguments.first ?? ""
+	public lazy var path: String = CommandLine.safeArguments.first ?? ""
 
-	private init() {
+	fileprivate init() {
 	}
 }
 

@@ -20,12 +20,13 @@ extension Collection where Iterator.Element: Equatable {
 }
 
 
-public struct LazySplitSequence <Base: Collection where Base.Iterator.Element: Equatable,
+public struct LazySplitSequence <Base: Collection>: IteratorProtocol, LazySequenceProtocol where
+	Base.Iterator.Element: Equatable,
 	Base.SubSequence: Collection,
 	Base.SubSequence.Iterator.Element==Base.Iterator.Element,
-	Base.SubSequence==Base.SubSequence.SubSequence>: IteratorProtocol, LazySequenceProtocol {
+	Base.SubSequence==Base.SubSequence.SubSequence {
 
-	private var remaining: Base.SubSequence?
+	fileprivate var remaining: Base.SubSequence?
 	private let separator: Base.Generator.Element
 	private let allowEmptySlices: Bool
 
@@ -57,15 +58,16 @@ extension LazyCollectionProtocol where Elements.Iterator.Element: Equatable,
 }
 
 
-public struct PartialSourceLazySplitSequence <Base: Collection where Base.Iterator.Element: Equatable,
+public struct PartialSourceLazySplitSequence <Base: Collection>: IteratorProtocol, LazySequenceProtocol where
+	Base.Iterator.Element: Equatable,
 	Base.SubSequence: RangeReplaceableCollection,
 	Base.SubSequence.Iterator.Element==Base.Iterator.Element,
-	Base.SubSequence==Base.SubSequence.SubSequence>: IteratorProtocol, LazySequenceProtocol {
+	Base.SubSequence==Base.SubSequence.SubSequence {
 
 	private var gs: LazyMapIterator<AnyIterator<Base>, LazySplitSequence<Base>>
 	private var g: LazySplitSequence<Base>?
 
-	public init (_ bases: ()->Base?, separator: Base.Iterator.Element) {
+	public init (_ bases: @escaping ()->Base?, separator: Base.Iterator.Element) {
 		gs = AnyIterator(bases).lazy.map {
 			LazySplitSequence($0, separator: separator, allowEmptySlices: true).makeIterator()
 			}.makeIterator()

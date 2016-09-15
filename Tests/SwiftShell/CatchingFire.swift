@@ -45,7 +45,7 @@ import XCTest
 	return result
 }
 
-@discardableResult public func AssertNoThrow(_ closure: @noescape() throws -> ()) {
+@discardableResult public func AssertNoThrow(_ closure: () throws -> ()) {
 	do {
 		try closure()
 	} catch let error {
@@ -82,7 +82,7 @@ public func AssertThrows<R, E where E: ErrorProtocol>(_ expectedError: E, _ clos
 	AssertThrows(expectedError) { try closure() }
 }
 */
-@discardableResult public func AssertThrows<E where E: ErrorProtocol>(_ expectedError: E, _ closure: @noescape() throws -> ()) -> () {
+@discardableResult public func AssertThrows<E>(_ expectedError: E, _ closure: () throws -> ()) -> () where E: Error {
 	do {
 		try closure()
 		XCTFail("Expected to catch <\(expectedError)>, "
@@ -100,7 +100,7 @@ public func AssertThrows<R, E where E: ErrorProtocol, E: Equatable>(_ expectedEr
 	AssertThrows(expectedError) { try closure() }
 }
 */
-@discardableResult public func AssertThrows<E where E: ErrorProtocol, E: Equatable>(_ expectedError: E, _ closure: @noescape() throws -> ()) -> () {
+@discardableResult public func AssertThrows<E>(_ expectedError: E, _ closure: () throws -> ()) -> () where E: Error, E: Equatable {
 	do {
 		try closure()
 		XCTFail("Expected to catch <\(expectedError)>, "
@@ -117,11 +117,11 @@ public func AssertThrows<R, E where E: ErrorProtocol, E: Equatable>(_ expectedEr
 }
 
 /// Implement pattern matching for ErrorProtocol
-internal func ~=(lhs: ErrorProtocol, rhs: ErrorProtocol) -> Bool {
+internal func ~=(lhs: Error, rhs: Error) -> Bool {
 	return lhs._domain == rhs._domain
 		&& rhs._code   == rhs._code
 }
-
+/*
 /// Helper struct to catch errors thrown by others, which aren't publicly exposed.
 ///
 /// Note:
@@ -132,7 +132,7 @@ internal func ~=(lhs: ErrorProtocol, rhs: ErrorProtocol) -> Bool {
 ////  put them in a separate enum and import your framework as `@testable` in your tests without
 ///   affecting the public API, if that matters.
 ///
-public struct Error : ErrorProtocol {
+public struct Error : Error {
 	public let domain: String
 	public let code: Int
 
@@ -154,7 +154,8 @@ public func ==(lhs: Error, rhs: Error) -> Bool {
 }
 
 /// Implement pattern matching for Error & ErrorProtocol
-public func ~=(lhs: Error, rhs: ErrorProtocol) -> Bool {
+public func ~=(lhs: Error, rhs: Error) -> Bool {
 	return lhs._domain == rhs._domain
 		&& rhs._code   == rhs._code
 }
+*/
