@@ -8,11 +8,12 @@
 
 import XCTest
 import SwiftShell
+import Foundation
 
 class MainContext_Tests: XCTestCase {
 
 	func testCurrentDirectory_IsCurrentDirectory () {
-		XCTAssertEqual( main.currentdirectory, NSFileManager.defaultManager().currentDirectoryPath + "/")
+		XCTAssertEqual( main.currentdirectory, Files.currentDirectoryPath + "/")
 	}
 
 	func testCurrentDirectory_CanChange () {
@@ -25,17 +26,17 @@ class MainContext_Tests: XCTestCase {
 
 	func testCurrentDirectory_AffectsNSURLBase () {
 		let originalcurrentdirectory = main.currentdirectory
-		XCTAssertNotEqual(NSURL(fileURLWithPath: "file").baseURL, NSURL(fileURLWithPath: "/private") )
+		XCTAssertNotEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/private") )
 
 		main.currentdirectory = "/private"
 
-		XCTAssertEqual(NSURL(fileURLWithPath: "file").baseURL, NSURL(fileURLWithPath: "/private") )
+		XCTAssertEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/private") )
 		main.currentdirectory = originalcurrentdirectory
 	}
 
 	func testTempDirectory () {
 		XCTAssertEqual( main.tempdirectory, main.tempdirectory )
-		XCTAssert( Files.fileExistsAtPath(main.tempdirectory), "Temporary directory \(main.tempdirectory) does not exist" )
+		XCTAssert( Files.fileExists(atPath: main.tempdirectory), "Temporary directory \(main.tempdirectory) does not exist" )
 	}
 }
 
@@ -49,12 +50,12 @@ class CopiedShellContext_Tests: XCTestCase {
 	}
 
 	func testCurrentDirectory_DoesNotAffectNSURLBase () {
-		let originalnsurlbaseurl = NSURL(fileURLWithPath: "file").baseURL
+		let originalnsurlbaseurl = URL(fileURLWithPath: "file").baseURL
 
 		var context = ShellContext(main)
 		context.currentdirectory = "/private"
 
-		XCTAssertEqual(NSURL(fileURLWithPath: "file").baseURL, originalnsurlbaseurl )
+		XCTAssertEqual(URL(fileURLWithPath: "file").baseURL, originalnsurlbaseurl )
 	}
 }
 
@@ -63,9 +64,9 @@ class BlankShellContext_Tests: XCTestCase {
 	func testIsBlank () {
 		let context = ShellContext()
 
-		XCTAssert( context.stdin.filehandle === NSFileHandle.fileHandleWithNullDevice() )
-		XCTAssert( context.stdout.filehandle === NSFileHandle.fileHandleWithNullDevice() )
-		XCTAssert( context.stderror.filehandle === NSFileHandle.fileHandleWithNullDevice() )
+		XCTAssert( context.stdin.filehandle === FileHandle.nullDevice )
+		XCTAssert( context.stdout.filehandle === FileHandle.nullDevice )
+		XCTAssert( context.stderror.filehandle === FileHandle.nullDevice )
 	}
 
 	func testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable () {
@@ -84,9 +85,9 @@ class BlankShellContext_Tests: XCTestCase {
 
 	func testRunAsyncCommand () {
 		let context = ShellContext()
-		let task = context.runAsync("/bin/echo", "one")
+		let process = context.runAsync("/bin/echo", "one")
 
-		XCTAssertEqual(task.stdout.read(), "one\n")
+		XCTAssertEqual(process.stdout.read(), "one\n")
 	}
 
 	func testRunAndPrintCommand () {
@@ -96,7 +97,7 @@ class BlankShellContext_Tests: XCTestCase {
 			try context.runAndPrint("/bin/echo", "one") // sent to null
 		}
 
-		let outputpipe = NSPipe()
+		let outputpipe = Pipe()
 		context.stdout = WriteableStream(outputpipe.fileHandleForWriting)
 		let output = outputpipe.fileHandleForReading
 

@@ -50,7 +50,7 @@ class Stream_Tests: XCTestCase {
 		writer.close()
 
 		var string = ""
-		print(reader, toStream: &string)
+		print(reader, to: &string)
 		
 		XCTAssertEqual(string, "one\n")
 	}
@@ -58,33 +58,35 @@ class Stream_Tests: XCTestCase {
 	func testPrintToStream () {
 		var (writer,reader) = streams()
 
-		print("one", toStream: &writer)
+		print("one", to: &writer)
 
 		XCTAssertEqual(reader.readSome(), "one\n")
 	}
 
+#if os(OSX)
 	func testOnOutput () {
 		let (writer,reader) = streams()
 
-		let expectoutput = expectationWithDescription("onOutput will be called when output is available")
+		let expectoutput = expectation(description: "onOutput will be called when output is available")
 		reader.onOutput { stream in
 			if stream.readSome() != nil {
 				expectoutput.fulfill()
 			}
 		}
 		writer.writeln()
-		waitForExpectationsWithTimeout(0.5, handler: nil)
+		waitForExpectations(timeout: 0.5, handler: nil)
 	}
 
 	func testOnStringOutput () {
 		let (writer,reader) = streams()
 
-		let expectoutput = expectationWithDescription("onOutput will be called when output is available")
+		let expectoutput = expectation(description: "onOutput will be called when output is available")
 		reader.onStringOutput { string in
 			XCTAssertEqual(string, "hi")
 			expectoutput.fulfill()
 		}
 		writer.write("hi")
-		waitForExpectationsWithTimeout(0.5, handler: nil)
+		waitForExpectations(timeout: 0.5, handler: nil)
 	}
+#endif
 }

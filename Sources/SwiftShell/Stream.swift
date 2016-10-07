@@ -8,10 +8,10 @@
 import Foundation
 
 /** A stream of text. Does as much as possible lazily. */
-public final class ReadableStream : Streamable {
+public final class ReadableStream : TextOutputStreamable {
 
-	public let filehandle: NSFileHandle
-	public let encoding: NSStringEncoding
+	public let filehandle: FileHandle
+	public let encoding: String.Encoding
 
 	/**
 	Whatever amount of text the stream feels like providing.
@@ -29,18 +29,18 @@ public final class ReadableStream : Streamable {
 	}
 
 	/** Enable stream to be used by "print". */
-	public func writeTo <Target : OutputStreamType> (inout target: Target) {
+	public func write<Target : TextOutputStream>(to target: inout Target) {
 		while let text = self.readSome() { target.write(text) }
 	}
 
-	public init (_ filehandle: NSFileHandle, encoding: NSStringEncoding = main.encoding) {
+	public init (_ filehandle: FileHandle, encoding: String.Encoding = main.encoding) {
 		self.filehandle = filehandle
 		self.encoding = encoding
 	}
 
 	/** Split stream lazily into lines. */
 	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
-		return PartialSourceLazySplitSequence(bases: {self.readSome()?.characters}, separator: "\n").map { String($0) }
+		return PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }
 	}
 }
 
@@ -53,9 +53,10 @@ extension ReadableStream: ShellRunnable {
 	}
 }
 
+#if !os(Linux)
 extension ReadableStream {
 
-	/** 
+	/**
 	`handler` will be called whenever there is new output available.
 	Pass `nil` to remove any preexisting handlers.
 
@@ -79,7 +80,7 @@ extension ReadableStream {
 	*/
 	public func onStringOutput ( handler: ((String) -> ())? ) {
 		if let h = handler {
-			filehandle.readabilityHandler = { (NSFileHandle) in
+			filehandle.readabilityHandler = { (FileHandle) in
 				if let output = self.readSome() {
 					h(output)
 				}
@@ -89,15 +90,16 @@ extension ReadableStream {
 		}
 	}
 }
+#endif
 
 /** An output stream, like standard output or a writeable file. */
-public final class WriteableStream : OutputStreamType {
+public final class WriteableStream : TextOutputStream {
 
-	public let filehandle: NSFileHandle
-	let encoding: NSStringEncoding
+	public let filehandle: FileHandle
+	let encoding: String.Encoding
 
 	/** Write the textual representation of `x` to the stream. */
-	public func write <T> (x: T) {
+	public func write <T> (_ x: T) {
 		if filehandle.fileDescriptor == STDOUT_FILENO {
 			print(x, terminator: "")
 		} else {
@@ -106,7 +108,7 @@ public final class WriteableStream : OutputStreamType {
 	}
 
 	/** Write the textual representation of `x` to the stream, and add a newline. */
-	public func writeln <T> (x: T) {
+	public func writeln <T> (_ x: T) {
 		if filehandle.fileDescriptor == STDOUT_FILENO {
 			print(x)
 		} else {
@@ -124,7 +126,7 @@ public final class WriteableStream : OutputStreamType {
 		filehandle.closeFile()
 	}
 
-	public init (_ filehandle: NSFileHandle, encoding: NSStringEncoding = main.encoding) {
+	public init (_ filehandle: FileHandle, encoding: String.Encoding = main.encoding) {
 		self.filehandle = filehandle
 		self.encoding = encoding
 	}
@@ -132,6 +134,6 @@ public final class WriteableStream : OutputStreamType {
 
 /** Create a pair of streams. What is written to the 1st one can be read from the 2nd one. */
 public func streams () -> (WriteableStream, ReadableStream) {
-	let pipe = NSPipe()
+	let pipe = Pipe()
 	return (WriteableStream(pipe.fileHandleForWriting), ReadableStream(pipe.fileHandleForReading))
 }

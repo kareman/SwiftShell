@@ -6,8 +6,10 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
+@testable
 import SwiftShell
 import XCTest
+import Foundation
 
 class Run_Tests: XCTestCase {
 
@@ -73,25 +75,25 @@ class RunAsync_Tests: XCTestCase {
 	}
 
 	func testOnCompletion () {
-		let expectcompletion = expectationWithDescription("onCompletion will be called when command has finished.")
+		let expectcompletion = expectation(description: "onCompletion will be called when command has finished.")
 
 		runAsync("echo")
 			.onCompletion { _ in expectcompletion.fulfill()	}
-		waitForExpectationsWithTimeout(0.5, handler: nil)
+		waitForExpectations(timeout: 0.5, handler: nil)
 	}
 }
 
 class RunAndPrint_Tests: XCTestCase {
 
-	var test_stdout: NSFileHandle!
-	var test_stderr: NSFileHandle!
+	var test_stdout: FileHandle!
+	var test_stderr: FileHandle!
 
 	override func setUp () {
-		let outputpipe = NSPipe()
+		let outputpipe = Pipe()
 		main.stdout = WriteableStream(outputpipe.fileHandleForWriting)
 		test_stdout = outputpipe.fileHandleForReading
 
-		let errorpipe = NSPipe()
+		let errorpipe = Pipe()
 		main.stderror = WriteableStream(errorpipe.fileHandleForWriting)
 		test_stderr = errorpipe.fileHandleForReading
 	}

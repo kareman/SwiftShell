@@ -10,7 +10,7 @@ private protocol AnyArrayType {
 }
 
 extension Array: AnyArrayType {
-	private var anyValues: [Any] {
+	fileprivate var anyValues: [Any] {
 		return self.map { $0 as Any }
 	}
 }

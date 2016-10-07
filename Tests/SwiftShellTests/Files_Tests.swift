@@ -13,19 +13,20 @@ import Foundation
 class UrlAppendationOperator: XCTestCase {
 
 	func testUrlPlusString () {
-		XCTAssertEqual( NSURL(fileURLWithPath: "dir") + "file.txt", NSURL(fileURLWithPath: "dir/file.txt"))
-		XCTAssertEqual( NSURL(fileURLWithPath: "dir/") + "/file.txt", NSURL(fileURLWithPath: "dir/file.txt"))
-		XCTAssertEqual( NSURL(string: "dir")! + "file.txt", NSURL(string: "dir/file.txt"))
+		XCTAssertEqual( URL(fileURLWithPath: "dir") + "file.txt", URL(fileURLWithPath: "dir/file.txt"))
+		XCTAssertEqual( URL(fileURLWithPath: "dir/") + "/file.txt", URL(fileURLWithPath: "dir/file.txt"))
+		XCTAssertEqual( URL(string: "dir")! + "file.txt", URL(string: "dir/file.txt"))
 	}
 }
 
 class Open: XCTestCase {
 
 	func testReadFile () {
-		let shorttextpath = pathForTestResource("shorttext", type: "txt")
+		let path = main.tempdirectory + "testReadFile.txt"
+		let _ = SwiftShell.run(bash: "echo Lorem ipsum dolor > " + path)
 
 		AssertNoThrow {
-			let file = try open(shorttextpath)
+			let file = try open(path)
 			XCTAssert(file.read().hasPrefix("Lorem ipsum dolor"))
 		}
 	}
@@ -67,7 +68,7 @@ class Open: XCTestCase {
 
 	func testOpenForWritingExistingFile_AppendsFile () {
 		let path = main.tempdirectory + "testOpenForWritingExistingFile_AppendsFile.txt"
-		SwiftShell.run(bash: "echo existing line > " + path)
+		let _ = SwiftShell.run(bash: "echo existing line > " + path)
 
 		AssertNoThrow {
 			let file = try open(forWriting: path)
@@ -81,7 +82,7 @@ class Open: XCTestCase {
 
 	func testOpenForOverWritingExistingFile () {
 		let path = main.tempdirectory + "testOpenForOverWritingExistingFile.txt"
-		SwiftShell.run(bash: "echo existing line > " + path)
+		let _ = SwiftShell.run(bash: "echo existing line > " + path)
 
 		AssertNoThrow {
 			let file = try open(forWriting: path, overwrite: true)

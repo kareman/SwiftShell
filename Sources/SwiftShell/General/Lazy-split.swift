@@ -5,7 +5,7 @@
 *
 */
 
-extension CollectionType where Generator.Element: Equatable {
+extension Collection where Iterator.Element: Equatable {
 
 	/**
 	Return everything before the first occurrence of ‘separator’ as 'head', and everything after it as 'tail'.
@@ -13,23 +13,24 @@ extension CollectionType where Generator.Element: Equatable {
 
 	If ‘separator’ is not found then ‘head’ contains everything and 'tail' is nil.
 	*/
-	public func splitOnce (separator: Generator.Element) -> (head: SubSequence, tail: SubSequence?) {
-		guard let nextindex = indexOf(separator) else { return (self[startIndex..<endIndex], nil) }
-		return (self[startIndex..<nextindex], self[nextindex.successor()..<endIndex])
+	public func splitOnce (separator: Iterator.Element) -> (head: SubSequence, tail: SubSequence?) {
+		guard let nextindex = index(of: separator) else { return (self[startIndex..<endIndex], nil) }
+		return (self[startIndex..<nextindex], self[index(after: nextindex)..<endIndex])
 	}
 }
 
 
-public struct LazySplitSequence <Base: CollectionType where Base.Generator.Element: Equatable,
-	Base.SubSequence: CollectionType,
-	Base.SubSequence.Generator.Element==Base.Generator.Element,
-	Base.SubSequence==Base.SubSequence.SubSequence>: GeneratorType, LazySequenceType {
+public struct LazySplitSequence <Base: Collection>: IteratorProtocol, LazySequenceProtocol where
+	Base.Iterator.Element: Equatable,
+	Base.SubSequence: Collection,
+	Base.SubSequence.Iterator.Element==Base.Iterator.Element,
+	Base.SubSequence==Base.SubSequence.SubSequence {
 
-	private var remaining: Base.SubSequence?
+	fileprivate var remaining: Base.SubSequence?
 	private let separator: Base.Generator.Element
 	private let allowEmptySlices: Bool
 
-	public init (_ base: Base, separator: Base.Generator.Element, allowEmptySlices: Bool = false) {
+	public init (_ base: Base, separator: Base.Iterator.Element, allowEmptySlices: Bool = false) {
 		self.separator = separator
 		self.remaining = base[base.startIndex..<base.endIndex]
 		self.allowEmptySlices = allowEmptySlices
@@ -37,19 +38,19 @@ public struct LazySplitSequence <Base: CollectionType where Base.Generator.Eleme
 
 	public mutating func next () -> Base.SubSequence? {
 		guard let remaining = self.remaining else { return nil }
-		let (head, tail) = remaining.splitOnce(separator)
+		let (head, tail) = remaining.splitOnce(separator: separator)
 		self.remaining = tail
 		return (!allowEmptySlices && head.isEmpty) ? next() : head
 	}
 }
 
-extension LazyCollectionType where Elements.Generator.Element: Equatable,
-	Elements.SubSequence: CollectionType,
-	Elements.SubSequence.Generator.Element==Elements.Generator.Element,
+extension LazyCollectionProtocol where Elements.Iterator.Element: Equatable,
+	Elements.SubSequence: Collection,
+	Elements.SubSequence.Iterator.Element==Elements.Iterator.Element,
 	Elements.SubSequence==Elements.SubSequence.SubSequence {
 
 	public func split (
-		separator: Elements.Generator.Element,	allowEmptySlices: Bool = false
+		separator: Elements.Iterator.Element,	allowEmptySlices: Bool = false
 		) -> LazySplitSequence<Elements> {
 
 		return LazySplitSequence(self.elements, separator: separator, allowEmptySlices: allowEmptySlices)
@@ -57,18 +58,19 @@ extension LazyCollectionType where Elements.Generator.Element: Equatable,
 }
 
 
-public struct PartialSourceLazySplitSequence <Base: CollectionType where Base.Generator.Element: Equatable,
-	Base.SubSequence: RangeReplaceableCollectionType,
-	Base.SubSequence.Generator.Element==Base.Generator.Element,
-	Base.SubSequence==Base.SubSequence.SubSequence>: GeneratorType, LazySequenceType {
+public struct PartialSourceLazySplitSequence <Base: Collection>: IteratorProtocol, LazySequenceProtocol where
+	Base.Iterator.Element: Equatable,
+	Base.SubSequence: RangeReplaceableCollection,
+	Base.SubSequence.Iterator.Element==Base.Iterator.Element,
+	Base.SubSequence==Base.SubSequence.SubSequence {
 
-	private var gs: LazyMapGenerator<AnyGenerator<Base>, LazySplitSequence<Base>>
+	private var gs: LazyMapIterator<AnyIterator<Base>, LazySplitSequence<Base>>
 	private var g: LazySplitSequence<Base>?
 
-	public init (bases: ()->Base?, separator: Base.Generator.Element) {
-		gs = AnyGenerator(body: bases).lazy.map {
-			LazySplitSequence($0, separator: separator, allowEmptySlices: true).generate()
-			}.generate()
+	public init (_ bases: @escaping ()->Base?, separator: Base.Iterator.Element) {
+		gs = AnyIterator(bases).lazy.map {
+			LazySplitSequence($0, separator: separator, allowEmptySlices: true).makeIterator()
+			}.makeIterator()
 	}
 
 	public mutating func next() -> Base.SubSequence? {

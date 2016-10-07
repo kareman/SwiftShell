@@ -7,33 +7,49 @@
 
 import Foundation
 
-/** The default NSFileManager */
-public let Files = NSFileManager.defaultManager()
+/** The default FileManager */
+public let Files = FileManager.default
 
 /** Append file or directory url to directory url */
-public func + (leftpath: NSURL, rightpath: String) -> NSURL {
-	return leftpath.URLByAppendingPathComponent(rightpath)
+public func + (leftpath: URL, rightpath: String) -> URL {
+	return leftpath.appendingPathComponent(rightpath)
 }
 
-/** Run a function which takes a NSErrorPointer. If an NSError occurs, throw it, otherwise return result. */
-func makeThrowable <T> (nserrorfunc: (NSErrorPointer) -> T) throws -> T {
-	var maybeerror: NSError?
-	let result = nserrorfunc(&maybeerror)
-	if let actualerror = maybeerror {
-		throw actualerror
+
+/** Error type for file commands. */
+public enum FileError: Error {
+
+	case notFound (path: String)
+
+	public static func checkFile (_ path: String) throws {
+		if !Files.fileExists(atPath: path) {
+			throw notFound(path: path)
+		}
 	}
-	return result
+}
+
+extension FileError: CustomStringConvertible {
+	public var description: String {
+		switch self {
+		case .notFound(let path):
+			return "Error: '\(path)' does not exist."
+		}
+	}
 }
 
 /** Open a file for reading, throw if an error occurs. */
-public func open (path: String, encoding: NSStringEncoding = main.encoding) throws -> ReadableStream {
-	return try open(NSURL(fileURLWithPath: path, isDirectory: false), encoding: encoding)
+public func open (_ path: String, encoding: String.Encoding = main.encoding) throws -> ReadableStream {
+	return try open(URL(fileURLWithPath: path, isDirectory: false), encoding: encoding)
 }
 
 /** Open a file for reading, throw if an error occurs. */
-public func open (path: NSURL, encoding: NSStringEncoding = main.encoding) throws -> ReadableStream {
-	try makeThrowable(path.checkResourceIsReachableAndReturnError)
-	return ReadableStream(try NSFileHandle(forReadingFromURL: path), encoding: encoding)
+public func open (_ path: URL, encoding: String.Encoding = main.encoding) throws -> ReadableStream {
+	do {
+		return ReadableStream(try FileHandle(forReadingFrom: path), encoding: encoding)
+	} catch {
+		try FileError.checkFile(path.path)
+		throw error
+	}
 }
 
 /**
@@ -42,16 +58,20 @@ If the file already exists and overwrite=false, the writing will begin at the en
 
 - parameter overwrite: If true, replace the file if it exists.
 */
-public func open (forWriting path: NSURL, overwrite: Bool = false, encoding: NSStringEncoding = main.encoding) throws -> WriteableStream {
+public func open (forWriting path: URL, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WriteableStream {
 
-	if overwrite || !Files.fileExistsAtPath(path.path!) {
-		Files.createFileAtPath(path.path!, contents: nil, attributes: nil)
+	if overwrite || !Files.fileExists(atPath: path.path) {
+		_ = Files.createFile(atPath: path.path, contents: nil, attributes: nil)
 	}
-	try makeThrowable(path.checkResourceIsReachableAndReturnError)
 
-	let filehandle = try NSFileHandle(forWritingToURL: path)
-	filehandle.seekToEndOfFile()
-	return WriteableStream(filehandle, encoding: encoding)
+	do {
+		let filehandle = try FileHandle(forWritingTo: path)
+		_ = filehandle.seekToEndOfFile()
+		return WriteableStream(filehandle, encoding: encoding)
+	} catch {
+		try FileError.checkFile(path.path)
+		throw error
+	}
 }
 
 /**
@@ -60,6 +80,6 @@ If the file already exists and overwrite=false, the writing will begin at the en
 
 - parameter overwrite: If true, replace the file if it exists.
 */
-public func open (forWriting path: String, overwrite: Bool = false, encoding: NSStringEncoding = main.encoding) throws -> WriteableStream {
-	return try open(forWriting:  NSURL(fileURLWithPath: path, isDirectory: false), overwrite: overwrite, encoding:  encoding)
+public func open (forWriting path: String, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WriteableStream {
+	return try open(forWriting: URL(fileURLWithPath: path, isDirectory: false), overwrite: overwrite, encoding:  encoding)
 }
