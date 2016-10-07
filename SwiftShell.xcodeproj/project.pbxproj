@@ -146,7 +146,7 @@
 				__PBXFileRef_GeneralTestSuite_Info.plist /* GeneralTestSuite_Info.plist */,
 			);
 			name = GeneralTestSuite;
-			path = Tests/General;
+			path = Tests/GeneralTests;
 			sourceTree = "<group>";
 		};
 		"_______Group_SwiftShell" /* SwiftShell */ = {
@@ -180,7 +180,7 @@
 				__PBXFileRef_SwiftShellTestSuite_Info.plist /* SwiftShellTestSuite_Info.plist */,
 			);
 			name = SwiftShellTestSuite;
-			path = Tests/SwiftShell;
+			path = Tests/SwiftShellTests;
 			sourceTree = "<group>";
 		};
 		"_______Tests_" /* Tests */ = {
