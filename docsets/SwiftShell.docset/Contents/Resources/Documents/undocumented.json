@@ -1,0 +1,355 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
+      "line": null,
+      "symbol": "ShellRunnable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
+      "line": null,
+      "symbol": "ShellRunnable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
+      "line": null,
+      "symbol": "ShellRunnable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
+      "line": null,
+      "symbol": "ShellRunnable",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
+      "line": 61,
+      "symbol": "ShellRunnable",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
+      "line": 62,
+      "symbol": "ShellRunnable.shellcontext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
+      "line": 131,
+      "symbol": "==(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.free",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
+      "line": 223,
+      "symbol": "AsyncShellTask.stdout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
+      "line": 224,
+      "symbol": "AsyncShellTask.stderror",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
+      "line": 269,
+      "symbol": "AsyncShellTask.onCompletion(handler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": null,
+      "symbol": "MainShellContext",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": null,
+      "symbol": "ShellContext",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 10,
+      "symbol": "ShellContextType",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 11,
+      "symbol": "ShellContextType.encoding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 12,
+      "symbol": "ShellContextType.env",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 14,
+      "symbol": "ShellContextType.stdin",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 15,
+      "symbol": "ShellContextType.stdout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 16,
+      "symbol": "ShellContextType.stderror",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 28,
+      "symbol": "ShellContext",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 29,
+      "symbol": "ShellContext.encoding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 30,
+      "symbol": "ShellContext.env",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 32,
+      "symbol": "ShellContext.stdin",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 33,
+      "symbol": "ShellContext.stdout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 34,
+      "symbol": "ShellContext.stderror",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 70,
+      "symbol": "ShellContext.shellcontext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 95,
+      "symbol": "MainShellContext",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 103,
+      "symbol": "MainShellContext.env",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 105,
+      "symbol": "MainShellContext.stdin",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 106,
+      "symbol": "MainShellContext.stdout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 107,
+      "symbol": "MainShellContext.stderror",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 143,
+      "symbol": "MainShellContext.shellcontext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
+      "line": 146,
+      "symbol": "main",
+      "symbol_kind": "source.lang.swift.decl.var.global",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/FileHandle.swift",
+      "line": 12,
+      "symbol": "FileHandle.readSome(encoding:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/FileHandle.swift",
+      "line": 23,
+      "symbol": "FileHandle.read(encoding:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/FileHandle.swift",
+      "line": 36,
+      "symbol": "FileHandle.write(_:encoding:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/FileHandle.swift",
+      "line": 43,
+      "symbol": "FileHandle.writeln(_:encoding:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Files.swift",
+      "line": 22,
+      "symbol": "FileError.notFound",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Files.swift",
+      "line": 24,
+      "symbol": "FileError.checkFile(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/General/Lazy-split.swift",
+      "line": 23,
+      "symbol": "LazySplitSequence",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/General/Lazy-split.swift",
+      "line": 33,
+      "symbol": "LazySplitSequence.init(_:separator:allowEmptySlices:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/General/Lazy-split.swift",
+      "line": 52,
+      "symbol": "LazyCollectionProtocol.split(separator:allowEmptySlices:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/General/Lazy-split.swift",
+      "line": 61,
+      "symbol": "PartialSourceLazySplitSequence",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/General/Lazy-split.swift",
+      "line": 70,
+      "symbol": "PartialSourceLazySplitSequence.init(_:separator:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Stream.swift",
+      "line": 13,
+      "symbol": "ReadableStream.filehandle",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Stream.swift",
+      "line": 14,
+      "symbol": "ReadableStream.encoding",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Stream.swift",
+      "line": 36,
+      "symbol": "ReadableStream.init(_:encoding:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Stream.swift",
+      "line": 49,
+      "symbol": "ReadableStream.shellcontext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Stream.swift",
+      "line": 98,
+      "symbol": "WriteableStream.filehandle",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Stream.swift",
+      "line": 129,
+      "symbol": "WriteableStream.init(_:encoding:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/String.swift",
+      "line": 12,
+      "symbol": "String.shellcontext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3"
+}

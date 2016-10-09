@@ -13,7 +13,7 @@
     <a title="Extensions  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftShell Docs</a> (51% documented)</p>
+        <p><a href="index.html">SwiftShell Docs</a> (56% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -48,7 +48,7 @@
             <a href="Global Variables.html">Global Variables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell5FilesCSo13NSFileManager">Files</a>
+                <a href="Global Variables.html#/s:v10SwiftShell5FilesCSo11FileManager">Files</a>
               </li>
               <li class="nav-group-task">
                 <a href="Global Variables.html#/s:v10SwiftShell4mainCS_16MainShellContext">main</a>
@@ -59,6 +59,9 @@
             <a href="Enums.html">Enums</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Enums/FileError.html">FileError</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/ShellError.html">ShellError</a>
               </li>
             </ul>
@@ -67,16 +70,16 @@
             <a href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/CollectionType.html">CollectionType</a>
+                <a href="Extensions/Collection.html">Collection</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/LazyCollectionType.html">LazyCollectionType</a>
+                <a href="Extensions/FileHandle.html">FileHandle</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/NSFileHandle.html">NSFileHandle</a>
+                <a href="Extensions/LazyCollectionProtocol.html">LazyCollectionProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/NSTask.html">NSTask</a>
+                <a href="Extensions/Process.html">Process</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/String.html">String</a>
@@ -87,28 +90,31 @@
             <a href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi1pFTCSo5NSURLSS_S0_">+(_:_:)</a>
+                <a href="Functions.html#/s:F10SwiftShelloi1pFTV10Foundation3URLSS_S1_">+(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb">==(_:_:)</a>
+                <a href="Functions.html#/s:F10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb">==(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4exitFTPs9ErrorType_4fileSS4lineSi_T_">exit(_:file:line:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4exitFTPs5Error_4fileSS4lineSi_Os5Never">exit(_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeVs5Int324fileSS4lineSi_T_">exit(errormessage:errorcode:file:line:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeSi4fileSS4lineSi_Os5Never">exit(errormessage:errorcode:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFzTCSo5NSURL8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeVs5Int324fileSS4lineSi_Os5Never">exit(errormessage:errorcode:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFzTSS8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzTSS8encodingVE10FoundationSS8Encoding_CS_14ReadableStream">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzTV10Foundation3URL8encodingVES0_SS8Encoding_CS_14ReadableStream">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingCSo5NSURL9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingVE10FoundationSS8Encoding_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingV10Foundation3URL9overwriteSb8encodingVES0_SS8Encoding_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_SS">run(_:_:file:line:)</a>
@@ -169,6 +175,37 @@
           </section>
           <section class="section task-group-section">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Process"></a>
+                <a name="//apple_ref/swift/Section/Process" class="dashAnchor"></a>
+                <a href="#/Process">
+                  <h3 class="section-name">Process</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)NSTask"></a>
+                    <a name="//apple_ref/swift/Extension/Process" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSTask">Process</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Extensions/Process.html" class="slightly-smaller">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
               <ul>
                 <li class="item">
                   <div>
@@ -183,8 +220,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Let Strings run commands using itself as stdin.</p>
-
+                        
                         <a href="Extensions/String.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -205,98 +241,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Ps14CollectionType"></a>
-                    <a name="//apple_ref/swift/Extension/CollectionType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Ps14CollectionType">CollectionType</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/CollectionType.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">CollectionType</span> <span class="p">:</span> <span class="kt">Indexable</span><span class="p">,</span> <span class="kt">SequenceType</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:Ps18LazyCollectionType"></a>
-                    <a name="//apple_ref/swift/Extension/LazyCollectionType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Ps18LazyCollectionType">LazyCollectionType</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                        <a href="Extensions/LazyCollectionType.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">LazyCollectionType</span> <span class="p">:</span> <span class="kt">CollectionType</span><span class="p">,</span> <span class="kt">LazySequenceType</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
-                <a name="/NSTask"></a>
-                <a name="//apple_ref/swift/Section/NSTask" class="dashAnchor"></a>
-                <a href="#/NSTask">
-                  <h3 class="section-name">NSTask</h3>
-                </a>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:objc(cs)NSTask"></a>
-                    <a name="//apple_ref/swift/Extension/NSTask" class="dashAnchor"></a>
-                    <a class="token" href="#/c:objc(cs)NSTask">NSTask</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                        <a href="Extensions/NSTask.html" class="slightly-smaller">See more</a>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/c:objc(cs)NSFileHandle"></a>
-                    <a name="//apple_ref/swift/Extension/NSFileHandle" class="dashAnchor"></a>
-                    <a class="token" href="#/c:objc(cs)NSFileHandle">NSFileHandle</a>
+                    <a name="//apple_ref/swift/Extension/FileHandle" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)NSFileHandle">FileHandle</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -306,7 +253,65 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
-                        <a href="Extensions/NSFileHandle.html" class="slightly-smaller">See more</a>
+                        <a href="Extensions/FileHandle.html" class="slightly-smaller">See more</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Ps10Collection"></a>
+                    <a name="//apple_ref/swift/Extension/Collection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Ps10Collection">Collection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Extensions/Collection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Collection</span> <span class="p">:</span> <span class="kt">Indexable</span><span class="p">,</span> <span class="kt">Sequence</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:Ps22LazyCollectionProtocol"></a>
+                    <a name="//apple_ref/swift/Extension/LazyCollectionProtocol" class="dashAnchor"></a>
+                    <a class="token" href="#/s:Ps22LazyCollectionProtocol">LazyCollectionProtocol</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                        <a href="Extensions/LazyCollectionProtocol.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">LazyCollectionProtocol</span> <span class="p">:</span> <span class="kt">Collection</span><span class="p">,</span> <span class="kt">LazySequenceProtocol</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -316,8 +321,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-03-31)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.5.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-10-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

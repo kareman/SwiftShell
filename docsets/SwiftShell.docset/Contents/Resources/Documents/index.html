@@ -13,7 +13,7 @@
     <a title="SwiftShell  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftShell Docs</a> (51% documented)</p>
+        <p><a href="index.html">SwiftShell Docs</a> (56% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -48,7 +48,7 @@
             <a href="Global Variables.html">Global Variables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:v10SwiftShell5FilesCSo13NSFileManager">Files</a>
+                <a href="Global Variables.html#/s:v10SwiftShell5FilesCSo11FileManager">Files</a>
               </li>
               <li class="nav-group-task">
                 <a href="Global Variables.html#/s:v10SwiftShell4mainCS_16MainShellContext">main</a>
@@ -59,6 +59,9 @@
             <a href="Enums.html">Enums</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Enums/FileError.html">FileError</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/ShellError.html">ShellError</a>
               </li>
             </ul>
@@ -67,16 +70,16 @@
             <a href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/CollectionType.html">CollectionType</a>
+                <a href="Extensions/Collection.html">Collection</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/LazyCollectionType.html">LazyCollectionType</a>
+                <a href="Extensions/FileHandle.html">FileHandle</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/NSFileHandle.html">NSFileHandle</a>
+                <a href="Extensions/LazyCollectionProtocol.html">LazyCollectionProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/NSTask.html">NSTask</a>
+                <a href="Extensions/Process.html">Process</a>
               </li>
               <li class="nav-group-task">
                 <a href="Extensions/String.html">String</a>
@@ -87,28 +90,31 @@
             <a href="Functions.html">Functions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi1pFTCSo5NSURLSS_S0_">+(_:_:)</a>
+                <a href="Functions.html#/s:F10SwiftShelloi1pFTV10Foundation3URLSS_S1_">+(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb">==(_:_:)</a>
+                <a href="Functions.html#/s:F10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb">==(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4exitFTPs9ErrorType_4fileSS4lineSi_T_">exit(_:file:line:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4exitFTPs5Error_4fileSS4lineSi_Os5Never">exit(_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeVs5Int324fileSS4lineSi_T_">exit(errormessage:errorcode:file:line:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeSi4fileSS4lineSi_Os5Never">exit(errormessage:errorcode:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFzTCSo5NSURL8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeVs5Int324fileSS4lineSi_Os5Never">exit(errormessage:errorcode:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFzTSS8encodingSu_CS_14ReadableStream">open(_:encoding:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzTSS8encodingVE10FoundationSS8Encoding_CS_14ReadableStream">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzTV10Foundation3URL8encodingVES0_SS8Encoding_CS_14ReadableStream">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingCSo5NSURL9overwriteSb8encodingSu_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingVE10FoundationSS8Encoding_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingV10Foundation3URL9overwriteSb8encodingVES0_SS8Encoding_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_SS">run(_:_:file:line:)</a>
@@ -166,18 +172,26 @@
             
             <p><a href="https://developer.apple.com/resources/"><img src="http://img.shields.io/badge/platform-osx-lightgrey.svg?style=flat" alt="Platform"></a> <a href="https://developer.apple.com/swift"><img src="http://img.shields.io/badge/language-swift-orange.svg?style=flat" alt="Language"></a> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a> <a href="http://mit-license.org"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License"></a></p>
 
+<p>For Swift 3. See <a href="https://github.com/kareman/SwiftShell/">this branch</a> for Swift 2.2+.</p>
+
 <p><em>Not currently available for Linux, because <a href="https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSTask.swift">NSTask</a> and <a href="https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSFileHandle.swift">NSFileHandle</a> have not been ported yet.</em></p>
 <a href='#swiftshell' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='swiftshell'>SwiftShell</h1>
 
-<p>An OS X Framework for command-line scripting in Swift.</p>
-<a href='#see_also' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='see_also'>See also</h4>
+<p>An OS X/macOS Framework for command-line scripting in Swift.</p>
+<a href='#see-also' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='see-also'>See also</h4>
 
 <ul>
 <li><a href="http://kareman.github.io/SwiftShell">Documentation</a> from the source code.</li>
 <li>A <a href="https://www.skilled.io/kare/swiftshell">description</a> of the project on <a href="https://www.skilled.io">skilled.io</a>.</li>
+<li>Example scripts
+
+<ul>
+<li><a href="http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/">Move files to the trash</a></li>
+<li><a href="http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/">Combine markdown files and convert to HTML</a> (runs a shell command in the middle of a method chain)</li>
+</ul></li>
 </ul>
 <a href='#example' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='example'>Example</h2>
-<a href='#print_line_numbers' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='print_line_numbers'>Print line numbers</h4>
+<a href='#print-line-numbers' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='print-line-numbers'>Print line numbers</h4>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SwiftShell</span>
 
 <span class="k">do</span> <span class="p">{</span>
@@ -195,13 +209,13 @@
 </code></pre>
 
 <p>Launched with e.g. <code>cat long.txt | print_linenumbers.swift</code> or <code>print_linenumbers.swift long.txt</code> this will print the line number at the beginning of each line.</p>
-<a href='#run_commands' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='run_commands'>Run commands</h2>
-<a href='#print_output' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='print_output'>Print output</h4>
+<a href='#run-commands' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='run-commands'>Run commands</h2>
+<a href='#print-output' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='print-output'>Print output</h4>
 <pre class="highlight swift"><code><span class="k">try</span> <span class="nf">runAndPrint</span><span class="p">(</span><span class="nv">bash</span><span class="p">:</span> <span class="s">"cmd1 arg | cmd2 arg"</span><span class="p">)</span> 
 </code></pre>
 
 <p>Run a shell command just like you would in the terminal. The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.</p>
-<a href='#in_line' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='in_line'>In-line</h4>
+<a href='#in-line' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='in-line'>In-line</h4>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">date</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nf">run</span><span class="p">(</span><span class="s">"date"</span><span class="p">,</span> <span class="s">"-u"</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="s">"Today's date in UTC is "</span> <span class="o">+</span> <span class="n">date</span><span class="p">)</span>
 </code></pre>
@@ -302,7 +316,7 @@
 
 <p>Everything is mutable, so you can set e.g. the text encoding or reroute standard error to a file.</p>
 <a href='#setup' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='setup'>Setup</h2>
-<a href='#shell_script' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='shell_script'>Shell script</h4>
+<a href='#shell-script' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='shell-script'>Shell script</h4>
 
 <ul>
 <li>In the Terminal, go to where you want to download SwiftShell.</li>
@@ -324,9 +338,9 @@ cd SwiftShell
 
 <span class="kd">import</span> <span class="kt">SwiftShell</span>
 </code></pre>
-<a href='#a_href_https_github_com_apple_swift_package_manager_swift_package_manager_a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a_href_https_github_com_apple_swift_package_manager_swift_package_manager_a'><a href="https://github.com/apple/swift-package-manager">Swift Package Manager</a></h4>
+<a href='#a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a'><a href="https://github.com/apple/swift-package-manager">Swift Package Manager</a></h4>
 
-<p><em>Will not work with swift-DEVELOPMENT-SNAPSHOT-2016-03-16-a or newer because of changes for Swift 3.0 that are incompatible with Swift 2.2.</em></p>
+<p>See the <a href="https://github.com/kareman/SwiftShell/tree/Swift3.0">Swift 3 branch</a>.</p>
 
 <p>Add <code>.Package(url: &quot;https://github.com/kareman/SwiftShell&quot;, majorVersion: 2)</code> to your Package.swift:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
@@ -340,14 +354,14 @@ cd SwiftShell
 </code></pre>
 
 <p>and run <code>swift build</code>.</p>
-<a href='#a_href_https_github_com_carthage_carthage_carthage_a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a_href_https_github_com_carthage_carthage_carthage_a'><a href="https://github.com/Carthage/Carthage">Carthage</a></h4>
+<a href='#a-href-https-github-com-carthage-carthage-carthage-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-carthage-carthage-carthage-a'><a href="https://github.com/Carthage/Carthage">Carthage</a></h4>
 
 <p>Add this to your Cartfile:</p>
 <pre class="highlight plaintext"><code>github "kareman/SwiftShell"
 </code></pre>
 
 <p>Then run <code>carthage update</code> and add the resulting framework to the <q>Embedded Binaries</q> section of the application. See <a href="https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">Carthage&rsquo;s README</a> for instructions.</p>
-<a href='#xcode_command_line_application' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='xcode_command_line_application'>Xcode command-line application</h4>
+<a href='#xcode-command-line-application' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='xcode-command-line-application'>Xcode command-line application</h4>
 
 <p>Sadly it is not possible to include a framework in an Xcode command-line application. But you can import one. Set the build settings FRAMEWORK_SEARCH_PATHS and LD_RUNPATH_SEARCH_PATHS to include a folder containing the SwiftShell framework. Or if you want the command line application to be self-contained you can include all the source files from SwiftShell in the command line target itself, and add <code>&quot;#import &quot;NSTask+NSTask_Errors.h&quot;</code> to the bridging header.</p>
 <a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
@@ -361,8 +375,8 @@ cd SwiftShell
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-03-31)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.5.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-10-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
