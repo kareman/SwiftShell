@@ -1,8 +1,8 @@
 [![Platform](http://img.shields.io/badge/platform-osx-lightgrey.svg?style=flat)](https://developer.apple.com/resources/) [![Language](http://img.shields.io/badge/language-swift-orange.svg?style=flat)](https://developer.apple.com/swift) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
 
-For Swift 2.2+. See [this branch](https://github.com/kareman/SwiftShell/tree/Swift3.0) for Swift 3.
+[Swift 3](https://github.com/kareman/SwiftShell) | Swift 2
 
-_Not currently available for Linux, because [NSTask](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSTask.swift) and [NSFileHandle](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSFileHandle.swift) have not been fully ported yet._
+_Not available for Linux, because [NSTask](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSTask.swift) and [NSFileHandle](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSFileHandle.swift) have not been fully ported yet._
 
 # SwiftShell
 
