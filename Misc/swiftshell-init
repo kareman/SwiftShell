@@ -2,6 +2,7 @@
 
 # Create a Swift Package Manager executable project structure and an Xcode project.
 
+# exit at the first sign of trouble.
 set -e
 
 NAME=$1
