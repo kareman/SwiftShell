@@ -23,19 +23,6 @@ public func exit <T> (errormessage: T, errorcode: Int = 1, file: String = #file,
 }
 
 /**
-Print message to standard error and halt execution.
-
-- parameter errormessage: the error message.
-- parameter errorcode: exit code for the entire program. Defaults to 1.
-- returns: not.
-*/
-public func exit <T> (errormessage: T, errorcode: Int32, file: String = #file, line: Int = #line) -> Never  {
-	main.stderror.write(file + ":\(line): ")
-	main.stderror.writeln(errormessage)
-	exit(errorcode)
-}
-
-/**
 Print error to standard error and halt execution.
 
 - parameter error: the error
@@ -100,13 +87,13 @@ extension ShellRunnable {
 public enum ShellError: Error, Equatable {
 
 	/** Exit code was not zero. */
-	case ReturnedErrorCode (command: String, errorcode: Int32)
+	case ReturnedErrorCode (command: String, errorcode: Int)
 
 	/** Command could not be executed. */
 	case InAccessibleExecutable (path: String)
 
 	/** Exit code for this error. */
-	var errorcode: Int32 {
+	var errorcode: Int {
 		switch self {
 		case .ReturnedErrorCode(_, let code):
 			return code
@@ -158,12 +145,12 @@ extension Process {
 	/**
 	Wait until process is finished.
 
-	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
+	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int)` if the exit code is anything but 0.
 	*/
 	public func finish() throws {
 		self.waitUntilExit()
 		guard self.terminationStatus == 0 else {
-			throw ShellError.ReturnedErrorCode(command: commandAsString()!, errorcode: self.terminationStatus)
+			throw ShellError.ReturnedErrorCode(command: commandAsString()!, errorcode: Int(self.terminationStatus))
 		}
 	}
 
@@ -251,7 +238,7 @@ public final class AsyncShellTask {
 	Wait for this shell process to finish.
 
 	- returns: itself
-	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
+	- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int)` if the exit code is anything but 0.
 	*/
 	@discardableResult public func finish() throws -> AsyncShellTask {
 		try process.finish()
@@ -259,9 +246,9 @@ public final class AsyncShellTask {
 	}
 
 	/** Wait for command to finish, then return with exit code. */
-	public func exitcode () -> Int32 {
+	public func exitcode () -> Int {
 		process.waitUntilExit()
-		return process.terminationStatus
+		return Int(process.terminationStatus)
 	}
 }
 
@@ -301,7 +288,7 @@ extension ShellRunnable {
 	- parameter executable: path to an executable file.
 	- parameter args: arguments to the executable.
 	- throws: 
-		`ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
+		`ShellError.ReturnedErrorCode (command: String, errorcode: Int)` if the exit code is anything but 0.
 
 		`ShellError.InAccessibleExecutable (path: String)` if 'executable’ turned out to be not so executable after all.
 	*/
@@ -345,7 +332,7 @@ Run executable and print output and errors.
 
 - parameter executable: path to an executable file.
 - parameter args: arguments to the executable.
-- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int32)` if the exit code is anything but 0.
+- throws: `ShellError.ReturnedErrorCode (command: String, errorcode: Int)` if the exit code is anything but 0.
 
 	`ShellError.InAccessibleExecutable (path: String)` if 'executable’ turned out to be not so executable after all.
 */
