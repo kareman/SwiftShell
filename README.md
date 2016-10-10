@@ -1,12 +1,10 @@
-[![Platform](http://img.shields.io/badge/platform-osx-lightgrey.svg?style=flat)](https://developer.apple.com/resources/) [![Language](http://img.shields.io/badge/language-swift-orange.svg?style=flat)](https://developer.apple.com/swift) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
+[![Build Status](https://travis-ci.org/kareman/SwiftShell.svg?branch=master)](https://travis-ci.org/kareman/SwiftShell) [![Platform](http://img.shields.io/badge/platform-osx-lightgrey.svg?style=flat)](https://developer.apple.com/resources/) [![Language](http://img.shields.io/badge/language-swift-orange.svg?style=flat)](https://developer.apple.com/swift) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://mit-license.org)
 
-For Swift 3. See [this branch](https://github.com/kareman/SwiftShell/) for Swift 2.2+.
-
-_Not currently available for Linux, because [NSTask](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSTask.swift) and [NSFileHandle](https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSFileHandle.swift) have not been ported yet._
+Swift 3 | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
 
 # SwiftShell
 
-An OS X/macOS Framework for command-line scripting in Swift.
+A framework for command-line scripting in Swift.
 
 #### See also
 
@@ -28,7 +26,7 @@ do {
 	let input = try main.arguments.first.map {try open($0)} ?? main.stdin
 
 	input.lines()
-		.enumerate().forEach { (linenr,line) in print(linenr+1, ":", line) }
+		.enumerated().forEach { (linenr,line) in print(linenr+1, ":", line) }
 
 	// Add a newline at the end
 	print("")
@@ -81,11 +79,11 @@ If the path to the executable is without any `/`, SwiftShell will try to find th
 The array of arguments can contain any type, since everything is convertible to strings in Swift. If it contains any arrays it will be flattened so only the elements will be used, not the arrays themselves.
 
 ```swift
-run("echo", "We are", 4, "arguments")
+try runAndPrint("echo", "We are", 4, "arguments")
 // echo "We are" 4 arguments
 
 let array = ["But", "we", "are"]
-run("echo", array, array.count + 2, "arguments")
+try runAndPrint("echo", array, array.count + 2, "arguments")
 // echo But we are 5 arguments
 ```
 
@@ -142,7 +140,7 @@ When launched from the top level you don't need to catch any errors, but you sti
 `main.stdout` is for normal output and `main.stderror` for errors:
 
 ```swift
-main.stdout.writeln("everything is fine")
+main.stdout.write("everything is fine")
 
 main.stderror.write("something went wrong ...")
 ```
@@ -178,6 +176,12 @@ Everything is mutable, so you can set e.g. the text encoding or reroute standard
 
 ## Setup
 
+One of the goals of SwiftShell is to be able to run single .swift files directly, like you do with bash and Python files. This is possible now, but every time you upgrade Xcode or Swift you have to recompile all the third party frameworks your Swift script files use (including the SwiftShell framework). This will continue to be a problem until Swift achieves ABI stability in (hopefully) version 4. For now it is more practical to precompile the script into a self-contained executable.
+
+#### Pre-compiled executable
+
+If you put [Misc/swiftshell-init](https://raw.githubusercontent.com/kareman/SwiftShell/master/Misc/swiftshell-init) somewhere in your $PATH you can create a new project with `swiftshell-init <name>`. This creates a new folder, initialises a Swift Package Manager executable folder structure, downloads the latest version of SwiftShell, creates an Xcode project and opens it. After running `swift build` you can find the compiled executable at `.build/debug/<name>`.
+
 #### Shell script
 
 - In the Terminal, go to where you want to download SwiftShell.
@@ -187,9 +191,7 @@ Everything is mutable, so you can set e.g. the text encoding or reroute standard
         cd SwiftShell
 
 - Copy/link `Misc/swiftshell` to your bin folder or anywhere in your PATH.
-- To install the framework itself, either:
-  - run `xcodebuild install` from the project's root folder. This will install the SwiftShell framework in ~/Library/Frameworks.
-  - _or_ run `xcodebuild` and copy the resulting framework from the build folder to your library folder of choice. If that is not "~/Library/Frameworks" or "/Library/Frameworks"  then make sure the folder is listed in $SWIFTSHELL_FRAMEWORK_PATH.
+- To install the framework itself, run `xcodebuild` and copy the resulting framework from the build folder to your library folder of choice. If that is not "~/Library/Frameworks" or "/Library/Frameworks"  then make sure the folder is listed in $SWIFTSHELL_FRAMEWORK_PATH.
 
 Then include this in the beginning of each script:
 
@@ -201,9 +203,7 @@ import SwiftShell
 
 #### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
-See the [Swift 3 branch](https://github.com/kareman/SwiftShell/tree/Swift3.0).
-
-Add `.Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 2)` to your Package.swift:
+Add `.Package(url: "https://github.com/kareman/SwiftShell", "3.0.0-beta")` to your Package.swift:
 
 ```swift
 import PackageDescription
@@ -211,7 +211,7 @@ import PackageDescription
 let package = Package(
 	name: "somecommandlineapp",
 	dependencies: [
-		.Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 2)
+		.Package(url: "https://github.com/kareman/SwiftShell.git", "3.0.0-beta")
 		 ]
 )
 ```
@@ -220,19 +220,10 @@ and run `swift build`.
 
 #### [Carthage](https://github.com/Carthage/Carthage)
 
-Add this to your Cartfile:
-
-```
-github "kareman/SwiftShell"
-```
-
-Then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for instructions.
+Add `github "kareman/SwiftShell" "master"` to your Cartfile, then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for further instructions.
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
-#### Xcode command-line application
-
-Sadly it is not possible to include a framework in an Xcode command-line application. But you can import one. Set the build settings FRAMEWORK_SEARCH_PATHS and LD_RUNPATH_SEARCH_PATHS to include a folder containing the SwiftShell framework. Or if you want the command line application to be self-contained you can include all the source files from SwiftShell in the command line target itself, and add `"#import "NSTask+NSTask_Errors.h"` to the bridging header.
 
 ## License
 
