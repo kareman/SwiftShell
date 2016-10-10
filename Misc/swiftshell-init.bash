@@ -13,7 +13,7 @@ swift package init --type executable
 
 cat >> Package.swift <<_EOF_
 
-package.dependencies.append(.Package(url: "https://github.com/kareman/SwiftShell.git", majorVersion: 3))
+package.dependencies.append(.Package(url: "https://github.com/kareman/SwiftShell.git", "3.0.0-beta"))
 _EOF_
 
 swift build
