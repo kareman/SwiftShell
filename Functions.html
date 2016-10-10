@@ -102,9 +102,6 @@
                 <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeSi4fileSS4lineSi_Os5Never">exit(errormessage:errorcode:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeVs5Int324fileSS4lineSi_Os5Never">exit(errormessage:errorcode:file:line:)</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Functions.html#/s:F10SwiftShell4openFzTSS8encodingVE10FoundationSS8Encoding_CS_14ReadableStream">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
@@ -419,71 +416,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:F10SwiftShell4exiturFT12errormessagex9errorcodeVs5Int324fileSS4lineSi_Os5Never"></a>
-                    <a name="//apple_ref/swift/Function/exit(errormessage:errorcode:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeVs5Int324fileSS4lineSi_Os5Never">exit(errormessage:errorcode:file:line:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Print message to standard error and halt execution.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">exit</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">errormessage</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">errorcode</span><span class="p">:</span> <span class="kt">Int32</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>errormessage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>the error message.</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>errorcode</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>exit code for the entire program. Defaults to 1.</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>not.</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:F10SwiftShell4exitFTPs5Error_4fileSS4lineSi_Os5Never"></a>
                     <a name="//apple_ref/swift/Function/exit(_:file:line:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:F10SwiftShell4exitFTPs5Error_4fileSS4lineSi_Os5Never">exit(_:file:line:)</a>
@@ -733,7 +665,7 @@
 
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <p><code>ShellError.ReturnedErrorCode (command: String, errorcode: Int32)</code> if the exit code is anything but 0.</p>
+    <p><code>ShellError.ReturnedErrorCode (command: String, errorcode: Int)</code> if the exit code is anything but 0.</p>
 
 <p><code>ShellError.InAccessibleExecutable (path: String)</code> if &lsquo;executable’ turned out to be not so executable after all.</p>
 
@@ -1001,7 +933,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-10-08)</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-10-10)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

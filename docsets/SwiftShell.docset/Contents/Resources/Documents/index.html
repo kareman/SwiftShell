@@ -102,9 +102,6 @@
                 <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeSi4fileSS4lineSi_Os5Never">exit(errormessage:errorcode:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeVs5Int324fileSS4lineSi_Os5Never">exit(errormessage:errorcode:file:line:)</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Functions.html#/s:F10SwiftShell4openFzTSS8encodingVE10FoundationSS8Encoding_CS_14ReadableStream">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
@@ -170,14 +167,12 @@
         <section>
           <section class="section">
             
-            <p><a href="https://developer.apple.com/resources/"><img src="http://img.shields.io/badge/platform-osx-lightgrey.svg?style=flat" alt="Platform"></a> <a href="https://developer.apple.com/swift"><img src="http://img.shields.io/badge/language-swift-orange.svg?style=flat" alt="Language"></a> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a> <a href="http://mit-license.org"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License"></a></p>
+            <p><a href="https://travis-ci.org/kareman/SwiftShell"><img src="https://travis-ci.org/kareman/SwiftShell.svg?branch=master" alt="Build Status"></a> <a href="https://developer.apple.com/resources/"><img src="http://img.shields.io/badge/platform-osx-lightgrey.svg?style=flat" alt="Platform"></a> <a href="https://developer.apple.com/swift"><img src="http://img.shields.io/badge/language-swift-orange.svg?style=flat" alt="Language"></a> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a> <a href="http://mit-license.org"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License"></a></p>
 
-<p>For Swift 3. See <a href="https://github.com/kareman/SwiftShell/">this branch</a> for Swift 2.2+.</p>
-
-<p><em>Not currently available for Linux, because <a href="https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSTask.swift">NSTask</a> and <a href="https://github.com/apple/swift-corelibs-foundation/blob/master/Foundation/NSFileHandle.swift">NSFileHandle</a> have not been ported yet.</em></p>
+<p>Swift 3 | <a href="https://github.com/kareman/SwiftShell/tree/Swift2">Swift 2</a></p>
 <a href='#swiftshell' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='swiftshell'>SwiftShell</h1>
 
-<p>An OS X/macOS Framework for command-line scripting in Swift.</p>
+<p>A framework for command-line scripting in Swift.</p>
 <a href='#see-also' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='see-also'>See also</h4>
 
 <ul>
@@ -199,7 +194,7 @@
     <span class="k">let</span> <span class="nv">input</span> <span class="o">=</span> <span class="k">try</span> <span class="n">main</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="k">try</span> <span class="nf">open</span><span class="p">(</span><span class="nv">$0</span><span class="p">)}</span> <span class="p">??</span> <span class="n">main</span><span class="o">.</span><span class="n">stdin</span>
 
     <span class="n">input</span><span class="o">.</span><span class="nf">lines</span><span class="p">()</span>
-        <span class="o">.</span><span class="nf">enumerate</span><span class="p">()</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="p">(</span><span class="n">linenr</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">linenr</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s">":"</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="p">}</span>
+        <span class="o">.</span><span class="nf">enumerated</span><span class="p">()</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="p">(</span><span class="n">linenr</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">linenr</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s">":"</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> <span class="p">}</span>
 
     <span class="c1">// Add a newline at the end</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
@@ -239,11 +234,11 @@
 <p>If the path to the executable is without any <code>/</code>, SwiftShell will try to find the full path using the <code>which</code> shell command.</p>
 
 <p>The array of arguments can contain any type, since everything is convertible to strings in Swift. If it contains any arrays it will be flattened so only the elements will be used, not the arrays themselves.</p>
-<pre class="highlight swift"><code><span class="nf">run</span><span class="p">(</span><span class="s">"echo"</span><span class="p">,</span> <span class="s">"We are"</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">"arguments"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">try</span> <span class="nf">runAndPrint</span><span class="p">(</span><span class="s">"echo"</span><span class="p">,</span> <span class="s">"We are"</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">"arguments"</span><span class="p">)</span>
 <span class="c1">// echo "We are" 4 arguments</span>
 
 <span class="k">let</span> <span class="nv">array</span> <span class="o">=</span> <span class="p">[</span><span class="s">"But"</span><span class="p">,</span> <span class="s">"we"</span><span class="p">,</span> <span class="s">"are"</span><span class="p">]</span>
-<span class="nf">run</span><span class="p">(</span><span class="s">"echo"</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">count</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"arguments"</span><span class="p">)</span>
+<span class="k">try</span> <span class="nf">runAndPrint</span><span class="p">(</span><span class="s">"echo"</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">count</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"arguments"</span><span class="p">)</span>
 <span class="c1">// echo But we are 5 arguments</span>
 </code></pre>
 
@@ -288,7 +283,7 @@
 <a href='#output' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='output'>Output</h2>
 
 <p><code>main.stdout</code> is for normal output and <code>main.stderror</code> for errors:</p>
-<pre class="highlight swift"><code><span class="n">main</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="nf">writeln</span><span class="p">(</span><span class="s">"everything is fine"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="n">main</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"everything is fine"</span><span class="p">)</span>
 
 <span class="n">main</span><span class="o">.</span><span class="n">stderror</span><span class="o">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"something went wrong ..."</span><span class="p">)</span>
 </code></pre>
@@ -316,6 +311,11 @@
 
 <p>Everything is mutable, so you can set e.g. the text encoding or reroute standard error to a file.</p>
 <a href='#setup' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='setup'>Setup</h2>
+
+<p>One of the goals of SwiftShell is to be able to run single .swift files directly, like you do with bash and Python files. This is possible now, but every time you upgrade Xcode or Swift you have to recompile all the third party frameworks your Swift script files use (including the SwiftShell framework). This will continue to be a problem until Swift achieves ABI stability in (hopefully) version 4. For now it is more practical to precompile the script into a self-contained executable.</p>
+<a href='#pre-compiled-executable' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='pre-compiled-executable'>Pre-compiled executable</h4>
+
+<p>If you put <a href="https://raw.githubusercontent.com/kareman/SwiftShell/master/Misc/swiftshell-init">Misc/swiftshell-init</a> somewhere in your $PATH you can create a new project with <code>swiftshell-init &lt;name&gt;</code>. This creates a new folder, initialises a Swift Package Manager executable folder structure, downloads the latest version of SwiftShell, creates an Xcode project and opens it. After running <code>swift build</code> you can find the compiled executable at <code>.build/debug/&lt;name&gt;</code>.</p>
 <a href='#shell-script' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='shell-script'>Shell script</h4>
 
 <ul>
@@ -325,12 +325,7 @@
 cd SwiftShell
 </code></pre></li>
 <li><p>Copy/link <code>Misc/swiftshell</code> to your bin folder or anywhere in your PATH.</p></li>
-<li><p>To install the framework itself, either:</p>
-
-<ul>
-<li>run <code>xcodebuild install</code> from the project&rsquo;s root folder. This will install the SwiftShell framework in ~/Library/Frameworks.</li>
-<li><em>or</em> run <code>xcodebuild</code> and copy the resulting framework from the build folder to your library folder of choice. If that is not <q>~/Library/Frameworks</q> or <q>/Library/Frameworks</q>  then make sure the folder is listed in $SWIFTSHELL_FRAMEWORK_PATH.</li>
-</ul></li>
+<li><p>To install the framework itself, run <code>xcodebuild</code> and copy the resulting framework from the build folder to your library folder of choice. If that is not <q>~/Library/Frameworks</q> or <q>/Library/Frameworks</q>  then make sure the folder is listed in $SWIFTSHELL_FRAMEWORK_PATH.</p></li>
 </ul>
 
 <p>Then include this in the beginning of each script:</p>
@@ -340,15 +335,13 @@ cd SwiftShell
 </code></pre>
 <a href='#a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a'><a href="https://github.com/apple/swift-package-manager">Swift Package Manager</a></h4>
 
-<p>See the <a href="https://github.com/kareman/SwiftShell/tree/Swift3.0">Swift 3 branch</a>.</p>
-
-<p>Add <code>.Package(url: &quot;https://github.com/kareman/SwiftShell&quot;, majorVersion: 2)</code> to your Package.swift:</p>
+<p>Add <code>.Package(url: &quot;https://github.com/kareman/SwiftShell&quot;, &quot;3.0.0-beta&quot;)</code> to your Package.swift:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
 
 <span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="s">"somecommandlineapp"</span><span class="p">,</span>
     <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-        <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/kareman/SwiftShell"</span><span class="p">,</span> <span class="nv">majorVersion</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/kareman/SwiftShell.git"</span><span class="p">,</span> <span class="s">"3.0.0-beta"</span><span class="p">)</span>
          <span class="p">]</span>
 <span class="p">)</span>
 </code></pre>
@@ -356,14 +349,7 @@ cd SwiftShell
 <p>and run <code>swift build</code>.</p>
 <a href='#a-href-https-github-com-carthage-carthage-carthage-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-github-com-carthage-carthage-carthage-a'><a href="https://github.com/Carthage/Carthage">Carthage</a></h4>
 
-<p>Add this to your Cartfile:</p>
-<pre class="highlight plaintext"><code>github "kareman/SwiftShell"
-</code></pre>
-
-<p>Then run <code>carthage update</code> and add the resulting framework to the <q>Embedded Binaries</q> section of the application. See <a href="https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">Carthage&rsquo;s README</a> for instructions.</p>
-<a href='#xcode-command-line-application' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='xcode-command-line-application'>Xcode command-line application</h4>
-
-<p>Sadly it is not possible to include a framework in an Xcode command-line application. But you can import one. Set the build settings FRAMEWORK_SEARCH_PATHS and LD_RUNPATH_SEARCH_PATHS to include a folder containing the SwiftShell framework. Or if you want the command line application to be self-contained you can include all the source files from SwiftShell in the command line target itself, and add <code>&quot;#import &quot;NSTask+NSTask_Errors.h&quot;</code> to the bridging header.</p>
+<p>Add <code>github &quot;kareman/SwiftShell&quot; &quot;master&quot;</code> to your Cartfile, then run <code>carthage update</code> and add the resulting framework to the <q>Embedded Binaries</q> section of the application. See <a href="https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">Carthage&rsquo;s README</a> for further instructions.</p>
 <a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
 
 <p>Released under the MIT License (MIT), <a href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a></p>
@@ -375,7 +361,7 @@ cd SwiftShell
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-10-08)</p>
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-10-10)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
