@@ -39,7 +39,9 @@ extension FileError: CustomStringConvertible {
 
 /** Open a file for reading, throw if an error occurs. */
 public func open (_ path: String, encoding: String.Encoding = main.encoding) throws -> ReadableStream {
-	return try open(URL(fileURLWithPath: path, isDirectory: false), encoding: encoding)
+	// URL does not handle leading "~/"
+	let fixedpath = path.hasPrefix("~") ? (path as NSString).expandingTildeInPath : path
+	return try open(URL(fileURLWithPath: fixedpath, isDirectory: false), encoding: encoding)
 }
 
 /** Open a file for reading, throw if an error occurs. */
@@ -81,5 +83,6 @@ If the file already exists and overwrite=false, the writing will begin at the en
 - parameter overwrite: If true, replace the file if it exists.
 */
 public func open (forWriting path: String, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WriteableStream {
-	return try open(forWriting: URL(fileURLWithPath: path, isDirectory: false), overwrite: overwrite, encoding:  encoding)
+	let fixedpath = path.hasPrefix("~") ? (path as NSString).expandingTildeInPath : path
+	return try open(forWriting: URL(fileURLWithPath: fixedpath, isDirectory: false), overwrite: overwrite, encoding:  encoding)
 }
