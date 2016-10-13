@@ -126,3 +126,13 @@ class RunAndPrint_Tests: XCTestCase {
 			{ try runAndPrint("notachance") }
 	}
 }
+
+extension RunAndPrint_Tests {
+	static var allTests = [
+		("testReturnsStandardOutput", testReturnsStandardOutput),
+		("testArgumentsFromArray", testArgumentsFromArray),
+		("testReturnsStandardError", testReturnsStandardError),
+		("testThrowsErrorOnExitcodeNotZero", testThrowsErrorOnExitcodeNotZero),
+		("testThrowsErrorOnInaccessibleExecutable", testThrowsErrorOnInaccessibleExecutable),
+		]
+}

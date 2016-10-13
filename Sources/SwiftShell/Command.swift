@@ -7,6 +7,10 @@
 
 import Foundation
 
+#if !os(OSX)
+typealias Process = Task
+#endif
+
 // MARK: exit
 
 /**
@@ -37,7 +41,7 @@ public func exit (_ error: Error, file: String = #file, line: Int = #line) -> Ne
 		// Cast to String to avoid compiler bug in release builds where the error message would not be printed.
 		exit(errormessage: String(error.localizedDescription), errorcode: error.code, file: file, line: line)
 #else
-		exit(errormessage: String(error), errorcode: error._code, file: file, line: line)
+		exit(errormessage: String(describing:error), errorcode: error._code, file: file, line: line)
 #endif
 	}
 }
