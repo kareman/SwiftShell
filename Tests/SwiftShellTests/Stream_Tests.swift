@@ -9,7 +9,7 @@
 import SwiftShell
 import XCTest
 
-class Stream_Tests: XCTestCase {
+public class Stream_Tests: XCTestCase {
 
 	func testStreams () {
 		let (writer,reader) = streams()
@@ -89,4 +89,16 @@ class Stream_Tests: XCTestCase {
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
 #endif
+}
+
+extension Stream_Tests {
+	public static var allTests = [
+		("testStreams", testStreams),
+		("testReadableStreamRun", testReadableStreamRun),
+		("testReadableStreamRunAsync", testReadableStreamRunAsync),
+		("testPrintStream", testPrintStream),
+		("testPrintToStream", testPrintToStream),
+		//("testOnOutput", testOnOutput),
+		//("testOnStringOutput", testOnStringOutput),
+		]
 }

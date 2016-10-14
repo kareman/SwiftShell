@@ -9,7 +9,7 @@
 import XCTest
 @testable import SwiftShell
 
-class Array_Tests: XCTestCase {
+public class Array_Tests: XCTestCase {
 
 	// comparing as strings because XCTAssertEqual doesn't support [Any]
 
@@ -36,3 +36,11 @@ class Array_Tests: XCTestCase {
 	}
 }
 
+
+extension Array_Tests {
+	public static var allTests = [
+		("testAnyArrayFlattenAFlatOne", testAnyArrayFlattenAFlatOne),
+		("testAnyArrayFlattenABumpyOne", testAnyArrayFlattenABumpyOne),
+		("testAnyArrayFlattenAVeryBumpyOne", testAnyArrayFlattenAVeryBumpyOne),
+		]
+}

@@ -9,7 +9,7 @@
 import XCTest
 @testable import SwiftShell
 
-class LazySplitGenerator_Tests: XCTestCase {
+public class LazySplitGenerator_Tests: XCTestCase {
 
 	func lazySplitToArray (allowEmptySlices: Bool) -> (String) -> [String] {
 		return { s in
@@ -101,4 +101,15 @@ class LazySplitGenerator_Tests: XCTestCase {
 
 extension String.CharacterView: CustomDebugStringConvertible {
 	public var debugDescription: String { return String(self) }
+}
+
+extension LazySplitGenerator_Tests {
+	public static var allTests = [
+		("testStringsLazySplit_AllowingEmptySlices", testStringsLazySplit_AllowingEmptySlices),
+		("testCollectionTypeSplit_AllowingEmptySlices", testCollectionTypeSplit_AllowingEmptySlices),
+		("testStringsLazySplit_NoEmptySlices", testStringsLazySplit_NoEmptySlices),
+		("testCollectionTypeSplit_NoEmptySlices", testCollectionTypeSplit_NoEmptySlices),
+		("testIntsLazySplit_NoEmptySlices", testIntsLazySplit_NoEmptySlices),
+		("testPartialSourceLazySplit_AllowingEmptySlices", testPartialSourceLazySplit_AllowingEmptySlices),
+		]
 }
