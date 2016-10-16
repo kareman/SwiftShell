@@ -45,3 +45,23 @@ extension FileHandle {
 		self.write("\n", encoding: encoding)
 	}
 }
+
+#if os(OSX)
+extension FileHandle {
+	/** Returns '.nullDevice'. 'nullDevice' has not been implemented yet in Swift Foundation. */
+	public class var nullDev: FileHandle {
+		return nullDevice
+	}
+}
+#else
+extension FileHandle {
+	@nonobjc static var _nulldevFileHandle: FileHandle = {
+		return FileHandle(forUpdatingAtPath: "/dev/null")!
+	}()
+
+	/** Returns '/dev/null'. 'nullDevice' has not been implemented yet in Swift Foundation. */
+	public class var nullDev: FileHandle {
+		return _nulldevFileHandle
+	}
+}
+#endif

@@ -17,20 +17,22 @@ public class MainContext_Tests: XCTestCase {
 	}
 
 	func testCurrentDirectory_CanChange () {
-		XCTAssertNotEqual( main.run("/bin/pwd"), "/private" )
-		main.currentdirectory = "/private"
+		let originalcurrentdirectory = main.currentdirectory
+		XCTAssertNotEqual( main.run("/bin/pwd"), "/usr" )
+		main.currentdirectory = "/usr"
 
-		XCTAssertEqual( main.run("/bin/pwd"), "/private" )
-		XCTAssertEqual( main.currentdirectory, "/private/" )
+		XCTAssertEqual( main.run("/bin/pwd"), "/usr" )
+		XCTAssertEqual( main.currentdirectory, "/usr/" )
+		main.currentdirectory = originalcurrentdirectory
 	}
 
 	func testCurrentDirectory_AffectsNSURLBase () {
 		let originalcurrentdirectory = main.currentdirectory
-		XCTAssertNotEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/private") )
+		XCTAssertNotEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/usr") )
 
-		main.currentdirectory = "/private"
+		main.currentdirectory = "/usr"
 
-		XCTAssertEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/private") )
+		XCTAssertEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/usr") )
 		main.currentdirectory = originalcurrentdirectory
 	}
 
@@ -64,17 +66,9 @@ public class BlankShellContext_Tests: XCTestCase {
 	func testIsBlank () {
 		let context = ShellContext()
 
-		XCTAssert( context.stdin.filehandle === FileHandle.nullDevice )
-		XCTAssert( context.stdout.filehandle === FileHandle.nullDevice )
-		XCTAssert( context.stderror.filehandle === FileHandle.nullDevice )
-	}
-
-	func testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable () {
-		let context = ShellContext() // everything is empty, including .env
-
-		AssertThrows(ShellError.InAccessibleExecutable(path: "echo")) {
-			try context.runAndPrint("echo", "one")
-		}
+		XCTAssert( context.stdin.filehandle === FileHandle.nullDev )
+		XCTAssert( context.stdout.filehandle === FileHandle.nullDev )
+		XCTAssert( context.stderror.filehandle === FileHandle.nullDev )
 	}
 
 	func testRunCommand () {
@@ -127,7 +121,6 @@ extension CopiedShellContext_Tests {
 extension BlankShellContext_Tests {
 	public static var allTests = [
 		("testIsBlank", testIsBlank),
-		("testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable", testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable),
 		("testRunCommand", testRunCommand),
 		("testRunAsyncCommand", testRunAsyncCommand),
 		("testRunAndPrintCommand", testRunAndPrintCommand),

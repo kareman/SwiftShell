@@ -71,7 +71,7 @@ public class LazySplitGenerator_Tests: XCTestCase {
 	}
 
 	func testIntsLazySplit_NoEmptySlices () {
-		let split = {(s: [Int]) -> [[Int]] in
+		_ = {(s: [Int]) -> [[Int]] in
 			s.lazy.split(separator: 0, omittingEmptySubsequences: true).map(Array.init)
 		}
 

@@ -117,8 +117,8 @@ public class RunAndPrint_Tests: XCTestCase {
 	}
 
 	func testThrowsErrorOnExitcodeNotZero () {
-		AssertThrows(ShellError.ReturnedErrorCode(command: "/bin/test \"1 1\" = \"2 2\"", errorcode: 1))
-			{ try runAndPrint("test", "1 1", "=", "2 2") }
+		AssertThrows(ShellError.ReturnedErrorCode(command: "/bin/bash -c \"exit 1\"", errorcode: 1))
+			{ try runAndPrint("bash", "-c", "exit 1") }
 	}
 
 	func testThrowsErrorOnInaccessibleExecutable () {
@@ -128,7 +128,7 @@ public class RunAndPrint_Tests: XCTestCase {
 }
 
 extension Run_Tests {
-	static var allTests = [
+	public static var allTests = [
 		("testBashCommand", testBashCommand),
 		("testArgumentsFromArray", testArgumentsFromArray),
 		("testSinglelineOutput", testSinglelineOutput),
@@ -138,7 +138,7 @@ extension Run_Tests {
 }
 
 extension RunAsync_Tests {
-	static var allTests = [
+	public static var allTests = [
 		("testReturnsStandardOutput", testReturnsStandardOutput),
 		("testReturnsStandardError", testReturnsStandardError),
 		("testArgumentsFromArray", testArgumentsFromArray),
