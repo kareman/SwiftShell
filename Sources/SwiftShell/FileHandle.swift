@@ -34,7 +34,11 @@ extension FileHandle {
 extension FileHandle {
 
 	public func write <T> (_ x: T, encoding: String.Encoding = main.encoding) {
-		guard let data = String(describing: x).data(using: encoding, allowLossyConversion:false) else {
+		let text = String(describing: x)
+#if !os(OSX)
+		guard !text.isEmpty else {return}
+#endif
+		guard let data = text.data(using: encoding, allowLossyConversion:false) else {
 			exit(errormessage: "Could not convert text to binary data.")
 		}
 		self.write(data)
@@ -45,3 +49,23 @@ extension FileHandle {
 		self.write("\n", encoding: encoding)
 	}
 }
+
+#if os(OSX)
+extension FileHandle {
+	/** Returns '.nullDevice'. 'nullDevice' has not been implemented yet in Swift Foundation. */
+	public class var nullDev: FileHandle {
+		return nullDevice
+	}
+}
+#else
+extension FileHandle {
+	@nonobjc static var _nulldevFileHandle: FileHandle = {
+		return FileHandle(forUpdatingAtPath: "/dev/null")!
+	}()
+
+	/** Returns '/dev/null'. 'nullDevice' has not been implemented yet in Swift Foundation. */
+	public class var nullDev: FileHandle {
+		return _nulldevFileHandle
+	}
+}
+#endif

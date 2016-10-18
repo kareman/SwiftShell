@@ -10,27 +10,29 @@ import XCTest
 import SwiftShell
 import Foundation
 
-class MainContext_Tests: XCTestCase {
+public class MainContext_Tests: XCTestCase {
 
 	func testCurrentDirectory_IsCurrentDirectory () {
 		XCTAssertEqual( main.currentdirectory, Files.currentDirectoryPath + "/")
 	}
 
 	func testCurrentDirectory_CanChange () {
-		XCTAssertNotEqual( main.run("/bin/pwd"), "/private" )
-		main.currentdirectory = "/private"
+		let originalcurrentdirectory = main.currentdirectory
+		XCTAssertNotEqual( main.run("/bin/pwd"), "/usr" )
+		main.currentdirectory = "/usr"
 
-		XCTAssertEqual( main.run("/bin/pwd"), "/private" )
-		XCTAssertEqual( main.currentdirectory, "/private/" )
+		XCTAssertEqual( main.run("/bin/pwd"), "/usr" )
+		XCTAssertEqual( main.currentdirectory, "/usr/" )
+		main.currentdirectory = originalcurrentdirectory
 	}
 
 	func testCurrentDirectory_AffectsNSURLBase () {
 		let originalcurrentdirectory = main.currentdirectory
-		XCTAssertNotEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/private") )
+		XCTAssertNotEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/usr") )
 
-		main.currentdirectory = "/private"
+		main.currentdirectory = "/usr"
 
-		XCTAssertEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/private") )
+		XCTAssertEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/usr") )
 		main.currentdirectory = originalcurrentdirectory
 	}
 
@@ -40,7 +42,7 @@ class MainContext_Tests: XCTestCase {
 	}
 }
 
-class CopiedShellContext_Tests: XCTestCase {
+public class CopiedShellContext_Tests: XCTestCase {
 
 	func testCopies () {
 		let context = ShellContext(main)
@@ -59,22 +61,14 @@ class CopiedShellContext_Tests: XCTestCase {
 	}
 }
 
-class BlankShellContext_Tests: XCTestCase {
+public class BlankShellContext_Tests: XCTestCase {
 
 	func testIsBlank () {
 		let context = ShellContext()
 
-		XCTAssert( context.stdin.filehandle === FileHandle.nullDevice )
-		XCTAssert( context.stdout.filehandle === FileHandle.nullDevice )
-		XCTAssert( context.stderror.filehandle === FileHandle.nullDevice )
-	}
-
-	func testNonAbsoluteExecutablePathFailsOnEmptyPATHEnvVariable () {
-		let context = ShellContext() // everything is empty, including .env
-
-		AssertThrows(ShellError.InAccessibleExecutable(path: "echo")) {
-			try context.runAndPrint("echo", "one")
-		}
+		XCTAssert( context.stdin.filehandle === FileHandle.nullDev )
+		XCTAssert( context.stdout.filehandle === FileHandle.nullDev )
+		XCTAssert( context.stderror.filehandle === FileHandle.nullDev )
 	}
 
 	func testRunCommand () {
@@ -106,4 +100,29 @@ class BlankShellContext_Tests: XCTestCase {
 		}
 		XCTAssertEqual(output.readSome(), "two\n")
 	}
+}
+
+extension MainContext_Tests {
+	public static var allTests = [
+		("testCurrentDirectory_IsCurrentDirectory", testCurrentDirectory_IsCurrentDirectory),
+		("testCurrentDirectory_CanChange", testCurrentDirectory_CanChange),
+		("testCurrentDirectory_AffectsNSURLBase", testCurrentDirectory_AffectsNSURLBase),
+		("testTempDirectory", testTempDirectory),
+		]
+}
+
+extension CopiedShellContext_Tests {
+	public static var allTests = [
+		("testCopies", testCopies),
+		("testCurrentDirectory_DoesNotAffectNSURLBase", testCurrentDirectory_DoesNotAffectNSURLBase),
+		]
+}
+
+extension BlankShellContext_Tests {
+	public static var allTests = [
+		("testIsBlank", testIsBlank),
+		("testRunCommand", testRunCommand),
+		("testRunAsyncCommand", testRunAsyncCommand),
+		("testRunAndPrintCommand", testRunAndPrintCommand),
+		]
 }

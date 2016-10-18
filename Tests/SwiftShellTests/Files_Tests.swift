@@ -10,7 +10,7 @@ import SwiftShell
 import XCTest
 import Foundation
 
-class UrlAppendationOperator: XCTestCase {
+public class UrlAppendationOperator: XCTestCase {
 
 	func testUrlPlusString () {
 		XCTAssertEqual( URL(fileURLWithPath: "dir") + "file.txt", URL(fileURLWithPath: "dir/file.txt"))
@@ -19,7 +19,7 @@ class UrlAppendationOperator: XCTestCase {
 	}
 }
 
-class Open: XCTestCase {
+public class Open: XCTestCase {
 
 	func testReadFile () {
 		let path = main.tempdirectory + "testReadFile.txt"
@@ -93,4 +93,21 @@ class Open: XCTestCase {
 			XCTAssertEqual( contents, "new line\n" )
 		}
 	}
+}
+
+extension UrlAppendationOperator {
+	public static var allTests = [
+		("testUrlPlusString", testUrlPlusString),
+		]
+}
+
+extension Open {
+	public static var allTests = [
+		("testReadFile", testReadFile),
+		("testReadFileWhichDoesNotExist", testReadFileWhichDoesNotExist),
+		("testOpenForWritingFileWhichDoesNotExist", testOpenForWritingFileWhichDoesNotExist),
+		("testOpenForOverWritingFileWhichDoesNotExist", testOpenForOverWritingFileWhichDoesNotExist),
+		("testOpenForWritingExistingFile_AppendsFile", testOpenForWritingExistingFile_AppendsFile),
+		("testOpenForOverWritingExistingFile", testOpenForOverWritingExistingFile),
+		]
 }

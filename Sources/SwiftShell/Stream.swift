@@ -118,7 +118,7 @@ public final class WriteableStream : TextOutputStream {
 
 	/** Write a newline to the stream. */
 	public func writeln () {
-		writeln("")
+		write("\n")
 	}
 
 	/** Close the stream. Must be called on local streams when finished writing. */

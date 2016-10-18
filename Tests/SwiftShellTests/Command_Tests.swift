@@ -11,7 +11,7 @@ import SwiftShell
 import XCTest
 import Foundation
 
-class Run_Tests: XCTestCase {
+public class Run_Tests: XCTestCase {
 
 	func testBashCommand () {
 		XCTAssertEqual( SwiftShell.run(bash:"echo one"), "one" )
@@ -35,7 +35,7 @@ class Run_Tests: XCTestCase {
 	}
 }
 
-class RunAsync_Tests: XCTestCase {
+public class RunAsync_Tests: XCTestCase {
 
 	func testReturnsStandardOutput () {
 		let asynctask = runAsync("/bin/echo", "one", "two" )
@@ -83,12 +83,12 @@ class RunAsync_Tests: XCTestCase {
 	}
 }
 
-class RunAndPrint_Tests: XCTestCase {
+public class RunAndPrint_Tests: XCTestCase {
 
 	var test_stdout: FileHandle!
 	var test_stderr: FileHandle!
 
-	override func setUp () {
+	public override func setUp () {
 		let outputpipe = Pipe()
 		main.stdout = WriteableStream(outputpipe.fileHandleForWriting)
 		test_stdout = outputpipe.fileHandleForReading
@@ -117,12 +117,43 @@ class RunAndPrint_Tests: XCTestCase {
 	}
 
 	func testThrowsErrorOnExitcodeNotZero () {
-		AssertThrows(ShellError.ReturnedErrorCode(command: "/bin/test \"1 1\" = \"2 2\"", errorcode: 1))
-			{ try runAndPrint("test", "1 1", "=", "2 2") }
+		AssertThrows(ShellError.ReturnedErrorCode(command: "/bin/bash -c \"exit 1\"", errorcode: 1))
+			{ try runAndPrint("bash", "-c", "exit 1") }
 	}
 
 	func testThrowsErrorOnInaccessibleExecutable () {
 		AssertThrows(ShellError.InAccessibleExecutable(path: "notachance"))
 			{ try runAndPrint("notachance") }
 	}
+}
+
+extension Run_Tests {
+	public static var allTests = [
+		("testBashCommand", testBashCommand),
+		("testArgumentsFromArray", testArgumentsFromArray),
+		("testSinglelineOutput", testSinglelineOutput),
+		("testMultilineOutput", testMultilineOutput),
+		("testExecutableWithoutPath", testExecutableWithoutPath),
+		]
+}
+
+extension RunAsync_Tests {
+	public static var allTests = [
+		("testReturnsStandardOutput", testReturnsStandardOutput),
+		("testReturnsStandardError", testReturnsStandardError),
+		("testArgumentsFromArray", testArgumentsFromArray),
+		("testFinishThrowsErrorOnExitcodeNotZero", testFinishThrowsErrorOnExitcodeNotZero),
+		("testExitCode", testExitCode),
+		("testOnCompletion", testOnCompletion),
+		]
+}
+
+extension RunAndPrint_Tests {
+	public static var allTests = [
+		("testReturnsStandardOutput", testReturnsStandardOutput),
+		("testArgumentsFromArray", testArgumentsFromArray),
+		("testReturnsStandardError", testReturnsStandardError),
+		("testThrowsErrorOnExitcodeNotZero", testThrowsErrorOnExitcodeNotZero),
+		("testThrowsErrorOnInaccessibleExecutable", testThrowsErrorOnInaccessibleExecutable),
+		]
 }

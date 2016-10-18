@@ -10,7 +10,7 @@ import SwiftShell
 import XCTest
 import Foundation
 
-class FileHandle_Tests: XCTestCase {
+public class FileHandle_Tests: XCTestCase {
 
 	func testWriteAndReadSome () {
 		let pipe = Pipe()
@@ -38,4 +38,11 @@ class FileHandle_Tests: XCTestCase {
 		XCTAssertEqual(reader.read(), "line1\n")
 		XCTAssertEqual(reader.read(), "", "Performing read() repeatedly on closed filehandle should return empty string.")
 	}
+}
+
+extension FileHandle_Tests {
+	public static var allTests = [
+		("testWriteAndReadSome", testWriteAndReadSome),
+		("testWritelnAndRead", testWritelnAndRead),
+		]
 }

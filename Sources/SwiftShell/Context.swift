@@ -46,9 +46,9 @@ public struct ShellContext: ShellContextType {
 		encoding = String.Encoding.utf8
 		env = [String:String]()
 
-		stdin =    ReadableStream(FileHandle.nullDevice, encoding: encoding)
-		stdout =   WriteableStream(FileHandle.nullDevice, encoding: encoding)
-		stderror = WriteableStream(FileHandle.nullDevice, encoding: encoding)
+		stdin =    ReadableStream(FileHandle.nullDev, encoding: encoding)
+		stdout =   WriteableStream(FileHandle.nullDev, encoding: encoding)
+		stderror = WriteableStream(FileHandle.nullDev, encoding: encoding)
 
 		currentdirectory = main.currentdirectory
 	}
