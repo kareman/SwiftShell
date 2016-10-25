@@ -46,7 +46,7 @@ public struct ShellContext: ShellContextType {
 		encoding = String.Encoding.utf8
 		env = [String:String]()
 
-		stdin =    ReadableStream(FileHandle.nullDev, encoding: encoding)
+		stdin =    FileHandleStream(FileHandle.nullDev, encoding: encoding)
 		stdout =   WriteableStream(FileHandle.nullDev, encoding: encoding)
 		stderror = WriteableStream(FileHandle.nullDev, encoding: encoding)
 
@@ -102,7 +102,7 @@ public final class MainShellContext: ShellContextType {
 	public var encoding = String.Encoding.utf8
 	public lazy var env = ProcessInfo.processInfo.environment as [String: String]
 
-	public lazy var stdin: ReadableStream = { ReadableStream(FileHandle.standardInput, encoding: self.encoding) }()
+	public lazy var stdin: ReadableStream = { FileHandleStream(FileHandle.standardInput, encoding: self.encoding) }()
 	public lazy var stdout: WriteableStream = { WriteableStream(FileHandle.standardOutput, encoding: self.encoding) }()
 	public lazy var stderror: WriteableStream = { WriteableStream(FileHandle.standardError, encoding: self.encoding) }()
 
