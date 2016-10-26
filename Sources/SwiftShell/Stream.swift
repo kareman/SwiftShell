@@ -108,12 +108,37 @@ extension ReadableStream {
 #endif
 
 /** An output stream, like standard output or a writeable file. */
-public final class WriteableStream : TextOutputStream {
+public protocol WriteableStream : class, TextOutputStream {
 
-	public let filehandle: FileHandle
-	let encoding: String.Encoding
+	var filehandle: FileHandle {get}
+	var encoding: String.Encoding {get}
 
 	/** Write the textual representation of `x` to the stream. */
+	func write <T> (_ x: T)
+
+	/** Write the textual representation of `x` to the stream, and add a newline. */
+	func writeln <T> (_ x: T)
+
+	/** Write a newline to the stream. */
+	func writeln ()
+
+	/** Close the stream. Must be called on local streams when finished writing. */
+	func close ()
+}
+
+extension WriteableStream {
+	public func writeln <T> (_ x: T) {
+		write(x)
+		writeln()
+	}
+
+	public func writeln () {
+		write("\n")
+	}
+}
+
+extension FileHandleStream: WriteableStream {
+
 	public func write <T> (_ x: T) {
 		if filehandle.fileDescriptor == STDOUT_FILENO {
 			print(x, terminator: "")
@@ -122,33 +147,13 @@ public final class WriteableStream : TextOutputStream {
 		}
 	}
 
-	/** Write the textual representation of `x` to the stream, and add a newline. */
-	public func writeln <T> (_ x: T) {
-		if filehandle.fileDescriptor == STDOUT_FILENO {
-			print(x)
-		} else {
-			filehandle.writeln(x, encoding: encoding)
-		}
-	}
-
-	/** Write a newline to the stream. */
-	public func writeln () {
-		write("\n")
-	}
-
-	/** Close the stream. Must be called on local streams when finished writing. */
 	public func close () {
 		filehandle.closeFile()
-	}
-
-	public init (_ filehandle: FileHandle, encoding: String.Encoding = main.encoding) {
-		self.filehandle = filehandle
-		self.encoding = encoding
 	}
 }
 
 /** Create a pair of streams. What is written to the 1st one can be read from the 2nd one. */
 public func streams () -> (WriteableStream, ReadableStream) {
 	let pipe = Pipe()
-	return (WriteableStream(pipe.fileHandleForWriting), FileHandleStream(pipe.fileHandleForReading))
+	return (FileHandleStream(pipe.fileHandleForWriting), FileHandleStream(pipe.fileHandleForReading))
 }

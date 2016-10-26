@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import SwiftShell
+@testable import SwiftShell
 import Foundation
 
 public class MainContext_Tests: XCTestCase {
@@ -92,7 +92,7 @@ public class BlankShellContext_Tests: XCTestCase {
 		}
 
 		let outputpipe = Pipe()
-		context.stdout = WriteableStream(outputpipe.fileHandleForWriting)
+		context.stdout = FileHandleStream(outputpipe.fileHandleForWriting)
 		let output = outputpipe.fileHandleForReading
 
 		AssertNoThrow {
