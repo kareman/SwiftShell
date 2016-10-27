@@ -8,10 +8,10 @@
 import Foundation
 
 /** A stream of text. Does as much as possible lazily. */
-public final class ReadableStream : TextOutputStreamable {
+public protocol ReadableStream : class, TextOutputStreamable, ShellRunnable {
 
-	public let filehandle: FileHandle
-	public let encoding: String.Encoding
+	var filehandle: FileHandle {get}
+	var encoding: String.Encoding {get}
 
 	/**
 	Whatever amount of text the stream feels like providing.
@@ -19,37 +19,52 @@ public final class ReadableStream : TextOutputStreamable {
 
 	- returns: more text from the stream, or nil if we have reached the end.
 	*/
-	public func readSome () -> String? {
-		return filehandle.readSome(encoding: encoding)
-	}
+	func readSome () -> String?
 
 	/** Read everything at once. */
-	public func read () -> String {
-		return filehandle.read(encoding: encoding)
+	func read () -> String
+
+	/** Split stream lazily into lines. */
+	func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String>
+}
+
+extension ReadableStream {
+
+	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
+		return PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }
 	}
 
-	/** Enable stream to be used by "print". */
+	// ShellRunnable
+	public var shellcontext: ShellContextType {
+		var context = ShellContext(main)
+		context.stdin = self
+		return context
+	}
+
+	// TextOutputStreamable
 	public func write<Target : TextOutputStream>(to target: inout Target) {
 		while let text = self.readSome() { target.write(text) }
 	}
+}
+
+class FileHandleStream {
+	public let filehandle: FileHandle
+	public let encoding: String.Encoding
 
 	public init (_ filehandle: FileHandle, encoding: String.Encoding = main.encoding) {
 		self.filehandle = filehandle
 		self.encoding = encoding
 	}
-
-	/** Split stream lazily into lines. */
-	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
-		return PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }
-	}
 }
 
-/** Let ReadableStream run commands using itself as stdin. */
-extension ReadableStream: ShellRunnable {
-	public var shellcontext: ShellContextType {
-		var context = ShellContext(main)
-		context.stdin = self
-		return context
+extension FileHandleStream: ReadableStream {
+
+	public func readSome () -> String? {
+		return filehandle.readSome(encoding: encoding)
+	}
+
+	public func read () -> String {
+		return filehandle.read(encoding: encoding)
 	}
 }
 
@@ -93,12 +108,37 @@ extension ReadableStream {
 #endif
 
 /** An output stream, like standard output or a writeable file. */
-public final class WriteableStream : TextOutputStream {
+public protocol WriteableStream : class, TextOutputStream {
 
-	public let filehandle: FileHandle
-	let encoding: String.Encoding
+	var filehandle: FileHandle {get}
+	var encoding: String.Encoding {get}
 
 	/** Write the textual representation of `x` to the stream. */
+	func write <T> (_ x: T)
+
+	/** Write the textual representation of `x` to the stream, and add a newline. */
+	func writeln <T> (_ x: T)
+
+	/** Write a newline to the stream. */
+	func writeln ()
+
+	/** Close the stream. Must be called on local streams when finished writing. */
+	func close ()
+}
+
+extension WriteableStream {
+	public func writeln <T> (_ x: T) {
+		write(x)
+		writeln()
+	}
+
+	public func writeln () {
+		write("\n")
+	}
+}
+
+extension FileHandleStream: WriteableStream {
+
 	public func write <T> (_ x: T) {
 		if filehandle.fileDescriptor == STDOUT_FILENO {
 			print(x, terminator: "")
@@ -107,33 +147,13 @@ public final class WriteableStream : TextOutputStream {
 		}
 	}
 
-	/** Write the textual representation of `x` to the stream, and add a newline. */
-	public func writeln <T> (_ x: T) {
-		if filehandle.fileDescriptor == STDOUT_FILENO {
-			print(x)
-		} else {
-			filehandle.writeln(x, encoding: encoding)
-		}
-	}
-
-	/** Write a newline to the stream. */
-	public func writeln () {
-		write("\n")
-	}
-
-	/** Close the stream. Must be called on local streams when finished writing. */
 	public func close () {
 		filehandle.closeFile()
-	}
-
-	public init (_ filehandle: FileHandle, encoding: String.Encoding = main.encoding) {
-		self.filehandle = filehandle
-		self.encoding = encoding
 	}
 }
 
 /** Create a pair of streams. What is written to the 1st one can be read from the 2nd one. */
 public func streams () -> (WriteableStream, ReadableStream) {
 	let pipe = Pipe()
-	return (WriteableStream(pipe.fileHandleForWriting), ReadableStream(pipe.fileHandleForReading))
+	return (FileHandleStream(pipe.fileHandleForWriting), FileHandleStream(pipe.fileHandleForReading))
 }

@@ -47,7 +47,7 @@ public func open (_ path: String, encoding: String.Encoding = main.encoding) thr
 /** Open a file for reading, throw if an error occurs. */
 public func open (_ path: URL, encoding: String.Encoding = main.encoding) throws -> ReadableStream {
 	do {
-		return ReadableStream(try FileHandle(forReadingFrom: path), encoding: encoding)
+		return FileHandleStream(try FileHandle(forReadingFrom: path), encoding: encoding)
 	} catch {
 		try FileError.checkFile(path.path)
 		throw error
@@ -69,7 +69,7 @@ public func open (forWriting path: URL, overwrite: Bool = false, encoding: Strin
 	do {
 		let filehandle = try FileHandle(forWritingTo: path)
 		_ = filehandle.seekToEndOfFile()
-		return WriteableStream(filehandle, encoding: encoding)
+		return FileHandleStream(filehandle, encoding: encoding)
 	} catch {
 		try FileError.checkFile(path.path)
 		throw error
