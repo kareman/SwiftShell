@@ -53,7 +53,7 @@ extension ReadableStream: ShellRunnable {
 	}
 }
 
-#if !os(Linux)
+#if os(macOS)
 extension ReadableStream {
 
 	/**
@@ -131,6 +131,27 @@ public final class WriteableStream : TextOutputStream {
 		self.encoding = encoding
 	}
 }
+
+#if os(macOS)
+extension WriteableStream {
+	/**
+	`handler` will be called whenever there is new output available.
+	Pass `nil` to remove any preexisting handlers.
+
+	- note: if the stream is read from outside of the handler, or more than once inside
+	the handler, it may be called once when stream is closed and empty.
+	*/
+	public func onInput ( handler: ((WriteableStream) -> ())? ) {
+		guard let handler = handler else {
+			filehandle.writeabilityHandler = nil
+			return
+		}
+		filehandle.writeabilityHandler = { [unowned self] _ in
+			handler(self)
+		}
+	}
+}
+#endif
 
 /** Create a pair of streams. What is written to the 1st one can be read from the 2nd one. */
 public func streams () -> (WriteableStream, ReadableStream) {

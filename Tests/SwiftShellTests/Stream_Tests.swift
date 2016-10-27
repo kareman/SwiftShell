@@ -63,7 +63,7 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(reader.readSome(), "one\n")
 	}
 
-#if os(OSX)
+#if os(macOS)
 	func testOnOutput () {
 		let (writer,reader) = streams()
 
@@ -86,6 +86,45 @@ public class Stream_Tests: XCTestCase {
 			expectoutput.fulfill()
 		}
 		writer.write("hi")
+		waitForExpectations(timeout: 0.5, handler: nil)
+	}
+
+	func testFoundationWriteabilityHandlerBeingCalledWhenNoInputIsAskedFor () {
+		let process = Process()
+		let inputpipe = Pipe()
+		var i = 0
+		inputpipe.fileHandleForWriting.writeabilityHandler = { filehandle in
+			i += 1
+			print("writeabilityHandler called",i,"times.")
+		}
+		process.standardInput = inputpipe
+
+		let outputpipe = Pipe()
+		process.standardOutput = outputpipe
+
+		process.launchPath = "/bin/echo"
+		process.arguments = ["hi"]
+
+		process.launch()
+		process.waitUntilExit()
+
+		XCTAssertEqual(outputpipe.fileHandleForReading.read(), "hi\n")
+		XCTAssertEqual(i, 0)
+	}
+
+	func testOnInput () {
+		var context = ShellContext()
+		let (writer,reader) = streams()
+		context.stdin = reader
+
+		let expectoutput = expectation(description: "onInput will be called when input is available")
+		writer.onInput { writer in
+			writer.writeln("onInput is working")
+			writer.onInput(handler: nil)
+			expectoutput.fulfill()
+		}
+		let command = context.runAsync(bash: "read answer; echo \"$answer\"")
+		XCTAssertEqual(command.stdout.read(), "onInput is working\n")
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
 #endif
