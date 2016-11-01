@@ -101,7 +101,7 @@ public final class WriteableStream : TextOutputStream {
 	/** Write the textual representation of `x` to the stream. */
 	public func write <T> (_ x: T) {
 		if filehandle.fileDescriptor == STDOUT_FILENO {
-			print(x, terminator: "")
+			Swift.print(x, terminator: "")
 		} else {
 			filehandle.write(x, encoding: encoding)
 		}
@@ -110,7 +110,7 @@ public final class WriteableStream : TextOutputStream {
 	/** Write the textual representation of `x` to the stream, and add a newline. */
 	public func writeln <T> (_ x: T) {
 		if filehandle.fileDescriptor == STDOUT_FILENO {
-			print(x)
+			Swift.print(x)
 		} else {
 			filehandle.writeln(x, encoding: encoding)
 		}
@@ -132,8 +132,31 @@ public final class WriteableStream : TextOutputStream {
 	}
 }
 
+extension WriteableStream {
+
+	/** 
+	Writes the textual representations of the given items into the stream.
+	Works exactly the same way as the built-in `print`.
+	*/
+	public func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
+		var iterator = items.lazy.map(String.init(describing:)).makeIterator()
+		guard let first = iterator.next() else {
+			write(terminator)
+			return
+		}
+		write(first)
+		while let item = iterator.next() {
+			write(separator)
+			write(item)
+		}
+		write(terminator)
+	}
+}
+
 /** Create a pair of streams. What is written to the 1st one can be read from the 2nd one. */
 public func streams () -> (WriteableStream, ReadableStream) {
 	let pipe = Pipe()
 	return (WriteableStream(pipe.fileHandleForWriting), ReadableStream(pipe.fileHandleForReading))
 }
+
+

@@ -63,6 +63,25 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(reader.readSome(), "one\n")
 	}
 
+	func testPrintWorksTheSameAsTheBuiltinOne() {
+		let (writer, reader) = streams()
+
+		var text = ""
+		print("1",2,3.0, to: &text)
+		writer.print("1",2,3.0)
+		XCTAssertEqual(reader.readSome(), text)
+
+		text = ""
+		print(to: &text)
+		writer.print()
+		XCTAssertEqual(reader.readSome(), text)
+
+		text = ""
+		print("1",[2,3], separator:"", terminator:"", to: &text)
+		writer.print("1",[2,3], separator:"", terminator:"")
+		XCTAssertEqual(reader.readSome(), text)
+	}
+
 #if os(macOS)
 	func testOnOutput () {
 		let (writer,reader) = streams()
@@ -98,6 +117,7 @@ extension Stream_Tests {
 		("testReadableStreamRunAsync", testReadableStreamRunAsync),
 		("testPrintStream", testPrintStream),
 		("testPrintToStream", testPrintToStream),
+		("testPrintWorksTheSameAsTheBuiltinOne", testPrintWorksTheSameAsTheBuiltinOne),
 		//("testOnOutput", testOnOutput),
 		//("testOnStringOutput", testOnStringOutput),
 		]
