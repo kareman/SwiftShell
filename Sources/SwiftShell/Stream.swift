@@ -140,11 +140,7 @@ extension WriteableStream {
 	*/
 	public func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
 		var iterator = items.lazy.map(String.init(describing:)).makeIterator()
-		guard let first = iterator.next() else {
-			write(terminator)
-			return
-		}
-		write(first)
+		iterator.next().map(write)
 		while let item = iterator.next() {
 			write(separator)
 			write(item)

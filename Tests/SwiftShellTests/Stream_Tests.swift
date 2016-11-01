@@ -67,13 +67,18 @@ public class Stream_Tests: XCTestCase {
 		let (writer, reader) = streams()
 
 		var text = ""
-		print("1",2,3.0, to: &text)
-		writer.print("1",2,3.0)
+		print(to: &text)
+		writer.print()
 		XCTAssertEqual(reader.readSome(), text)
 
 		text = ""
-		print(to: &text)
-		writer.print()
+		print("1",to: &text)
+		writer.print("1")
+		XCTAssertEqual(reader.readSome(), text)
+
+		text = ""
+		print("1",2,3.0, to: &text)
+		writer.print("1",2,3.0)
 		XCTAssertEqual(reader.readSome(), text)
 
 		text = ""
