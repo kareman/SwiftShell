@@ -35,7 +35,7 @@ extension FileHandle {
 
 	public func write <T> (_ x: T, encoding: String.Encoding = main.encoding) {
 		let text = String(describing: x)
-#if !os(OSX)
+#if !os(macOS)
 		guard !text.isEmpty else {return}
 #endif
 		guard let data = text.data(using: encoding, allowLossyConversion:false) else {
@@ -50,7 +50,7 @@ extension FileHandle {
 	}
 }
 
-#if os(OSX)
+#if os(macOS)
 extension FileHandle {
 	/** Returns '.nullDevice'. 'nullDevice' has not been implemented yet in Swift Foundation. */
 	public class var nullDev: FileHandle {

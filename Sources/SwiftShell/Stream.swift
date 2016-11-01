@@ -53,7 +53,7 @@ extension ReadableStream: ShellRunnable {
 	}
 }
 
-#if !os(Linux)
+#if os(macOS)
 extension ReadableStream {
 
 	/**

@@ -63,7 +63,7 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(reader.readSome(), "one\n")
 	}
 
-#if os(OSX)
+#if os(macOS)
 	func testOnOutput () {
 		let (writer,reader) = streams()
 
