@@ -72,7 +72,7 @@ If you read all of command.stderror or command.stdout it will automatically wait
 
 The 3 `run` functions above take 2 different types of parameters:
 
-**(executable: String, _ args: Any ...)**
+**(_ executable: String, _ args: Any ...)**
 
 If the path to the executable is without any `/`, SwiftShell will try to find the full path using the `which` shell command.
 
