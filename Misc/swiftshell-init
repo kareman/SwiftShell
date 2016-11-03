@@ -22,5 +22,9 @@ swift build
 # Uncomment to automatically place a symbolic link to the compiled executable in a folder in your $PATH. 
 #ln -s `pwd`/.build/debug/$NAME <A FOLDER IN YOUR $PATH>/$NAME
 
-swift package generate-xcodeproj
-open $NAME.xcodeproj/
+platform=$(uname)
+
+if [[ "$platform" == 'Darwin' ]]; then
+	swift package generate-xcodeproj
+	open $NAME.xcodeproj/
+fi
