@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol ShellContextType {
+public protocol ShellContextType: CustomDebugStringConvertible {
 	var encoding: String.Encoding {get set}
 	var env: [String: String] {get set}
 
@@ -24,6 +24,15 @@ public protocol ShellContextType {
 	var currentdirectory: String {get set}
 }
 
+extension ShellContextType {
+	/** A textual representation of this instance, suitable for debugging. */
+	public var debugDescription: String {
+		var result = ""
+		debugPrint("encoding:", encoding, "stdin:", stdin, "stdout:", stdout, "stderror:", stderror, "currentdirectory:", currentdirectory, to: &result)
+		debugPrint("env:", env, to: &result)
+		return result
+	}
+}
 
 public struct ShellContext: ShellContextType {
 	public var encoding: String.Encoding

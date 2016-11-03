@@ -53,6 +53,15 @@ extension ReadableStream: ShellRunnable {
 	}
 }
 
+extension ReadableStream: CustomDebugStringConvertible {
+	/* A textual representation of this instance, suitable for debugging. */
+	public var debugDescription: String {
+		var result = ""
+		debugPrint("ReadableStream(fd: \(filehandle.fileDescriptor), encoding: \(encoding))", to: &result)
+		return result
+	}
+}
+
 #if os(macOS)
 extension ReadableStream {
 
@@ -146,6 +155,15 @@ extension WriteableStream {
 			write(item)
 		}
 		write(terminator)
+	}
+}
+
+extension WriteableStream: CustomDebugStringConvertible {
+	/** A textual representation of this instance, suitable for debugging. */
+	public var debugDescription: String {
+		var result = ""
+		debugPrint("WriteableStream(fd: \(filehandle.fileDescriptor), encoding: \(encoding))", to: &result)
+		return result
 	}
 }
 
