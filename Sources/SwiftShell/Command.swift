@@ -18,7 +18,7 @@ Print message to standard error and halt execution.
 
 - parameter errormessage: the error message.
 - parameter errorcode: exit code for the entire program. Defaults to 1.
-- returns: not.
+- returns: Never.
 */
 public func exit <T> (errormessage: T, errorcode: Int = 1, file: String = #file, line: Int = #line) -> Never  {
 	main.stderror.write(file + ":\(line): ")
@@ -30,7 +30,7 @@ public func exit <T> (errormessage: T, errorcode: Int = 1, file: String = #file,
 Print error to standard error and halt execution.
 
 - parameter error: the error
-- returns: not.
+- returns: Never.
 */
 public func exit (_ error: Error, file: String = #file, line: Int = #line) -> Never  {
 	if let shellerror = error as? ShellError {
