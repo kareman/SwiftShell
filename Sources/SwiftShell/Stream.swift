@@ -11,7 +11,7 @@ import Foundation
 public final class ReadableStream : TextOutputStreamable {
 
 	public let filehandle: FileHandle
-	public let encoding: String.Encoding
+	public var encoding: String.Encoding
 
 	/**
 	Whatever amount of text the stream feels like providing.
@@ -103,7 +103,7 @@ extension ReadableStream {
 public final class WriteableStream : TextOutputStream {
 
 	public let filehandle: FileHandle
-	let encoding: String.Encoding
+	public var encoding: String.Encoding
 
 	/** Write the textual representation of `x` to the stream. */
 	public func write <T> (_ x: T) {
