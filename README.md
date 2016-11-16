@@ -4,7 +4,14 @@ Swift 3 | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
 
 # SwiftShell
 
-A framework for command-line scripting in Swift.
+A library for creating command-line applications and running shell commands in Swift. It lets you:
+
+- run shell commands
+- run them asynchronously, and be notified when output is available
+- access the context in which your application is running, like environment variables, standard input, standard output, standard error, the current directory and the command line arguments
+- create new such contexts you can run commands in
+- handle errors
+- read and write files
 
 #### See also
 
@@ -39,7 +46,7 @@ Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumber
 
 ## Run commands
 
-#### Print output
+### Print output
 
 ```swift
 try runAndPrint(bash: "cmd1 arg | cmd2 arg") 
@@ -47,7 +54,7 @@ try runAndPrint(bash: "cmd1 arg | cmd2 arg")
 
 Run a shell command just like you would in the terminal. The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.
 
-#### In-line
+### In-line
 
 ```swift
 let date: String = run("date", "-u")
@@ -56,7 +63,7 @@ print("Today's date in UTC is " + date)
 
 Similar to `$(cmd)` in bash, this just returns the output from the command as a string, ignoring any errors.
 
-#### Asynchronous
+### Asynchronous
 
 ```swift
 let command = runAsync("cmd", "-n", 245)
@@ -68,11 +75,11 @@ Launch a command and continue before it's finished. You can process standard out
 
 If you read all of command.stderror or command.stdout it will automatically wait for the command to finish running. You can still call `finish()` to check for errors.
 
-#### Parameters
+### Parameters
 
 The 3 `run` functions above take 2 different types of parameters:
 
-**(_ executable: String, _ args: Any ...)**
+#### (_ executable: String, _ args: Any ...)
 
 If the path to the executable is without any `/`, SwiftShell will try to find the full path using the `which` shell command.
 
@@ -87,11 +94,11 @@ try runAndPrint("echo", array, array.count + 2, "arguments")
 // echo But we are 5 arguments
 ```
 
-**(bash bashcommand: String)**
+#### (bash bashcommand: String)
 
 These are the commands you normally use in the Terminal. You can use pipes and redirection and all that good stuff. Support for other shell interpreters can easily be added.
 
-#### Errors
+### Errors
 
 If the command provided to `runAsync` could not be launched for any reason the program will print the error to standard error and exit, as is usual in scripts (it is quite possible SwiftShell should be less usual here).
 
@@ -137,21 +144,30 @@ When launched from the top level you don't need to catch any errors, but you sti
 
 ## Output
 
-`main.stdout` is for normal output and `main.stderror` for errors:
+`main.stdout` is for normal output and `main.stderror` for errors. You can also write to a file:
 
 ```swift
-main.stdout.write("everything is fine")
+main.stdout.print("everything is fine")
+main.stderror.print("no wait, something went wrong ...")
 
-main.stderror.write("something went wrong ...")
+let file = try open(forWriting: path)
+file.print("something")
 ```
+
+`.write` doesn't add a newline, and you can change the text encoding with `.encoding`.
 
 ## Input
 
-Use `main.stdin` to read from standard input:
+Use `main.stdin` to read from standard input, or you can read from a file:
 
 ```swift
-let input: String = main.stdin.read()
+let input: String? = main.stdin.readSome() // read what is available, don't wait for end of file 
+
+let file = try open(path)
+let contents: String = file.read() // read everything
 ```
+
+Using `.readSome()` you can read piecewise instead of waiting for the input to be finished and then reading everything at once. You can change the text encoding with `.encoding`.
 
 ## Main
 
@@ -178,11 +194,11 @@ Everything is mutable, so you can set e.g. the text encoding or reroute standard
 
 One of the goals of SwiftShell is to be able to run single .swift files directly, like you do with bash and Python files. This is possible now, but every time you upgrade Xcode or Swift you have to recompile all the third party frameworks your Swift script files use (including the SwiftShell framework). This will continue to be a problem until Swift achieves ABI stability in (hopefully) version 4. For now it is more practical to precompile the script into a self-contained executable.
 
-#### Pre-compiled executable
+### Pre-compiled executable
 
 If you put [Misc/swiftshell-init](https://raw.githubusercontent.com/kareman/SwiftShell/master/Misc/swiftshell-init) somewhere in your $PATH you can create a new project with `swiftshell-init <name>`. This creates a new folder, initialises a Swift Package Manager executable folder structure, downloads the latest version of SwiftShell, creates an Xcode project and opens it. After running `swift build` you can find the compiled executable at `.build/debug/<name>`.
 
-#### Shell script
+### Shell script
 
 - In the Terminal, go to where you want to download SwiftShell.
 - Run
@@ -201,7 +217,7 @@ Then include this in the beginning of each script:
 import SwiftShell
 ```
 
-#### [Swift Package Manager](https://github.com/apple/swift-package-manager)
+### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
 Add `.Package(url: "https://github.com/kareman/SwiftShell", "3.0.0-beta")` to your Package.swift:
 
@@ -218,7 +234,7 @@ let package = Package(
 
 and run `swift build`.
 
-#### [Carthage](https://github.com/Carthage/Carthage)
+### [Carthage](https://github.com/Carthage/Carthage)
 
 Add `github "kareman/SwiftShell" "master"` to your Cartfile, then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for further instructions.
 
