@@ -36,13 +36,7 @@ public func exit (_ error: Error, file: String = #file, line: Int = #line) -> Ne
 	if let shellerror = error as? ShellError {
 		exit(errormessage: shellerror, errorcode: shellerror.errorcode, file: file, line: line)
 	} else {
-#if os(macOS)
-		let error = error as NSError
-		// Cast to String to avoid compiler bug in release builds where the error message would not be printed.
-		exit(errormessage: String(error.localizedDescription), errorcode: error.code, file: file, line: line)
-#else
-		exit(errormessage: String(describing:error), errorcode: error._code, file: file, line: line)
-#endif
+		exit(errormessage: error, errorcode: error._code, file: file, line: line)
 	}
 }
 
