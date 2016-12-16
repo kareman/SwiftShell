@@ -214,11 +214,11 @@ public final class AsyncShellTask {
 
 		let outpipe = Pipe()
 		process.standardOutput = outpipe
-		stdout = ReadableStream(outpipe.fileHandleForReading)
+		stdout = FileHandleStream(outpipe.fileHandleForReading)
 
 		let errorpipe = Pipe()
 		process.standardError = errorpipe
-		stderror = ReadableStream(errorpipe.fileHandleForReading)
+		stderror = FileHandleStream(errorpipe.fileHandleForReading)
 
 		do {
 			try process.launchThrowably()
