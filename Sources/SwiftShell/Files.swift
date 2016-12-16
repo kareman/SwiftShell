@@ -69,7 +69,7 @@ public func open (forWriting path: URL, overwrite: Bool = false, encoding: Strin
 	do {
 		let filehandle = try FileHandle(forWritingTo: path)
 		_ = filehandle.seekToEndOfFile()
-		return WriteableStream(filehandle, encoding: encoding)
+		return FileHandleStream(filehandle, encoding: encoding)
 	} catch {
 		try FileError.checkFile(path.path)
 		throw error

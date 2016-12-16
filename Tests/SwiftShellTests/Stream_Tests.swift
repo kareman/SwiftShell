@@ -6,7 +6,7 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
-import SwiftShell
+@testable import SwiftShell
 import XCTest
 
 public class Stream_Tests: XCTestCase {
@@ -56,7 +56,9 @@ public class Stream_Tests: XCTestCase {
 	}
 
 	func testPrintToStream () {
-		var (writer,reader) = streams()
+		let (w,reader) = streams()
+		// 'print' does not work with protocol types directly, not even 'TextOutputStream'.
+		var writer = w as! FileHandleStream
 
 		print("one", to: &writer)
 
