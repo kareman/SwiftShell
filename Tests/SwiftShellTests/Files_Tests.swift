@@ -45,7 +45,7 @@ public class Open: XCTestCase {
 
 		AssertNoThrow {
 			let file = try open(forWriting: path)
-			file.writeln("line 1")
+			file.print("line 1")
 			file.close()
 
 			let contents = try String(contentsOfFile: path)
@@ -58,7 +58,7 @@ public class Open: XCTestCase {
 
 		AssertNoThrow {
 			let file = try open(forWriting: path, overwrite: true)
-			file.writeln("line 1")
+			file.print("line 1")
 			file.close()
 
 			let contents = try String(contentsOfFile: path)
@@ -72,7 +72,7 @@ public class Open: XCTestCase {
 
 		AssertNoThrow {
 			let file = try open(forWriting: path)
-			file.writeln("new line")
+			file.print("new line")
 			file.close()
 
 			let contents = try String(contentsOfFile: path)
@@ -86,7 +86,7 @@ public class Open: XCTestCase {
 
 		AssertNoThrow {
 			let file = try open(forWriting: path, overwrite: true)
-			file.writeln("new line")
+			file.print("new line")
 			file.close()
 
 			let contents = try String(contentsOfFile: path)

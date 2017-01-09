@@ -28,14 +28,14 @@ public class FileHandle_Tests: XCTestCase {
 		XCTAssertEqual(reader.read(), "")
 	}
 
-	func testWritelnAndRead () {
+	func testWriteAndRead () {
 		let pipe = Pipe()
 		let writer = pipe.fileHandleForWriting
 		let reader = pipe.fileHandleForReading
 
-		writer.writeln("line1")
+		writer.write("line1")
 		writer.closeFile()
-		XCTAssertEqual(reader.read(), "line1\n")
+		XCTAssertEqual(reader.read(), "line1")
 		XCTAssertEqual(reader.read(), "", "Performing read() repeatedly on closed filehandle should return empty string.")
 	}
 }
@@ -43,6 +43,6 @@ public class FileHandle_Tests: XCTestCase {
 extension FileHandle_Tests {
 	public static var allTests = [
 		("testWriteAndReadSome", testWriteAndReadSome),
-		("testWritelnAndRead", testWritelnAndRead),
+		("testWriteAndRead", testWriteAndRead),
 		]
 }

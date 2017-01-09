@@ -90,11 +90,11 @@ public class RunAndPrint_Tests: XCTestCase {
 
 	public override func setUp () {
 		let outputpipe = Pipe()
-		main.stdout = WriteableStream(outputpipe.fileHandleForWriting)
+		main.stdout = FileHandleStream(outputpipe.fileHandleForWriting)
 		test_stdout = outputpipe.fileHandleForReading
 
 		let errorpipe = Pipe()
-		main.stderror = WriteableStream(errorpipe.fileHandleForWriting)
+		main.stderror = FileHandleStream(errorpipe.fileHandleForWriting)
 		test_stderr = errorpipe.fileHandleForReading
 	}
 

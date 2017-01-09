@@ -8,10 +8,10 @@
 import Foundation
 
 /** A stream of text. Does as much as possible lazily. */
-public final class ReadableStream : TextOutputStreamable {
+public protocol ReadableStream : class, TextOutputStreamable, ShellRunnable {
 
-	public let filehandle: FileHandle
-	public var encoding: String.Encoding
+	var filehandle: FileHandle {get}
+	var encoding: String.Encoding {get set}
 
 	/**
 	Whatever amount of text the stream feels like providing.
@@ -19,41 +19,54 @@ public final class ReadableStream : TextOutputStreamable {
 
 	- returns: more text from the stream, or nil if we have reached the end.
 	*/
-	public func readSome () -> String? {
-		return filehandle.readSome(encoding: encoding)
-	}
+	func readSome () -> String?
 
 	/** Read everything at once. */
-	public func read () -> String {
-		return filehandle.read(encoding: encoding)
-	}
+	func read () -> String
+}
 
-	/** Enable stream to be used by "print". */
-	public func write<Target : TextOutputStream>(to target: inout Target) {
-		while let text = self.readSome() { target.write(text) }
-	}
-
-	public init (_ filehandle: FileHandle, encoding: String.Encoding = main.encoding) {
-		self.filehandle = filehandle
-		self.encoding = encoding
-	}
+extension ReadableStream {
 
 	/** Split stream lazily into lines. */
 	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
 		return PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }
 	}
-}
 
-/** Let ReadableStream run commands using itself as stdin. */
-extension ReadableStream: ShellRunnable {
+	// ShellRunnable
 	public var shellcontext: ShellContextType {
 		var context = ShellContext(main)
 		context.stdin = self
 		return context
 	}
+
+	// TextOutputStreamable
+	public func write<Target : TextOutputStream>(to target: inout Target) {
+		while let text = self.readSome() { target.write(text) }
+	}
 }
 
-extension ReadableStream: CustomDebugStringConvertible {
+class FileHandleStream {
+	public let filehandle: FileHandle
+	public var encoding: String.Encoding
+
+	public init (_ filehandle: FileHandle, encoding: String.Encoding = main.encoding) {
+		self.filehandle = filehandle
+		self.encoding = encoding
+	}
+}
+
+extension FileHandleStream: ReadableStream {
+
+	public func readSome () -> String? {
+		return filehandle.readSome(encoding: encoding)
+	}
+
+	public func read () -> String {
+		return filehandle.read(encoding: encoding)
+	}
+}
+
+extension FileHandleStream: CustomDebugStringConvertible {
 	/* A textual representation of this instance, suitable for debugging. */
 	public var debugDescription: String {
 		return "ReadableStream(fd: \(filehandle.fileDescriptor), encoding: \(encoding))"
@@ -100,48 +113,21 @@ extension ReadableStream {
 #endif
 
 /** An output stream, like standard output or a writeable file. */
-public final class WriteableStream : TextOutputStream {
+public protocol WriteableStream : class, TextOutputStream {
 
-	public let filehandle: FileHandle
-	public var encoding: String.Encoding
+	var filehandle: FileHandle { get }
+	var encoding: String.Encoding {get set}
 
 	/** Write the textual representation of `x` to the stream. */
-	public func write <T> (_ x: T) {
-		if filehandle.fileDescriptor == STDOUT_FILENO {
-			Swift.print(x, terminator: "")
-		} else {
-			filehandle.write(x, encoding: encoding)
-		}
-	}
-
-	/** Write the textual representation of `x` to the stream, and add a newline. */
-	public func writeln <T> (_ x: T) {
-		if filehandle.fileDescriptor == STDOUT_FILENO {
-			Swift.print(x)
-		} else {
-			filehandle.writeln(x, encoding: encoding)
-		}
-	}
-
-	/** Write a newline to the stream. */
-	public func writeln () {
-		write("\n")
-	}
+	func write <T> (_ x: T)
 
 	/** Close the stream. Must be called on local streams when finished writing. */
-	public func close () {
-		filehandle.closeFile()
-	}
-
-	public init (_ filehandle: FileHandle, encoding: String.Encoding = main.encoding) {
-		self.filehandle = filehandle
-		self.encoding = encoding
-	}
+	func close ()
 }
 
 extension WriteableStream {
 
-	/** 
+	/**
 	Writes the textual representations of the given items into the stream.
 	Works exactly the same way as the built-in `print`.
 	*/
@@ -156,17 +142,26 @@ extension WriteableStream {
 	}
 }
 
-extension WriteableStream: CustomDebugStringConvertible {
-	/** A textual representation of this instance, suitable for debugging. */
-	public var debugDescription: String {
-		return "WriteableStream(fd: \(filehandle.fileDescriptor), encoding: \(encoding))"
+extension FileHandleStream: WriteableStream {
+
+	public func write <T> (_ x: T) {
+		if filehandle.fileDescriptor == STDOUT_FILENO {
+			print(x, terminator: "")
+		} else {
+			filehandle.write(x, encoding: encoding)
+		}
+	}
+
+	public func close () {
+		filehandle.closeFile()
 	}
 }
+
 
 /** Create a pair of streams. What is written to the 1st one can be read from the 2nd one. */
 public func streams () -> (WriteableStream, ReadableStream) {
 	let pipe = Pipe()
-	return (WriteableStream(pipe.fileHandleForWriting), ReadableStream(pipe.fileHandleForReading))
+	return (FileHandleStream(pipe.fileHandleForWriting), FileHandleStream(pipe.fileHandleForReading))
 }
 
 

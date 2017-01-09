@@ -21,8 +21,7 @@ Print message to standard error and halt execution.
 - returns: Never.
 */
 public func exit <T> (errormessage: T, errorcode: Int = 1, file: String = #file, line: Int = #line) -> Never  {
-	main.stderror.write(file + ":\(line): ")
-	main.stderror.writeln(errormessage)
+	main.stderror.print(file + ":\(line):", errormessage)
 	exit(Int32(errorcode))
 }
 
@@ -214,11 +213,11 @@ public final class AsyncShellTask {
 
 		let outpipe = Pipe()
 		process.standardOutput = outpipe
-		stdout = ReadableStream(outpipe.fileHandleForReading)
+		stdout = FileHandleStream(outpipe.fileHandleForReading)
 
 		let errorpipe = Pipe()
 		process.standardError = errorpipe
-		stderror = ReadableStream(errorpipe.fileHandleForReading)
+		stderror = FileHandleStream(errorpipe.fileHandleForReading)
 
 		do {
 			try process.launchThrowably()

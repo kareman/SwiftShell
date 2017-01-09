@@ -6,7 +6,7 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
-import SwiftShell
+@testable import SwiftShell
 import XCTest
 
 public class Stream_Tests: XCTestCase {
@@ -17,8 +17,8 @@ public class Stream_Tests: XCTestCase {
 		writer.write("one")
 		XCTAssertEqual(reader.readSome(), "one")
 
-		writer.writeln()
-		writer.writeln("two")
+		writer.print()
+		writer.print("two")
 		XCTAssertEqual(reader.readSome(), "\ntwo\n")
 
 		writer.write("three")
@@ -56,7 +56,9 @@ public class Stream_Tests: XCTestCase {
 	}
 
 	func testPrintToStream () {
-		var (writer,reader) = streams()
+		let (w,reader) = streams()
+		// 'print' does not work with protocol types directly, not even 'TextOutputStream'.
+		var writer = w as! FileHandleStream
 
 		print("one", to: &writer)
 
@@ -97,7 +99,7 @@ public class Stream_Tests: XCTestCase {
 				expectoutput.fulfill()
 			}
 		}
-		writer.writeln()
+		writer.print()
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
 
