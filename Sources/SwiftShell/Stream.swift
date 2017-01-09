@@ -112,6 +112,7 @@ extension ReadableStream {
 }
 #endif
 
+
 /** An output stream, like standard output or a writeable file. */
 public protocol WriteableStream : class, TextOutputStream {
 
@@ -157,6 +158,24 @@ extension FileHandleStream: WriteableStream {
 	}
 }
 
+/** Singleton WriteableStream used only for `print`ing to stdout with the default main.stdout. */
+internal class StdoutStream: WriteableStream {
+	public var filehandle: FileHandle {
+		return FileHandle.standardOutput
+	}
+
+	public var encoding: String.Encoding = main.encoding
+
+	private init () { }
+
+	static var `default`: StdoutStream { return StdoutStream() }
+
+	public func write <T> (_ x: T) {
+		print(x, terminator: "")
+	}
+
+	public func close () {}
+}
 
 /** Create a pair of streams. What is written to the 1st one can be read from the 2nd one. */
 public func streams () -> (WriteableStream, ReadableStream) {

@@ -112,7 +112,7 @@ public final class MainShellContext: ShellContextType {
 	public lazy var env = ProcessInfo.processInfo.environment as [String: String]
 
 	public lazy var stdin: ReadableStream = { FileHandleStream(FileHandle.standardInput, encoding: self.encoding) }()
-	public lazy var stdout: WriteableStream = { FileHandleStream(FileHandle.standardOutput, encoding: self.encoding) }()
+	public lazy var stdout: WriteableStream = { StdoutStream.default }()
 	public lazy var stderror: WriteableStream = { FileHandleStream(FileHandle.standardError, encoding: self.encoding) }()
 
 	/**
