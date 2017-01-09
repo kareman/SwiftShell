@@ -21,8 +21,7 @@ Print message to standard error and halt execution.
 - returns: Never.
 */
 public func exit <T> (errormessage: T, errorcode: Int = 1, file: String = #file, line: Int = #line) -> Never  {
-	main.stderror.write(file + ":\(line): ")
-	main.stderror.print(errormessage)
+	main.stderror.print(file + ":\(line):", errormessage)
 	exit(Int32(errorcode))
 }
 
