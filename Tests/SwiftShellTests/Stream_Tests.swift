@@ -17,8 +17,8 @@ public class Stream_Tests: XCTestCase {
 		writer.write("one")
 		XCTAssertEqual(reader.readSome(), "one")
 
-		writer.writeln()
-		writer.writeln("two")
+		writer.print()
+		writer.print("two")
 		XCTAssertEqual(reader.readSome(), "\ntwo\n")
 
 		writer.write("three")
@@ -99,7 +99,7 @@ public class Stream_Tests: XCTestCase {
 				expectoutput.fulfill()
 			}
 		}
-		writer.writeln()
+		writer.print()
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
 

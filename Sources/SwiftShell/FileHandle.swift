@@ -43,11 +43,6 @@ extension FileHandle {
 		}
 		self.write(data)
 	}
-
-	public func writeln <T> (_ x: T, encoding: String.Encoding = main.encoding) {
-		self.write(x, encoding: encoding)
-		self.write("\n", encoding: encoding)
-	}
 }
 
 #if os(macOS)

@@ -126,14 +126,6 @@ public protocol WriteableStream : class, TextOutputStream {
 }
 
 extension WriteableStream {
-	public func writeln <T> (_ x: T) {
-		write(x)
-		writeln()
-	}
-
-	public func writeln () {
-		write("\n")
-	}
 
 	/**
 	Writes the textual representations of the given items into the stream.
