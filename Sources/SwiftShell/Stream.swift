@@ -28,8 +28,8 @@ public protocol ReadableStream : class, TextOutputStreamable, ShellRunnable {
 extension ReadableStream {
 
 	/** Split stream lazily into lines. */
-	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
-		return PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }
+	public func lines () -> LazySequence<AnySequence<String>> {
+		return AnySequence(PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }).lazy
 	}
 
 	// ShellRunnable
