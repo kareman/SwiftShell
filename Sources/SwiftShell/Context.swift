@@ -12,8 +12,8 @@ public protocol ShellContextType: CustomDebugStringConvertible {
 	var env: [String: String] {get set}
 
 	var stdin: ReadableStream {get set}
-	var stdout: WriteableStream {get set}
-	var stderror: WriteableStream {get set}
+	var stdout: WritableStream {get set}
+	var stderror: WritableStream {get set}
 
 	/**
 	The current working directory.
@@ -39,8 +39,8 @@ public struct ShellContext: ShellContextType {
 	public var env: [String: String]
 
 	public var stdin: ReadableStream
-	public var stdout: WriteableStream
-	public var stderror: WriteableStream
+	public var stdout: WritableStream
+	public var stderror: WritableStream
 
 	/**
 	The current working directory.
@@ -112,8 +112,8 @@ public final class MainShellContext: ShellContextType {
 	public lazy var env = ProcessInfo.processInfo.environment as [String: String]
 
 	public lazy var stdin: ReadableStream = { FileHandleStream(FileHandle.standardInput, encoding: self.encoding) }()
-	public lazy var stdout: WriteableStream = { StdoutStream.default }()
-	public lazy var stderror: WriteableStream = { FileHandleStream(FileHandle.standardError, encoding: self.encoding) }()
+	public lazy var stdout: WritableStream = { StdoutStream.default }()
+	public lazy var stderror: WritableStream = { FileHandleStream(FileHandle.standardError, encoding: self.encoding) }()
 
 	/**
 	The current working directory.

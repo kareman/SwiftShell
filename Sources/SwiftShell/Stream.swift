@@ -114,7 +114,7 @@ extension ReadableStream {
 
 
 /** An output stream, like standard output or a writeable file. */
-public protocol WriteableStream : class, TextOutputStream {
+public protocol WritableStream : class, TextOutputStream {
 
 	var filehandle: FileHandle { get }
 	var encoding: String.Encoding {get set}
@@ -126,7 +126,7 @@ public protocol WriteableStream : class, TextOutputStream {
 	func close ()
 }
 
-extension WriteableStream {
+extension WritableStream {
 
 	/**
 	Writes the textual representations of the given items into the stream.
@@ -143,7 +143,7 @@ extension WriteableStream {
 	}
 }
 
-extension FileHandleStream: WriteableStream {
+extension FileHandleStream: WritableStream {
 
 	public func write <T> (_ x: T) {
 		if filehandle.fileDescriptor == STDOUT_FILENO {
@@ -158,8 +158,8 @@ extension FileHandleStream: WriteableStream {
 	}
 }
 
-/** Singleton WriteableStream used only for `print`ing to stdout with the default main.stdout. */
-internal class StdoutStream: WriteableStream {
+/** Singleton WritableStream used only for `print`ing to stdout with the default main.stdout. */
+internal class StdoutStream: WritableStream {
 	public var filehandle: FileHandle {
 		return FileHandle.standardOutput
 	}
@@ -178,7 +178,7 @@ internal class StdoutStream: WriteableStream {
 }
 
 /** Create a pair of streams. What is written to the 1st one can be read from the 2nd one. */
-public func streams () -> (WriteableStream, ReadableStream) {
+public func streams () -> (WritableStream, ReadableStream) {
 	let pipe = Pipe()
 	return (FileHandleStream(pipe.fileHandleForWriting), FileHandleStream(pipe.fileHandleForReading))
 }

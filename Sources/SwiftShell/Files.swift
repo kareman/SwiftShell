@@ -60,7 +60,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
 
 - parameter overwrite: If true, replace the file if it exists.
 */
-public func open (forWriting path: URL, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WriteableStream {
+public func open (forWriting path: URL, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WritableStream {
 
 	if overwrite || !Files.fileExists(atPath: path.path) {
 		_ = Files.createFile(atPath: path.path, contents: nil, attributes: nil)
@@ -82,7 +82,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
 
 - parameter overwrite: If true, replace the file if it exists.
 */
-public func open (forWriting path: String, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WriteableStream {
+public func open (forWriting path: String, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WritableStream {
 	let fixedpath = path.hasPrefix("~") ? NSString(string: path).expandingTildeInPath : path
 	return try open(forWriting: URL(fileURLWithPath: fixedpath, isDirectory: false), overwrite: overwrite, encoding:  encoding)
 }
