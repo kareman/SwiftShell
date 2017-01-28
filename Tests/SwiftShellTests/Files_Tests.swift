@@ -93,6 +93,20 @@ public class Open: XCTestCase {
 			XCTAssertEqual( contents, "new line\n" )
 		}
 	}
+    
+    func testOpenForOverWritingCreatesIntermediateDirectory () {
+        let path = main.tempdirectory + "/intermediate/path/testOpenForOverWritingExistingFile.txt"
+        let _ = SwiftShell.run(bash: "echo existing line > " + path)
+        
+        AssertNoThrow {
+            let file = try open(forWriting: path, overwrite: false)
+            file.print("new line")
+            file.close()
+            
+            let contents = try String(contentsOfFile: path)
+            XCTAssertEqual( contents, "new lin1e\n" )
+        }
+    }
 }
 
 extension UrlAppendationOperator {
@@ -109,5 +123,6 @@ extension Open {
 		("testOpenForOverWritingFileWhichDoesNotExist", testOpenForOverWritingFileWhichDoesNotExist),
 		("testOpenForWritingExistingFile_AppendsFile", testOpenForWritingExistingFile_AppendsFile),
 		("testOpenForOverWritingExistingFile", testOpenForOverWritingExistingFile),
+		("testOpenForOverWritingCreatesIntermediateDirectory", testOpenForOverWritingCreatesIntermediateDirectory)
 		]
 }
