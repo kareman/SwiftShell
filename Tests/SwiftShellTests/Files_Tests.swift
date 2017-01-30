@@ -90,17 +90,11 @@ public class Open: XCTestCase {
 	}
     
     func testOpenForOverWritingCreatesIntermediateDirectory () {
-        let path = main.tempdirectory + "/intermediate/path/testOpenForOverWritingExistingFile.txt"
-        let _ = SwiftShell.run(bash: "echo existing line > " + path)
-        
+        let path = main.tempdirectory + "intermediate/path/testOpenForOverWritingExistingFile.txt"
 
         AssertDoesNotThrow {
-            let file = try open(forWriting: path, overwrite: false)
-            file.print("new line")
-            file.close()
-            
-            let contents = try String(contentsOfFile: path)
-            XCTAssertEqual( contents, "new lin1e\n" )
+            _ = try open(forWriting: path, overwrite: false)
+			XCTAssert(Files.fileExists(atPath: path))
         }
     }
 }
