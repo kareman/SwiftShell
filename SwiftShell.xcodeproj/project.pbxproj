@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BA3162631D075F72006BEB3A /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3162621D075F72006BEB3A /* String.swift */; };
 		BA3162671D07627D006BEB3A /* String_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3162641D0761D1006BEB3A /* String_Tests.swift */; };
+		BAB06F481E3FBF00006D2D02 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB06F471E3FBF00006D2D02 /* TestHelpers.swift */; };
 		_LinkFileRef_SwiftShell_via_SwiftShellTestSuite /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "_____Product_SwiftShell" /* SwiftShell.framework */; };
 		__src_cc_ref_Sources/SwiftShell/Bash.swift /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/SwiftShell/Bash.swift /* Bash.swift */; };
 		__src_cc_ref_Sources/SwiftShell/Command.swift /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/SwiftShell/Command.swift /* Command.swift */; };
@@ -20,7 +21,6 @@
 		__src_cc_ref_Sources/SwiftShell/Stream.swift /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Sources/SwiftShell/Stream.swift /* Stream.swift */; };
 		__src_cc_ref_Tests/General/Array_Tests.swift /* Array_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/General/Array_Tests.swift /* Array_Tests.swift */; };
 		__src_cc_ref_Tests/General/Collection_Tests.swift /* Collection_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/General/Collection_Tests.swift /* Collection_Tests.swift */; };
-		__src_cc_ref_Tests/SwiftShell/CatchingFire.swift /* CatchingFire.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/SwiftShell/CatchingFire.swift /* CatchingFire.swift */; };
 		__src_cc_ref_Tests/SwiftShell/Command_Tests.swift /* Command_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/SwiftShell/Command_Tests.swift /* Command_Tests.swift */; };
 		__src_cc_ref_Tests/SwiftShell/Context_Tests.swift /* Context_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/SwiftShell/Context_Tests.swift /* Context_Tests.swift */; };
 		__src_cc_ref_Tests/SwiftShell/FileHandle_Tests.swift /* FileHandle_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = __PBXFileRef_Tests/SwiftShell/FileHandle_Tests.swift /* FileHandle_Tests.swift */; };
@@ -41,6 +41,7 @@
 /* Begin PBXFileReference section */
 		BA3162621D075F72006BEB3A /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		BA3162641D0761D1006BEB3A /* String_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String_Tests.swift; sourceTree = "<group>"; };
+		BAB06F471E3FBF00006D2D02 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		__PBXFileRef_GeneralTestSuite_Info.plist /* GeneralTestSuite_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = GeneralTestSuite_Info.plist; path = SwiftShell.xcodeproj/GeneralTestSuite_Info.plist; sourceTree = SOURCE_ROOT; };
 		__PBXFileRef_Package.swift /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Sources/SwiftShell/Bash.swift /* Bash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Bash.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -56,7 +57,6 @@
 		__PBXFileRef_SwiftShell_Info.plist /* SwiftShell_Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = SwiftShell_Info.plist; path = SwiftShell.xcodeproj/SwiftShell_Info.plist; sourceTree = SOURCE_ROOT; };
 		__PBXFileRef_Tests/General/Array_Tests.swift /* Array_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array_Tests.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Tests/General/Collection_Tests.swift /* Collection_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection_Tests.swift; sourceTree = "<group>"; };
-		__PBXFileRef_Tests/SwiftShell/CatchingFire.swift /* CatchingFire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatchingFire.swift; sourceTree = "<group>"; };
 		__PBXFileRef_Tests/SwiftShell/Command_Tests.swift /* Command_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Command_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		__PBXFileRef_Tests/SwiftShell/Context_Tests.swift /* Context_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Context_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		__PBXFileRef_Tests/SwiftShell/FileHandle_Tests.swift /* FileHandle_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FileHandle_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -170,7 +170,7 @@
 		"_______Group_SwiftShellTestSuite" /* SwiftShellTestSuite */ = {
 			isa = PBXGroup;
 			children = (
-				__PBXFileRef_Tests/SwiftShell/CatchingFire.swift /* CatchingFire.swift */,
+				BAB06F471E3FBF00006D2D02 /* TestHelpers.swift */,
 				__PBXFileRef_Tests/SwiftShell/Command_Tests.swift /* Command_Tests.swift */,
 				__PBXFileRef_Tests/SwiftShell/Context_Tests.swift /* Context_Tests.swift */,
 				__PBXFileRef_Tests/SwiftShell/FileHandle_Tests.swift /* FileHandle_Tests.swift */,
@@ -301,9 +301,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				__src_cc_ref_Tests/SwiftShell/CatchingFire.swift /* CatchingFire.swift in Sources */,
 				__src_cc_ref_Tests/SwiftShell/Command_Tests.swift /* Command_Tests.swift in Sources */,
 				__src_cc_ref_Tests/SwiftShell/Context_Tests.swift /* Context_Tests.swift in Sources */,
+				BAB06F481E3FBF00006D2D02 /* TestHelpers.swift in Sources */,
 				BA3162671D07627D006BEB3A /* String_Tests.swift in Sources */,
 				__src_cc_ref_Tests/SwiftShell/FileHandle_Tests.swift /* FileHandle_Tests.swift in Sources */,
 				__src_cc_ref_Tests/SwiftShell/Files_Tests.swift /* Files_Tests.swift in Sources */,

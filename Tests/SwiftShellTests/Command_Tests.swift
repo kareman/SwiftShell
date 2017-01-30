@@ -8,6 +8,7 @@
 
 @testable
 import SwiftShell
+
 import XCTest
 import Foundation
 
@@ -39,7 +40,7 @@ public class RunAsync_Tests: XCTestCase {
 
 	func testReturnsStandardOutput () {
 		let asynctask = runAsync("/bin/echo", "one", "two" )
-		AssertNoThrow { try asynctask.finish() }
+		AssertDoesNotThrow { try asynctask.finish() }
 
 		XCTAssertEqual( asynctask.stdout.read(), "one two\n" )
 		XCTAssertEqual( asynctask.stderror.read(), "" )
@@ -47,14 +48,14 @@ public class RunAsync_Tests: XCTestCase {
 
 	func testReturnsStandardError () {
 		let asynctask = runAsync(bash: "echo one two > /dev/stderr" )
-		AssertNoThrow { try asynctask.finish() }
+		AssertDoesNotThrow { try asynctask.finish() }
 
 		XCTAssertEqual( asynctask.stderror.read(), "one two\n" )
 		XCTAssertEqual( asynctask.stdout.read(), "" )
 	}
 
 	func testArgumentsFromArray () {
-		AssertNoThrow {
+		AssertDoesNotThrow {
 			let output = try runAsync("/bin/echo", ["one", "two"]).finish().stdout.read()
 			XCTAssertEqual( output, "one two\n" )
 		}
@@ -99,19 +100,19 @@ public class RunAndPrint_Tests: XCTestCase {
 	}
 
 	func testReturnsStandardOutput () {
-		AssertNoThrow { try runAndPrint("/bin/echo", "one", "two" ) }
+		AssertDoesNotThrow { try runAndPrint("/bin/echo", "one", "two" ) }
 
 		XCTAssertEqual( test_stdout.readSome(), "one two\n" )
 	}
 
 	func testArgumentsFromArray () {
-		AssertNoThrow { try runAndPrint("/bin/echo", ["one", "two"] ) }
+		AssertDoesNotThrow { try runAndPrint("/bin/echo", ["one", "two"] ) }
 
 		XCTAssertEqual( test_stdout.readSome(), "one two\n" )
 	}
 
 	func testReturnsStandardError () {
-		AssertNoThrow { try runAndPrint(bash: "echo one two > /dev/stderr" ) }
+		AssertDoesNotThrow { try runAndPrint(bash: "echo one two > /dev/stderr" ) }
 
 		XCTAssertEqual( test_stderr.readSome(), "one two\n" )
 	}

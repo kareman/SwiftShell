@@ -87,18 +87,16 @@ public class BlankShellContext_Tests: XCTestCase {
 	func testRunAndPrintCommand () {
 		var context = ShellContext()
 
-		AssertNoThrow {
+		AssertDoesNotThrow {
 			try context.runAndPrint("/bin/echo", "one") // sent to null
-		}
 
-		let outputpipe = Pipe()
-		context.stdout = FileHandleStream(outputpipe.fileHandleForWriting)
-		let output = outputpipe.fileHandleForReading
+			let outputpipe = Pipe()
+			context.stdout = FileHandleStream(outputpipe.fileHandleForWriting)
+			let output = outputpipe.fileHandleForReading
 
-		AssertNoThrow {
 			try context.runAndPrint("/bin/echo", "two")
+			XCTAssertEqual(output.readSome(), "two\n")
 		}
-		XCTAssertEqual(output.readSome(), "two\n")
 	}
 }
 

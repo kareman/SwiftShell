@@ -20,6 +20,20 @@
                ReferencedContainer = "container:SwiftShell.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "______Target_GeneralTestSuite"
+               BuildableName = "GeneralTestSuite.xctest"
+               BlueprintName = "GeneralTestSuite"
+               ReferencedContainer = "container:SwiftShell.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -32,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_GeneralTestSuite"
-               BuildableName = "GeneralTestSuite.xctest"
-               BlueprintName = "GeneralTestSuite"
+               BlueprintIdentifier = "______Target_SwiftShellTestSuite"
+               BuildableName = "SwiftShellTestSuite.xctest"
+               BlueprintName = "SwiftShellTestSuite"
                ReferencedContainer = "container:SwiftShell.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,13 +56,22 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_SwiftShellTestSuite"
-               BuildableName = "SwiftShellTestSuite.xctest"
-               BlueprintName = "SwiftShellTestSuite"
+               BlueprintIdentifier = "______Target_GeneralTestSuite"
+               BuildableName = "GeneralTestSuite.xctest"
+               BlueprintName = "GeneralTestSuite"
                ReferencedContainer = "container:SwiftShell.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "______Target_SwiftShell"
+            BuildableName = "SwiftShell.framework"
+            BlueprintName = "SwiftShell"
+            ReferencedContainer = "container:SwiftShell.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -80,6 +103,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "______Target_SwiftShell"
+            BuildableName = "SwiftShell.framework"
+            BlueprintName = "SwiftShell"
+            ReferencedContainer = "container:SwiftShell.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

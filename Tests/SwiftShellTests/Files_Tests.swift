@@ -25,25 +25,20 @@ public class Open: XCTestCase {
 		let path = main.tempdirectory + "testReadFile.txt"
 		let _ = SwiftShell.run(bash: "echo Lorem ipsum dolor > " + path)
 
-		AssertNoThrow {
+		AssertDoesNotThrow {
 			let file = try open(path)
 			XCTAssert(file.read().hasPrefix("Lorem ipsum dolor"))
 		}
 	}
 
 	func testReadFileWhichDoesNotExist () {
-		do {
-			let _ = try open("/nonexistingfile.txt")
-			XCTFail("Creating stream from non-existing file did not throw error")
-		} catch {
-
-		}
+		XCTAssertThrowsError(try open("/nonexistingfile.txt"))
 	}
 
 	func testOpenForWritingFileWhichDoesNotExist () {
 		let path = main.tempdirectory + "testOpenForWritingFileWhichDoesNotExist.txt"
 
-		AssertNoThrow {
+		AssertDoesNotThrow {
 			let file = try open(forWriting: path)
 			file.print("line 1")
 			file.close()
@@ -56,7 +51,7 @@ public class Open: XCTestCase {
 	func testOpenForOverWritingFileWhichDoesNotExist () {
 		let path = main.tempdirectory + "testOpenForOverWritingFileWhichDoesNotExist.txt"
 
-		AssertNoThrow {
+		AssertDoesNotThrow {
 			let file = try open(forWriting: path, overwrite: true)
 			file.print("line 1")
 			file.close()
@@ -70,7 +65,7 @@ public class Open: XCTestCase {
 		let path = main.tempdirectory + "testOpenForWritingExistingFile_AppendsFile.txt"
 		let _ = SwiftShell.run(bash: "echo existing line > " + path)
 
-		AssertNoThrow {
+		AssertDoesNotThrow {
 			let file = try open(forWriting: path)
 			file.print("new line")
 			file.close()
@@ -84,7 +79,7 @@ public class Open: XCTestCase {
 		let path = main.tempdirectory + "testOpenForOverWritingExistingFile.txt"
 		let _ = SwiftShell.run(bash: "echo existing line > " + path)
 
-		AssertNoThrow {
+		AssertDoesNotThrow {
 			let file = try open(forWriting: path, overwrite: true)
 			file.print("new line")
 			file.close()
@@ -98,7 +93,8 @@ public class Open: XCTestCase {
         let path = main.tempdirectory + "/intermediate/path/testOpenForOverWritingExistingFile.txt"
         let _ = SwiftShell.run(bash: "echo existing line > " + path)
         
-        AssertNoThrow {
+
+        AssertDoesNotThrow {
             let file = try open(forWriting: path, overwrite: false)
             file.print("new line")
             file.close()
