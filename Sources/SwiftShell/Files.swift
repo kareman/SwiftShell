@@ -63,6 +63,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
 public func open (forWriting path: URL, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WritableStream {
 
 	if overwrite || !Files.fileExists(atPath: path.path) {
+		try Files.createDirectory(at: path.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
 		_ = Files.createFile(atPath: path.path, contents: nil, attributes: nil)
 	}
 
