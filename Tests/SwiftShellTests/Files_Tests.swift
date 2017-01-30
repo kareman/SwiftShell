@@ -43,7 +43,7 @@ public class Open: XCTestCase {
 			file.print("line 1")
 			file.close()
 
-			let contents = try String(contentsOfFile: path)
+			let contents = try String(contentsOfFile: path, encoding: .utf8)
 			XCTAssertEqual( contents, "line 1\n" )
 		}
 	}
@@ -56,7 +56,7 @@ public class Open: XCTestCase {
 			file.print("line 1")
 			file.close()
 
-			let contents = try String(contentsOfFile: path)
+			let contents = try String(contentsOfFile: path, encoding: .utf8)
 			XCTAssertEqual( contents, "line 1\n" )
 		}
 	}
@@ -70,7 +70,7 @@ public class Open: XCTestCase {
 			file.print("new line")
 			file.close()
 
-			let contents = try String(contentsOfFile: path)
+			let contents = try String(contentsOfFile: path, encoding: .utf8)
 			XCTAssertEqual( contents, "existing line\nnew line\n" )
 		}
 	}
@@ -84,7 +84,7 @@ public class Open: XCTestCase {
 			file.print("new line")
 			file.close()
 
-			let contents = try String(contentsOfFile: path)
+			let contents = try String(contentsOfFile: path, encoding: .utf8)
 			XCTAssertEqual( contents, "new line\n" )
 		}
 	}
