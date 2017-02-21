@@ -9,6 +9,7 @@
 @testable
 import SwiftShell
 
+
 import XCTest
 import Foundation
 
@@ -91,11 +92,11 @@ public class RunAndPrint_Tests: XCTestCase {
 
 	public override func setUp () {
 		let outputpipe = Pipe()
-		main.stdout = FileHandleStream(outputpipe.fileHandleForWriting)
+		main.stdout = FileHandleStream(outputpipe.fileHandleForWriting, encoding: .utf8)
 		test_stdout = outputpipe.fileHandleForReading
 
 		let errorpipe = Pipe()
-		main.stderror = FileHandleStream(errorpipe.fileHandleForWriting)
+		main.stderror = FileHandleStream(errorpipe.fileHandleForWriting, encoding: .utf8)
 		test_stderr = errorpipe.fileHandleForReading
 	}
 

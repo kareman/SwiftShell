@@ -5,9 +5,11 @@
 *
 */
 
+#if !(os(iOS) || os(tvOS) || os(watchOS))
+
 import Foundation
 
-#if !os(macOS)
+#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
 typealias Process = Task
 #endif
 
@@ -213,11 +215,11 @@ public final class AsyncShellTask {
 
 		let outpipe = Pipe()
 		process.standardOutput = outpipe
-		stdout = FileHandleStream(outpipe.fileHandleForReading)
+		stdout = FileHandleStream(outpipe.fileHandleForReading, encoding: main.encoding)
 
 		let errorpipe = Pipe()
 		process.standardError = errorpipe
-		stderror = FileHandleStream(errorpipe.fileHandleForReading)
+		stderror = FileHandleStream(errorpipe.fileHandleForReading, encoding: main.encoding)
 
 		do {
 			try process.launchThrowably()
@@ -336,3 +338,5 @@ Run executable and print output and errors.
 public func runAndPrint (_ executable: String, _ args: Any ...) throws {
 	return try main.runAndPrint(executable, args)
 }
+
+#endif

@@ -7,44 +7,6 @@
 
 import Foundation
 
-extension FileHandle {
-
-	public func readSome (encoding: String.Encoding = main.encoding) -> String? {
-		let data = self.availableData
-
-		guard data.count > 0 else { return nil }
-		guard let result = String(data: data, encoding: encoding) else {
-			exit(errormessage: "Could not convert binary data to text.")
-		}
-
-		return result
-	}
-
-	public func read (encoding: String.Encoding = main.encoding) -> String {
-		let data = self.readDataToEndOfFile()
-
-		guard let result = String(data: data, encoding: encoding) else {
-			exit(errormessage: "Could not convert binary data to text.")
-		}
-
-		return result
-	}
-}
-
-extension FileHandle {
-
-	public func write <T> (_ x: T, encoding: String.Encoding = main.encoding) {
-		let text = String(describing: x)
-#if !os(macOS)
-		guard !text.isEmpty else {return}
-#endif
-		guard let data = text.data(using: encoding, allowLossyConversion:false) else {
-			exit(errormessage: "Could not convert text to binary data.")
-		}
-		self.write(data)
-	}
-}
-
 #if os(macOS)
 extension FileHandle {
 	/** Returns '.nullDevice'. 'nullDevice' has not been implemented yet in Swift Foundation. */

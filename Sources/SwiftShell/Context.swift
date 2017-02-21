@@ -5,6 +5,8 @@
 *
 */
 
+#if !(os(iOS) || os(tvOS) || os(watchOS))
+
 import Foundation
 
 public protocol ShellContextType: CustomDebugStringConvertible {
@@ -153,3 +155,5 @@ extension MainShellContext: ShellRunnable {
 }
 
 public let main = MainShellContext()
+
+#endif

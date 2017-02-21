@@ -6,7 +6,7 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
-@testable import SwiftShell
+import SwiftShell
 import XCTest
 
 public class Stream_Tests: XCTestCase {
@@ -26,6 +26,7 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(reader.read(), "three")
 	}
 
+#if !(os(iOS) || os(tvOS) || os(watchOS))
 	func testReadableStreamRun () {
 		let (writer,reader) = streams()
 
@@ -43,6 +44,7 @@ public class Stream_Tests: XCTestCase {
 
 		XCTAssertEqual(reader.runAsync("cat").stdout.read(), "one")
 	}
+#endif
 
 	func testPrintStream () {
 		let (writer,reader) = streams()
@@ -89,7 +91,7 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(reader.readSome(), text)
 	}
 
-#if os(macOS)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	func testOnOutput () {
 		let (writer,reader) = streams()
 
@@ -117,6 +119,7 @@ public class Stream_Tests: XCTestCase {
 #endif
 }
 
+#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
 extension Stream_Tests {
 	public static var allTests = [
 		("testStreams", testStreams),
@@ -129,3 +132,4 @@ extension Stream_Tests {
 		//("testOnStringOutput", testOnStringOutput),
 		]
 }
+#endif

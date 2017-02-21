@@ -3,6 +3,7 @@ import XCTest
 
 import GeneralTests
 import SwiftShellTests
+import StreamTests
 
 let tests: [XCTestCaseEntry] = [
 	testCase(Array_Tests.allTests),

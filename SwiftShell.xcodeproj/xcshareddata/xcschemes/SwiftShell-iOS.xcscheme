@@ -28,20 +28,6 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_55"
-               BuildableName = "GeneralTests.xctest"
-               BlueprintName = "GeneralTests"
-               ReferencedContainer = "container:SwiftShell.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "OBJ_62"
                BuildableName = "StreamTests.xctest"
                BlueprintName = "StreamTests"
@@ -51,7 +37,7 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Debug-iOS"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -60,29 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_70"
-               BuildableName = "SwiftShellTests.xctest"
-               BlueprintName = "SwiftShellTests"
-               ReferencedContainer = "container:SwiftShell.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "OBJ_62"
                BuildableName = "StreamTests.xctest"
                BlueprintName = "StreamTests"
-               ReferencedContainer = "container:SwiftShell.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_55"
-               BuildableName = "GeneralTests.xctest"
-               BlueprintName = "GeneralTests"
                ReferencedContainer = "container:SwiftShell.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -100,7 +66,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Debug-iOS"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -122,7 +88,7 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Release-iOS"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -138,10 +104,10 @@
       </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Debug-iOS">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Release-iOS"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

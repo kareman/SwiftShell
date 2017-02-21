@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import SwiftShell
+
 import Foundation
 
 public class MainContext_Tests: XCTestCase {
@@ -91,7 +92,7 @@ public class BlankShellContext_Tests: XCTestCase {
 			try context.runAndPrint("/bin/echo", "one") // sent to null
 
 			let outputpipe = Pipe()
-			context.stdout = FileHandleStream(outputpipe.fileHandleForWriting)
+			context.stdout = FileHandleStream(outputpipe.fileHandleForWriting, encoding: .utf8)
 			let output = outputpipe.fileHandleForReading
 
 			try context.runAndPrint("/bin/echo", "two")

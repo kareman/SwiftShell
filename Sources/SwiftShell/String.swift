@@ -5,6 +5,8 @@
 *
 */
 
+#if !(os(iOS) || os(tvOS) || os(watchOS))
+
 import Foundation
 
 /** Let Strings run commands using itself as stdin. */
@@ -19,3 +21,5 @@ extension String: ShellRunnable {
 		return context
 	}
 }
+
+#endif
