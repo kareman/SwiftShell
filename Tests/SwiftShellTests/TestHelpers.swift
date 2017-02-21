@@ -29,7 +29,7 @@ func AssertDoesNotThrow(_ closure: () throws -> ()) {
 ///     }
 ///
 /// If the closure does not throw the expected error, the test fails.
-@discardableResult public func AssertThrows<E>(_ expectedError: E,
+public func AssertThrows<E>(_ expectedError: E,
 	file: StaticString = #file, line: UInt = #line, _ closure: () throws -> ())
 	where E: Error, E: Equatable {
 
