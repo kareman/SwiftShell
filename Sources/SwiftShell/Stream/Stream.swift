@@ -8,7 +8,10 @@ import Foundation
 
 extension FileHandle {
 
-	public func readSome(encoding: String.Encoding = .utf8) -> String? {
+	/// Read what is available, as a String.
+	/// - Parameter encoding: the encoding to use.
+	/// - Returns: The contents as a String, or nil the end has been reached.
+	public func readSome(encoding: String.Encoding) -> String? {
 		let data = self.availableData
 
 		guard data.count > 0 else { return nil }
@@ -19,7 +22,9 @@ extension FileHandle {
 		return result
 	}
 
-	public func read(encoding: String.Encoding = .utf8) -> String {
+	/// Read to the end, as a String.
+	/// - Parameter encoding: the encoding to use.
+	public func read(encoding: String.Encoding) -> String {
 		let data = self.readDataToEndOfFile()
 
 		guard let result = String(data: data, encoding: encoding) else {
@@ -44,6 +49,7 @@ extension FileHandle {
 }
 
 #if os(iOS) || os(tvOS) || os(watchOS)
+/// ShellRunnable is not available on iOS, tvOS and watchOS.
 public protocol ShellRunnable {}
 #endif
 

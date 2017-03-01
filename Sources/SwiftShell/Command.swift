@@ -44,6 +44,7 @@ public func exit (_ error: Error, file: String = #file, line: Int = #line) -> Ne
 
 //	MARK: ShellRunnable
 
+/// Can run shell commands using itself as standard input and 'main' as the context.
 public protocol ShellRunnable {
 	var shellcontext: ShellContextType { get }
 }

@@ -18,14 +18,14 @@ public class FileHandle_Tests: XCTestCase {
 		let reader = pipe.fileHandleForReading
 
 		writer.write("line1")
-		XCTAssertEqual(reader.readSome(), "line1")
+		XCTAssertEqual(reader.readSome(encoding: .utf8), "line1")
 		writer.write("line2")
-		XCTAssertEqual(reader.readSome(), "line2")
+		XCTAssertEqual(reader.readSome(encoding: .utf8), "line2")
 
 		writer.closeFile()
-		XCTAssertNil(reader.readSome())
-		XCTAssertNil(reader.readSome(), "Performing readSome() repeatedly on closed filehandle should return nil.")
-		XCTAssertEqual(reader.read(), "")
+		XCTAssertNil(reader.readSome(encoding: .utf8))
+		XCTAssertNil(reader.readSome(encoding: .utf8), "Performing readSome() repeatedly on closed filehandle should return nil.")
+		XCTAssertEqual(reader.read(encoding: .utf8), "")
 	}
 
 	func testWriteAndRead () {
@@ -35,8 +35,8 @@ public class FileHandle_Tests: XCTestCase {
 
 		writer.write("line1")
 		writer.closeFile()
-		XCTAssertEqual(reader.read(), "line1")
-		XCTAssertEqual(reader.read(), "", "Performing read() repeatedly on closed filehandle should return empty string.")
+		XCTAssertEqual(reader.read(encoding: .utf8), "line1")
+		XCTAssertEqual(reader.read(encoding: .utf8This), "", "Performing read() repeatedly on closed filehandle should return empty string.")
 	}
 }
 

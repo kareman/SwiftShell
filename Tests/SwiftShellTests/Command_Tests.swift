@@ -103,19 +103,19 @@ public class RunAndPrint_Tests: XCTestCase {
 	func testReturnsStandardOutput () {
 		AssertDoesNotThrow { try runAndPrint("/bin/echo", "one", "two" ) }
 
-		XCTAssertEqual( test_stdout.readSome(), "one two\n" )
+		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
 	}
 
 	func testArgumentsFromArray () {
 		AssertDoesNotThrow { try runAndPrint("/bin/echo", ["one", "two"] ) }
 
-		XCTAssertEqual( test_stdout.readSome(), "one two\n" )
+		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
 	}
 
 	func testReturnsStandardError () {
 		AssertDoesNotThrow { try runAndPrint(bash: "echo one two > /dev/stderr" ) }
 
-		XCTAssertEqual( test_stderr.readSome(), "one two\n" )
+		XCTAssertEqual( test_stderr.readSome(encoding: .utf8), "one two\n" )
 	}
 
 	func testThrowsErrorOnExitcodeNotZero () {

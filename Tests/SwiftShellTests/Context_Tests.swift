@@ -96,7 +96,7 @@ public class BlankShellContext_Tests: XCTestCase {
 			let output = outputpipe.fileHandleForReading
 
 			try context.runAndPrint("/bin/echo", "two")
-			XCTAssertEqual(output.readSome(), "two\n")
+			XCTAssertEqual(output.readSome(encoding: .utf8), "two\n")
 		}
 	}
 }
