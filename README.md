@@ -240,6 +240,15 @@ Add `github "kareman/SwiftShell" "master"` to your Cartfile, then run `carthage 
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
+### [CocoaPods](https://cocoapods.org/)
+
+Add `SwiftShell` to your `Podfile`.
+
+```Ruby
+pod "SwiftShell", git: "https://github.com/kareman/SwiftShell.git"
+```
+
+Then run `pod install` to install it.
 
 ## License
 
