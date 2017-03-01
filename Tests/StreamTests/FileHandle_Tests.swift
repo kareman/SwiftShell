@@ -36,7 +36,7 @@ public class FileHandle_Tests: XCTestCase {
 		writer.write("line1")
 		writer.closeFile()
 		XCTAssertEqual(reader.read(encoding: .utf8), "line1")
-		XCTAssertEqual(reader.read(encoding: .utf8This), "", "Performing read() repeatedly on closed filehandle should return empty string.")
+		XCTAssertEqual(reader.read(encoding: .utf8), "", "Performing read() repeatedly on closed filehandle should return empty string.")
 	}
 }
 
