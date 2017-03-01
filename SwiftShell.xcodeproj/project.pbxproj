@@ -36,6 +36,13 @@
 			remoteGlobalIDString = OBJ_40;
 			remoteInfo = SwiftShell;
 		};
+		BAC5F1851E676AFC00F075BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_40;
+			remoteInfo = SwiftShell;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -251,6 +258,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BAC5F1861E676AFC00F075BA /* PBXTargetDependency */,
 			);
 			name = StreamTests;
 			productName = StreamTests;
@@ -352,6 +360,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BAC5F1861E676AFC00F075BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_40 /* SwiftShell */;
+			targetProxy = BAC5F1851E676AFC00F075BA /* PBXContainerItemProxy */;
+		};
 		OBJ_83 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = OBJ_40 /* SwiftShell */;
