@@ -59,9 +59,9 @@ public protocol ReadableStream: class, TextOutputStreamable, ShellRunnable {
 	var encoding: String.Encoding {get set}
 	var filehandle: FileHandle {get}
 
-	/// Whatever amount of text the stream feels like providing.
+	/// All the text the stream contains so far. 
 	/// If the source is a file this will read everything at once.
-	/// - returns: more text from the stream, or nil if we have reached the end.
+	/// - Returns: more text from the stream, or nil if we have reached the end.
 	func readSome() -> String?
 
 	/// Reads everything at once.
@@ -99,13 +99,10 @@ extension ReadableStream {
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	extension ReadableStream {
-
-		/**
-		`handler` will be called whenever there is new output available.
-		Pass `nil` to remove any preexisting handlers.
-		- note: if the stream is read from outside of the handler, or more than once inside
-		the handler, it may be called once when stream is closed and empty.
-		*/
+		/// `handler` will be called whenever there is new output available.
+		/// Pass `nil` to remove any preexisting handlers.
+		/// - Note: if the stream is read from outside of the handler, or more than once inside
+		/// the handler, it may be called once when stream is closed and empty.
 		public func onOutput ( handler: ((ReadableStream) -> ())? ) {
 			guard let handler = handler else {
 				filehandle.readabilityHandler = nil
@@ -116,19 +113,19 @@ extension ReadableStream {
 			}
 		}
 
-		/**
-		`handler` will be called whenever there is new text output available.
-		Pass `nil` to remove any preexisting handlers.
-		*/
+		/// `handler` will be called whenever there is new text output available.
+		/// Pass `nil` to remove any preexisting handlers.
+		/// - Note: if the stream is read from outside of the handler, or more than once inside
+		/// the handler, it may be called once when stream is closed and empty.
 		public func onStringOutput ( handler: ((String) -> ())? ) {
-			if let h = handler {
-				filehandle.readabilityHandler = { (FileHandle) in
-					if let output = self.readSome() {
-						h(output)
-					}
+			guard let handler = handler else {
+				self.onOutput(handler: nil)
+				return
+			}
+			self.onOutput { stream in
+				if let output = stream.readSome() {
+					handler(output)
 				}
-			} else {
-				filehandle.readabilityHandler = nil
 			}
 		}
 	}
@@ -137,7 +134,6 @@ extension ReadableStream {
 
 /// An output stream, like standard output or a writeable file.
 public protocol WritableStream: class, TextOutputStream {
-
 	var encoding: String.Encoding {get set}
 	var filehandle: FileHandle {get}
 
@@ -150,7 +146,6 @@ public protocol WritableStream: class, TextOutputStream {
 }
 
 extension WritableStream {
-
 	public func write (_ x: String) {
 		if filehandle.fileDescriptor == STDOUT_FILENO {
 			Swift.print(x, terminator: "")
@@ -164,7 +159,7 @@ extension WritableStream {
 	}
 
 	/// Writes the textual representations of the given items into the stream.
-	/// Works exactly the same way as the built-in `print`.
+	/// Works exactly the same way as `print` from Swift's standard library.
 	///
 	/// To avoid printing a newline at the end, pass `terminator: ""` or use `write` ìnstead.
 	///

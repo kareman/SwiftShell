@@ -25,7 +25,6 @@
 		OBJ_78 /* Files_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* Files_Tests.swift */; };
 		OBJ_79 /* String_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* String_Tests.swift */; };
 		OBJ_80 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* TestHelpers.swift */; };
-		OBJ_82 /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* SwiftShell.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +36,13 @@
 			remoteInfo = SwiftShell;
 		};
 		BAC5F1851E676AFC00F075BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_40;
+			remoteInfo = SwiftShell;
+		};
+		BAC5F1B31E68942E00F075BA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -99,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_82 /* SwiftShell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +247,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BAC5F1B41E68942E00F075BA /* PBXTargetDependency */,
 			);
 			name = GeneralTests;
 			productName = GeneralTests;
@@ -364,6 +370,11 @@
 			isa = PBXTargetDependency;
 			target = OBJ_40 /* SwiftShell */;
 			targetProxy = BAC5F1851E676AFC00F075BA /* PBXContainerItemProxy */;
+		};
+		BAC5F1B41E68942E00F075BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_40 /* SwiftShell */;
+			targetProxy = BAC5F1B31E68942E00F075BA /* PBXContainerItemProxy */;
 		};
 		OBJ_83 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
