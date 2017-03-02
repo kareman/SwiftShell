@@ -10,3 +10,4 @@ install:
 script:
 - swift build
 - swift test
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pod lib lint --allow-warnings; fi
