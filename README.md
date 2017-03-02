@@ -192,7 +192,7 @@ Everything is mutable, so you can set e.g. the text encoding or reroute standard
 
 ## Setup
 
-One of the goals of SwiftShell is to be able to run single .swift files directly, like you do with bash and Python files. This is possible now, but every time you upgrade Xcode or Swift you have to recompile all the third party frameworks your Swift script files use (including the SwiftShell framework). This will continue to be a problem until Swift achieves ABI stability in (hopefully) version 4. For now it is more practical to precompile the script into a self-contained executable.
+One of the goals of SwiftShell is to be able to run single .swift files directly, like you do with bash and Python files. This is possible now, but every time you upgrade Xcode or Swift you have to recompile all the third party frameworks your Swift script files use (including the SwiftShell framework). This will continue to be a problem until Swift achieves ABI stability in (hopefully) version 5. For now it is more practical to precompile the script into a self-contained executable.
 
 ### Pre-compiled executable
 
@@ -245,7 +245,7 @@ Add `github "kareman/SwiftShell" "master"` to your Cartfile, then run `carthage 
 Add `SwiftShell` to your `Podfile`.
 
 ```Ruby
-pod "SwiftShell", git: "https://github.com/kareman/SwiftShell.git"
+pod 'SwiftShell', '>= 3.0.0-beta'
 ```
 
 Then run `pod install` to install it.
