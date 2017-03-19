@@ -10,7 +10,10 @@
 import Foundation
 
 #if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
+#if swift(>=3.1)
+#else
 typealias Process = Task
+#endif
 #endif
 
 // MARK: exit
