@@ -10,3 +10,7 @@ install:
 script:
 - swift build
 - swift test
+- swiftenv install 3.1-DEVELOPMENT-SNAPSHOT-2017-03-19-a
+- swiftenv local 3.1-DEVELOPMENT-SNAPSHOT-2017-03-19-a
+- swift build
+- swift test
