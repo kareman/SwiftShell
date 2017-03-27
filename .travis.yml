@@ -1,3 +1,5 @@
+env:
+- SWIFT_BETA=3.1-DEVELOPMENT-SNAPSHOT-2017-03-24-a
 os:
 - osx
 - linux
@@ -10,7 +12,7 @@ install:
 script:
 - swift build
 - swift test
-- swiftenv install 3.1-DEVELOPMENT-SNAPSHOT-2017-03-24-a
-- swiftenv local 3.1-DEVELOPMENT-SNAPSHOT-2017-03-24-a
+- swiftenv install $SWIFT_BETA
+- swiftenv local $SWIFT_BETA
 - swift build
 - swift test
