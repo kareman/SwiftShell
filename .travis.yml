@@ -1,5 +1,5 @@
 env:
-- SWIFT_BETA=3.1-DEVELOPMENT-SNAPSHOT-2017-03-24-a
+- SWIFT_BETA=3.1
 os:
 - osx
 - linux
