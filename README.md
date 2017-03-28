@@ -30,6 +30,8 @@ A library for creating command-line applications and running shell commands in S
 #### Print line numbers
 
 ```swift
+#!/usr/bin/env swiftshell
+
 import SwiftShell
 
 do {
