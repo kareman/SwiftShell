@@ -33,7 +33,7 @@ public class Stream_Tests: XCTestCase {
 		writer.write("one")
 		writer.close()
 
-		XCTAssertEqual(reader.run("cat"), "one")
+		XCTAssertEqual(reader.run("cat").stdout, "one")
 	}
 
 	func testReadableStreamRunAsync () {

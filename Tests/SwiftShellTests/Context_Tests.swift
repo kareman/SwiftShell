@@ -19,10 +19,10 @@ public class MainContext_Tests: XCTestCase {
 
 	func testCurrentDirectory_CanChange () {
 		let originalcurrentdirectory = main.currentdirectory
-		XCTAssertNotEqual( main.run("/bin/pwd"), "/usr" )
+		XCTAssertNotEqual( main.run("/bin/pwd").stdout, "/usr" )
 		main.currentdirectory = "/usr"
 
-		XCTAssertEqual( main.run("/bin/pwd"), "/usr" )
+		XCTAssertEqual( main.run("/bin/pwd").stdout, "/usr" )
 		XCTAssertEqual( main.currentdirectory, "/usr/" )
 		main.currentdirectory = originalcurrentdirectory
 	}
@@ -75,7 +75,7 @@ public class BlankShellContext_Tests: XCTestCase {
 	func testRunCommand () {
 		let context = ShellContext()
 
-		XCTAssertEqual(context.run("/bin/echo", "one"), "one")
+		XCTAssertEqual(context.run("/bin/echo", "one").stdout, "one")
 	}
 
 	func testRunAsyncCommand () {
