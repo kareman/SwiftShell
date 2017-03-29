@@ -10,9 +10,7 @@
 import Foundation
 
 public protocol ShellContextType: CustomDebugStringConvertible {
-	var encoding: String.Encoding {get set}
 	var env: [String: String] {get set}
-
 	var stdin: ReadableStream {get set}
 	var stdout: WritableStream {get set}
 	var stderror: WritableStream {get set}
@@ -30,14 +28,13 @@ extension ShellContextType {
 	/** A textual representation of this instance, suitable for debugging. */
 	public var debugDescription: String {
 		var result = ""
-		debugPrint("encoding:", encoding, "stdin:", stdin, "stdout:", stdout, "stderror:", stderror, "currentdirectory:", currentdirectory, to: &result)
+		debugPrint("stdin:", stdin, "stdout:", stdout, "stderror:", stderror, "currentdirectory:", currentdirectory, to: &result)
 		debugPrint("env:", env, to: &result)
 		return result
 	}
 }
 
 public struct ShellContext: ShellContextType {
-	public var encoding: String.Encoding
 	public var env: [String: String]
 
 	public var stdin: ReadableStream
@@ -54,25 +51,20 @@ public struct ShellContext: ShellContextType {
 
 	/** Creates a blank ShellContext. */
 	public init () {
-		encoding = String.Encoding.utf8
+		let encoding = String.Encoding.utf8
 		env = [String:String]()
-
 		stdin =    FileHandleStream(FileHandle.nullDev, encoding: encoding)
 		stdout =   FileHandleStream(FileHandle.nullDev, encoding: encoding)
 		stderror = FileHandleStream(FileHandle.nullDev, encoding: encoding)
-
 		currentdirectory = main.currentdirectory
 	}
 
 	/** Creates a new ShellContext from another ShellContextType. */
 	public init (_ context: ShellContextType) {
-		encoding = context.encoding
 		env = context.env
-
 		stdin =    context.stdin
 		stdout =   context.stdout
 		stderror = context.stderror
-
 		currentdirectory = context.currentdirectory
 	}
 }
@@ -106,13 +98,13 @@ extension CommandLine {
 public final class MainShellContext: ShellContextType {
 
 	/** 
-	The default character encoding for SwiftShell.
+	The default character encoding used throughout SwiftShell.
 
-	TODO: get encoding from environmental variable LC_CTYPE.
+	Changing this has no effect on stdin, stdout and stderror as their encodings are set individually.
 	*/
-	public var encoding = String.Encoding.utf8
-	public lazy var env = ProcessInfo.processInfo.environment as [String: String]
+	public var encoding = String.Encoding.utf8 // TODO: get encoding from environmental variable LC_CTYPE.
 
+	public lazy var env = ProcessInfo.processInfo.environment as [String: String]
 	public lazy var stdin: ReadableStream = { FileHandleStream(FileHandle.standardInput, encoding: self.encoding) }()
 	public lazy var stdout: WritableStream = { StdoutStream.default }()
 	public lazy var stderror: WritableStream = { FileHandleStream(FileHandle.standardError, encoding: self.encoding) }()
