@@ -185,12 +185,12 @@ public final class RunOutput {
 	}
 
 	/// Standard output, trimmed for whitespace and newline if it is single-line.
-	public lazy var stdout: String = RunOutput.cleanUpOutput(self.output.stdout.read())
+	public private(set) lazy var stdout: String = RunOutput.cleanUpOutput(self.output.stdout.read())
 
 	/// Standard error, trimmed for whitespace and newline if it is single-line.
-	public lazy var stderror: String = RunOutput.cleanUpOutput(self.output.stderror.read())
+	public private(set) lazy var stderror: String = RunOutput.cleanUpOutput(self.output.stderror.read())
 
-	/// The exit code of the command. Anything but 0 means error.
+	/// The exit code of the command. Anything but 0 means there was an error.
 	public var exitcode: Int { return output.exitcode() }
 
 	/// Checks if the exit code is 0.
