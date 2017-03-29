@@ -61,7 +61,7 @@ extension ShellRunnable {
 			guard !executable.characters.contains("/") else {
 				return executable
 			}
-			let path = self.run("/usr/bin/which", executable)
+			let path = self.run("/usr/bin/which", executable).stdout
 			return path.isEmpty ? executable : path
 		}
 
@@ -165,43 +165,70 @@ extension Process {
 
 // MARK: run
 
-extension ShellRunnable {
+/** Output from a `run` command. */
+public final class RunOutput {
+	fileprivate let output: AsyncShellTask
 
-	func outputFromRun (_ process: Process, file: String, line: Int) -> String {
-		let output = Pipe ()
-		process.standardOutput = output
-		process.standardError = output
-		do {
-			try process.launchThrowably()
-		} catch {
-			exit(errormessage: error, file: file, line: line)
-		}
-		var outputstring = output.fileHandleForReading.read(encoding: shellcontext.encoding)
-		process.waitUntilExit()
-
-		// if output is single-line, trim it.
-		let firstnewline = outputstring.characters.index(of: "\n")
-		if firstnewline == nil || outputstring.characters.index(after: firstnewline!) == outputstring.endIndex {
-			outputstring = outputstring.trimmingCharacters(in: .whitespacesAndNewlines)
-		}
-
-		return outputstring
+	init(output: AsyncShellTask) {
+		output.process.waitUntilExit()
+		self.output = output
 	}
 
-	/**
-	Shortcut for shell command, returns output and errors as a String.
+	/// If output is single-line, trim it.
+	static private func cleanUpOutput(_ text: String) -> String {
+		var text = text
+		let firstnewline = text.characters.index(of: "\n")
+		if firstnewline == nil || text.characters.index(after: firstnewline!) == text.endIndex {
+			text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+		}
+		return text
+	}
 
-	- warning: will crash if ‘executable’ could not be launched.
-	- parameter executable: path to an executable file.
-	- parameter args: the arguments, one string for each.
-	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
-	*/
-	@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
-		let stringargs = args.flatten().map(String.init(describing:))
-		return outputFromRun(createTask(executable, args: stringargs), file: file, line: line)
+	/// Standard output, trimmed for whitespace and newline if it is single-line.
+	public lazy var stdout: String = RunOutput.cleanUpOutput(self.output.stdout.read())
+
+	/// Standard error, trimmed for whitespace and newline if it is single-line.
+	public lazy var stderror: String = RunOutput.cleanUpOutput(self.output.stderror.read())
+
+	/// The exit code of the command. Anything but 0 means error.
+	public var exitcode: Int { return output.exitcode() }
+
+	/// Checks if the exit code is 0.
+	public var succeeded: Bool { return exitcode == 0 }
+
+	@discardableResult
+	static func && (lhs: RunOutput, rhs: @autoclosure () -> RunOutput) -> RunOutput {
+		guard lhs.succeeded else { return lhs }
+		return rhs()
+	}
+
+	@discardableResult
+	static func || (lhs: RunOutput, rhs: @autoclosure () -> RunOutput) -> RunOutput {
+		if lhs.succeeded { return lhs }
+		return rhs()
 	}
 }
 
+extension ShellRunnable {
+
+	@available(*, unavailable, message: "Use `run(...).stdout` instead.")
+	@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
+		fatalError()
+	}
+
+	/**
+	Runs a shell command.
+
+	- warning: will crash if ‘executable’ could not be launched.
+	- parameter executable: path to an executable, or the name of an executable in PATH.
+	- parameter args: the arguments, one string for each.
+	*/
+	@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> RunOutput {
+		let stringargs = args.flatten().map(String.init(describing:))
+		let async = AsyncShellTask(process: createTask(executable, args: stringargs), file: file, line: line)
+		return RunOutput(output: async)
+	}
+}
 
 // MARK: runAsync
 
@@ -304,16 +331,21 @@ extension ShellRunnable {
 // MARK: Global functions
 
 /**
-Shortcut for shell command, returns output and errors as a String.
+Runs a shell command.
 
 - warning: will crash if ‘executable’ could not be launched.
-- parameter executable: path to an executable file.
+- parameter executable: path to an executable, or the name of an executable in PATH.
 - parameter args: the arguments, one string for each.
-- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 */
-@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
+@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> RunOutput {
 	return main.run(executable, args, file: file, line: line)
 }
+
+@available(*, unavailable, message: "Use `run(...).stdout` instead.")
+@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
+	fatalError()
+}
+
 
 /**
 Run executable and return before it is finished.

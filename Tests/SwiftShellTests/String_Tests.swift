@@ -12,7 +12,7 @@ import SwiftShell
 public class String_Tests: XCTestCase {
 
 	func testRunCommands () {
-		XCTAssertEqual("one two".run("wc","-w"), "2")
+		XCTAssertEqual("one two".run("wc","-w").stdout, "2")
 		XCTAssertEqual("one".runAsync("cat").stdout.read(), "one")
 	}
 }

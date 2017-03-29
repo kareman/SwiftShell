@@ -17,14 +17,19 @@ extension ShellRunnable {
 		return createTask("/bin/bash", args: ["-c", bashcommand])
 	}
 
+	@available(*, unavailable, message: "Use `run(bash: ...).stdout` instead.")
+	@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
+		fatalError()
+	}
+
 	/**
-	Shortcut for bash shell command, returns output and errors as a String.
+	Runs a bash shell command.
 
 	- parameter bashcommand: the bash shell command.
-	- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 	*/
-	@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
-		return outputFromRun(createTask(bash: bashcommand), file: file, line: line)
+	@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> RunOutput {
+		let async = AsyncShellTask(process: createTask(bash: bashcommand), file: file, line: line)
+		return RunOutput(output: async)
 	}
 
 	/**
@@ -50,13 +55,17 @@ extension ShellRunnable {
 	}
 }
 
+@available(*, unavailable, message: "Use `run(bash: ...).stdout` instead.")
+@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
+	fatalError()
+}
+
 /**
-Shortcut for bash shell command, returns output and errors as a String.
+Runs a bash shell command.
 
 - parameter bashcommand: the bash shell command.
-- returns: standard output and standard error in one string, trimmed of whitespace and newline if it is single-line.
 */
-@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
+@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> RunOutput {
 	return main.run(bash: bashcommand, file: file, line: line)
 }
 

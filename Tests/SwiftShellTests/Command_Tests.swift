@@ -16,24 +16,55 @@ import Foundation
 public class Run_Tests: XCTestCase {
 
 	func testBashCommand () {
-		XCTAssertEqual( SwiftShell.run(bash:"echo one"), "one" )
+		XCTAssertEqual( SwiftShell.run(bash:"echo one").stdout, "one" )
 	}
 
 	func testArgumentsFromArray () {
 		let stringarray = ["one", "two"]
-		XCTAssertEqual( SwiftShell.run("/bin/echo", stringarray), "one two" )
+		XCTAssertEqual( SwiftShell.run("/bin/echo", stringarray).stdout, "one two" )
 	}
 
 	func testSinglelineOutput () {
-		XCTAssertEqual( SwiftShell.run("/bin/echo", "one", "two"), "one two" )
+		XCTAssertEqual( SwiftShell.run("/bin/echo", "one", "two").stdout, "one two" )
 	}
 
 	func testMultilineOutput () {
-		XCTAssertEqual( SwiftShell.run("/bin/echo", "one\ntwo"), "one\ntwo\n" )
+		XCTAssertEqual( SwiftShell.run("/bin/echo", "one\ntwo").stdout, "one\ntwo\n" )
 	}
 
 	func testExecutableWithoutPath () {
-		XCTAssertEqual( SwiftShell.run("echo", "one"), "one")
+		XCTAssertEqual( SwiftShell.run("echo", "one").stdout, "one")
+	}
+
+	func testSuccess() {
+		let success = SwiftShell.run(bash: "exit 0")
+		XCTAssertEqual( success.exitcode, 0)
+		XCTAssertEqual( success.succeeded, true)
+
+		let failure = SwiftShell.run(bash: "exit 1")
+		XCTAssertEqual( failure.exitcode, 1)
+		XCTAssertEqual( failure.succeeded, false)
+	}
+
+	func testAnd() {
+		main.currentdirectory = main.tempdirectory
+		let bothsucceed = SwiftShell.run("touch", "created") && SwiftShell.run("echo", "thisran")
+		XCTAssert(Files.fileExists(atPath: "created"))
+		XCTAssertEqual(bothsucceed.stdout, "thisran")
+
+		let firstfails = SwiftShell.run(bash: "exit 1") && SwiftShell.run("touch", "notcreated")
+		XCTAssertFalse(firstfails.succeeded)
+		XCTAssertFalse(Files.fileExists(atPath: "notcreated"))
+	}
+
+	func testOr() {
+		main.currentdirectory = main.tempdirectory
+		let firstran = SwiftShell.run("echo", "thisran") || SwiftShell.run("touch", "notcreated")
+		XCTAssertEqual(firstran.stdout, "thisran")
+		XCTAssertFalse(Files.fileExists(atPath: "notcreated"))
+
+		let firstfailedsecondran = SwiftShell.run(bash: "exit 1") || SwiftShell.run("echo", "thisran")
+		XCTAssertEqual(firstfailedsecondran.stdout, "thisran")
 	}
 }
 
