@@ -1,6 +1,6 @@
 //
 // Context_Tests.swift
-// SwiftShell2
+// SwiftShell
 //
 // Created by Kåre Morstøl on 20.07.15.
 //
@@ -43,10 +43,10 @@ public class MainContext_Tests: XCTestCase {
 	}
 }
 
-public class CopiedShellContext_Tests: XCTestCase {
+public class CopiedCustomContext_Tests: XCTestCase {
 
 	func testCopies () {
-		let context = ShellContext(main)
+		let context = CustomContext(main)
 
 		XCTAssert( context.stdin === main.stdin )
 		XCTAssertEqual(context.env, main.env)
@@ -55,17 +55,17 @@ public class CopiedShellContext_Tests: XCTestCase {
 	func testCurrentDirectory_DoesNotAffectNSURLBase () {
 		let originalnsurlbaseurl = URL(fileURLWithPath: "file").baseURL
 
-		var context = ShellContext(main)
+		var context = CustomContext(main)
 		context.currentdirectory = "/private"
 
 		XCTAssertEqual(URL(fileURLWithPath: "file").baseURL, originalnsurlbaseurl )
 	}
 }
 
-public class BlankShellContext_Tests: XCTestCase {
+public class BlankCustomContext_Tests: XCTestCase {
 
 	func testIsBlank () {
-		let context = ShellContext()
+		let context = CustomContext()
 
 		XCTAssert( context.stdin.filehandle === FileHandle.nullDev )
 		XCTAssert( context.stdout.filehandle === FileHandle.nullDev )
@@ -73,20 +73,20 @@ public class BlankShellContext_Tests: XCTestCase {
 	}
 
 	func testRunCommand () {
-		let context = ShellContext()
+		let context = CustomContext()
 
 		XCTAssertEqual(context.run("/bin/echo", "one").stdout, "one")
 	}
 
 	func testRunAsyncCommand () {
-		let context = ShellContext()
+		let context = CustomContext()
 		let process = context.runAsync("/bin/echo", "one")
 
 		XCTAssertEqual(process.stdout.read(), "one\n")
 	}
 
 	func testRunAndPrintCommand () {
-		var context = ShellContext()
+		var context = CustomContext()
 
 		AssertDoesNotThrow {
 			try context.runAndPrint("/bin/echo", "one") // sent to null
@@ -110,14 +110,14 @@ extension MainContext_Tests {
 		]
 }
 
-extension CopiedShellContext_Tests {
+extension CopiedCustomContext_Tests {
 	public static var allTests = [
 		("testCopies", testCopies),
 		("testCurrentDirectory_DoesNotAffectNSURLBase", testCurrentDirectory_DoesNotAffectNSURLBase),
 		]
 }
 
-extension BlankShellContext_Tests {
+extension BlankCustomContext_Tests {
 	public static var allTests = [
 		("testIsBlank", testIsBlank),
 		("testRunCommand", testRunCommand),

@@ -10,9 +10,9 @@
 import Foundation
 
 /** Let Strings run commands using itself as stdin. */
-extension String: ShellRunnable {
-	public var shellcontext: ShellContextType {
-		var context = ShellContext(main)
+extension String: CommandRunning {
+	public var context: Context {
+		var context = CustomContext(main)
 		let (writer,reader) = streams()
 
 		writer.write(self)

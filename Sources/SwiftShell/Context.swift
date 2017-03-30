@@ -9,7 +9,7 @@
 
 import Foundation
 
-public protocol ShellContextType: CustomDebugStringConvertible {
+public protocol Context: CustomDebugStringConvertible {
 	var env: [String: String] {get set}
 	var stdin: ReadableStream {get set}
 	var stdout: WritableStream {get set}
@@ -24,7 +24,7 @@ public protocol ShellContextType: CustomDebugStringConvertible {
 	var currentdirectory: String {get set}
 }
 
-extension ShellContextType {
+extension Context {
 	/** A textual representation of this instance, suitable for debugging. */
 	public var debugDescription: String {
 		var result = ""
@@ -34,7 +34,7 @@ extension ShellContextType {
 	}
 }
 
-public struct ShellContext: ShellContextType, ShellRunnable {
+public struct CustomContext: Context, CommandRunning {
 	public var env: [String: String]
 	public var stdin: ReadableStream
 	public var stdout: WritableStream
@@ -48,7 +48,7 @@ public struct ShellContext: ShellContextType, ShellRunnable {
 	*/
 	public var currentdirectory: String
 
-	/** Creates a blank ShellContext. */
+	/** Creates a blank CustomContext. */
 	public init () {
 		let encoding = String.Encoding.utf8
 		env = [String:String]()
@@ -58,8 +58,8 @@ public struct ShellContext: ShellContextType, ShellRunnable {
 		currentdirectory = main.currentdirectory
 	}
 
-	/** Creates a new ShellContext from another ShellContextType. */
-	public init (_ context: ShellContextType) {
+	/** Creates a new CustomContext from another Context. */
+	public init (_ context: Context) {
 		env = context.env
 		stdin =    context.stdin
 		stdout =   context.stdout
@@ -89,7 +89,7 @@ extension CommandLine {
 	}
 }
 
-public final class MainShellContext: ShellContextType, ShellRunnable {
+public final class MainContext: Context, CommandRunning {
 	/** 
 	The default character encoding used throughout SwiftShell.
 
@@ -135,6 +135,6 @@ public final class MainShellContext: ShellContextType, ShellRunnable {
 	}
 }
 
-public let main = MainShellContext()
+public let main = MainContext()
 
 #endif

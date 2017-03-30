@@ -1,6 +1,6 @@
 //
 // Array_Tests.swift
-// SwiftShell2
+// SwiftShell
 //
 // Created by Kåre Morstøl on 20.09.15.
 //

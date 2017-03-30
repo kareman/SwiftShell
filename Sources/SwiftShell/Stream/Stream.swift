@@ -49,12 +49,12 @@ extension FileHandle {
 }
 
 #if os(iOS) || os(tvOS) || os(watchOS)
-/// ShellRunnable is not available on iOS, tvOS and watchOS.
-public protocol ShellRunnable {}
+/// CommandRunning is not available on iOS, tvOS and watchOS.
+public protocol CommandRunning {}
 #endif
 
 /// A stream of text. Does as much as possible lazily.
-public protocol ReadableStream: class, TextOutputStreamable, ShellRunnable {
+public protocol ReadableStream: class, TextOutputStreamable, CommandRunning {
 
 	var encoding: String.Encoding {get set}
 	var filehandle: FileHandle {get}
@@ -89,8 +89,8 @@ extension ReadableStream {
 	}
 
 	#if !(os(iOS) || os(tvOS) || os(watchOS))
-	public var shellcontext: ShellContextType {
-		var context = ShellContext(main)
+	public var context: Context {
+		var context = CustomContext(main)
 		context.stdin = self
 		return context
 	}

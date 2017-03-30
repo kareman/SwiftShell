@@ -11,7 +11,7 @@ import Foundation
 
 // MARK: Bash
 
-extension ShellRunnable {
+extension CommandRunning {
 
 	func createTask (bash bashcommand: String) -> Process {
 		return createTask("/bin/bash", args: ["-c", bashcommand])
@@ -28,7 +28,7 @@ extension ShellRunnable {
 	- parameter bashcommand: the bash shell command.
 	*/
 	@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> RunOutput {
-		let async = AsyncShellTask(process: createTask(bash: bashcommand), file: file, line: line)
+		let async = AsyncCommand(process: createTask(bash: bashcommand), file: file, line: line)
 		return RunOutput(output: async)
 	}
 
@@ -36,17 +36,17 @@ extension ShellRunnable {
 	Run bash command and return before it is finished.
 
 	- parameter bashcommand: the bash shell command.
-	- returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
+	- returns: an AsyncCommand struct with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync (bash bashcommand: String) -> AsyncShellTask {
-		return AsyncShellTask(process: createTask(bash: bashcommand))
+	public func runAsync (bash bashcommand: String) -> AsyncCommand {
+		return AsyncCommand(process: createTask(bash: bashcommand))
 	}
 
 	/**
 	Run bash command and print output and errors.
 
 	- parameter bashcommand: the bash shell command.
-	- throws: a ShellError.ReturnedErrorCode if the return code is anything but 0.
+	- throws: a CommandError.ReturnedErrorCode if the return code is anything but 0.
 	*/
 	public func runAndPrint (bash bashcommand: String) throws {
 		let process = createTask(bash: bashcommand)
@@ -73,9 +73,9 @@ Runs a bash shell command.
 Run bash command and return before it is finished.
 
 - parameter bashcommand: the bash shell command.
-- returns: an AsyncShellTask struct with standard output, standard error and a 'finish' function.
+- returns: an AsyncCommand struct with standard output, standard error and a 'finish' function.
 */
-public func runAsync (bash bashcommand: String) -> AsyncShellTask {
+public func runAsync (bash bashcommand: String) -> AsyncCommand {
 	return main.runAsync(bash: bashcommand)
 }
 
@@ -83,7 +83,7 @@ public func runAsync (bash bashcommand: String) -> AsyncShellTask {
 Run bash command and print output and errors.
 
 - parameter bashcommand: the bash shell command.
-- throws: a ShellError.ReturnedErrorCode if the return code is anything but 0.
+- throws: a CommandError.ReturnedErrorCode if the return code is anything but 0.
 */
 public func runAndPrint (bash bashcommand: String) throws {
 	return try main.runAndPrint(bash: bashcommand)
