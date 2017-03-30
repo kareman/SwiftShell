@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>LazyCollectionProtocol Extension Reference</title>
+    <title>WritableStream Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/LazyCollectionProtocol" class="dashAnchor"></a>
-    <a title="LazyCollectionProtocol Extension Reference"></a>
+    <a name="//apple_ref/swift/Protocol/WritableStream" class="dashAnchor"></a>
+    <a title="WritableStream Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">SwiftShell Docs</a> (67% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">SwiftShell Reference</a>
         <img id="carat" src="../img/carat.png" />
-        LazyCollectionProtocol Extension Reference
+        WritableStream Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -179,14 +179,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>LazyCollectionProtocol</h1>
+            <h1>WritableStream</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">LazyCollectionProtocol</span> <span class="p">:</span> <span class="kt">Collection</span><span class="p">,</span> <span class="kt">LazySequenceProtocol</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">WritableStream</span><span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStream</span></code></pre>
 
                 </div>
               </div>
-            
+            <p>An output stream, like standard output or a writeable file.</p>
+
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -194,9 +195,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:Fe10SwiftShellRxs22LazyCollectionProtocolWx8Elements11SubSequence_s10CollectionWxS1_8Iterator7Element_s9EquatableWxS1_S2_S2__zWxS1_S2__WxS1_S2_S4_S5__zWxS1_S4_S5__rS0_5splitFT9separatorWxS1_S4_S5__16allowEmptySlicesSb_GVS_17LazySplitSequencewxS1__"></a>
-                    <a name="//apple_ref/swift/Method/split(separator:allowEmptySlices:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:Fe10SwiftShellRxs22LazyCollectionProtocolWx8Elements11SubSequence_s10CollectionWxS1_8Iterator7Element_s9EquatableWxS1_S2_S2__zWxS1_S2__WxS1_S2_S4_S5__zWxS1_S4_S5__rS0_5splitFT9separatorWxS1_S4_S5__16allowEmptySlicesSb_GVS_17LazySplitSequencewxS1__">split(separator:allowEmptySlices:)</a>
+                    <a name="/s:vP10SwiftShell14WritableStream8encodingVE10FoundationSS8Encoding"></a>
+                    <a name="//apple_ref/swift/Property/encoding" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP10SwiftShell14WritableStream8encodingVE10FoundationSS8Encoding">encoding</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -204,15 +205,151 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates a lazy sequence by splitting this Collection repeatedly.</p>
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">WritableStream</span><span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStream</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vP10SwiftShell14WritableStream10filehandleCSo10FileHandle"></a>
+                    <a name="//apple_ref/swift/Property/filehandle" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP10SwiftShell14WritableStream10filehandleCSo10FileHandle">filehandle</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">WritableStream</span><span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStream</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP10SwiftShell14WritableStream5writeFSST_"></a>
+                    <a name="//apple_ref/swift/Method/write(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP10SwiftShell14WritableStream5writeFSST_">write(_:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Writes <code>x</code> to the stream.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">write</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP10SwiftShell14WritableStream5closeFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/close()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP10SwiftShell14WritableStream5closeFT_T_">close()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Closes the stream. Must be called on non-file streams when finished writing,
+to prevent deadlock when reading.</p>
+
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Closes the stream. Must be called on non-file streams when finished writing,
+to prevent deadlock when reading.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">close</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE10SwiftShellPS_14WritableStream5printFTGSaP__9separatorSS10terminatorSS_T_"></a>
+                    <a name="//apple_ref/swift/Method/print(_:separator:terminator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_14WritableStream5printFTGSaP__9separatorSS10terminatorSS_T_">print(_:separator:terminator:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Writes the textual representations of the given items into the stream.
+Works exactly the same way as <code>print</code> from Swift&rsquo;s standard library.</p>
+
+<p>To avoid printing a newline at the end, pass <code>terminator: &quot;&quot;</code> or use <code>write</code> ìnstead.</p>
 
 <ul>
 <li>Parameters:
 
 <ul>
-<li>separator: The element of this collection to split over.</li>
-<li>allowEmptySlices: If there are two or more separators in a row, or this Collection begins or ends with
-a separator, should empty slices be emitted? Defaults to false.</li>
+<li>items: Zero or more items to print, converting them to text with String(describing:).</li>
+<li>separator: What to print between each item. Default is &ldquo; &rdquo;.</li>
+<li>terminator: What to print at the end. Default is newline.</li>
 </ul></li>
 </ul>
 
@@ -221,9 +358,7 @@ a separator, should empty slices be emitted? Defaults to false.</li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">split</span> <span class="p">(</span>
-		<span class="nv">separator</span><span class="p">:</span> <span class="kt">Elements</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt">Element</span><span class="p">,</span> <span class="nv">allowEmptySlices</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span>
-		<span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/LazySplitSequence.html">LazySplitSequence</a></span><span class="o">&lt;</span><span class="kt">Elements</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">print</span><span class="p">(</span><span class="n">_</span> <span class="nv">items</span><span class="p">:</span> <span class="kt">Any</span><span class="o">...</span><span class="p">,</span> <span class="nv">separator</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">" "</span><span class="p">,</span> <span class="nv">terminator</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -234,12 +369,12 @@ a separator, should empty slices be emitted? Defaults to false.</li>
                             <tr>
                               <td>
                                 <code>
-                                <em>separator</em>
+                                <em>items</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The element of this collection to split over.</p>
+                                  <p>Zero or more items to print, converting them to text with String(describing:).</p>
 
                                 </div>
                               </td>
@@ -247,12 +382,25 @@ a separator, should empty slices be emitted? Defaults to false.</li>
                             <tr>
                               <td>
                                 <code>
-                                <em>allowEmptySlices</em>
+                                <em>separator</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>If there are two or more separators in a row, or this Collection begins or ends with a separator, should empty slices be emitted? Defaults to false.</p>
+                                  <p>What to print between each item. Default is “ “.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>terminator</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>What to print at the end. Default is newline.</p>
 
                                 </div>
                               </td>

@@ -14,7 +14,7 @@
     <a title="Process Extension Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SwiftShell Docs</a> (56% documented)</p>
+        <p><a href="../index.html">SwiftShell Docs</a> (67% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -32,16 +32,19 @@
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Classes/AsyncShellTask.html">AsyncShellTask</a>
+                <a href="../Classes/AsyncCommand.html">AsyncCommand</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/MainShellContext.html">MainShellContext</a>
+                <a href="../Classes/FileHandleStream.html">FileHandleStream</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/ReadableStream.html">ReadableStream</a>
+                <a href="../Classes/MainContext.html">MainContext</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/WriteableStream.html">WriteableStream</a>
+                <a href="../Classes/RunOutput.html">RunOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/StdoutStream.html">StdoutStream</a>
               </li>
             </ul>
           </li>
@@ -52,7 +55,7 @@
                 <a href="../Global Variables.html#/s:v10SwiftShell5FilesCSo11FileManager">Files</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Global Variables.html#/s:v10SwiftShell4mainCS_16MainShellContext">main</a>
+                <a href="../Global Variables.html#/s:v10SwiftShell4mainCS_11MainContext">main</a>
               </li>
             </ul>
           </li>
@@ -60,10 +63,10 @@
             <a href="../Enums.html">Enums</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/FileError.html">FileError</a>
+                <a href="../Enums/CommandError.html">CommandError</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Enums/ShellError.html">ShellError</a>
+                <a href="../Enums/FileError.html">FileError</a>
               </li>
             </ul>
           </li>
@@ -71,7 +74,7 @@
             <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions/Collection.html">Collection</a>
+                <a href="../Extensions/FileHandle.html">FileHandle</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/FileHandle.html">FileHandle</a>
@@ -94,7 +97,7 @@
                 <a href="../Functions.html#/s:F10SwiftShelloi1pFTV10Foundation3URLSS_S1_">+(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShelloi2eeFTOS_10ShellErrorS0__Sb">==(_:_:)</a>
+                <a href="../Functions.html#/s:F10SwiftShelloi2eeFTOS_12CommandErrorS0__Sb">==(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F10SwiftShell4exitFTPs5Error_4fileSS4lineSi_Os5Never">exit(_:file:line:)</a>
@@ -103,22 +106,22 @@
                 <a href="../Functions.html#/s:F10SwiftShell4exiturFT12errormessagex9errorcodeSi4fileSS4lineSi_Os5Never">exit(errormessage:errorcode:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell4openFzTSS8encodingVE10FoundationSS8Encoding_CS_14ReadableStream">open(_:encoding:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell4openFzTSS8encodingVE10FoundationSS8Encoding_PS_14ReadableStream_">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell4openFzTV10Foundation3URL8encodingVES0_SS8Encoding_CS_14ReadableStream">open(_:encoding:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell4openFzTV10Foundation3URL8encodingVES0_SS8Encoding_PS_14ReadableStream_">open(_:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingVE10FoundationSS8Encoding_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell4openFzT10forWritingSS9overwriteSb8encodingVE10FoundationSS8Encoding_PS_14WritableStream_">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell4openFzT10forWritingV10Foundation3URL9overwriteSb8encodingVES0_SS8Encoding_CS_15WriteableStream">open(forWriting:overwrite:encoding:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell4openFzT10forWritingV10Foundation3URL9overwriteSb8encodingVES0_SS8Encoding_PS_14WritableStream_">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_SS">run(_:_:file:line:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_CS_9RunOutput">run(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell3runFT4bashSS4fileSS4lineSi_SS">run(bash:file:line:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell3runFT4bashSS4fileSS4lineSi_CS_9RunOutput">run(bash:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F10SwiftShell11runAndPrintFztSSGSaP___T_">runAndPrint(_:_:)</a>
@@ -127,13 +130,13 @@
                 <a href="../Functions.html#/s:F10SwiftShell11runAndPrintFzT4bashSS_T_">runAndPrint(bash:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_CS_14AsyncShellTask">runAsync(_:_:file:line:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_CS_12AsyncCommand">runAsync(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS_CS_14AsyncShellTask">runAsync(bash:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS_CS_12AsyncCommand">runAsync(bash:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell7streamsFT_TCS_15WriteableStreamCS_14ReadableStream_">streams()</a>
+                <a href="../Functions.html#/s:F10SwiftShell7streamsFT_TPS_14WritableStream_PS_14ReadableStream__">streams()</a>
               </li>
             </ul>
           </li>
@@ -141,10 +144,19 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Protocols/ShellContextType.html">ShellContextType</a>
+                <a href="../Protocols.html#/CommandRunning">CommandRunning</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/ShellRunnable.html">ShellRunnable</a>
+                <a href="../Protocols/CommandRunning.html">CommandRunning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/Context.html">Context</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReadableStream.html">ReadableStream</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/WritableStream.html">WritableStream</a>
               </li>
             </ul>
           </li>
@@ -152,13 +164,13 @@
             <a href="../Structs.html">Structs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/CustomContext.html">CustomContext</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/LazySplitSequence.html">LazySplitSequence</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/PartialSourceLazySplitSequence.html">PartialSourceLazySplitSequence</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/ShellContext.html">ShellContext</a>
               </li>
             </ul>
           </li>
@@ -191,7 +203,7 @@
 
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    ShellError.InAccessibleExecutable if command could not be executed.
+    CommandError.InAccessibleExecutable if command could not be executed.
 
 </div>
 
@@ -224,7 +236,7 @@
 
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <code>ShellError.ReturnedErrorCode (command: String, errorcode: Int)</code> if the exit code is anything but 0.
+    <code>CommandError.ReturnedErrorCode (command: String, errorcode: Int)</code> if the exit code is anything but 0.
 
 </div>
 
@@ -245,8 +257,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2016-10-10)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-03-31)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

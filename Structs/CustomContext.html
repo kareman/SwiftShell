@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>FileHandle Extension Reference</title>
+    <title>CustomContext Struct Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/FileHandle" class="dashAnchor"></a>
-    <a title="FileHandle Extension Reference"></a>
+    <a name="//apple_ref/swift/Struct/CustomContext" class="dashAnchor"></a>
+    <a title="CustomContext Struct Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">SwiftShell Docs</a> (67% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">SwiftShell Reference</a>
         <img id="carat" src="../img/carat.png" />
-        FileHandle Extension Reference
+        CustomContext Struct Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -179,7 +179,7 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>FileHandle</h1>
+            <h1>CustomContext</h1>
             <p>Undocumented</p>
 
           </section>
@@ -189,9 +189,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
-                    <a name="//apple_ref/swift/Variable/nullDev" class="dashAnchor"></a>
-                    <a class="token" href="#/">nullDev</a>
+                    <a name="/s:vV10SwiftShell13CustomContext3envGVs10DictionarySSSS_"></a>
+                    <a name="//apple_ref/swift/Property/env" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV10SwiftShell13CustomContext3envGVs10DictionarySSSS_">env</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -201,6 +201,147 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV10SwiftShell13CustomContext5stdinPS_14ReadableStream_"></a>
+                    <a name="//apple_ref/swift/Property/stdin" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV10SwiftShell13CustomContext5stdinPS_14ReadableStream_">stdin</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV10SwiftShell13CustomContext6stdoutPS_14WritableStream_"></a>
+                    <a name="//apple_ref/swift/Property/stdout" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV10SwiftShell13CustomContext6stdoutPS_14WritableStream_">stdout</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV10SwiftShell13CustomContext8stderrorPS_14WritableStream_"></a>
+                    <a name="//apple_ref/swift/Property/stderror" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV10SwiftShell13CustomContext8stderrorPS_14WritableStream_">stderror</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV10SwiftShell13CustomContext16currentdirectorySS"></a>
+                    <a name="//apple_ref/swift/Property/currentdirectory" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV10SwiftShell13CustomContext16currentdirectorySS">currentdirectory</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The current working directory.</p>
+
+<p>Must be used instead of <code>run(&quot;cd&quot;, &quot;...&quot;)</code> because all the <code>run</code> commands are executed in a
+separate process and changing the directory there will not affect the rest of the Swift script.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">currentdirectory</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV10SwiftShell13CustomContextcFT_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV10SwiftShell13CustomContextcFT_S0_">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a blank CustomContext.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV10SwiftShell13CustomContextcFPS_7Context_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV10SwiftShell13CustomContextcFPS_7Context_S0_">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new CustomContext from another Context.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span> <span class="p">(</span><span class="n">_</span> <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Context.html">Context</a></span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
