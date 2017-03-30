@@ -52,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA50D28D1E8DB923002BA4A5 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Command.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_11 /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Context.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_12 /* FileHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandle.swift; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 		OBJ_20 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BA50D28D1E8DB923002BA4A5 /* LinuxMain.swift */,
 				OBJ_21 /* GeneralTests */,
 				OBJ_23 /* StreamTests */,
 				OBJ_26 /* SwiftShellTests */,
