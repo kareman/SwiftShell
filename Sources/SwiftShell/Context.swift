@@ -34,9 +34,8 @@ extension ShellContextType {
 	}
 }
 
-public struct ShellContext: ShellContextType {
+public struct ShellContext: ShellContextType, ShellRunnable {
 	public var env: [String: String]
-
 	public var stdin: ReadableStream
 	public var stdout: WritableStream
 	public var stderror: WritableStream
@@ -69,10 +68,6 @@ public struct ShellContext: ShellContextType {
 	}
 }
 
-extension ShellContext: ShellRunnable {
-	public var shellcontext: ShellContextType { return self }
-}
-
 
 private func createTempdirectory () -> String {
 	let name = URL(fileURLWithPath: main.path).lastPathComponent
@@ -88,15 +83,13 @@ private func createTempdirectory () -> String {
 }
 
 extension CommandLine {
-
 	/** Workaround for nil crash in CommandLine.arguments when run in Xcode. */
 	static var safeArguments: [String] {
 		return self.argc == 0 ? [] : self.arguments
 	}
 }
 
-public final class MainShellContext: ShellContextType {
-
+public final class MainShellContext: ShellContextType, ShellRunnable {
 	/** 
 	The default character encoding used throughout SwiftShell.
 
@@ -140,10 +133,6 @@ public final class MainShellContext: ShellContextType {
 
 	fileprivate init() {
 	}
-}
-
-extension MainShellContext: ShellRunnable {
-	public var shellcontext: ShellContextType { return self }
 }
 
 public let main = MainShellContext()

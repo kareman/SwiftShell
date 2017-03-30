@@ -49,6 +49,10 @@ public protocol ShellRunnable {
 	var shellcontext: ShellContextType { get }
 }
 
+extension ShellRunnable where Self: ShellContextType {
+	public var shellcontext: ShellContextType { return self }
+}
+
 extension ShellRunnable {
 
 	func createTask (_ executable: String, args: [String]) -> Process {
