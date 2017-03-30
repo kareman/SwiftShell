@@ -123,13 +123,13 @@ public final class MainShellContext: ShellContextType, ShellRunnable {
 	The tempdirectory is unique each time a script is run and is created the first time it is used.
 	It lies in the user's temporary directory and will be automatically deleted at some point.
 	*/
-	public lazy var tempdirectory: String = createTempdirectory()
+	public private(set) lazy var tempdirectory: String = createTempdirectory()
 
 	/** The arguments this executable was launched with. Use main.path to get the path. */
-	public lazy var arguments: [String] = Array(CommandLine.safeArguments.dropFirst())
+	public private(set) lazy var arguments: [String] = Array(CommandLine.safeArguments.dropFirst())
 
 	/** The path to the currently running executable. Will be empty in playgrounds. */
-	public lazy var path: String = CommandLine.safeArguments.first ?? ""
+	public private(set) lazy var path: String = CommandLine.safeArguments.first ?? ""
 
 	fileprivate init() {
 	}
