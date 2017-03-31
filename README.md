@@ -27,9 +27,6 @@ A library for creating command-line applications and running shell commands in S
 
 - [Documentation](http://kareman.github.io/SwiftShell) from the source code.
 - A [description](https://www.skilled.io/kare/swiftshell) of the project on [skilled.io](https://www.skilled.io).
-- Example scripts
-    - [Move files to the trash](http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/)
-    - [Combine markdown files and convert to HTML](http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/) (runs a shell command in the middle of a method chain)
 
 ## Example
 
@@ -55,42 +52,85 @@ do {
 ```
 
 Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumbers.swift long.txt` this will print the line number at the beginning of each line.
+The
+#### Others
+
+- [Use contexts, examine output from command](https://github.com/kareman/testcommit/blob/master/Sources/main.swift)
+- [Run a shell command in the middle of a method chain](http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/)
+- [Move files to the trash](http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/)
+
 
 ## Overview
 
 ### Context
 
-When running programs (or [processes][]) in the Terminal or launching them some other way, in addition to their arguments they have access to the following information, represented in SwiftShell by the Context protocol:
+All commands (a.k.a. [processes][]) you run in SwiftShell need context: [environment variables](https://en.wikipedia.org/wiki/Environment_variable), the [current working directory](https://en.wikipedia.org/wiki/Working_directory), standard input, standard output and standard error (see [standard streams](https://en.wikipedia.org/wiki/Standard_streams)).
+
 
 ```swift
-public protocol Context {
-	var env: [String: String] {get set}
-	var currentdirectory: String {get set}
-	var stdin: ReadableStream {get set}
-	var stdout: WritableStream {get set}
-	var stderror: WritableStream {get set}
+public struct CustomContext: Context, CommandRunning {
+	public var env: [String: String]
+	public var currentdirectory: String
+	public var stdin: ReadableStream
+	public var stdout: WritableStream
+	public var stderror: WritableStream
 }
 ```
 
-For more, check out Wikipedia on [Environment variables](https://en.wikipedia.org/wiki/Environment_variable), [Current working directory](https://en.wikipedia.org/wiki/Working_directory) and [standard streams](https://en.wikipedia.org/wiki/Standard_streams).
-
-Commands don't change their context.
+You can create a copy of your application's context: `let context = CustomContext(main)`, or create a new empty one: `let context = CustomContext()`. Everything is mutable, so you can set e.g. the current directory or redirect standard error to a file.
 
 [processes]: https://en.wikipedia.org/wiki/Process_(computing)
 
 #### Main context
 
-So what else can `main` do? It is the only global value in SwiftShell and contains all the contextual information about the outside world:
+The global variable `main` contains the context for the application itself. In addition to the properties mentioned above it also has these:
+
+- `public var encoding: String.Encoding`
+The default encoding used when opening files or creating new streams.
+- `public let tempdirectory: String`
+A temporary directory you can use for temporary stuff.
+- `public let arguments: [String]`
+The arguments used when launching the application.
+- `public let path: String`
+The path to the application.
+
+Commands can't change the context they run in (or anything else internally in your application) so e.g. `main.run("cd", "somedirectory")` will achieve nothing. Use `main.currentdirectory = "somedirectory"` instead, this changes the current working directory for the entire application.
+
+### Streams
+
+Sources and targets for text. [FileSmith][]'s [WritableFile][] and [ReadableFile][] are also streams, and can be used as stdin, stdout and stderror in SwiftShell contexts, including `main`.
+
+[FileSmith]: https://github.com/kareman/FileSmith 
+[WritableFile]: https://kareman.github.io/FileSmith/Classes/WritableFile.html
+[ReadableFile]: https://kareman.github.io/FileSmith/Classes/ReadableFile.html
+
+#### WritableStream
+
+`main.stdout` is for normal output and `main.stderror` for errors. You can also write to a file:
 
 ```swift
-var encoding: UInt
-lazy var tempdirectory: String
+main.stdout.print("everything is fine")
+main.stderror.print("no wait, something went wrong ...")
 
-lazy var arguments: [String]
-lazy var name: String
+let file = try open(forWriting: path)
+file.print("something")
 ```
 
-Everything is mutable, so you can set e.g. the text encoding or reroute standard error to a file.
+`.write` doesn't add a newline, and you can change the text encoding with `.encoding`.
+
+#### ReadableStream
+
+Use `main.stdin` to read from standard input, or you can read from a file:
+
+```swift
+let input: String? = main.stdin.readSome() // read what is available, don't wait for end of file 
+
+let file = try open(path)
+let contents: String = file.read() // read everything
+```
+
+Using `.readSome()` you can read piecewise instead of waiting for the input to be finished and then reading everything at once. You can change the text encoding with `.encoding`.
+
 
 ### Commands
 
@@ -189,35 +229,6 @@ Instead of dealing with the values from these errors you can just print them:
 &nbsp;
 
 When launched from the top level you don't need to catch any errors, but you still have to use `try`.
-
-### Streams
-
-#### Output
-
-`main.stdout` is for normal output and `main.stderror` for errors. You can also write to a file:
-
-```swift
-main.stdout.print("everything is fine")
-main.stderror.print("no wait, something went wrong ...")
-
-let file = try open(forWriting: path)
-file.print("something")
-```
-
-`.write` doesn't add a newline, and you can change the text encoding with `.encoding`.
-
-#### Input
-
-Use `main.stdin` to read from standard input, or you can read from a file:
-
-```swift
-let input: String? = main.stdin.readSome() // read what is available, don't wait for end of file 
-
-let file = try open(path)
-let contents: String = file.read() // read everything
-```
-
-Using `.readSome()` you can read piecewise instead of waiting for the input to be finished and then reading everything at once. You can change the text encoding with `.encoding`.
 
 ### The Terminal
 
