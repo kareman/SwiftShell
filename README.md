@@ -2,9 +2,11 @@ Run shell commands | [Parse command line arguments](https://github.com/kareman/M
 
 ---
 
-<img src="Misc/logo.png" alt="SwiftShell logo" style='float:right' />
-
 Swift 3 | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
+
+<p align="center">
+	<img src="Misc/logo.png" alt="SwiftShell logo" />
+</p>
 
 [![Build Status](https://travis-ci.org/kareman/SwiftShell.svg?branch=master)](https://travis-ci.org/kareman/SwiftShell) ![Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Linux-lightgrey.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
