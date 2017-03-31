@@ -2,20 +2,24 @@ Run shell commands | [Parse command line arguments](https://github.com/kareman/M
 
 ---
 
+<img src="Misc/logo.png" alt="SwiftShell logo" style='float:right' />
+
 Swift 3 | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
 
 [![Build Status](https://travis-ci.org/kareman/SwiftShell.svg?branch=master)](https://travis-ci.org/kareman/SwiftShell) ![Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Linux-lightgrey.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 # SwiftShell
 
-A library for creating command-line applications and running shell commands in Swift. It lets you:
+A library for creating command-line applications and running shell commands in Swift. 
 
-- run shell commands
-- run them asynchronously, and be notified when output is available
-- access the context in which your application is running, like environment variables, standard input, standard output, standard error, the current directory and the command line arguments
-- create new such contexts you can run commands in
-- handle errors
-- read and write files
+#### Features
+
+- [x] run commands, and handle the output.
+- [x] run commands asynchronously, and be notified when output is available.
+- [x] access the context your application is running in, like environment variables, standard input, standard output, standard error, the current directory and the command line arguments.
+- [x] create new such contexts you can run commands in.
+- [x] handle errors.
+- [x] read and write files.
 
 #### See also
 
@@ -50,17 +54,45 @@ do {
 
 Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumbers.swift long.txt` this will print the line number at the beginning of each line.
 
-## Run commands
+## Overview
 
-### Print output
+### Context
+
+When running programs (or [processes][]) in the Terminal or launching them some other way, in addition to their arguments they have access to the following information, represented in SwiftShell by the Context protocol:
 
 ```swift
-try runAndPrint(bash: "cmd1 arg | cmd2 arg") 
+public protocol Context {
+	var env: [String: String] {get set}
+	var currentdirectory: String {get set}
+	var stdin: ReadableStream {get set}
+	var stdout: WritableStream {get set}
+	var stderror: WritableStream {get set}
+}
 ```
 
-Run a shell command just like you would in the terminal. The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.
+For more, check out Wikipedia on [Environment variables](https://en.wikipedia.org/wiki/Environment_variable), [Current working directory](https://en.wikipedia.org/wiki/Working_directory) and [standard streams](https://en.wikipedia.org/wiki/Standard_streams).
 
-### In-line
+Commands don't change their context.
+
+[processes]: https://en.wikipedia.org/wiki/Process_(computing)
+
+#### Main context
+
+So what else can `main` do? It is the only global value in SwiftShell and contains all the contextual information about the outside world:
+
+```swift
+var encoding: UInt
+lazy var tempdirectory: String
+
+lazy var arguments: [String]
+lazy var name: String
+```
+
+Everything is mutable, so you can set e.g. the text encoding or reroute standard error to a file.
+
+### Commands
+
+#### Run
 
 ```swift
 let date: String = run("date", "-u")
@@ -69,7 +101,15 @@ print("Today's date in UTC is " + date)
 
 Similar to `$(cmd)` in bash, this just returns the output from the command as a string, ignoring any errors.
 
-### Asynchronous
+#### Print output
+
+```swift
+try runAndPrint(bash: "cmd1 arg | cmd2 arg") 
+```
+
+Run a shell command just like you would in the terminal. The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.
+
+#### Asynchronous
 
 ```swift
 let command = runAsync("cmd", "-n", 245)
@@ -81,11 +121,11 @@ Launch a command and continue before it's finished. You can process standard out
 
 If you read all of command.stderror or command.stdout it will automatically wait for the command to finish running. You can still call `finish()` to check for errors.
 
-### Parameters
+#### Parameters
 
 The 3 `run` functions above take 2 different types of parameters:
 
-#### (_ executable: String, _ args: Any ...)
+##### (_ executable: String, _ args: Any ...)
 
 If the path to the executable is without any `/`, SwiftShell will try to find the full path using the `which` shell command.
 
@@ -100,11 +140,11 @@ try runAndPrint("echo", array, array.count + 2, "arguments")
 // echo But we are 5 arguments
 ```
 
-#### (bash bashcommand: String)
+##### (bash bashcommand: String)
 
 These are the commands you normally use in the Terminal. You can use pipes and redirection and all that good stuff. Support for other shell interpreters can easily be added.
 
-### Errors
+#### Errors
 
 If the command provided to `runAsync` could not be launched for any reason the program will print the error to standard error and exit, as is usual in scripts (it is quite possible SwiftShell should be less usual here).
 
@@ -148,7 +188,9 @@ Instead of dealing with the values from these errors you can just print them:
 
 When launched from the top level you don't need to catch any errors, but you still have to use `try`.
 
-## Output
+### Streams
+
+#### Output
 
 `main.stdout` is for normal output and `main.stderror` for errors. You can also write to a file:
 
@@ -162,7 +204,7 @@ file.print("something")
 
 `.write` doesn't add a newline, and you can change the text encoding with `.encoding`.
 
-## Input
+#### Input
 
 Use `main.stdin` to read from standard input, or you can read from a file:
 
@@ -175,26 +217,7 @@ let contents: String = file.read() // read everything
 
 Using `.readSome()` you can read piecewise instead of waiting for the input to be finished and then reading everything at once. You can change the text encoding with `.encoding`.
 
-## Main
-
-So what else can `main` do? It is the only global value in SwiftShell and contains all the contextual information about the outside world:
-
-```swift
-var encoding: UInt
-lazy var env: [String : String]
-
-lazy var stdin: ReadableStream
-lazy var stdout: WriteableStream
-lazy var stderror: WriteableStream
-
-var currentdirectory: String
-lazy var tempdirectory: String
-
-lazy var arguments: [String]
-lazy var name: String
-```
-
-Everything is mutable, so you can set e.g. the text encoding or reroute standard error to a file.
+### The Terminal
 
 ## Setup
 
