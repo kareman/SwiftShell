@@ -48,7 +48,8 @@ public struct CustomContext: Context, CommandRunning {
 	*/
 	public var currentdirectory: String
 
-	/** Creates a blank CustomContext. */
+	/** Creates a blank CustomContext where env and stdin are empty, stdout and stderror discard everything and 
+	currentdirectory is the current working directory. */
 	public init () {
 		let encoding = String.Encoding.utf8
 		env = [String:String]()
@@ -58,7 +59,7 @@ public struct CustomContext: Context, CommandRunning {
 		currentdirectory = main.currentdirectory
 	}
 
-	/** Creates a new CustomContext from another Context. */
+	/** Creates an identical copy of another Context. */
 	public init (_ context: Context) {
 		env = context.env
 		stdin =    context.stdin

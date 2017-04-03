@@ -7,8 +7,7 @@
 //
 
 import XCTest
-@testable import SwiftShell
-
+import SwiftShell
 import Foundation
 
 public class MainContext_Tests: XCTestCase {

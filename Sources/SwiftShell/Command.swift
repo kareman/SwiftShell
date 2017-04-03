@@ -200,13 +200,13 @@ public final class RunOutput {
 	public var succeeded: Bool { return exitcode == 0 }
 
 	@discardableResult
-	static func && (lhs: RunOutput, rhs: @autoclosure () -> RunOutput) -> RunOutput {
+	public static func && (lhs: RunOutput, rhs: @autoclosure () -> RunOutput) -> RunOutput {
 		guard lhs.succeeded else { return lhs }
 		return rhs()
 	}
 
 	@discardableResult
-	static func || (lhs: RunOutput, rhs: @autoclosure () -> RunOutput) -> RunOutput {
+	public static func || (lhs: RunOutput, rhs: @autoclosure () -> RunOutput) -> RunOutput {
 		if lhs.succeeded { return lhs }
 		return rhs()
 	}
