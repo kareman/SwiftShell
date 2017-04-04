@@ -27,9 +27,8 @@ extension CommandRunning {
 
 	- parameter bashcommand: the bash shell command.
 	*/
-	@discardableResult public func run (bash bashcommand: String) -> RunOutput {
-		let async = AsyncCommand(unlaunched: createTask(bash: bashcommand))
-		return RunOutput(output: async)
+	@discardableResult public func run (bash bashcommand: String, combineOutput: Bool = false) -> RunOutput {
+		return run("/bin/bash", "-c", bashcommand, combineOutput: combineOutput)
 	}
 
 	/**

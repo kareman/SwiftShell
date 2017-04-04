@@ -221,7 +221,6 @@ public final class RunOutput {
 }
 
 extension CommandRunning {
-
 	@available(*, unavailable, message: "Use `run(...).stdout` instead.")
 	@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
 		fatalError()
@@ -234,9 +233,9 @@ extension CommandRunning {
 	- parameter executable: path to an executable, or the name of an executable in PATH.
 	- parameter args: the arguments, one string for each.
 	*/
-	@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> RunOutput {
+	@discardableResult public func run (_ executable: String, _ args: Any ..., combineOutput: Bool = false, file: String = #file, line: Int = #line) -> RunOutput {
 		let stringargs = args.flatten().map(String.init(describing:))
-		let async = AsyncCommand(unlaunched: createTask(executable, args: stringargs))
+		let async = AsyncCommand(unlaunched: createTask(executable, args: stringargs), combineOutput: combineOutput)
 		return RunOutput(output: async)
 	}
 }
@@ -249,16 +248,21 @@ public final class AsyncCommand {
 	public let stderror: ReadableStream
 	fileprivate let process: Process
 
-	init (unlaunched process: Process) {
+	init (unlaunched process: Process, combineOutput: Bool = false) {
 		self.process = process
 
 		let outpipe = Pipe()
 		process.standardOutput = outpipe
 		stdout = FileHandleStream(outpipe.fileHandleForReading, encoding: main.encoding)
 
-		let errorpipe = Pipe()
-		process.standardError = errorpipe
-		stderror = FileHandleStream(errorpipe.fileHandleForReading, encoding: main.encoding)
+
+		if combineOutput {
+			stderror = stdout
+		} else {
+			let errorpipe = Pipe()
+			process.standardError = errorpipe
+			stderror = FileHandleStream(errorpipe.fileHandleForReading, encoding: main.encoding)
+		}
 	}
 
 	convenience init (launch process: Process, file: String, line: Int) {
@@ -269,7 +273,6 @@ public final class AsyncCommand {
 		} catch {
 			exit(errormessage: error, file: file, line: line)
 		}
-
 	}
 
 	/** Terminate process early. */
