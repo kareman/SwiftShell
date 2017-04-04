@@ -13,10 +13,6 @@ import Foundation
 
 extension CommandRunning {
 
-	func createTask (bash bashcommand: String) -> Process {
-		return createTask("/bin/bash", args: ["-c", bashcommand])
-	}
-
 	@available(*, unavailable, message: "Use `run(bash: ...).stdout` instead.")
 	@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
 		fatalError()
@@ -38,7 +34,7 @@ extension CommandRunning {
 	- returns: an AsyncCommand struct with standard output, standard error and a 'finish' function.
 	*/
 	public func runAsync (bash bashcommand: String, file: String = #file, line: Int = #line) -> AsyncCommand {
-		return AsyncCommand(launch: createTask(bash: bashcommand), file: file, line: line)
+		return runAsync("/bin/bash", "-c", bashcommand, file: file, line: line)
 	}
 
 	/**
@@ -48,9 +44,7 @@ extension CommandRunning {
 	- throws: a CommandError.ReturnedErrorCode if the return code is anything but 0.
 	*/
 	public func runAndPrint (bash bashcommand: String) throws {
-		let process = createTask(bash: bashcommand)
-		process.launch()
-		try process.finish()
+		return try runAndPrint("/bin/bash", "-c", bashcommand)
 	}
 }
 
@@ -64,8 +58,8 @@ Runs a bash shell command.
 
 - parameter bashcommand: the bash shell command.
 */
-@discardableResult public func run (bash bashcommand: String) -> RunOutput {
-	return main.run(bash: bashcommand)
+@discardableResult public func run (bash bashcommand: String, combineOutput: Bool = false) -> RunOutput {
+	return main.run(bash: bashcommand, combineOutput: combineOutput)
 }
 
 /**
@@ -74,8 +68,8 @@ Run bash command and return before it is finished.
 - parameter bashcommand: the bash shell command.
 - returns: an AsyncCommand struct with standard output, standard error and a 'finish' function.
 */
-public func runAsync (bash bashcommand: String) -> AsyncCommand {
-	return main.runAsync(bash: bashcommand)
+public func runAsync (bash bashcommand: String, file: String = #file, line: Int = #line) -> AsyncCommand {
+	return main.runAsync(bash: bashcommand, file: file, line: line)
 }
 
 /**
