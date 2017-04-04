@@ -239,7 +239,7 @@ extension CommandRunning {
 	- parameter executable: path to an executable, or the name of an executable in PATH.
 	- parameter args: the arguments, one string for each.
 	*/
-	@discardableResult public func run (_ executable: String, _ args: Any ..., combineOutput: Bool = false, file: String = #file, line: Int = #line) -> RunOutput {
+	@discardableResult public func run (_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> RunOutput {
 		let stringargs = args.flatten().map(String.init(describing:))
 		let async = AsyncCommand(unlaunched: createTask(executable, args: stringargs), combineOutput: combineOutput)
 		return RunOutput(output: async)
@@ -254,7 +254,7 @@ public final class AsyncCommand {
 	public let stderror: ReadableStream
 	fileprivate let process: Process
 
-	init (unlaunched process: Process, combineOutput: Bool = false) {
+	init (unlaunched process: Process, combineOutput: Bool) {
 		self.process = process
 
 		let outpipe = Pipe()
@@ -272,7 +272,7 @@ public final class AsyncCommand {
 	}
 
 	convenience init (launch process: Process, file: String, line: Int) {
-		self.init(unlaunched: process)
+		self.init(unlaunched: process, combineOutput: false)
 
 		do {
 			try process.launchThrowably()
@@ -362,8 +362,8 @@ Runs a command.
 - parameter executable: path to an executable, or the name of an executable in PATH.
 - parameter args: the arguments, one string for each.
 */
-@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> RunOutput {
-	return main.run(executable, args, file: file, line: line)
+@discardableResult public func run (_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> RunOutput {
+	return main.run(executable, args, combineOutput: combineOutput)
 }
 
 @available(*, unavailable, message: "Use `run(...).stdout` instead.")
