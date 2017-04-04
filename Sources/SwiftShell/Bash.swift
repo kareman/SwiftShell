@@ -27,8 +27,8 @@ extension CommandRunning {
 
 	- parameter bashcommand: the bash shell command.
 	*/
-	@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> RunOutput {
-		let async = AsyncCommand(process: createTask(bash: bashcommand), file: file, line: line)
+	@discardableResult public func run (bash bashcommand: String) -> RunOutput {
+		let async = AsyncCommand(unlaunched: createTask(bash: bashcommand))
 		return RunOutput(output: async)
 	}
 
@@ -38,8 +38,8 @@ extension CommandRunning {
 	- parameter bashcommand: the bash shell command.
 	- returns: an AsyncCommand struct with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync (bash bashcommand: String) -> AsyncCommand {
-		return AsyncCommand(process: createTask(bash: bashcommand))
+	public func runAsync (bash bashcommand: String, file: String = #file, line: Int = #line) -> AsyncCommand {
+		return AsyncCommand(launch: createTask(bash: bashcommand), file: file, line: line)
 	}
 
 	/**
@@ -65,8 +65,8 @@ Runs a bash shell command.
 
 - parameter bashcommand: the bash shell command.
 */
-@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> RunOutput {
-	return main.run(bash: bashcommand, file: file, line: line)
+@discardableResult public func run (bash bashcommand: String) -> RunOutput {
+	return main.run(bash: bashcommand)
 }
 
 /**

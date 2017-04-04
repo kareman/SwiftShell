@@ -171,9 +171,17 @@ extension Process {
 /** Output from a `run` command. */
 public final class RunOutput {
 	fileprivate let output: AsyncCommand
+	public private(set) var error: CommandError? = nil
 
 	init(output: AsyncCommand) {
-		output.process.waitUntilExit()
+		do {
+			try output.process.launchThrowably()
+			try output.finish()
+		} catch let error as CommandError {
+			self.error = error
+		} catch {
+			assertionFailure("Unexpected error: \(error)")
+		}
 		self.output = output
 	}
 
@@ -228,7 +236,7 @@ extension CommandRunning {
 	*/
 	@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> RunOutput {
 		let stringargs = args.flatten().map(String.init(describing:))
-		let async = AsyncCommand(process: createTask(executable, args: stringargs), file: file, line: line)
+		let async = AsyncCommand(unlaunched: createTask(executable, args: stringargs))
 		return RunOutput(output: async)
 	}
 }
@@ -241,7 +249,7 @@ public final class AsyncCommand {
 	public let stderror: ReadableStream
 	fileprivate let process: Process
 
-	init (process: Process, file: String = #file, line: Int = #line) {
+	init (unlaunched process: Process) {
 		self.process = process
 
 		let outpipe = Pipe()
@@ -251,12 +259,17 @@ public final class AsyncCommand {
 		let errorpipe = Pipe()
 		process.standardError = errorpipe
 		stderror = FileHandleStream(errorpipe.fileHandleForReading, encoding: main.encoding)
+	}
+
+	convenience init (launch process: Process, file: String, line: Int) {
+		self.init(unlaunched: process)
 
 		do {
 			try process.launchThrowably()
 		} catch {
 			exit(errormessage: error, file: file, line: line)
 		}
+
 	}
 
 	/** Terminate process early. */
@@ -303,7 +316,7 @@ extension CommandRunning {
 	*/
 	public func runAsync (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncCommand {
 		let stringargs = args.flatten().map(String.init(describing:))
-		return AsyncCommand(process: createTask(executable, args: stringargs), file: file, line: line)
+		return AsyncCommand(launch: createTask(executable, args: stringargs), file: file, line: line)
 	}
 }
 
