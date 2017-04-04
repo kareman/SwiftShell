@@ -207,12 +207,18 @@ public final class RunOutput {
 	/// Checks if the exit code is 0.
 	public var succeeded: Bool { return exitcode == 0 }
 
+	/// Run the first command, then the second one only if the first succeeded.
+	///
+	/// - Returns: the result of the second one if it was run, otherwise the first one.
 	@discardableResult
 	public static func && (lhs: RunOutput, rhs: @autoclosure () -> RunOutput) -> RunOutput {
 		guard lhs.succeeded else { return lhs }
 		return rhs()
 	}
 
+	/// Run the first command, then the second one only if the first failed.
+	///
+	/// - Returns: the result of the second one if it was run, otherwise the first one.
 	@discardableResult
 	public static func || (lhs: RunOutput, rhs: @autoclosure () -> RunOutput) -> RunOutput {
 		if lhs.succeeded { return lhs }
