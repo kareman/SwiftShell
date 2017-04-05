@@ -14,7 +14,7 @@ import Foundation
 extension CommandRunning {
 
 	@available(*, unavailable, message: "Use `run(bash: ...).stdout` instead.")
-	@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
+	@discardableResult public func run (bash bashcommand: String, combineOutput: Bool = false) -> String {
 		fatalError()
 	}
 
@@ -49,7 +49,7 @@ extension CommandRunning {
 }
 
 @available(*, unavailable, message: "Use `run(bash: ...).stdout` instead.")
-@discardableResult public func run (bash bashcommand: String, file: String = #file, line: Int = #line) -> String {
+@discardableResult public func run (bash bashcommand: String, combineOutput: Bool = false) -> String {
 	fatalError()
 }
 

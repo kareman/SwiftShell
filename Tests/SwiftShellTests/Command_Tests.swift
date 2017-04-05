@@ -12,6 +12,13 @@ import Foundation
 
 public class Run_Tests: XCTestCase {
 
+	func testCompilesWhenNotDefiningReturnType() {
+		_ = SwiftShell.run("echo", "hi")
+		_ = SwiftShell.run(bash: "echo hi")
+		main.run("echo", "hi")
+		main.run(bash: "echo hi")
+	}
+
 	func testBashCommand () {
 		XCTAssertEqual( SwiftShell.run(bash:"echo one").stdout, "one" )
 	}

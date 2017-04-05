@@ -228,7 +228,7 @@ public final class RunOutput {
 
 extension CommandRunning {
 	@available(*, unavailable, message: "Use `run(...).stdout` instead.")
-	@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
+	@discardableResult public func run (_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> String {
 		fatalError()
 	}
 
@@ -367,7 +367,7 @@ Runs a command.
 }
 
 @available(*, unavailable, message: "Use `run(...).stdout` instead.")
-@discardableResult public func run (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> String {
+@discardableResult public func run (_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> String {
 	fatalError()
 }
 
