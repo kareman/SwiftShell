@@ -117,10 +117,10 @@
                 <a href="Functions.html#/s:F10SwiftShell4openFzT10forWritingV10Foundation3URL9overwriteSb8encodingVES0_SS8Encoding_PS_14WritableStream_">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_CS_9RunOutput">run(_:_:file:line:)</a>
+                <a href="Functions.html#/s:F10SwiftShell3runFTSSGSaP__13combineOutputSb_CS_9RunOutput">run(_:_:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell3runFT4bashSS4fileSS4lineSi_CS_9RunOutput">run(bash:file:line:)</a>
+                <a href="Functions.html#/s:F10SwiftShell3runFT4bashSS13combineOutputSb_CS_9RunOutput">run(bash:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F10SwiftShell11runAndPrintFztSSGSaP___T_">runAndPrint(_:_:)</a>
@@ -132,7 +132,7 @@
                 <a href="Functions.html#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_CS_12AsyncCommand">runAsync(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS_CS_12AsyncCommand">runAsync(bash:)</a>
+                <a href="Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS4fileSS4lineSi_CS_12AsyncCommand">runAsync(bash:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:F10SwiftShell7streamsFT_TPS_14WritableStream_PS_14ReadableStream__">streams()</a>
@@ -185,6 +185,10 @@
 
 <p>Swift 3 | <a href="https://github.com/kareman/SwiftShell/tree/Swift2">Swift 2</a></p>
 
+<p align="center">
+    <img src="Misc/logo.png" alt="SwiftShell logo" />
+</p>
+
 <p><a href="https://travis-ci.org/kareman/SwiftShell"><img src="https://travis-ci.org/kareman/SwiftShell.svg?branch=master" alt="Build Status"></a> <img src="https://img.shields.io/badge/platforms-macOS%20%7C%20Linux-lightgrey.svg" alt="Platforms"> <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible"></a></p>
 <a href='#swiftshell' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='swiftshell'>SwiftShell</h1>
 
@@ -207,6 +211,7 @@
 <li>Example scripts
 
 <ul>
+<li>[</li>
 <li><a href="http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/">Move files to the trash</a></li>
 <li><a href="http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/">Combine markdown files and convert to HTML</a> (runs a shell command in the middle of a method chain)</li>
 </ul></li>
@@ -235,34 +240,55 @@
 <a href='#overview' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='overview'>Overview</h2>
 <a href='#context' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='context'>Context</h3>
 
-<p>All applications (<a href="https://en.wikipedia.org/wiki/Process_(computing)">processes</a>) have access to some information about the outside world and ways of communicating with it. This is represented in SwiftShell by the Context protocol:</p>
-<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Context</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="nv">env</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]</span> <span class="p">{</span><span class="k">get</span> <span class="k">set</span><span class="p">}</span>
-    <span class="k">var</span> <span class="nv">currentdirectory</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span><span class="k">get</span> <span class="k">set</span><span class="p">}</span>
-    <span class="k">var</span> <span class="nv">stdin</span><span class="p">:</span> <span class="kt">ReadableStream</span> <span class="p">{</span><span class="k">get</span> <span class="k">set</span><span class="p">}</span>
-    <span class="k">var</span> <span class="nv">stdout</span><span class="p">:</span> <span class="kt">WritableStream</span> <span class="p">{</span><span class="k">get</span> <span class="k">set</span><span class="p">}</span>
-    <span class="k">var</span> <span class="nv">stderror</span><span class="p">:</span> <span class="kt">WritableStream</span> <span class="p">{</span><span class="k">get</span> <span class="k">set</span><span class="p">}</span>
+<p>All commands (a.k.a. <a href="https://en.wikipedia.org/wiki/Process_(computing)">processes</a>) you run in SwiftShell need context: <a href="https://en.wikipedia.org/wiki/Environment_variable">environment variables</a>, the <a href="https://en.wikipedia.org/wiki/Working_directory">current working directory</a>, standard input, standard output and standard error (see <a href="https://en.wikipedia.org/wiki/Standard_streams">standard streams</a>).</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CustomContext</span><span class="p">:</span> <span class="kt">Context</span><span class="p">,</span> <span class="kt">CommandRunning</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">env</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">currentdirectory</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">stdin</span><span class="p">:</span> <span class="kt">ReadableStream</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">stdout</span><span class="p">:</span> <span class="kt">WritableStream</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">stderror</span><span class="p">:</span> <span class="kt">WritableStream</span>
 <span class="p">}</span>
 </code></pre>
-<a href='#a-href-https-en-wikipedia-org-wiki-environment_variable-environment-variables-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-en-wikipedia-org-wiki-environment_variable-environment-variables-a'><a href="https://en.wikipedia.org/wiki/Environment_variable">Environment variables</a></h4>
 
-<p>You can list them in the terminal with the <code>env</code> command.</p>
-<a href='#a-href-https-en-wikipedia-org-wiki-working_directory-current-working-directory-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-en-wikipedia-org-wiki-working_directory-current-working-directory-a'><a href="https://en.wikipedia.org/wiki/Working_directory">Current working directory</a></h4>
-
-<p>Used as the base for all relative paths. Most commands expect this to be the directory they are supposed to do stuff in.</p>
-
-<p>Commands don&rsquo;t change their context.</p>
+<p>You can create a copy of your application&rsquo;s context: <code>let context = CustomContext(main)</code>, or create a new empty one: <code>let context = CustomContext()</code>.</p>
 <a href='#main-context' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='main-context'>Main context</h4>
 
-<p>So what else can <code>main</code> do? It is the only global value in SwiftShell and contains all the contextual information about the outside world:</p>
-<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">UInt</span>
-<span class="kd">lazy</span> <span class="k">var</span> <span class="nv">tempdirectory</span><span class="p">:</span> <span class="kt">String</span>
+<p>The global variable <code>main</code> contains the context for the application itself. In addition to the properties mentioned above it also has these:</p>
 
-<span class="kd">lazy</span> <span class="k">var</span> <span class="nv">arguments</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span>
-<span class="kd">lazy</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
+<ul>
+<li><code>public var encoding: String.Encoding</code>
+The default encoding used when opening files or creating new streams.</li>
+<li><code>public let tempdirectory: String</code>
+A temporary directory the application can use for temporary stuff.</li>
+<li><code>public let arguments: [String]</code>
+The arguments used when launching the application.</li>
+<li><code>public let path: String</code>
+The path to the application.</li>
+</ul>
+
+<p>Everything is mutable, so you can set e.g. the text encoding or reroute standard error to a file. But commands can&rsquo;t change the context they run in (or anything else in your application) so e.g. <code>main.run(&quot;cd&quot;, &quot;somefolder&quot;)</code> will achieve nothing. Use <code>main.currentdirectory = &quot;somefolder&quot;</code> instead.</p>
+<a href='#streams' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='streams'>Streams</h3>
+<a href='#output' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='output'>Output</h4>
+
+<p><code>main.stdout</code> is for normal output and <code>main.stderror</code> for errors. You can also write to a file:</p>
+<pre class="highlight swift"><code><span class="n">main</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="nf">print</span><span class="p">(</span><span class="s">"everything is fine"</span><span class="p">)</span>
+<span class="n">main</span><span class="o">.</span><span class="n">stderror</span><span class="o">.</span><span class="nf">print</span><span class="p">(</span><span class="s">"no wait, something went wrong ..."</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="k">try</span> <span class="nf">open</span><span class="p">(</span><span class="nv">forWriting</span><span class="p">:</span> <span class="n">path</span><span class="p">)</span>
+<span class="n">file</span><span class="o">.</span><span class="nf">print</span><span class="p">(</span><span class="s">"something"</span><span class="p">)</span>
 </code></pre>
 
-<p>Everything is mutable, so you can set e.g. the text encoding or reroute standard error to a file.</p>
+<p><code>.write</code> doesn&rsquo;t add a newline, and you can change the text encoding with <code>.encoding</code>.</p>
+<a href='#input' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='input'>Input</h4>
+
+<p>Use <code>main.stdin</code> to read from standard input, or you can read from a file:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="nf">readSome</span><span class="p">()</span> <span class="c1">// read what is available, don't wait for end of file </span>
+
+<span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="k">try</span> <span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">contents</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="nf">read</span><span class="p">()</span> <span class="c1">// read everything</span>
+</code></pre>
+
+<p>Using <code>.readSome()</code> you can read piecewise instead of waiting for the input to be finished and then reading everything at once. You can change the text encoding with <code>.encoding</code>.</p>
 <a href='#commands' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='commands'>Commands</h3>
 <a href='#run' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='run'>Run</h4>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">date</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nf">run</span><span class="p">(</span><span class="s">"date"</span><span class="p">,</span> <span class="s">"-u"</span><span class="p">)</span>
@@ -337,28 +363,6 @@
 <p>&nbsp;</p>
 
 <p>When launched from the top level you don&rsquo;t need to catch any errors, but you still have to use <code>try</code>.</p>
-<a href='#streams' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='streams'>Streams</h3>
-<a href='#output' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='output'>Output</h4>
-
-<p><code>main.stdout</code> is for normal output and <code>main.stderror</code> for errors. You can also write to a file:</p>
-<pre class="highlight swift"><code><span class="n">main</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="nf">print</span><span class="p">(</span><span class="s">"everything is fine"</span><span class="p">)</span>
-<span class="n">main</span><span class="o">.</span><span class="n">stderror</span><span class="o">.</span><span class="nf">print</span><span class="p">(</span><span class="s">"no wait, something went wrong ..."</span><span class="p">)</span>
-
-<span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="k">try</span> <span class="nf">open</span><span class="p">(</span><span class="nv">forWriting</span><span class="p">:</span> <span class="n">path</span><span class="p">)</span>
-<span class="n">file</span><span class="o">.</span><span class="nf">print</span><span class="p">(</span><span class="s">"something"</span><span class="p">)</span>
-</code></pre>
-
-<p><code>.write</code> doesn&rsquo;t add a newline, and you can change the text encoding with <code>.encoding</code>.</p>
-<a href='#input' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='input'>Input</h4>
-
-<p>Use <code>main.stdin</code> to read from standard input, or you can read from a file:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">input</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="nf">readSome</span><span class="p">()</span> <span class="c1">// read what is available, don't wait for end of file </span>
-
-<span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="k">try</span> <span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">contents</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="nf">read</span><span class="p">()</span> <span class="c1">// read everything</span>
-</code></pre>
-
-<p>Using <code>.readSome()</code> you can read piecewise instead of waiting for the input to be finished and then reading everything at once. You can change the text encoding with <code>.encoding</code>.</p>
 <a href='#the-terminal' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='the-terminal'>The Terminal</h3>
 <a href='#setup' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='setup'>Setup</h2>
 
@@ -418,7 +422,7 @@ cd SwiftShell
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-03-31)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-04-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

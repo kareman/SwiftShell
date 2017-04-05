@@ -118,10 +118,10 @@
                 <a href="../Functions.html#/s:F10SwiftShell4openFzT10forWritingV10Foundation3URL9overwriteSb8encodingVES0_SS8Encoding_PS_14WritableStream_">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_CS_9RunOutput">run(_:_:file:line:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell3runFTSSGSaP__13combineOutputSb_CS_9RunOutput">run(_:_:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell3runFT4bashSS4fileSS4lineSi_CS_9RunOutput">run(bash:file:line:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell3runFT4bashSS13combineOutputSb_CS_9RunOutput">run(bash:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F10SwiftShell11runAndPrintFztSSGSaP___T_">runAndPrint(_:_:)</a>
@@ -133,7 +133,7 @@
                 <a href="../Functions.html#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_CS_12AsyncCommand">runAsync(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS_CS_12AsyncCommand">runAsync(bash:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS4fileSS4lineSi_CS_12AsyncCommand">runAsync(bash:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F10SwiftShell7streamsFT_TPS_14WritableStream_PS_14ReadableStream__">streams()</a>
@@ -234,9 +234,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FE10SwiftShellPS_14CommandRunning3runFT4bashSS4fileSS4lineSi_CS_9RunOutput"></a>
-                    <a name="//apple_ref/swift/Method/run(bash:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FE10SwiftShellPS_14CommandRunning3runFT4bashSS4fileSS4lineSi_CS_9RunOutput">run(bash:file:line:)</a>
+                    <a name="/s:FE10SwiftShellPS_14CommandRunning3runFT4bashSS13combineOutputSb_CS_9RunOutput"></a>
+                    <a name="//apple_ref/swift/Method/run(bash:combineOutput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_14CommandRunning3runFT4bashSS13combineOutputSb_CS_9RunOutput">run(bash:combineOutput:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -254,7 +254,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RunOutput.html">RunOutput</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">combineOutput</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RunOutput.html">RunOutput</a></span></code></pre>
 
                         </div>
                       </div>
@@ -275,6 +275,19 @@
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>combineOutput</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>if true then stdout and stderror go to the same stream. Default is false.</p>
+
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -284,9 +297,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FE10SwiftShellPS_14CommandRunning8runAsyncFT4bashSS_CS_12AsyncCommand"></a>
-                    <a name="//apple_ref/swift/Method/runAsync(bash:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FE10SwiftShellPS_14CommandRunning8runAsyncFT4bashSS_CS_12AsyncCommand">runAsync(bash:)</a>
+                    <a name="/s:FE10SwiftShellPS_14CommandRunning8runAsyncFT4bashSS4fileSS4lineSi_CS_12AsyncCommand"></a>
+                    <a name="//apple_ref/swift/Method/runAsync(bash:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_14CommandRunning8runAsyncFT4bashSS4fileSS4lineSi_CS_12AsyncCommand">runAsync(bash:file:line:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -304,7 +317,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/AsyncCommand.html">AsyncCommand</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/AsyncCommand.html">AsyncCommand</a></span></code></pre>
 
                         </div>
                       </div>
@@ -399,9 +412,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FE10SwiftShellPS_14CommandRunning3runFTSSGSaP__4fileSS4lineSi_CS_9RunOutput"></a>
-                    <a name="//apple_ref/swift/Method/run(_:_:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FE10SwiftShellPS_14CommandRunning3runFTSSGSaP__4fileSS4lineSi_CS_9RunOutput">run(_:_:file:line:)</a>
+                    <a name="/s:FE10SwiftShellPS_14CommandRunning3runFTSSGSaP__13combineOutputSb_CS_9RunOutput"></a>
+                    <a name="//apple_ref/swift/Method/run(_:_:combineOutput:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_14CommandRunning3runFTSSGSaP__13combineOutputSb_CS_9RunOutput">run(_:_:combineOutput:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -414,18 +427,12 @@
                       <div class="abstract">
                         <p>Runs a command.</p>
 
-<div class="aside aside-warning">
-    <p class="aside-title">Warning</p>
-    will crash if ‘executable’ could not be launched.
-
-</div>
-
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RunOutput.html">RunOutput</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">combineOutput</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RunOutput.html">RunOutput</a></span></code></pre>
 
                         </div>
                       </div>
@@ -455,6 +462,19 @@
                               <td>
                                 <div>
                                   <p>the arguments, one string for each.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>combineOutput</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>if true then stdout and stderror go to the same stream. Default is false.</p>
 
                                 </div>
                               </td>
@@ -623,7 +643,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-03-31)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-04-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -118,10 +118,10 @@
                 <a href="../Functions.html#/s:F10SwiftShell4openFzT10forWritingV10Foundation3URL9overwriteSb8encodingVES0_SS8Encoding_PS_14WritableStream_">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell3runFTSSGSaP__4fileSS4lineSi_CS_9RunOutput">run(_:_:file:line:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell3runFTSSGSaP__13combineOutputSb_CS_9RunOutput">run(_:_:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell3runFT4bashSS4fileSS4lineSi_CS_9RunOutput">run(bash:file:line:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell3runFT4bashSS13combineOutputSb_CS_9RunOutput">run(bash:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F10SwiftShell11runAndPrintFztSSGSaP___T_">runAndPrint(_:_:)</a>
@@ -133,7 +133,7 @@
                 <a href="../Functions.html#/s:F10SwiftShell8runAsyncFTSSGSaP__4fileSS4lineSi_CS_12AsyncCommand">runAsync(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS_CS_12AsyncCommand">runAsync(bash:)</a>
+                <a href="../Functions.html#/s:F10SwiftShell8runAsyncFT4bashSS4fileSS4lineSi_CS_12AsyncCommand">runAsync(bash:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F10SwiftShell7streamsFT_TPS_14WritableStream_PS_14ReadableStream__">streams()</a>
@@ -192,6 +192,33 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10SwiftShell9RunOutput5errorGSqOS_12CommandError_"></a>
+                    <a name="//apple_ref/swift/Property/error" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10SwiftShell9RunOutput5errorGSqOS_12CommandError_">error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">RunOutput</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -300,12 +327,88 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFC10SwiftShell9RunOutputoi2aaFTS0_KT_S0__S0_"></a>
+                    <a name="//apple_ref/swift/Method/&amp;&amp;(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFC10SwiftShell9RunOutputoi2aaFTS0_KT_S0__S0_">&amp;&amp;(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Run the first command, then the second one only if the first succeeded.</p>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    the result of the second one if it was run, otherwise the first one.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RunOutput</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">RunOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RunOutput</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the result of the second one if it was run, otherwise the first one.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFC10SwiftShell9RunOutputoi2ooFTS0_KT_S0__S0_"></a>
+                    <a name="//apple_ref/swift/Method/||(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFC10SwiftShell9RunOutputoi2ooFTS0_KT_S0__S0_">||(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Run the first command, then the second one only if the first failed.</p>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    the result of the second one if it was run, otherwise the first one.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">||</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">RunOutput</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">RunOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">RunOutput</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>the result of the second one if it was run, otherwise the first one.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-03-31)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-04-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
