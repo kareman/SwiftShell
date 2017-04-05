@@ -168,7 +168,7 @@ extension Process {
 
 // MARK: run
 
-/** Output from a `run` command. */
+/// Output from a `run` command.
 public final class RunOutput {
 	fileprivate let output: AsyncCommand
 	public private(set) var error: CommandError? = nil
@@ -232,13 +232,11 @@ extension CommandRunning {
 		fatalError()
 	}
 
-	/**
-	Runs a command.
-
-	- warning: will crash if ‘executable’ could not be launched.
-	- parameter executable: path to an executable, or the name of an executable in PATH.
-	- parameter args: the arguments, one string for each.
-	*/
+	/// Runs a command.
+	///
+	/// - parameter executable: path to an executable, or the name of an executable in PATH.
+	/// - parameter args: the arguments, one string for each.
+	/// - parameter combineOutput: if true then stdout and stderror go to the same stream. Default is false.
 	@discardableResult public func run (_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> RunOutput {
 		let stringargs = args.flatten().map(String.init(describing:))
 		let async = AsyncCommand(unlaunched: createProcess(executable, args: stringargs), combineOutput: combineOutput)
@@ -355,13 +353,11 @@ extension CommandRunning {
 
 // MARK: Global functions
 
-/**
-Runs a command.
-
-- warning: will crash if ‘executable’ could not be launched.
-- parameter executable: path to an executable, or the name of an executable in PATH.
-- parameter args: the arguments, one string for each.
-*/
+/// Runs a command.
+///
+/// - parameter executable: path to an executable, or the name of an executable in PATH.
+/// - parameter args: the arguments, one string for each.
+/// - parameter combineOutput: if true then stdout and stderror go to the same stream. Default is false.
 @discardableResult public func run (_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> RunOutput {
 	return main.run(executable, args, combineOutput: combineOutput)
 }

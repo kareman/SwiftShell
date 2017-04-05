@@ -18,11 +18,10 @@ extension CommandRunning {
 		fatalError()
 	}
 
-	/**
-	Runs a bash shell command.
-
-	- parameter bashcommand: the bash shell command.
-	*/
+	/// Runs a bash shell command.
+	///
+	/// - parameter bashcommand: the bash shell command.
+	/// - parameter combineOutput: if true then stdout and stderror go to the same stream. Default is false.
 	@discardableResult public func run (bash bashcommand: String, combineOutput: Bool = false) -> RunOutput {
 		return run("/bin/bash", "-c", bashcommand, combineOutput: combineOutput)
 	}
@@ -53,11 +52,10 @@ extension CommandRunning {
 	fatalError()
 }
 
-/**
-Runs a bash shell command.
-
-- parameter bashcommand: the bash shell command.
-*/
+/// Runs a bash shell command.
+///
+/// - parameter bashcommand: the bash shell command.
+/// - parameter combineOutput: if true then stdout and stderror go to the same stream. Default is false.
 @discardableResult public func run (bash bashcommand: String, combineOutput: Bool = false) -> RunOutput {
 	return main.run(bash: bashcommand, combineOutput: combineOutput)
 }
