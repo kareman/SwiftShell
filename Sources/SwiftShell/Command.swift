@@ -55,7 +55,7 @@ extension CommandRunning where Self: Context {
 
 extension CommandRunning {
 
-	func createTask (_ executable: String, args: [String]) -> Process {
+	func createProcess (_ executable: String, args: [String]) -> Process {
 
 		/**
 		If `executable` is not a path and a path for an executable file of that name can be found, return that path.
@@ -241,7 +241,7 @@ extension CommandRunning {
 	*/
 	@discardableResult public func run (_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> RunOutput {
 		let stringargs = args.flatten().map(String.init(describing:))
-		let async = AsyncCommand(unlaunched: createTask(executable, args: stringargs), combineOutput: combineOutput)
+		let async = AsyncCommand(unlaunched: createProcess(executable, args: stringargs), combineOutput: combineOutput)
 		return RunOutput(output: async)
 	}
 }
@@ -325,7 +325,7 @@ extension CommandRunning {
 	*/
 	public func runAsync (_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncCommand {
 		let stringargs = args.flatten().map(String.init(describing:))
-		return AsyncCommand(launch: createTask(executable, args: stringargs), file: file, line: line)
+		return AsyncCommand(launch: createProcess(executable, args: stringargs), file: file, line: line)
 	}
 }
 
@@ -346,7 +346,7 @@ extension CommandRunning {
 	*/
 	public func runAndPrint (_ executable: String, _ args: Any ...) throws {
 		let stringargs = args.flatten().map(String.init(describing:))
-		let process = createTask(executable, args: stringargs)
+		let process = createProcess(executable, args: stringargs)
 
 		try process.launchThrowably()
 		try process.finish()

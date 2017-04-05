@@ -75,19 +75,19 @@ public class Run_Tests: XCTestCase {
 public class RunAsync_Tests: XCTestCase {
 
 	func testReturnsStandardOutput () {
-		let asynctask = runAsync("/bin/echo", "one", "two" )
-		AssertDoesNotThrow { try asynctask.finish() }
+		let asynccommand = runAsync("/bin/echo", "one", "two" )
+		AssertDoesNotThrow { try asynccommand.finish() }
 
-		XCTAssertEqual( asynctask.stdout.read(), "one two\n" )
-		XCTAssertEqual( asynctask.stderror.read(), "" )
+		XCTAssertEqual( asynccommand.stdout.read(), "one two\n" )
+		XCTAssertEqual( asynccommand.stderror.read(), "" )
 	}
 
 	func testReturnsStandardError () {
-		let asynctask = runAsync(bash: "echo one two > /dev/stderr" )
-		AssertDoesNotThrow { try asynctask.finish() }
+		let asynccommand = runAsync(bash: "echo one two > /dev/stderr" )
+		AssertDoesNotThrow { try asynccommand.finish() }
 
-		XCTAssertEqual( asynctask.stderror.read(), "one two\n" )
-		XCTAssertEqual( asynctask.stdout.read(), "" )
+		XCTAssertEqual( asynccommand.stderror.read(), "one two\n" )
+		XCTAssertEqual( asynccommand.stdout.read(), "" )
 	}
 
 	func testArgumentsFromArray () {
@@ -98,17 +98,17 @@ public class RunAsync_Tests: XCTestCase {
 	}
 
 	func testFinishThrowsErrorOnExitcodeNotZero () {
-		let asynctask = runAsync(bash: "echo errormessage > /dev/stderr; exit 1" )
+		let asynccommand = runAsync(bash: "echo errormessage > /dev/stderr; exit 1" )
 
 		AssertThrows(CommandError.ReturnedErrorCode(command: "/bin/bash -c \"echo errormessage > /dev/stderr; exit 1\"", errorcode: 1))
-			{ try asynctask.finish() }
-		XCTAssertEqual( asynctask.stderror.read(), "errormessage\n" )
+			{ try asynccommand.finish() }
+		XCTAssertEqual( asynccommand.stderror.read(), "errormessage\n" )
 	}
 
 	func testExitCode () {
-		let asynctask = runAsync(bash: "exit 1" )
+		let asynccommand = runAsync(bash: "exit 1" )
 
-		XCTAssertEqual( asynctask.exitcode(), 1 )
+		XCTAssertEqual( asynccommand.exitcode(), 1 )
 	}
 
 	func testOnCompletion () {
