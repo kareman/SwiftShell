@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'SwiftShell'
-  s.version      = '3.0.0-beta.11'
+  s.version      = '3.0.0-beta.14'
   s.summary      = 'A Swift framework for shell scripting.'
   s.description  = 'SwiftShell is a library for creating command-line applications and running shell commands in Swift.'
   s.homepage     = 'https://github.com/kareman/SwiftShell'
