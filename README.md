@@ -41,8 +41,9 @@ do {
 	// If there is an argument, try opening it as a file. Otherwise use standard input.
 	let input = try main.arguments.first.map {try open($0)} ?? main.stdin
 
-	input.lines()
-		.enumerated().forEach { (linenr,line) in print(linenr+1, ":", line) }
+	input.lines().enumerated().forEach { (linenr,line) in 
+		print(linenr+1, ":", line) 
+	}
 
 	// Add a newline at the end
 	print("")
@@ -52,20 +53,20 @@ do {
 ```
 
 Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumbers.swift long.txt` this will print the line number at the beginning of each line.
-The
+
 #### Others
 
-- [Use contexts, examine output from command](https://github.com/kareman/testcommit/blob/master/Sources/main.swift)
+- [Test the latest commit (using make and/or Swift).][testcommit]
 - [Run a shell command in the middle of a method chain](http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/)
 - [Move files to the trash](http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/)
 
+[testcommit]: https://github.com/kareman/testcommit/blob/master/Sources/main.swift
 
 ## Overview
 
 ### Context
 
-All commands (a.k.a. [processes][]) you run in SwiftShell need context: [environment variables](https://en.wikipedia.org/wiki/Environment_variable), the [current working directory](https://en.wikipedia.org/wiki/Working_directory), standard input, standard output and standard error (see [standard streams](https://en.wikipedia.org/wiki/Standard_streams)).
-
+All commands (a.k.a. [processes][]) you run in SwiftShell need context: [environment variables](https://en.wikipedia.org/wiki/Environment_variable), the [current working directory](https://en.wikipedia.org/wiki/Working_directory), standard input, standard output and standard error ([standard streams](https://en.wikipedia.org/wiki/Standard_streams)).
 
 ```swift
 public struct CustomContext: Context, CommandRunning {
@@ -83,7 +84,7 @@ You can create a copy of your application's context: `let context = CustomContex
 
 #### Main context
 
-The global variable `main` contains the context for the application itself. In addition to the properties mentioned above it also has these:
+The global variable `main` is the Context for the application itself. In addition to the properties mentioned above it also has these:
 
 - `public var encoding: String.Encoding`
 The default encoding used when opening files or creating new streams.
@@ -94,11 +95,48 @@ The arguments used when launching the application.
 - `public let path: String`
 The path to the application.
 
+`main.stdout` is for normal output, like Swift's `print` function. `main.stderror` is for error output, and `main.stdin` is the standard input to your application, provided by something like `somecommand | yourapplication` in the terminal.
+
 Commands can't change the context they run in (or anything else internally in your application) so e.g. `main.run("cd", "somedirectory")` will achieve nothing. Use `main.currentdirectory = "somedirectory"` instead, this changes the current working directory for the entire application.
+
+#### Example
+
+Prepare a context similar to a new macOS user account's environment in the terminal (from [kareman/testcommit][testcommit]):
+
+```swift
+import SwiftShell
+import Foundation
+
+extension Dictionary where Key:Hashable {
+	public func filterToDictionary <C: Collection> (keys: C) -> [Key:Value]
+		where C.Iterator.Element == Key, C.IndexDistance == Int {
+
+		var result = [Key:Value](minimumCapacity: keys.count)
+		for key in keys { result[key] = self[key] }
+		return result
+	}
+}
+
+// Prepare an environment as close to a new OS X user account as possible.
+var cleanctx = CustomContext(main)
+let cleanenvvars = ["TERM_PROGRAM", "SHELL", "TERM", "TMPDIR", "Apple_PubSub_Socket_Render", "TERM_PROGRAM_VERSION", "TERM_SESSION_ID", "USER", "SSH_AUTH_SOCK", "__CF_USER_TEXT_ENCODING", "XPC_FLAGS", "XPC_SERVICE_NAME", "SHLVL", "HOME", "LOGNAME", "LC_CTYPE", "_"]
+cleanctx.env = cleanctx.env.filterToDictionary(keys: cleanenvvars)
+cleanctx.env["PATH"] = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+// Create a temporary directory for testing.
+cleanctx.currentdirectory = main.tempdirectory
+```
 
 ### Streams
 
-Sources and targets for text. [FileSmith][]'s [WritableFile][] and [ReadableFile][] are also streams, and can be used as stdin, stdout and stderror in SwiftShell contexts, including `main`.
+Streams provide or receive text, using the text encoding in their `.encoding` property. In addition to the stdin, stdout and stderror of a Context mentioned above, files can also be streams. 
+
+```swift
+let readfile = try open(path) // ReadableStream
+let writefile = try open(forWriting: path) // WritableStream
+```
+
+[FileSmith][]'s [WritableFile][] and [ReadableFile][] are streams too, and can be used as stdin, stdout and stderror in SwiftShell Contexts, including `main`.
 
 [FileSmith]: https://github.com/kareman/FileSmith 
 [WritableFile]: https://kareman.github.io/FileSmith/Classes/WritableFile.html
@@ -106,30 +144,30 @@ Sources and targets for text. [FileSmith][]'s [WritableFile][] and [ReadableFile
 
 #### WritableStream
 
-`main.stdout` is for normal output and `main.stderror` for errors. You can also write to a file:
+You can also write to a file:
 
 ```swift
 main.stdout.print("everything is fine")
 main.stderror.print("no wait, something went wrong ...")
 
-let file = try open(forWriting: path)
+
 file.print("something")
 ```
 
-`.write` doesn't add a newline, and you can change the text encoding with `.encoding`.
+`.write` doesn't add a newline, and 
 
 #### ReadableStream
 
-Use `main.stdin` to read from standard input, or you can read from a file:
+, or you can read from a file:
 
 ```swift
 let input: String? = main.stdin.readSome() // read what is available, don't wait for end of file 
 
-let file = try open(path)
+
 let contents: String = file.read() // read everything
 ```
 
-Using `.readSome()` you can read piecewise instead of waiting for the input to be finished and then reading everything at once. You can change the text encoding with `.encoding`.
+Using `.readSome()` you can read piecewise instead of waiting for the input to be finished and then reading everything at once. 
 
 
 ### Commands
