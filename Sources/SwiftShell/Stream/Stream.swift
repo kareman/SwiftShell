@@ -103,7 +103,7 @@ extension ReadableStream {
 		/// Pass `nil` to remove any preexisting handlers.
 		/// - Note: if the stream is read from outside of the handler, or more than once inside
 		/// the handler, it may be called once when stream is closed and empty.
-		public func onOutput ( handler: ((ReadableStream) -> ())? ) {
+		public func onOutput ( handler: ((ReadableStream) -> Void)? ) {
 			guard let handler = handler else {
 				filehandle.readabilityHandler = nil
 				return
@@ -117,7 +117,7 @@ extension ReadableStream {
 		/// Pass `nil` to remove any preexisting handlers.
 		/// - Note: if the stream is read from outside of the handler, or more than once inside
 		/// the handler, it may be called once when stream is closed and empty.
-		public func onStringOutput ( handler: ((String) -> ())? ) {
+		public func onStringOutput ( handler: ((String) -> Void)? ) {
 			guard let handler = handler else {
 				self.onOutput(handler: nil)
 				return
@@ -130,7 +130,6 @@ extension ReadableStream {
 		}
 	}
 #endif
-
 
 /// An output stream, like standard output or a writeable file.
 public protocol WritableStream: class, TextOutputStream {
@@ -178,7 +177,6 @@ extension WritableStream {
 		write(terminator)
 	}
 }
-
 
 /// Singleton WritableStream used only for `print`ing to stdout.
 public class StdoutStream: WritableStream {

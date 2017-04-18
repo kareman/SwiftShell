@@ -52,7 +52,7 @@ public struct CustomContext: Context, CommandRunning {
 	currentdirectory is the current working directory. */
 	public init () {
 		let encoding = String.Encoding.utf8
-		env = [String:String]()
+		env = [String: String]()
 		stdin =    FileHandleStream(FileHandle.nullDev, encoding: encoding)
 		stdout =   FileHandleStream(FileHandle.nullDev, encoding: encoding)
 		stderror = FileHandleStream(FileHandle.nullDev, encoding: encoding)
@@ -68,7 +68,6 @@ public struct CustomContext: Context, CommandRunning {
 		currentdirectory = context.currentdirectory
 	}
 }
-
 
 private func createTempdirectory () -> String {
 	let name = URL(fileURLWithPath: main.path).lastPathComponent

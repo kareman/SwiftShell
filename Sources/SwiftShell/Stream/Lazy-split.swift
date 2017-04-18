@@ -16,7 +16,6 @@ extension Collection where Iterator.Element: Equatable {
 	}
 }
 
-
 /// A sequence from splitting a Collection lazily.
 public struct LazySplitSequence <Base: Collection>: IteratorProtocol, LazySequenceProtocol where
 	Base.Iterator.Element: Equatable,
@@ -55,7 +54,6 @@ extension LazyCollectionProtocol where Elements.Iterator.Element: Equatable,
 	Elements.SubSequence.Iterator.Element==Elements.Iterator.Element,
 	Elements.SubSequence==Elements.SubSequence.SubSequence {
 
-
 	/// Creates a lazy sequence by splitting this Collection repeatedly.
 	///
 	/// - Parameters:
@@ -80,14 +78,13 @@ public struct PartialSourceLazySplitSequence <Base: Collection>: IteratorProtoco
 	private var gs: LazyMapIterator<AnyIterator<Base>, LazySplitSequence<Base>>
 	private var g: LazySplitSequence<Base>?
 
-	
 	/// Creates a lazy sequence by splitting a series of collections repeatedly, as if they were one collection.
 	///
 	/// - Parameters:
 	///   - bases: A function which returns the next collection in the series each time it is called, 
 	///     or nil if there are no more collections.
 	///   - separator: The element of ‘bases’ to split over.
-	public init (_ bases: @escaping ()->Base?, separator: Base.Iterator.Element) {
+	public init (_ bases: @escaping () -> Base?, separator: Base.Iterator.Element) {
 		gs = AnyIterator(bases).lazy.map {
 			LazySplitSequence($0, separator: separator, allowEmptySlices: true).makeIterator()
 			}.makeIterator()

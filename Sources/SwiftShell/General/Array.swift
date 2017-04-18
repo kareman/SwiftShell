@@ -16,7 +16,6 @@ extension Array: AnyArrayType {
 }
 
 extension Array where Element: Any {
-
 	func flatten () -> [Any] {
 		return self.flatMap { x -> [Any] in
 			if let anyarray = x as? AnyArrayType {

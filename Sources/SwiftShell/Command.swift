@@ -33,7 +33,7 @@ Print error to standard error and halt execution.
 - parameter error: the error
 - returns: Never.
 */
-public func exit (_ error: Error, file: String = #file, line: Int = #line) -> Never  {
+public func exit (_ error: Error, file: String = #file, line: Int = #line) -> Never {
 	if let commanderror = error as? CommandError {
 		exit(errormessage: commanderror, errorcode: commanderror.errorcode, file: file, line: line)
 	} else {
@@ -41,8 +41,7 @@ public func exit (_ error: Error, file: String = #file, line: Int = #line) -> Ne
 	}
 }
 
-
-//	MARK: CommandRunning
+// MARK: CommandRunning
 
 /// Can run commands.
 public protocol CommandRunning {
@@ -83,7 +82,6 @@ extension CommandRunning {
 		return process
 	}
 }
-
 
 // MARK: CommandError
 
@@ -160,7 +158,7 @@ extension Process {
 	/** The full path to the executable + all arguments, each one quoted if it contains a space. */
 	func commandAsString () -> String? {
 		guard let path = self.launchPath else { return nil }
-		return self.arguments?.reduce(path) { (acc:String, arg:String) in
+		return self.arguments?.reduce(path) { (acc: String, arg: String) in
 			return acc + " " + ( arg.characters.contains(" ") ? ("\"" + arg + "\"") : arg )
 		}
 	}
@@ -171,7 +169,7 @@ extension Process {
 /// Output from a `run` command.
 public final class RunOutput {
 	fileprivate let output: AsyncCommand
-	public private(set) var error: CommandError? = nil
+	public private(set) var error: CommandError?
 
 	init(output: AsyncCommand) {
 		do {
@@ -259,7 +257,6 @@ public final class AsyncCommand {
 		process.standardOutput = outpipe
 		stdout = FileHandleStream(outpipe.fileHandleForReading, encoding: main.encoding)
 
-
 		if combineOutput {
 			stderror = stdout
 		} else {
@@ -303,8 +300,8 @@ public final class AsyncCommand {
 }
 
 extension AsyncCommand {
-	@discardableResult public func onCompletion ( handler: ((AsyncCommand) -> ())? ) -> AsyncCommand {
-		process.terminationHandler = { (Process) in
+	@discardableResult public func onCompletion ( handler: ((AsyncCommand) -> Void)? ) -> AsyncCommand {
+		process.terminationHandler = { _ in
 			handler?(self)
 		}
 		return self
@@ -326,7 +323,6 @@ extension CommandRunning {
 		return AsyncCommand(launch: createProcess(executable, args: stringargs), file: file, line: line)
 	}
 }
-
 
 // MARK: runAndPrint
 
@@ -366,7 +362,6 @@ extension CommandRunning {
 @discardableResult public func run (_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> String {
 	fatalError()
 }
-
 
 /**
 Run executable and return before it is finished.

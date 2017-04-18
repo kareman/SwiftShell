@@ -17,7 +17,6 @@ public func + (leftpath: URL, rightpath: String) -> URL {
 	return leftpath.appendingPathComponent(rightpath)
 }
 
-
 /** Error type for file commands. */
 public enum FileError: Error {
 

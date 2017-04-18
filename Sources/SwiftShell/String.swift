@@ -13,7 +13,7 @@ import Foundation
 extension String: CommandRunning {
 	public var context: Context {
 		var context = CustomContext(main)
-		let (writer,reader) = streams()
+		let (writer, reader) = streams()
 
 		writer.write(self)
 		writer.close()
