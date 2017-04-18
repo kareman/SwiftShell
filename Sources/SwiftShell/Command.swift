@@ -89,17 +89,17 @@ extension CommandRunning {
 public enum CommandError: Error, Equatable {
 
 	/** Exit code was not zero. */
-	case ReturnedErrorCode (command: String, errorcode: Int)
+	case returnedErrorCode (command: String, errorcode: Int)
 
 	/** Command could not be executed. */
-	case InAccessibleExecutable (path: String)
+	case inAccessibleExecutable (path: String)
 
 	/** Exit code for this error. */
 	var errorcode: Int {
 		switch self {
-		case .ReturnedErrorCode(_, let code):
+		case .returnedErrorCode(_, let code):
 			return code
-		case .InAccessibleExecutable:
+		case .inAccessibleExecutable:
 			return 127 // according to http://tldp.org/LDP/abs/html/exitcodes.html
 		}
 	}
@@ -108,9 +108,9 @@ public enum CommandError: Error, Equatable {
 extension CommandError: CustomStringConvertible {
 	public var description: String {
 		switch self {
-		case .InAccessibleExecutable(let path):
+		case .inAccessibleExecutable(let path):
 			return "Could not execute file at path '\(path)'."
-		case .ReturnedErrorCode(let command, let code):
+		case .returnedErrorCode(let command, let code):
 			return "Command '\(command)' returned with error code \(code)."
 		}
 	}
@@ -118,9 +118,9 @@ extension CommandError: CustomStringConvertible {
 
 public func == (e1: CommandError, e2: CommandError) -> Bool {
 	switch (e1, e2) {
-	case (.ReturnedErrorCode(let c1), .ReturnedErrorCode(let c2)):
+	case (.returnedErrorCode(let c1), .returnedErrorCode(let c2)):
 		return c1.errorcode == c2.errorcode && c1.command == c2.command
-	case (.InAccessibleExecutable(let c1), .InAccessibleExecutable(let c2)):
+	case (.inAccessibleExecutable(let c1), .inAccessibleExecutable(let c2)):
 		return c1 == c2
 	default:
 		return false
@@ -138,7 +138,7 @@ extension Process {
 	*/
 	public func launchThrowably() throws {
 		guard Files.isExecutableFile(atPath: self.launchPath!) else {
-			throw CommandError.InAccessibleExecutable(path: self.launchPath!)
+			throw CommandError.inAccessibleExecutable(path: self.launchPath!)
 		}
 		launch()
 	}
@@ -151,7 +151,7 @@ extension Process {
 	public func finish() throws {
 		self.waitUntilExit()
 		guard self.terminationStatus == 0 else {
-			throw CommandError.ReturnedErrorCode(command: commandAsString()!, errorcode: Int(self.terminationStatus))
+			throw CommandError.returnedErrorCode(command: commandAsString()!, errorcode: Int(self.terminationStatus))
 		}
 	}
 
