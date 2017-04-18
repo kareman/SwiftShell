@@ -146,11 +146,7 @@ public protocol WritableStream: class, TextOutputStream {
 
 extension WritableStream {
 	public func write (_ x: String) {
-		if filehandle.fileDescriptor == STDOUT_FILENO {
-			Swift.print(x, terminator: "")
-		} else {
-			filehandle.write(x, encoding: encoding)
-		}
+		filehandle.write(x, encoding: encoding)
 	}
 
 	public func close () {
