@@ -57,8 +57,8 @@ Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumber
 #### Others
 
 - [Test the latest commit (using make and/or Swift).][testcommit]
-- [Run a shell command in the middle of a method chain](http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/)
-- [Move files to the trash](http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/)
+- [Run a shell command in the middle of a method chain](http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/).
+- [Move files to the trash](http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/).
 
 [testcommit]: https://github.com/kareman/testcommit/blob/master/Sources/main.swift
 
@@ -129,12 +129,9 @@ cleanctx.currentdirectory = main.tempdirectory
 
 ### Streams
 
-Streams provide or receive text, using the text encoding in their `.encoding` property. In addition to the stdin, stdout and stderror of a Context mentioned above, files can also be streams. 
+The types ReadableStream and WritableStream in `Context` above are ways to read and write text from/to commands, files or the application's own standard streams. They both have an `.encoding` property they use when encoding/decoding text.
 
-```swift
-let readfile = try open(path) // ReadableStream
-let writefile = try open(forWriting: path) // WritableStream
-```
+You can use `let (input,output) = streams()` to create a new pair of streams. What you write to `input` you can read from `output`.
 
 [FileSmith][]'s [WritableFile][] and [ReadableFile][] are streams too, and can be used as stdin, stdout and stderror in SwiftShell Contexts, including `main`.
 
@@ -144,42 +141,77 @@ let writefile = try open(forWriting: path) // WritableStream
 
 #### WritableStream
 
-You can also write to a file:
+When writing to a WritableStream you normally use `.print` which works exactly like Swift's built-in print function:
 
 ```swift
 main.stdout.print("everything is fine")
 main.stderror.print("no wait, something went wrong ...")
 
-
-file.print("something")
+let writefile = try open(forWriting: path) // WritableStream
+writefile.print("1", 2, 3/5, separator: "+", terminator: "=")
 ```
 
-`.write` doesn't add a newline, and 
+If you want to be taken literally, use `.write` instead. It doesn't add a newline and writes exactly and only what you write:
+
+```swift
+writefile.write("Read my lips:")
+```
+
+You can close the stream to signal you are done with it:
+
+```swift
+writefile.close()
+```
 
 #### ReadableStream
 
-, or you can read from a file:
+When reading from a ReadableStream you can read everything at once:
 
 ```swift
-let input: String? = main.stdin.readSome() // read what is available, don't wait for end of file 
-
-
-let contents: String = file.read() // read everything
+let readfile = try open(path) // ReadableStream
+let contents = readfile.read()
 ```
 
-Using `.readSome()` you can read piecewise instead of waiting for the input to be finished and then reading everything at once. 
+This will read everything and wait for the stream to be closed if it isn't already.
 
+You can also read it asynchronously, as in read whatever is in there now and continue without waiting for it to be closed:
+
+```swift
+while let text = main.stdin.readSome() {
+	// do something with ‘text’...
+}
+```
+
+`.readSome()` returns `String?` - if the stream is closed it returns nil, if there is anything there it returns it, and if there is nothing there and the stream is still open it will wait until either there is more content or the stream is closed.
+
+Another way to read asynchronously is to use the `lines` method which creates a lazy sequence of Strings, one for each line in the stream:
+
+```swift
+for line in main.stdin.lines() {
+	// ...
+}
+```
+
+Or instead of stopping and waiting for any output you can be notified whenever there is something more in the stream:
+
+```swift
+main.stdin.onOutput { stream in
+	// ‘stream’ refers to main.stdin
+}
+```
 
 ### Commands
+
+All Contexts (`CustomContext` and `main`) implement `CommandRunning`, which means they can run commands using themselves as the Context. ReadableStream and String can also run commands, they use `main` as the Context and themselves as `.stdin`.
+
+There are three different ways of running a command:
 
 #### Run
 
 ```swift
-let date: String = run("date", "-u")
+let date: String = run("date", "-u").stdout
 print("Today's date in UTC is " + date)
 ```
-
-Similar to `$(cmd)` in bash, this just returns the output from the command as a string, ignoring any errors.
 
 #### Print output
 
