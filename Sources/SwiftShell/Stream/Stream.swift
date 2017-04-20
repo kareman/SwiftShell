@@ -60,7 +60,8 @@ public protocol ReadableStream: class, TextOutputStreamable, CommandRunning {
 	var filehandle: FileHandle {get}
 
 	/// All the text the stream contains so far. 
-	/// If the source is a file this will read everything at once.
+	/// If the source is a file this will read everything at once. 
+	/// If the stream is empty and still open this will wait for more content or end-of-file.
 	/// - Returns: more text from the stream, or nil if we have reached the end.
 	func readSome() -> String?
 
@@ -159,7 +160,7 @@ extension WritableStream {
 	/// To avoid printing a newline at the end, pass `terminator: ""` or use `write` ìnstead.
 	///
 	/// - Parameters:
-	///   - items: Zero or more items to print, converting them to text with String(describing:).
+	///   - items: Zero or more items to print, converted to text with String(describing:).
 	///   - separator: What to print between each item. Default is " ".
 	///   - terminator: What to print at the end. Default is newline.
 	@warn_unqualified_access

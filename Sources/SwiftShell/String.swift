@@ -9,7 +9,7 @@
 
 import Foundation
 
-/** Let Strings run commands using itself as stdin. */
+/// Let Strings run commands using itself as stdin.
 extension String: CommandRunning {
 	public var context: Context {
 		var context = CustomContext(main)

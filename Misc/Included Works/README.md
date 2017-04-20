@@ -2,7 +2,7 @@
 
 The following files are from other projects:
 
-- SwiftShellTests/Scripts/assert.sh
+- Scripts/assert.sh
 
         # assert.sh 1.0 - bash unit testing framework
         # Copyright (C) 2009, 2010, 2011, 2012 Robert Lehmann

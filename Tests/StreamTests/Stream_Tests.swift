@@ -108,7 +108,7 @@ public class Stream_Tests: XCTestCase {
 	func testOnStringOutput () {
 		let (writer,reader) = streams()
 
-		let expectoutput = expectation(description: "onOutput will be called when output is available")
+		let expectoutput = expectation(description: "onStringOutput will be called when output is available")
 		reader.onStringOutput { string in
 			XCTAssertEqual(string, "hi")
 			expectoutput.fulfill()
