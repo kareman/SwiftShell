@@ -12,7 +12,7 @@ import Foundation
 
 public class FileHandle_Tests: XCTestCase {
 
-	func testWriteAndReadSome () {
+	func testWriteAndReadSome() {
 		let pipe = Pipe()
 		let writer = pipe.fileHandleForWriting
 		let reader = pipe.fileHandleForReading
@@ -28,7 +28,7 @@ public class FileHandle_Tests: XCTestCase {
 		XCTAssertEqual(reader.read(encoding: .utf8), "")
 	}
 
-	func testWriteAndRead () {
+	func testWriteAndRead() {
 		let pipe = Pipe()
 		let writer = pipe.fileHandleForWriting
 		let reader = pipe.fileHandleForReading

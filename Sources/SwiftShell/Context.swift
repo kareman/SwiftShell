@@ -50,7 +50,7 @@ public struct CustomContext: Context, CommandRunning {
 
 	/** Creates a blank CustomContext where env and stdin are empty, stdout and stderror discard everything and 
 	currentdirectory is the current working directory. */
-	public init () {
+	public init() {
 		let encoding = String.Encoding.utf8
 		env = [String: String]()
 		stdin =    FileHandleStream(FileHandle.nullDev, encoding: encoding)
@@ -60,7 +60,7 @@ public struct CustomContext: Context, CommandRunning {
 	}
 
 	/** Creates an identical copy of another Context. */
-	public init (_ context: Context) {
+	public init(_ context: Context) {
 		env = context.env
 		stdin =    context.stdin
 		stdout =   context.stdout
@@ -69,7 +69,7 @@ public struct CustomContext: Context, CommandRunning {
 	}
 }
 
-private func createTempdirectory () -> String {
+private func createTempdirectory() -> String {
 	let name = URL(fileURLWithPath: main.path).lastPathComponent
 	let tempdirectory = URL(fileURLWithPath:NSTemporaryDirectory()) + (name + "-" + ProcessInfo.processInfo.globallyUniqueString)
 	do {

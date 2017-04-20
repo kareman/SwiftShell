@@ -11,7 +11,7 @@ import XCTest
 
 public class Stream_Tests: XCTestCase {
 
-	func testStreams () {
+	func testStreams() {
 		let (writer,reader) = streams()
 
 		writer.write("one")
@@ -27,7 +27,7 @@ public class Stream_Tests: XCTestCase {
 	}
 
 #if !(os(iOS) || os(tvOS) || os(watchOS))
-	func testReadableStreamRun () {
+	func testReadableStreamRun() {
 		let (writer,reader) = streams()
 
 		writer.write("one")
@@ -36,7 +36,7 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(reader.run("cat").stdout, "one")
 	}
 
-	func testReadableStreamRunAsync () {
+	func testReadableStreamRunAsync() {
 		let (writer,reader) = streams()
 
 		writer.write("one")
@@ -46,7 +46,7 @@ public class Stream_Tests: XCTestCase {
 	}
 #endif
 
-	func testPrintStream () {
+	func testPrintStream() {
 		let (writer,reader) = streams()
 		writer.write("one")
 		writer.close()
@@ -57,7 +57,7 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(string, "one\n")
 	}
 
-	func testPrintToStream () {
+	func testPrintToStream() {
 		let (w,reader) = streams()
 		// 'print' does not work with protocol types directly, not even 'TextOutputStream'.
 		var writer = w as! FileHandleStream
@@ -92,7 +92,7 @@ public class Stream_Tests: XCTestCase {
 	}
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-	func testOnOutput () {
+	func testOnOutput() {
 		let (writer,reader) = streams()
 
 		let expectoutput = expectation(description: "onOutput will be called when output is available")
@@ -105,7 +105,7 @@ public class Stream_Tests: XCTestCase {
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
 
-	func testOnStringOutput () {
+	func testOnStringOutput() {
 		let (writer,reader) = streams()
 
 		let expectoutput = expectation(description: "onStringOutput will be called when output is available")

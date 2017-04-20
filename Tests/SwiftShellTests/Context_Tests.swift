@@ -12,11 +12,11 @@ import Foundation
 
 public class MainContext_Tests: XCTestCase {
 
-	func testCurrentDirectory_IsCurrentDirectory () {
+	func testCurrentDirectory_IsCurrentDirectory() {
 		XCTAssertEqual( main.currentdirectory, Files.currentDirectoryPath + "/")
 	}
 
-	func testCurrentDirectory_CanChange () {
+	func testCurrentDirectory_CanChange() {
 		let originalcurrentdirectory = main.currentdirectory
 		XCTAssertNotEqual( main.run("/bin/pwd").stdout, "/usr" )
 		main.currentdirectory = "/usr"
@@ -26,7 +26,7 @@ public class MainContext_Tests: XCTestCase {
 		main.currentdirectory = originalcurrentdirectory
 	}
 
-	func testCurrentDirectory_AffectsNSURLBase () {
+	func testCurrentDirectory_AffectsNSURLBase() {
 		let originalcurrentdirectory = main.currentdirectory
 		XCTAssertNotEqual(URL(fileURLWithPath: "file").baseURL, URL(fileURLWithPath: "/usr") )
 
@@ -36,7 +36,7 @@ public class MainContext_Tests: XCTestCase {
 		main.currentdirectory = originalcurrentdirectory
 	}
 
-	func testTempDirectory () {
+	func testTempDirectory() {
 		XCTAssertEqual( main.tempdirectory, main.tempdirectory )
 		XCTAssert( Files.fileExists(atPath: main.tempdirectory), "Temporary directory \(main.tempdirectory) does not exist" )
 	}
@@ -44,14 +44,14 @@ public class MainContext_Tests: XCTestCase {
 
 public class CopiedCustomContext_Tests: XCTestCase {
 
-	func testCopies () {
+	func testCopies() {
 		let context = CustomContext(main)
 
 		XCTAssert( context.stdin === main.stdin )
 		XCTAssertEqual(context.env, main.env)
 	}
 
-	func testCurrentDirectory_DoesNotAffectNSURLBase () {
+	func testCurrentDirectory_DoesNotAffectNSURLBase() {
 		let originalnsurlbaseurl = URL(fileURLWithPath: "file").baseURL
 
 		var context = CustomContext(main)
@@ -63,7 +63,7 @@ public class CopiedCustomContext_Tests: XCTestCase {
 
 public class BlankCustomContext_Tests: XCTestCase {
 
-	func testIsBlank () {
+	func testIsBlank() {
 		let context = CustomContext()
 
 		XCTAssert( context.stdin.filehandle === FileHandle.nullDev )
@@ -71,20 +71,20 @@ public class BlankCustomContext_Tests: XCTestCase {
 		XCTAssert( context.stderror.filehandle === FileHandle.nullDev )
 	}
 
-	func testRunCommand () {
+	func testRunCommand() {
 		let context = CustomContext()
 
 		XCTAssertEqual(context.run("/bin/echo", "one").stdout, "one")
 	}
 
-	func testRunAsyncCommand () {
+	func testRunAsyncCommand() {
 		let context = CustomContext()
 		let process = context.runAsync("/bin/echo", "one")
 
 		XCTAssertEqual(process.stdout.read(), "one\n")
 	}
 
-	func testRunAndPrintCommand () {
+	func testRunAndPrintCommand() {
 		var context = CustomContext()
 
 		AssertDoesNotThrow {

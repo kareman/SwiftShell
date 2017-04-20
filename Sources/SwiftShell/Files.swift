@@ -20,9 +20,9 @@ public func + (leftpath: URL, rightpath: String) -> URL {
 /** Error type for file commands. */
 public enum FileError: Error {
 
-	case notFound (path: String)
+	case notFound(path: String)
 
-	public static func checkFile (_ path: String) throws {
+	public static func checkFile(_ path: String) throws {
 		if !Files.fileExists(atPath: path) {
 			throw notFound(path: path)
 		}
@@ -39,14 +39,14 @@ extension FileError: CustomStringConvertible {
 }
 
 /** Open a file for reading, throw if an error occurs. */
-public func open (_ path: String, encoding: String.Encoding = main.encoding) throws -> ReadableStream {
+public func open(_ path: String, encoding: String.Encoding = main.encoding) throws -> ReadableStream {
 	// URL does not handle leading "~/"
 	let fixedpath = path.hasPrefix("~") ? NSString(string: path).expandingTildeInPath : path
 	return try open(URL(fileURLWithPath: fixedpath, isDirectory: false), encoding: encoding)
 }
 
 /** Open a file for reading, throw if an error occurs. */
-public func open (_ path: URL, encoding: String.Encoding = main.encoding) throws -> ReadableStream {
+public func open(_ path: URL, encoding: String.Encoding = main.encoding) throws -> ReadableStream {
 	do {
 		return FileHandleStream(try FileHandle(forReadingFrom: path), encoding: encoding)
 	} catch {
@@ -61,7 +61,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
 
 - parameter overwrite: If true, replace the file if it exists.
 */
-public func open (forWriting path: URL, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WritableStream {
+public func open(forWriting path: URL, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WritableStream {
 
 	if overwrite || !Files.fileExists(atPath: path.path) {
 		try Files.createDirectory(at: path.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
@@ -84,7 +84,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
 
 - parameter overwrite: If true, replace the file if it exists.
 */
-public func open (forWriting path: String, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WritableStream {
+public func open(forWriting path: String, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> WritableStream {
 	let fixedpath = path.hasPrefix("~") ? NSString(string: path).expandingTildeInPath : path
 	return try open(forWriting: URL(fileURLWithPath: fixedpath, isDirectory: false), overwrite: overwrite, encoding:  encoding)
 }

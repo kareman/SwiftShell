@@ -71,11 +71,11 @@ public protocol ReadableStream: class, TextOutputStreamable, CommandRunning {
 
 extension ReadableStream {
 
-	public func readSome () -> String? {
+	public func readSome() -> String? {
 		return filehandle.readSome(encoding: encoding)
 	}
 
-	public func read () -> String {
+	public func read() -> String {
 		return filehandle.read(encoding: encoding)
 	}
 
@@ -104,7 +104,7 @@ extension ReadableStream {
 		/// Pass `nil` to remove any preexisting handlers.
 		/// - Note: if the stream is read from outside of the handler, or more than once inside
 		/// the handler, it may be called once when stream is closed and empty.
-		public func onOutput ( handler: ((ReadableStream) -> Void)? ) {
+		public func onOutput( handler: ((ReadableStream) -> Void)? ) {
 			guard let handler = handler else {
 				filehandle.readabilityHandler = nil
 				return
@@ -118,7 +118,7 @@ extension ReadableStream {
 		/// Pass `nil` to remove any preexisting handlers.
 		/// - Note: if the stream is read from outside of the handler, or more than once inside
 		/// the handler, it may be called once when stream is closed and empty.
-		public func onStringOutput ( handler: ((String) -> Void)? ) {
+		public func onStringOutput( handler: ((String) -> Void)? ) {
 			guard let handler = handler else {
 				self.onOutput(handler: nil)
 				return
@@ -146,11 +146,11 @@ public protocol WritableStream: class, TextOutputStream {
 }
 
 extension WritableStream {
-	public func write (_ x: String) {
+	public func write(_ x: String) {
 		filehandle.write(x, encoding: encoding)
 	}
 
-	public func close () {
+	public func close() {
 		filehandle.closeFile()
 	}
 
@@ -195,14 +195,14 @@ public class FileHandleStream: ReadableStream, WritableStream {
 	public let filehandle: FileHandle
 	public var encoding: String.Encoding
 
-	public init (_ filehandle: FileHandle, encoding: String.Encoding) {
+	public init(_ filehandle: FileHandle, encoding: String.Encoding) {
 		self.filehandle = filehandle
 		self.encoding = encoding
 	}
 }
 
 /// Creates a pair of streams. What is written to the 1st one can be read from the 2nd one.
-public func streams () -> (WritableStream, ReadableStream) {
+public func streams() -> (WritableStream, ReadableStream) {
 	let pipe = Pipe()
 	return (FileHandleStream(pipe.fileHandleForWriting, encoding: .utf8), FileHandleStream(pipe.fileHandleForReading, encoding: .utf8))
 }

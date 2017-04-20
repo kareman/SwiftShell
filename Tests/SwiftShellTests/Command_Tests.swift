@@ -19,24 +19,24 @@ public class Run_Tests: XCTestCase {
 		main.run(bash: "echo hi")
 	}
 
-	func testBashCommand () {
+	func testBashCommand() {
 		XCTAssertEqual( SwiftShell.run(bash:"echo one").stdout, "one" )
 	}
 
-	func testArgumentsFromArray () {
+	func testArgumentsFromArray() {
 		let stringarray = ["one", "two"]
 		XCTAssertEqual( SwiftShell.run("/bin/echo", stringarray).stdout, "one two" )
 	}
 
-	func testSinglelineOutput () {
+	func testSinglelineOutput() {
 		XCTAssertEqual( SwiftShell.run("/bin/echo", "one", "two").stdout, "one two" )
 	}
 
-	func testMultilineOutput () {
+	func testMultilineOutput() {
 		XCTAssertEqual( SwiftShell.run("/bin/echo", "one\ntwo").stdout, "one\ntwo\n" )
 	}
 
-	func testExecutableWithoutPath () {
+	func testExecutableWithoutPath() {
 		XCTAssertEqual( SwiftShell.run("echo", "one").stdout, "one")
 	}
 
@@ -74,7 +74,7 @@ public class Run_Tests: XCTestCase {
 
 public class RunAsync_Tests: XCTestCase {
 
-	func testReturnsStandardOutput () {
+	func testReturnsStandardOutput() {
 		let asynccommand = runAsync("/bin/echo", "one", "two" )
 		AssertDoesNotThrow { try asynccommand.finish() }
 
@@ -82,7 +82,7 @@ public class RunAsync_Tests: XCTestCase {
 		XCTAssertEqual( asynccommand.stderror.read(), "" )
 	}
 
-	func testReturnsStandardError () {
+	func testReturnsStandardError() {
 		let asynccommand = runAsync(bash: "echo one two > /dev/stderr" )
 		AssertDoesNotThrow { try asynccommand.finish() }
 
@@ -90,14 +90,14 @@ public class RunAsync_Tests: XCTestCase {
 		XCTAssertEqual( asynccommand.stdout.read(), "" )
 	}
 
-	func testArgumentsFromArray () {
+	func testArgumentsFromArray() {
 		AssertDoesNotThrow {
 			let output = try runAsync("/bin/echo", ["one", "two"]).finish().stdout.read()
 			XCTAssertEqual( output, "one two\n" )
 		}
 	}
 
-	func testFinishThrowsErrorOnExitcodeNotZero () {
+	func testFinishThrowsErrorOnExitcodeNotZero() {
 		let asynccommand = runAsync(bash: "echo errormessage > /dev/stderr; exit 1" )
 
 		AssertThrows(CommandError.returnedErrorCode(command: "/bin/bash -c \"echo errormessage > /dev/stderr; exit 1\"", errorcode: 1))
@@ -105,13 +105,13 @@ public class RunAsync_Tests: XCTestCase {
 		XCTAssertEqual( asynccommand.stderror.read(), "errormessage\n" )
 	}
 
-	func testExitCode () {
+	func testExitCode() {
 		let asynccommand = runAsync(bash: "exit 1" )
 
 		XCTAssertEqual( asynccommand.exitcode(), 1 )
 	}
 
-	func testOnCompletion () {
+	func testOnCompletion() {
 		let expectcompletion = expectation(description: "onCompletion will be called when command has finished.")
 
 		runAsync("echo")
@@ -125,7 +125,7 @@ public class RunAndPrint_Tests: XCTestCase {
 	var test_stdout: FileHandle!
 	var test_stderr: FileHandle!
 
-	public override func setUp () {
+	public override func setUp() {
 		let outputpipe = Pipe()
 		main.stdout = FileHandleStream(outputpipe.fileHandleForWriting, encoding: .utf8)
 		test_stdout = outputpipe.fileHandleForReading
@@ -135,30 +135,30 @@ public class RunAndPrint_Tests: XCTestCase {
 		test_stderr = errorpipe.fileHandleForReading
 	}
 
-	func testReturnsStandardOutput () {
+	func testReturnsStandardOutput() {
 		AssertDoesNotThrow { try runAndPrint("/bin/echo", "one", "two" ) }
 
 		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
 	}
 
-	func testArgumentsFromArray () {
+	func testArgumentsFromArray() {
 		AssertDoesNotThrow { try runAndPrint("/bin/echo", ["one", "two"] ) }
 
 		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
 	}
 
-	func testReturnsStandardError () {
+	func testReturnsStandardError() {
 		AssertDoesNotThrow { try runAndPrint(bash: "echo one two > /dev/stderr" ) }
 
 		XCTAssertEqual( test_stderr.readSome(encoding: .utf8), "one two\n" )
 	}
 
-	func testThrowsErrorOnExitcodeNotZero () {
+	func testThrowsErrorOnExitcodeNotZero() {
 		AssertThrows(CommandError.returnedErrorCode(command: "/bin/bash -c \"exit 1\"", errorcode: 1))
 			{ try runAndPrint("bash", "-c", "exit 1") }
 	}
 
-	func testThrowsErrorOnInaccessibleExecutable () {
+	func testThrowsErrorOnInaccessibleExecutable() {
 		AssertThrows(CommandError.inAccessibleExecutable(path: "notachance"))
 			{ try runAndPrint("notachance") }
 	}

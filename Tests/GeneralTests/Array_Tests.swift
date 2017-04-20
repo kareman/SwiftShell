@@ -13,13 +13,13 @@ public class Array_Tests: XCTestCase {
 
 	// comparing as strings because XCTAssertEqual doesn't support [Any]
 
-	func testAnyArrayFlattenAFlatOne () {
+	func testAnyArrayFlattenAFlatOne() {
 		XCTAssertEqual( ([1,"2"] as [Any]).flatten().description, "[1, \"2\"]")
 		XCTAssertEqual( (["1","2"] as [Any]).flatten().description, ["1", "2"].description)
 		XCTAssertEqual( ([1,2] as [Any]).flatten().description, [1,2].description)
 	}
 
-	func testAnyArrayFlattenABumpyOne () {
+	func testAnyArrayFlattenABumpyOne() {
 		let intarray = [1,2]
 		XCTAssertEqual( ([intarray] as [Any]).flatten().description, [1,2].description)
 		XCTAssertEqual( (["1",[2,3]] as [Any]).flatten().description, "[\"1\", 2, 3]")
@@ -29,7 +29,7 @@ public class Array_Tests: XCTestCase {
 		XCTAssertEqual( ([stringarray, 3] as [Any]).flatten().description, (["one","two",3] as [Any]).description)
 	}
 
-	func testAnyArrayFlattenAVeryBumpyOne () {
+	func testAnyArrayFlattenAVeryBumpyOne() {
 		let intarray = [1,2]
 		XCTAssertEqual( ([[intarray]] as [Any]).flatten().description, intarray.description)
 		XCTAssertEqual( (["1",[2,[3] as Any]] as [Any]).flatten().description, "[\"1\", 2, 3]")

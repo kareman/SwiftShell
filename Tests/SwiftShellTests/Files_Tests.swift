@@ -12,7 +12,7 @@ import Foundation
 
 public class UrlAppendationOperator: XCTestCase {
 
-	func testUrlPlusString () {
+	func testUrlPlusString() {
 		XCTAssertEqual( URL(fileURLWithPath: "dir") + "file.txt", URL(fileURLWithPath: "dir/file.txt"))
 		XCTAssertEqual( URL(fileURLWithPath: "dir/") + "/file.txt", URL(fileURLWithPath: "dir/file.txt"))
 		XCTAssertEqual( URL(string: "dir")! + "file.txt", URL(string: "dir/file.txt"))
@@ -21,7 +21,7 @@ public class UrlAppendationOperator: XCTestCase {
 
 public class Open: XCTestCase {
 
-	func testReadFile () {
+	func testReadFile() {
 		let path = main.tempdirectory + "testReadFile.txt"
 		let _ = SwiftShell.run(bash: "echo Lorem ipsum dolor > " + path)
 
@@ -31,11 +31,11 @@ public class Open: XCTestCase {
 		}
 	}
 
-	func testReadFileWhichDoesNotExist () {
+	func testReadFileWhichDoesNotExist() {
 		XCTAssertThrowsError(try open("/nonexistingfile.txt"))
 	}
 
-	func testOpenForWritingFileWhichDoesNotExist () {
+	func testOpenForWritingFileWhichDoesNotExist() {
 		let path = main.tempdirectory + "testOpenForWritingFileWhichDoesNotExist.txt"
 
 		AssertDoesNotThrow {
@@ -48,7 +48,7 @@ public class Open: XCTestCase {
 		}
 	}
 
-	func testOpenForOverWritingFileWhichDoesNotExist () {
+	func testOpenForOverWritingFileWhichDoesNotExist() {
 		let path = main.tempdirectory + "testOpenForOverWritingFileWhichDoesNotExist.txt"
 
 		AssertDoesNotThrow {
@@ -61,7 +61,7 @@ public class Open: XCTestCase {
 		}
 	}
 
-	func testOpenForWritingExistingFile_AppendsFile () {
+	func testOpenForWritingExistingFile_AppendsFile() {
 		let path = main.tempdirectory + "testOpenForWritingExistingFile_AppendsFile.txt"
 		let _ = SwiftShell.run(bash: "echo existing line > " + path)
 
@@ -75,7 +75,7 @@ public class Open: XCTestCase {
 		}
 	}
 
-	func testOpenForOverWritingExistingFile () {
+	func testOpenForOverWritingExistingFile() {
 		let path = main.tempdirectory + "testOpenForOverWritingExistingFile.txt"
 		let _ = SwiftShell.run(bash: "echo existing line > " + path)
 
@@ -89,7 +89,7 @@ public class Open: XCTestCase {
 		}
 	}
     
-    func testOpenForOverWritingCreatesIntermediateDirectory () {
+    func testOpenForOverWritingCreatesIntermediateDirectory() {
         let path = main.tempdirectory + "intermediate/path/testOpenForOverWritingExistingFile.txt"
 
         AssertDoesNotThrow {
