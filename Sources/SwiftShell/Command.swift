@@ -95,7 +95,7 @@ public enum CommandError: Error, Equatable {
 	case inAccessibleExecutable(path: String)
 
 	/** Exit code for this error. */
-	var errorcode: Int {
+	public var errorcode: Int {
 		switch self {
 		case .returnedErrorCode(_, let code):
 			return code
@@ -122,8 +122,10 @@ public func == (e1: CommandError, e2: CommandError) -> Bool {
 		return c1.errorcode == c2.errorcode && c1.command == c2.command
 	case (.inAccessibleExecutable(let c1), .inAccessibleExecutable(let c2)):
 		return c1 == c2
-	default:
+	case (.inAccessibleExecutable, .returnedErrorCode), (.returnedErrorCode, .inAccessibleExecutable):
 		return false
+	default:
+		fatalError("not implemented")
 	}
 }
 
@@ -134,7 +136,7 @@ extension Process {
 	/**
 	Launch process.
 
-	- throws: CommandError.InAccessibleExecutable if command could not be executed.
+	- throws: CommandError.inAccessibleExecutable if command could not be executed.
 	*/
 	public func launchThrowably() throws {
 		guard Files.isExecutableFile(atPath: self.launchPath!) else {
@@ -146,7 +148,7 @@ extension Process {
 	/**
 	Wait until process is finished.
 
-	- throws: `CommandError.ReturnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
+	- throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 	*/
 	public func finish() throws {
 		self.waitUntilExit()
@@ -285,7 +287,7 @@ public final class AsyncCommand {
 	Wait for this command to finish.
 
 	- returns: itself
-	- throws: `CommandError.ReturnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
+	- throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 	*/
 	@discardableResult public func finish() throws -> AsyncCommand {
 		try process.finish()
@@ -334,9 +336,9 @@ extension CommandRunning {
 	- parameter executable: path to an executable file.
 	- parameter args: arguments to the executable.
 	- throws: 
-		`CommandError.ReturnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
+		`CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 
-		`CommandError.InAccessibleExecutable(path: String)` if 'executable’ turned out to be not so executable after all.
+		`CommandError.inAccessibleExecutable(path: String)` if 'executable’ turned out to be not so executable after all.
 	*/
 	public func runAndPrint(_ executable: String, _ args: Any ...) throws {
 		let stringargs = args.flatten().map(String.init(describing:))
@@ -380,9 +382,9 @@ Run executable and print output and errors.
 
 - parameter executable: path to an executable file.
 - parameter args: arguments to the executable.
-- throws: `CommandError.ReturnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
+- throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 
-	`CommandError.InAccessibleExecutable(path: String)` if 'executable’ turned out to be not so executable after all.
+	`CommandError.inAccessibleExecutable(path: String)` if 'executable’ turned out to be not so executable after all.
 */
 public func runAndPrint(_ executable: String, _ args: Any ...) throws {
 	return try main.runAndPrint(executable, args)

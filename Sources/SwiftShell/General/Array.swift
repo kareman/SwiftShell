@@ -20,9 +20,8 @@ extension Array where Element: Any {
 		return self.flatMap { x -> [Any] in
 			if let anyarray = x as? AnyArrayType {
 				return anyarray.anyValues.flatten()
-			} else {
-				return [x]
 			}
+			return [x]
 		}
 	}
 }
