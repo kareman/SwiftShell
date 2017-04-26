@@ -171,9 +171,11 @@ extension Process {
 /// Output from a `run` command.
 public final class RunOutput {
 	fileprivate let output: AsyncCommand
+
+	/// The error from running the command, if any.
 	public private(set) var error: CommandError?
 
-	init(output: AsyncCommand) {
+	init(launch output: AsyncCommand) {
 		do {
 			try output.process.launchThrowably()
 			try output.finish()
@@ -240,7 +242,7 @@ extension CommandRunning {
 	@discardableResult public func run(_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> RunOutput {
 		let stringargs = args.flatten().map(String.init(describing:))
 		let async = AsyncCommand(unlaunched: createProcess(executable, args: stringargs), combineOutput: combineOutput)
-		return RunOutput(output: async)
+		return RunOutput(launch: async)
 	}
 }
 
@@ -270,7 +272,6 @@ public final class AsyncCommand {
 
 	convenience init(launch process: Process, file: String, line: Int) {
 		self.init(unlaunched: process, combineOutput: false)
-
 		do {
 			try process.launchThrowably()
 		} catch {
