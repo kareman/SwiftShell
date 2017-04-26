@@ -202,11 +202,45 @@ main.stdin.onOutput { stream in
 
 ### Commands
 
-All Contexts (`CustomContext` and `main`) implement `CommandRunning`, which means they can run commands using themselves as the Context. ReadableStream and String can also run commands, they use `main` as the Context and themselves as `.stdin`.
+All Contexts (`CustomContext` and `main`) implement `CommandRunning`, which means they can run commands using themselves as the Context. ReadableStream and String can also run commands, they use `main` as the Context and themselves as `.stdin`. As a shortcut you can just use `run(...)` instead of `main.run(...)`
 
 There are three different ways of running a command:
 
 #### Run
+
+The simplest is to just run the command, wait until it's finished and return the results:
+
+```swift
+let result1 = run("/usr/bin/executable", "argument1", "argument2")
+let result2 = run("executable", "argument1", "argument2")
+```
+
+If you don't provide the full path to the executable, then SwiftShell will try to find it in any of the directories in the `PATH` environment variable.
+
+`run` returns the following information:
+
+```swift
+/// Output from a `run` command.
+public final class RunOutput {
+
+	/// The error from running the command, if any.
+	let error: CommandError?
+
+	/// Standard output, trimmed for whitespace and newline if it is single-line.
+	let stdout: String
+
+	/// Standard error, trimmed for whitespace and newline if it is single-line.
+	let stderror: String
+
+	/// The exit code of the command. Anything but 0 means there was an error.
+	let exitcode: Int
+
+	/// Checks if the exit code is 0.
+	let succeeded: Bool
+}
+```
+
+For example:
 
 ```swift
 let date: String = run("date", "-u").stdout
@@ -216,10 +250,12 @@ print("Today's date in UTC is " + date)
 #### Print output
 
 ```swift
-try runAndPrint(bash: "cmd1 arg | cmd2 arg") 
+try runAndPrint("executable", "arg") 
 ```
 
-Run a shell command just like you would in the terminal. The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.
+This runs a command like in the terminal, where any output goes to the Context's (`main` in this case) `.stdout` and `.stderror` respectively.  If the executable could not be found, was inaccessible or not executable, or the command returned with an exit code other than zero, then `runAndPrint` will throw a `CommandError`.
+
+The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.
 
 #### Asynchronous
 
@@ -229,7 +265,31 @@ let command = runAsync("cmd", "-n", 245)
 try command.finish()
 ```
 
-Launch a command and continue before it's finished. You can process standard output and standard error, and optionally wait until it's finished and handle any errors.
+`runAsync` launches a command and continues before it's finished. It returns this:
+
+```swift
+/// Output from the 'runAsync' methods.
+public final class AsyncCommand {
+
+	public let stdout: ReadableStream
+	public let stderror: ReadableStream
+
+	/// Terminate process early.
+	public func stop()
+
+	/// Wait for command to finish.
+	/// - returns: itself
+	/// - throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
+	public func finish() throws -> AsyncCommand
+
+	/// Wait for command to finish, then return with exit code.
+	public func exitcode() -> Int
+
+	public func onCompletion(handler: ((AsyncCommand) -> Void)?) -> AsyncCommand
+}
+```
+
+You can process standard output and standard error, and optionally wait until it's finished and handle any errors.
 
 If you read all of command.stderror or command.stdout it will automatically wait for the command to finish running. You can still call `finish()` to check for errors.
 
@@ -239,7 +299,7 @@ The 3 `run` functions above take 2 different types of parameters:
 
 ##### (_ executable: String, _ args: Any ...)
 
-If the path to the executable is without any `/`, SwiftShell will try to find the full path using the `which` shell command.
+If the path to the executable is without any `/`, SwiftShell will try to find the full path using the `which` shell command, which searches the directories in the `PATH` environment variable in order.
 
 The array of arguments can contain any type, since everything is convertible to strings in Swift. If it contains any arrays it will be flattened so only the elements will be used, not the arrays themselves.
 
@@ -254,7 +314,18 @@ try runAndPrint("echo", array, array.count + 2, "arguments")
 
 ##### (bash bashcommand: String)
 
-These are the commands you normally use in the Terminal. You can use pipes and redirection and all that good stuff. Support for other shell interpreters can easily be added.
+These are the commands you normally use in the Terminal. You can use pipes and redirection and all that good stuff:
+
+```swift
+try runAndPrint(bash: "cmd1 arg1 | cmd2 > output.txt")
+```
+
+Note that you can achieve the same thing in pure SwiftShell, though nowhere near as succinctly:
+
+```swift
+var file = try open(forWriting: "output.txt")
+runAsync("cmd1", "arg1").stdout.runAsync("cmd2").stdout.write(to: &file)
+```
 
 #### Errors
 
@@ -296,11 +367,7 @@ Instead of dealing with the values from these errors you can just print them:
 }
 ```
 
-&nbsp;
-
 When launched from the top level you don't need to catch any errors, but you still have to use `try`.
-
-### The Terminal
 
 ## Setup
 
