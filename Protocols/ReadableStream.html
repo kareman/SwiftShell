@@ -14,7 +14,7 @@
     <a title="ReadableStream Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SwiftShell Docs</a> (67% documented)</p>
+        <p><a href="../index.html">SwiftShell Docs</a> (70% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -263,7 +263,8 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>All the text the stream contains so far. 
-If the source is a file this will read everything at once.
+If the source is a file this will read everything at once. 
+If the stream is empty and still open this will wait for more content or end-of-file.
 - Returns: more text from the stream, or nil if we have reached the end.</p>
 
                       </div>
@@ -373,7 +374,7 @@ If the source is a file this will read everything at once.
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Writes the text in this file to the given TextOutputStream.</p>
+                        <p>Writes the text in this stream to the given TextOutputStream.</p>
 
                       </div>
                       <div class="declaration">
@@ -381,6 +382,36 @@ If the source is a file this will read everything at once.
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">write</span><span class="o">&lt;</span><span class="kt">Target</span><span class="p">:</span> <span class="kt">TextOutputStream</span><span class="o">&gt;</span><span class="p">(</span><span class="n">to</span> <span class="nv">target</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Target</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE10SwiftShellPS_14ReadableStream5writeFT2toRPS_14WritableStream__T_"></a>
+                    <a name="//apple_ref/swift/Method/write(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_14ReadableStream5writeFT2toRPS_14WritableStream__T_">write(to:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Writes the text in this stream to the given WritableStream.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">write</span><span class="p">(</span><span class="n">to</span> <span class="nv">target</span><span class="p">:</span> <span class="k">inout</span> <span class="kt"><a href="../Protocols/WritableStream.html">WritableStream</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -417,6 +448,74 @@ If the source is a file this will read everything at once.
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE10SwiftShellPS_14ReadableStream12readSomeDataFT_GSqV10Foundation4Data_"></a>
+                    <a name="//apple_ref/swift/Method/readSomeData()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_14ReadableStream12readSomeDataFT_GSqV10Foundation4Data_">readSomeData()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>All the data the stream contains so far.
+If the source is a file this will read everything at once.
+If the stream is empty and still open this will wait for more content or end-of-file.
+- Returns: more data from the stream, or nil if we have reached the end.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">readSomeData</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>more data from the stream, or nil if we have reached the end.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE10SwiftShellPS_14ReadableStream8readDataFT_V10Foundation4Data"></a>
+                    <a name="//apple_ref/swift/Method/readData()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_14ReadableStream8readDataFT_V10Foundation4Data">readData()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reads everything at once.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">readData</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
             <div class="task-group">
@@ -424,9 +523,9 @@ If the source is a file this will read everything at once.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FE10SwiftShellPS_14ReadableStream8onOutputFT7handlerGSqFPS0__T___T_"></a>
-                    <a name="//apple_ref/swift/Method/onOutput(handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FE10SwiftShellPS_14ReadableStream8onOutputFT7handlerGSqFPS0__T___T_">onOutput(handler:)</a>
+                    <a name="/s:FE10SwiftShellPS_14ReadableStream8onOutputFFPS0__T_T_"></a>
+                    <a name="//apple_ref/swift/Method/onOutput(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_14ReadableStream8onOutputFFPS0__T_T_">onOutput(_:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -438,7 +537,6 @@ If the source is a file this will read everything at once.
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p><code>handler</code> will be called whenever there is new output available.
-Pass <code>nil</code> to remove any preexisting handlers.
 - Note: if the stream is read from outside of the handler, or more than once inside
 the handler, it may be called once when stream is closed and empty.</p>
 
@@ -447,7 +545,7 @@ the handler, it may be called once when stream is closed and empty.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">onOutput</span> <span class="p">(</span> <span class="nv">handler</span><span class="p">:</span> <span class="p">((</span><span class="kt">ReadableStream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">())?</span> <span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">onOutput</span><span class="p">(</span><span class="n">_</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">ReadableStream</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -457,9 +555,9 @@ the handler, it may be called once when stream is closed and empty.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FE10SwiftShellPS_14ReadableStream14onStringOutputFT7handlerGSqFSST___T_"></a>
-                    <a name="//apple_ref/swift/Method/onStringOutput(handler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FE10SwiftShellPS_14ReadableStream14onStringOutputFT7handlerGSqFSST___T_">onStringOutput(handler:)</a>
+                    <a name="/s:FE10SwiftShellPS_14ReadableStream14onStringOutputFFSST_T_"></a>
+                    <a name="//apple_ref/swift/Method/onStringOutput(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE10SwiftShellPS_14ReadableStream14onStringOutputFFSST_T_">onStringOutput(_:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -471,7 +569,6 @@ the handler, it may be called once when stream is closed and empty.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p><code>handler</code> will be called whenever there is new text output available.
-Pass <code>nil</code> to remove any preexisting handlers.
 - Note: if the stream is read from outside of the handler, or more than once inside
 the handler, it may be called once when stream is closed and empty.</p>
 
@@ -480,7 +577,7 @@ the handler, it may be called once when stream is closed and empty.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">onStringOutput</span> <span class="p">(</span> <span class="nv">handler</span><span class="p">:</span> <span class="p">((</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">())?</span> <span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">onStringOutput</span><span class="p">(</span><span class="n">_</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -492,7 +589,7 @@ the handler, it may be called once when stream is closed and empty.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-04-05)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-04-28)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

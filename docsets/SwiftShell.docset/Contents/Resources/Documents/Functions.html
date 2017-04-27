@@ -13,7 +13,7 @@
     <a title="Functions  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftShell Docs</a> (67% documented)</p>
+        <p><a href="index.html">SwiftShell Docs</a> (70% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -212,7 +212,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">combineOutput</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/RunOutput.html">RunOutput</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">combineOutput</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/RunOutput.html">RunOutput</a></span></code></pre>
 
                         </div>
                       </div>
@@ -272,7 +272,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/AsyncCommand.html">AsyncCommand</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span><span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/AsyncCommand.html">AsyncCommand</a></span></code></pre>
 
                         </div>
                       </div>
@@ -321,7 +321,7 @@
 
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    a CommandError.ReturnedErrorCode if the return code is anything but 0.
+    a CommandError.returnedErrorCode if the return code is anything but 0.
 
 </div>
 
@@ -330,7 +330,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAndPrint</span> <span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAndPrint</span><span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -388,7 +388,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">exit</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">errormessage</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">errorcode</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">exit</span> <span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">errormessage</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">errorcode</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
 
                         </div>
                       </div>
@@ -453,7 +453,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">exit</span> <span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">exit</span><span class="p">(</span><span class="n">_</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Never</span></code></pre>
 
                         </div>
                       </div>
@@ -546,7 +546,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span> <span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">combineOutput</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/RunOutput.html">RunOutput</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">combineOutput</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/RunOutput.html">RunOutput</a></span></code></pre>
 
                         </div>
                       </div>
@@ -625,7 +625,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span> <span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/AsyncCommand.html">AsyncCommand</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span><span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/AsyncCommand.html">AsyncCommand</a></span></code></pre>
 
                         </div>
                       </div>
@@ -687,9 +687,9 @@
 
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    <p><code>CommandError.ReturnedErrorCode (command: String, errorcode: Int)</code> if the exit code is anything but 0.</p>
+    <p><code>CommandError.returnedErrorCode(command: String, errorcode: Int)</code> if the exit code is anything but 0.</p>
 
-<p><code>CommandError.InAccessibleExecutable (path: String)</code> if &lsquo;executable’ turned out to be not so executable after all.</p>
+<p><code>CommandError.inAccessibleExecutable(path: String)</code> if &lsquo;executable’ turned out to be not so executable after all.</p>
 
 </div>
 
@@ -698,7 +698,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAndPrint</span> <span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAndPrint</span><span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -789,7 +789,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span> <span class="p">(</span><span class="n">_</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:v10SwiftShell4mainCS_11MainContext">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/ReadableStream.html">ReadableStream</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">_</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:v10SwiftShell4mainCS_11MainContext">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/ReadableStream.html">ReadableStream</a></span></code></pre>
 
                         </div>
                       </div>
@@ -816,7 +816,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span> <span class="p">(</span><span class="n">_</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:v10SwiftShell4mainCS_11MainContext">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/ReadableStream.html">ReadableStream</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">_</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:v10SwiftShell4mainCS_11MainContext">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/ReadableStream.html">ReadableStream</a></span></code></pre>
 
                         </div>
                       </div>
@@ -844,7 +844,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span> <span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:v10SwiftShell4mainCS_11MainContext">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/WritableStream.html">WritableStream</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:v10SwiftShell4mainCS_11MainContext">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/WritableStream.html">WritableStream</a></span></code></pre>
 
                         </div>
                       </div>
@@ -892,7 +892,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span> <span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:v10SwiftShell4mainCS_11MainContext">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/WritableStream.html">WritableStream</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:v10SwiftShell4mainCS_11MainContext">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/WritableStream.html">WritableStream</a></span></code></pre>
 
                         </div>
                       </div>
@@ -943,7 +943,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">streams</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt"><a href="Protocols/WritableStream.html">WritableStream</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/ReadableStream.html">ReadableStream</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">streams</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="kt"><a href="Protocols/WritableStream.html">WritableStream</a></span><span class="p">,</span> <span class="kt"><a href="Protocols/ReadableStream.html">ReadableStream</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -955,7 +955,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-04-05)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-04-28)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
