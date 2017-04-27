@@ -300,12 +300,14 @@ public final class AsyncCommand {
 		process.waitUntilExit()
 		return Int(process.terminationStatus)
 	}
-}
 
-extension AsyncCommand {
-	@discardableResult public func onCompletion( handler: ((AsyncCommand) -> Void)? ) -> AsyncCommand {
+	/// Takes a closure to be called when the command has finished.
+	///
+	/// - Parameter handler: A closure taking this AsyncCommand as input, returning nothing.
+	/// - Returns: This AsyncCommand.
+	@discardableResult public func onCompletion(_ handler: @escaping (AsyncCommand) -> Void) -> AsyncCommand {
 		process.terminationHandler = { _ in
-			handler?(self)
+			handler(self)
 		}
 		return self
 	}
