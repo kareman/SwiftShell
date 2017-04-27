@@ -138,6 +138,9 @@ public protocol WritableStream: class, TextOutputStream {
 	var encoding: String.Encoding {get set}
 	var filehandle: FileHandle {get}
 
+	/// Writes `x` to the stream.
+	func write(_ x: String)
+
 	/// Closes the stream. Must be called on non-file streams when finished writing,
 	/// to prevent deadlock when reading.
 	func close()
