@@ -433,6 +433,4 @@ Then run `pod install` to install it.
 
 Released under the MIT License (MIT), http://opensource.org/licenses/MIT
 
-Some files are covered by other licences, see [included works](Misc/Included%20Works).
-
 Kåre Morstøl, [NotTooBad Software](http://nottoobadsoftware.com)
