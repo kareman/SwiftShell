@@ -91,6 +91,11 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(reader.readSome(), text)
 	}
 
+	func testWriteStreamToAnotherStreamCompiles() {
+		var file = try! open(forWriting: "/tmp/testWriteStreamToAnotherStreamCompiles.txt")
+		runAsync("echo", "arg1").stdout.runAsync("wc").stdout.write(to: &file)
+	}
+
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	func testOnOutput() {
 		let (writer,reader) = streams()
@@ -128,6 +133,7 @@ extension Stream_Tests {
 		("testPrintStream", testPrintStream),
 		("testPrintToStream", testPrintToStream),
 		("testPrintWorksTheSameAsTheBuiltinOne", testPrintWorksTheSameAsTheBuiltinOne),
+		("testWriteStreamToAnotherStreamCompiles", testWriteStreamToAnotherStreamCompiles),
 		//("testOnOutput", testOnOutput),
 		//("testOnStringOutput", testOnStringOutput),
 		]
