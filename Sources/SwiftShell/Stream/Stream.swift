@@ -97,6 +97,20 @@ extension ReadableStream {
 		return context
 	}
 	#endif
+
+	/// All the data the stream contains so far.
+	/// If the source is a file this will read everything at once.
+	/// If the stream is empty and still open this will wait for more content or end-of-file.
+	/// - Returns: more data from the stream, or nil if we have reached the end.
+	public func readSomeData() -> Data? {
+		let data = filehandle.availableData
+		return data.count > 0 ? data : nil
+	}
+
+	/// Reads everything at once.
+	public func readData() -> Data {
+		return filehandle.readDataToEndOfFile()
+	}
 }
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
@@ -163,6 +177,11 @@ extension WritableStream {
 			write(item)
 		}
 		write(terminator)
+	}
+
+	/// Writes data to the stream.
+	public func write(data: Data) {
+		filehandle.write(data)
 	}
 }
 

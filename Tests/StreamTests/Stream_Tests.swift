@@ -7,6 +7,7 @@
 //
 
 import SwiftShell
+import Foundation
 import XCTest
 
 public class Stream_Tests: XCTestCase {
@@ -24,6 +25,18 @@ public class Stream_Tests: XCTestCase {
 		writer.write("three")
 		writer.close()
 		XCTAssertEqual(reader.read(), "three")
+	}
+
+	func testData() {
+		let (writer,reader) = streams()
+		let data = Data(bytes: [2,4,9,7])
+
+		writer.write(data: data)
+		XCTAssertEqual(reader.readSomeData(), data)
+
+		writer.write(data: data.base64EncodedData())
+		writer.close()
+		XCTAssertEqual(reader.readData(), data.base64EncodedData())
 	}
 
 #if !(os(iOS) || os(tvOS) || os(watchOS))
