@@ -4,26 +4,29 @@ Run shell commands | [Parse command line arguments](https://github.com/kareman/M
 
 Swift 3 | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
 
+<p align="center">
+	<img src="Misc/logo.png" alt="SwiftShell logo" />
+</p>
+
 [![Build Status](https://travis-ci.org/kareman/SwiftShell.svg?branch=master)](https://travis-ci.org/kareman/SwiftShell) ![Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Linux-lightgrey.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 # SwiftShell
 
-A library for creating command-line applications and running shell commands in Swift. It lets you:
+A library for creating command-line applications and running shell commands in Swift. 
 
-- run shell commands
-- run them asynchronously, and be notified when output is available
-- access the context in which your application is running, like environment variables, standard input, standard output, standard error, the current directory and the command line arguments
-- create new such contexts you can run commands in
-- handle errors
-- read and write files
+#### Features
+
+- [x] run commands, and handle the output.
+- [x] run commands asynchronously, and be notified when output is available.
+- [x] access the context your application is running in, like environment variables, standard input, standard output, standard error, the current directory and the command line arguments.
+- [x] create new such contexts you can run commands in.
+- [x] handle errors.
+- [x] read and write files.
 
 #### See also
 
 - [Documentation](http://kareman.github.io/SwiftShell) from the source code.
 - A [description](https://www.skilled.io/kare/swiftshell) of the project on [skilled.io](https://www.skilled.io).
-- Example scripts
-    - [Move files to the trash](http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/)
-    - [Combine markdown files and convert to HTML](http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/) (runs a shell command in the middle of a method chain)
 
 ## Example
 
@@ -38,8 +41,9 @@ do {
 	// If there is an argument, try opening it as a file. Otherwise use standard input.
 	let input = try main.arguments.first.map {try open($0)} ?? main.stdin
 
-	input.lines()
-		.enumerated().forEach { (linenr,line) in print(linenr+1, ":", line) }
+	input.lines().enumerated().forEach { (linenr,line) in 
+		print(linenr+1, ":", line) 
+	}
 
 	// Add a newline at the end
 	print("")
@@ -50,26 +54,210 @@ do {
 
 Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumbers.swift long.txt` this will print the line number at the beginning of each line.
 
-## Run commands
+#### Others
 
-### Print output
+- [Test the latest commit (using make and/or Swift).][testcommit]
+- [Run a shell command in the middle of a method chain](http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/).
+- [Move files to the trash](http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/).
+
+[testcommit]: https://github.com/kareman/testcommit/blob/master/Sources/main.swift
+
+## Overview
+
+### Context
+
+All commands (a.k.a. [processes][]) you run in SwiftShell need context: [environment variables](https://en.wikipedia.org/wiki/Environment_variable), the [current working directory](https://en.wikipedia.org/wiki/Working_directory), standard input, standard output and standard error ([standard streams](https://en.wikipedia.org/wiki/Standard_streams)).
 
 ```swift
-try runAndPrint(bash: "cmd1 arg | cmd2 arg") 
+public struct CustomContext: Context, CommandRunning {
+	public var env: [String: String]
+	public var currentdirectory: String
+	public var stdin: ReadableStream
+	public var stdout: WritableStream
+	public var stderror: WritableStream
+}
 ```
 
-Run a shell command just like you would in the terminal. The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.
+You can create a copy of your application's context: `let context = CustomContext(main)`, or create a new empty one: `let context = CustomContext()`. Everything is mutable, so you can set e.g. the current directory or redirect standard error to a file.
 
-### In-line
+[processes]: https://en.wikipedia.org/wiki/Process_(computing)
+
+#### Main context
+
+The global variable `main` is the Context for the application itself. In addition to the properties mentioned above it also has these:
+
+- `public var encoding: String.Encoding`
+The default encoding used when opening files or creating new streams.
+- `public let tempdirectory: String`
+A temporary directory you can use for temporary stuff.
+- `public let arguments: [String]`
+The arguments used when launching the application.
+- `public let path: String`
+The path to the application.
+
+`main.stdout` is for normal output, like Swift's `print` function. `main.stderror` is for error output, and `main.stdin` is the standard input to your application, provided by something like `somecommand | yourapplication` in the terminal.
+
+Commands can't change the context they run in (or anything else internally in your application) so e.g. `main.run("cd", "somedirectory")` will achieve nothing. Use `main.currentdirectory = "somedirectory"` instead, this changes the current working directory for the entire application.
+
+#### Example
+
+Prepare a context similar to a new macOS user account's environment in the terminal (from [kareman/testcommit][testcommit]):
 
 ```swift
-let date: String = run("date", "-u")
+import SwiftShell
+import Foundation
+
+extension Dictionary where Key:Hashable {
+	public func filterToDictionary <C: Collection> (keys: C) -> [Key:Value]
+		where C.Iterator.Element == Key, C.IndexDistance == Int {
+
+		var result = [Key:Value](minimumCapacity: keys.count)
+		for key in keys { result[key] = self[key] }
+		return result
+	}
+}
+
+// Prepare an environment as close to a new OS X user account as possible.
+var cleanctx = CustomContext(main)
+let cleanenvvars = ["TERM_PROGRAM", "SHELL", "TERM", "TMPDIR", "Apple_PubSub_Socket_Render", "TERM_PROGRAM_VERSION", "TERM_SESSION_ID", "USER", "SSH_AUTH_SOCK", "__CF_USER_TEXT_ENCODING", "XPC_FLAGS", "XPC_SERVICE_NAME", "SHLVL", "HOME", "LOGNAME", "LC_CTYPE", "_"]
+cleanctx.env = cleanctx.env.filterToDictionary(keys: cleanenvvars)
+cleanctx.env["PATH"] = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+// Create a temporary directory for testing.
+cleanctx.currentdirectory = main.tempdirectory
+```
+
+### Streams
+
+The types ReadableStream and WritableStream in `Context` above are ways to read and write text from/to commands, files or the application's own standard streams. They both have an `.encoding` property they use when encoding/decoding text.
+
+You can use `let (input,output) = streams()` to create a new pair of streams. What you write to `input` you can read from `output`.
+
+[FileSmith][]'s [WritableFile][] and [ReadableFile][] are streams too, and can be used as stdin, stdout and stderror in SwiftShell Contexts, including `main`.
+
+[FileSmith]: https://github.com/kareman/FileSmith 
+[WritableFile]: https://kareman.github.io/FileSmith/Classes/WritableFile.html
+[ReadableFile]: https://kareman.github.io/FileSmith/Classes/ReadableFile.html
+
+#### WritableStream
+
+When writing to a WritableStream you normally use `.print` which works exactly like Swift's built-in print function:
+
+```swift
+main.stdout.print("everything is fine")
+main.stderror.print("no wait, something went wrong ...")
+
+let writefile = try open(forWriting: path) // WritableStream
+writefile.print("1", 2, 3/5, separator: "+", terminator: "=")
+```
+
+If you want to be taken literally, use `.write` instead. It doesn't add a newline and writes exactly and only what you write:
+
+```swift
+writefile.write("Read my lips:")
+```
+
+You can close the stream to signal you are done with it:
+
+```swift
+writefile.close()
+```
+
+#### ReadableStream
+
+When reading from a ReadableStream you can read everything at once:
+
+```swift
+let readfile = try open(path) // ReadableStream
+let contents = readfile.read()
+```
+
+This will read everything and wait for the stream to be closed if it isn't already.
+
+You can also read it asynchronously, as in read whatever is in there now and continue without waiting for it to be closed:
+
+```swift
+while let text = main.stdin.readSome() {
+	// do something with ‘text’...
+}
+```
+
+`.readSome()` returns `String?` - if the stream is closed it returns nil, if there is anything there it returns it, and if there is nothing there and the stream is still open it will wait until either there is more content or the stream is closed.
+
+Another way to read asynchronously is to use the `lines` method which creates a lazy sequence of Strings, one for each line in the stream:
+
+```swift
+for line in main.stdin.lines() {
+	// ...
+}
+```
+
+Or instead of stopping and waiting for any output you can be notified whenever there is something more in the stream:
+
+```swift
+main.stdin.onOutput { stream in
+	// ‘stream’ refers to main.stdin
+}
+```
+
+### Commands
+
+All Contexts (`CustomContext` and `main`) implement `CommandRunning`, which means they can run commands using themselves as the Context. ReadableStream and String can also run commands, they use `main` as the Context and themselves as `.stdin`. As a shortcut you can just use `run(...)` instead of `main.run(...)`
+
+There are three different ways of running a command:
+
+#### Run
+
+The simplest is to just run the command, wait until it's finished and return the results:
+
+```swift
+let result1 = run("/usr/bin/executable", "argument1", "argument2")
+let result2 = run("executable", "argument1", "argument2")
+```
+
+If you don't provide the full path to the executable, then SwiftShell will try to find it in any of the directories in the `PATH` environment variable.
+
+`run` returns the following information:
+
+```swift
+/// Output from a `run` command.
+public final class RunOutput {
+
+	/// The error from running the command, if any.
+	let error: CommandError?
+
+	/// Standard output, trimmed for whitespace and newline if it is single-line.
+	let stdout: String
+
+	/// Standard error, trimmed for whitespace and newline if it is single-line.
+	let stderror: String
+
+	/// The exit code of the command. Anything but 0 means there was an error.
+	let exitcode: Int
+
+	/// Checks if the exit code is 0.
+	let succeeded: Bool
+}
+```
+
+For example:
+
+```swift
+let date: String = run("date", "-u").stdout
 print("Today's date in UTC is " + date)
 ```
 
-Similar to `$(cmd)` in bash, this just returns the output from the command as a string, ignoring any errors.
+#### Print output
 
-### Asynchronous
+```swift
+try runAndPrint("executable", "arg") 
+```
+
+This runs a command like in the terminal, where any output goes to the Context's (`main` in this case) `.stdout` and `.stderror` respectively.  If the executable could not be found, was inaccessible or not executable, or the command returned with an exit code other than zero, then `runAndPrint` will throw a `CommandError`.
+
+The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.
+
+#### Asynchronous
 
 ```swift
 let command = runAsync("cmd", "-n", 245)
@@ -77,17 +265,41 @@ let command = runAsync("cmd", "-n", 245)
 try command.finish()
 ```
 
-Launch a command and continue before it's finished. You can process standard output and standard error, and optionally wait until it's finished and handle any errors.
+`runAsync` launches a command and continues before it's finished. It returns this:
+
+```swift
+/// Output from the 'runAsync' methods.
+public final class AsyncCommand {
+
+	public let stdout: ReadableStream
+	public let stderror: ReadableStream
+
+	/// Terminate process early.
+	public func stop()
+
+	/// Wait for command to finish.
+	/// - returns: itself
+	/// - throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
+	public func finish() throws -> AsyncCommand
+
+	/// Wait for command to finish, then return with exit code.
+	public func exitcode() -> Int
+
+	public func onCompletion(handler: ((AsyncCommand) -> Void)?) -> AsyncCommand
+}
+```
+
+You can process standard output and standard error, and optionally wait until it's finished and handle any errors.
 
 If you read all of command.stderror or command.stdout it will automatically wait for the command to finish running. You can still call `finish()` to check for errors.
 
-### Parameters
+#### Parameters
 
 The 3 `run` functions above take 2 different types of parameters:
 
-#### (_ executable: String, _ args: Any ...)
+##### (_ executable: String, _ args: Any ...)
 
-If the path to the executable is without any `/`, SwiftShell will try to find the full path using the `which` shell command.
+If the path to the executable is without any `/`, SwiftShell will try to find the full path using the `which` shell command, which searches the directories in the `PATH` environment variable in order.
 
 The array of arguments can contain any type, since everything is convertible to strings in Swift. If it contains any arrays it will be flattened so only the elements will be used, not the arrays themselves.
 
@@ -100,11 +312,22 @@ try runAndPrint("echo", array, array.count + 2, "arguments")
 // echo But we are 5 arguments
 ```
 
-#### (bash bashcommand: String)
+##### (bash bashcommand: String)
 
-These are the commands you normally use in the Terminal. You can use pipes and redirection and all that good stuff. Support for other shell interpreters can easily be added.
+These are the commands you normally use in the Terminal. You can use pipes and redirection and all that good stuff:
 
-### Errors
+```swift
+try runAndPrint(bash: "cmd1 arg1 | cmd2 > output.txt")
+```
+
+Note that you can achieve the same thing in pure SwiftShell, though nowhere near as succinctly:
+
+```swift
+var file = try open(forWriting: "output.txt")
+runAsync("cmd1", "arg1").stdout.runAsync("cmd2").stdout.write(to: &file)
+```
+
+#### Errors
 
 If the command provided to `runAsync` could not be launched for any reason the program will print the error to standard error and exit, as is usual in scripts (it is quite possible SwiftShell should be less usual here).
 
@@ -144,57 +367,7 @@ Instead of dealing with the values from these errors you can just print them:
 }
 ```
 
-&nbsp;
-
 When launched from the top level you don't need to catch any errors, but you still have to use `try`.
-
-## Output
-
-`main.stdout` is for normal output and `main.stderror` for errors. You can also write to a file:
-
-```swift
-main.stdout.print("everything is fine")
-main.stderror.print("no wait, something went wrong ...")
-
-let file = try open(forWriting: path)
-file.print("something")
-```
-
-`.write` doesn't add a newline, and you can change the text encoding with `.encoding`.
-
-## Input
-
-Use `main.stdin` to read from standard input, or you can read from a file:
-
-```swift
-let input: String? = main.stdin.readSome() // read what is available, don't wait for end of file 
-
-let file = try open(path)
-let contents: String = file.read() // read everything
-```
-
-Using `.readSome()` you can read piecewise instead of waiting for the input to be finished and then reading everything at once. You can change the text encoding with `.encoding`.
-
-## Main
-
-So what else can `main` do? It is the only global value in SwiftShell and contains all the contextual information about the outside world:
-
-```swift
-var encoding: UInt
-lazy var env: [String : String]
-
-lazy var stdin: ReadableStream
-lazy var stdout: WriteableStream
-lazy var stderror: WriteableStream
-
-var currentdirectory: String
-lazy var tempdirectory: String
-
-lazy var arguments: [String]
-lazy var name: String
-```
-
-Everything is mutable, so you can set e.g. the text encoding or reroute standard error to a file.
 
 ## Setup
 
