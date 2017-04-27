@@ -302,6 +302,9 @@ public final class AsyncCommand {
 	public let stdout: ReadableStream
 	public let stderror: ReadableStream
 
+	/// Is the command still running?
+	public var isRunning: Bool
+
 	/// Terminate process early.
 	public func stop()
 

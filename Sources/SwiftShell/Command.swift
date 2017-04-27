@@ -248,6 +248,12 @@ extension CommandRunning {
 
 // MARK: runAsync
 
+#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
+extension Task {
+	var isRunning: Bool { return running }
+}
+#endif
+
 /** Output from the 'runAsync' methods. */
 public final class AsyncCommand {
 	public let stdout: ReadableStream
@@ -278,6 +284,9 @@ public final class AsyncCommand {
 			exit(errormessage: error, file: file, line: line)
 		}
 	}
+
+	/// Is the command still running?
+	public var isRunning: Bool { return process.isRunning }
 
 	/** Terminate process early. */
 	public func stop() {
