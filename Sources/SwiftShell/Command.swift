@@ -288,7 +288,7 @@ public final class AsyncCommand {
 	/// Is the command still running?
 	public var isRunning: Bool { return process.isRunning }
 
-	/** Terminate process early. */
+	/// Terminates command.
 	public func stop() {
 		process.terminate()
 	}

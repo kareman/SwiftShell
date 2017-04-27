@@ -41,6 +41,7 @@ A library for creating command-line applications and running shell commands in S
 - [Streams](#streams)
     - [WritableStream](#writablestream)
     - [ReadableStream](#readablestream)
+    - [Data](#data)
 - [Commands](#commands)
     - [Run](#run)
     - [Print output](#print-output)
@@ -75,7 +76,7 @@ do {
 		print(linenr+1, ":", line) 
 	}
 
-	// Add a newline at the end
+	// Add a newline at the end.
 	print("")
 } catch {
 	exit(error)
@@ -157,7 +158,7 @@ cleanctx.currentdirectory = main.tempdirectory
 
 ## Streams
 
-The types ReadableStream and WritableStream in `Context` above are ways to read and write text from/to commands, files or the application's own standard streams. They both have an `.encoding` property they use when encoding/decoding text.
+The protocols ReadableStream and WritableStream in `Context` above can read and write text from/to commands, files or the application's own standard streams. They both have an `.encoding` property they use when encoding/decoding text.
 
 You can use `let (input,output) = streams()` to create a new pair of streams. What you write to `input` you can read from `output`.
 
@@ -185,7 +186,7 @@ If you want to be taken literally, use `.write` instead. It doesn't add a newlin
 writefile.write("Read my lips:")
 ```
 
-You can close the stream to signal you are done with it:
+You can close the stream, so anyone who tries to read from the other end won't have to wait around forever:
 
 ```swift
 writefile.close()
@@ -202,7 +203,7 @@ let contents = readfile.read()
 
 This will read everything and wait for the stream to be closed if it isn't already.
 
-You can also read it asynchronously, as in read whatever is in there now and continue without waiting for it to be closed:
+You can also read it asynchronously, that is read whatever is in there now and continue without waiting for it to be closed:
 
 ```swift
 while let text = main.stdin.readSome() {
@@ -210,7 +211,7 @@ while let text = main.stdin.readSome() {
 }
 ```
 
-`.readSome()` returns `String?` - if the stream is closed it returns nil, if there is anything there it returns it, and if there is nothing there and the stream is still open it will wait until either there is more content or the stream is closed.
+`.readSome()` returns `String?` - if there is anything there it returns it, if the stream is closed it returns nil, and if there is nothing there and the stream is still open it will wait until either there is more content or the stream is closed.
 
 Another way to read asynchronously is to use the `lines` method which creates a lazy sequence of Strings, one for each line in the stream:
 
@@ -220,12 +221,23 @@ for line in main.stdin.lines() {
 }
 ```
 
-Or instead of stopping and waiting for any output you can be notified whenever there is something more in the stream:
+Or instead of stopping and waiting for any output you can be notified whenever there is something in the stream:
 
 ```swift
 main.stdin.onOutput { stream in
 	// ‘stream’ refers to main.stdin
 }
+```
+
+#### Data
+
+In addition to text, streams can also handle raw Data:
+
+```swift
+let data = Data(...)
+writer.write(data: data)
+reader.readSomeData()
+reader.readData() 
 ```
 
 ## Commands
@@ -271,7 +283,7 @@ public final class RunOutput {
 For example:
 
 ```swift
-let date: String = run("date", "-u").stdout
+let date = run("date", "-u").stdout
 print("Today's date in UTC is " + date)
 ```
 
@@ -288,9 +300,16 @@ The name may seem a bit cumbersome, but it explains exactly what it does. SwiftS
 #### Asynchronous
 
 ```swift
-let command = runAsync("cmd", "-n", 245)
-// do something with command.stderror or command.stdout
-try command.finish()
+let command = runAsync("cmd", "-n", 245).onCompletion { command in
+	// be notified when the command is finished.
+}
+command.stdout.onOutput { stdout in 
+	// be notified when the command produces output.	
+}
+
+// do something with ‘command’ while it is still running.
+
+try command.finish() // wait for it to finish.
 ```
 
 `runAsync` launches a command and continues before it's finished. It returns this:
@@ -298,31 +317,33 @@ try command.finish()
 ```swift
 /// Output from the 'runAsync' methods.
 public final class AsyncCommand {
-
 	public let stdout: ReadableStream
 	public let stderror: ReadableStream
 
 	/// Is the command still running?
 	public var isRunning: Bool
 
-	/// Terminate process early.
+	/// Terminates command.
 	public func stop()
 
-	/// Wait for command to finish.
+	/// Waits for command to finish.
 	/// - returns: itself
 	/// - throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 	public func finish() throws -> AsyncCommand
 
-	/// Wait for command to finish, then return with exit code.
+	/// Waits for command to finish, then returns with exit code.
 	public func exitcode() -> Int
 
-	public func onCompletion(handler: ((AsyncCommand) -> Void)?) -> AsyncCommand
+	/// Takes a closure to be called when the command has finished.
+	/// - Parameter handler: A closure taking this AsyncCommand as input, returning nothing.
+	/// - Returns: This AsyncCommand.
+	public func onCompletion(_ handler: @escaping (AsyncCommand) -> Void) -> AsyncCommand
 }
 ```
 
 You can process standard output and standard error, and optionally wait until it's finished and handle any errors.
 
-If you read all of command.stderror or command.stdout it will automatically wait for the command to finish running. You can still call `finish()` to check for errors.
+If you read all of command.stderror or command.stdout it will automatically wait for the command to close its streams (and presumably finish running). You can still call `finish()` to check for errors.
 
 #### Parameters
 
@@ -360,16 +381,14 @@ runAsync("cmd1", "arg1").stdout.runAsync("cmd2").stdout.write(to: &file)
 
 #### Errors
 
-If the command provided to `runAsync` could not be launched for any reason the program will print the error to standard error and exit, as is usual in scripts (it is quite possible SwiftShell should be less usual here).
-
-The `runAsync("cmd").finish()` method on the other hand throws an error if the exit code of the command is anything but 0:
+If the command provided to `runAsync` could not be launched for any reason the program will print the error to standard error and exit, as is usual in scripts. The `runAsync("cmd").finish()` method throws an error if the exit code of the command is anything but 0:
 
 ```swift
 let command = runAsync("cmd", "-n", 245)
-// do something with command.stderror or command.stdout
+// do something with command.stderror or command.stdoutCommandError
 do {
 	try command.finish()
-} catch ShellError.ReturnedErrorCode(let error) {
+} catch CommandError.ReturnedErrorCode(let error) {
 	// use error.command or error.errorcode
 }
 ```
@@ -377,7 +396,7 @@ do {
 The `runAndPrint` command can also throw this error, in addition to this one if the command could not be launched:
 
 ```swift
-} catch ShellError.InAccessibleExecutable(let path) {
+} catch CommandError.InAccessibleExecutable(let path) {
 	// ‘path’ is the full path to the executable
 }
 ```
@@ -398,7 +417,7 @@ Instead of dealing with the values from these errors you can just print them:
 }
 ```
 
-When launched from the top level you don't need to catch any errors, but you still have to use `try`.
+When at the top code level you don't need to catch any errors, but you still have to use `try`.
 
 ## Setup
 
