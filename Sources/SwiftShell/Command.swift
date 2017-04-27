@@ -11,6 +11,10 @@ import Foundation
 
 #if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !swift(>=3.1)
 typealias Process = Task
+
+extension Task {
+	var isRunning: Bool { return running }
+}
 #endif
 
 // MARK: exit
@@ -247,12 +251,6 @@ extension CommandRunning {
 }
 
 // MARK: runAsync
-
-#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
-extension Task {
-	var isRunning: Bool { return running }
-}
-#endif
 
 /** Output from the 'runAsync' methods. */
 public final class AsyncCommand {
