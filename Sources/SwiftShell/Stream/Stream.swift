@@ -102,28 +102,18 @@ extension ReadableStream {
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	extension ReadableStream {
 		/// `handler` will be called whenever there is new output available.
-		/// Pass `nil` to remove any preexisting handlers.
 		/// - Note: if the stream is read from outside of the handler, or more than once inside
 		/// the handler, it may be called once when stream is closed and empty.
-		public func onOutput( handler: ((ReadableStream) -> Void)? ) {
-			guard let handler = handler else {
-				filehandle.readabilityHandler = nil
-				return
-			}
+		public func onOutput(_ handler: @escaping (ReadableStream) -> Void) {
 			filehandle.readabilityHandler = { [unowned self] _ in
 				handler(self)
 			}
 		}
 
 		/// `handler` will be called whenever there is new text output available.
-		/// Pass `nil` to remove any preexisting handlers.
 		/// - Note: if the stream is read from outside of the handler, or more than once inside
 		/// the handler, it may be called once when stream is closed and empty.
-		public func onStringOutput( handler: ((String) -> Void)? ) {
-			guard let handler = handler else {
-				self.onOutput(handler: nil)
-				return
-			}
+		public func onStringOutput(_ handler: @escaping (String) -> Void) {
 			self.onOutput { stream in
 				if let output = stream.readSome() {
 					handler(output)
