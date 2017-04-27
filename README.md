@@ -28,6 +28,36 @@ A library for creating command-line applications and running shell commands in S
 - [Documentation](http://kareman.github.io/SwiftShell) from the source code.
 - A [description](https://www.skilled.io/kare/swiftshell) of the project on [skilled.io](https://www.skilled.io).
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+#### Table of Contents
+
+- [Example](#example)
+    - [Print line numbers](#print-line-numbers)
+    - [Others](#others)
+- [Context](#context)
+    - [Main context](#main-context)
+    - [Example](#example-1)
+- [Streams](#streams)
+    - [WritableStream](#writablestream)
+    - [ReadableStream](#readablestream)
+- [Commands](#commands)
+    - [Run](#run)
+    - [Print output](#print-output)
+    - [Asynchronous](#asynchronous)
+    - [Parameters](#parameters)
+    - [Errors](#errors)
+- [Setup](#setup)
+  - [Pre-compiled executable](#pre-compiled-executable)
+  - [Shell script](#shell-script)
+  - [Swift Package Manager](#swift-package-manager)
+  - [Carthage](#carthage)
+  - [CocoaPods](#cocoapods)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+
 ## Example
 
 #### Print line numbers
@@ -62,9 +92,7 @@ Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumber
 
 [testcommit]: https://github.com/kareman/testcommit/blob/master/Sources/main.swift
 
-## Overview
-
-### Context
+## Context
 
 All commands (a.k.a. [processes][]) you run in SwiftShell need context: [environment variables](https://en.wikipedia.org/wiki/Environment_variable), the [current working directory](https://en.wikipedia.org/wiki/Working_directory), standard input, standard output and standard error ([standard streams](https://en.wikipedia.org/wiki/Standard_streams)).
 
@@ -127,7 +155,7 @@ cleanctx.env["PATH"] = "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 cleanctx.currentdirectory = main.tempdirectory
 ```
 
-### Streams
+## Streams
 
 The types ReadableStream and WritableStream in `Context` above are ways to read and write text from/to commands, files or the application's own standard streams. They both have an `.encoding` property they use when encoding/decoding text.
 
@@ -200,7 +228,7 @@ main.stdin.onOutput { stream in
 }
 ```
 
-### Commands
+## Commands
 
 All Contexts (`CustomContext` and `main`) implement `CommandRunning`, which means they can run commands using themselves as the Context. ReadableStream and String can also run commands, they use `main` as the Context and themselves as `.stdin`. As a shortcut you can just use `run(...)` instead of `main.run(...)`
 
