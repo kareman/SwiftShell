@@ -7,7 +7,6 @@
 import Foundation
 
 extension FileHandle {
-
 	/// Read what is available, as a String.
 	/// - Parameter encoding: the encoding to use.
 	/// - Returns: The contents as a String, or nil the end has been reached.
@@ -36,10 +35,9 @@ extension FileHandle {
 }
 
 extension FileHandle {
-
 	public func write(_ string: String, encoding: String.Encoding = .utf8) {
 		#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
-			guard !string.isEmpty else {return}
+			guard !string.isEmpty else { return }
 		#endif
 		guard let data = string.data(using: encoding, allowLossyConversion: false) else {
 			fatalError("Could not convert text to binary data.")
@@ -55,7 +53,6 @@ public protocol CommandRunning {}
 
 /// A stream of text. Does as much as possible lazily.
 public protocol ReadableStream: class, TextOutputStreamable, CommandRunning {
-
 	var encoding: String.Encoding {get set}
 	var filehandle: FileHandle {get}
 
@@ -70,7 +67,6 @@ public protocol ReadableStream: class, TextOutputStreamable, CommandRunning {
 }
 
 extension ReadableStream {
-
 	public func readSome() -> String? {
 		return filehandle.readSome(encoding: encoding)
 	}
@@ -84,8 +80,13 @@ extension ReadableStream {
 		return AnySequence(PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }).lazy
 	}
 
-	/// Writes the text in this file to the given TextOutputStream.
+	/// Writes the text in this stream to the given TextOutputStream.
 	public func write<Target: TextOutputStream>(to target: inout Target) {
+		while let text = self.readSome() { target.write(text) }
+	}
+
+	/// Writes the text in this stream to the given WritableStream.
+	public func write(to target: inout WritableStream) {
 		while let text = self.readSome() { target.write(text) }
 	}
 
@@ -136,9 +137,6 @@ extension ReadableStream {
 public protocol WritableStream: class, TextOutputStream {
 	var encoding: String.Encoding {get set}
 	var filehandle: FileHandle {get}
-
-	/// Writes `x` to the stream.
-	func write(_ x: String)
 
 	/// Closes the stream. Must be called on non-file streams when finished writing,
 	/// to prevent deadlock when reading.
