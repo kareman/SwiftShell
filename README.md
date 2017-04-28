@@ -25,7 +25,7 @@ A library for creating command-line applications and running shell commands in S
 
 #### See also
 
-- [Documentation](http://kareman.github.io/SwiftShell) from the source code.
+- [API Documentation](http://kareman.github.io/SwiftShell).
 - A [description](https://www.skilled.io/kare/swiftshell) of the project on [skilled.io](https://www.skilled.io).
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -448,7 +448,7 @@ import SwiftShell
 
 ### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
-Add `.Package(url: "https://github.com/kareman/SwiftShell", "3.0.0-beta")` to your Package.swift:
+Add `.Package(url: "https://github.com/kareman/SwiftShell", "3.0.0")` to your Package.swift:
 
 ```swift
 import PackageDescription
@@ -456,7 +456,7 @@ import PackageDescription
 let package = Package(
 	name: "somecommandlineapp",
 	dependencies: [
-		.Package(url: "https://github.com/kareman/SwiftShell.git", "3.0.0-beta")
+		.Package(url: "https://github.com/kareman/SwiftShell.git", "3.0.0")
 		 ]
 )
 ```
@@ -474,7 +474,7 @@ Add `github "kareman/SwiftShell" "master"` to your Cartfile, then run `carthage 
 Add `SwiftShell` to your `Podfile`.
 
 ```Ruby
-pod 'SwiftShell', '>= 3.0.0-beta'
+pod 'SwiftShell', '>= 3.0.0'
 ```
 
 Then run `pod install` to install it.
