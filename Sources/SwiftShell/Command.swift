@@ -41,7 +41,7 @@ public func exit(_ error: Error, file: String = #file, line: Int = #line) -> Nev
 	if let commanderror = error as? CommandError {
 		exit(errormessage: commanderror, errorcode: commanderror.errorcode, file: file, line: line)
 	} else {
-		exit(errormessage: error, errorcode: error._code, file: file, line: line)
+		exit(errormessage: error.localizedDescription, errorcode: error._code, file: file, line: line)
 	}
 }
 
