@@ -71,7 +71,6 @@
 		OBJ_31 /* String_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = String_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_32 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TestHelpers.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_33 /* Misc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Misc; sourceTree = SOURCE_ROOT; };
-		OBJ_34 /* Scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scripts; sourceTree = SOURCE_ROOT; };
 		OBJ_36 /* SwiftShell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftShell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_37 /* GeneralTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = GeneralTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_38 /* StreamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = StreamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,7 +190,6 @@
 				OBJ_7 /* Sources */,
 				OBJ_20 /* Tests */,
 				OBJ_33 /* Misc */,
-				OBJ_34 /* Scripts */,
 				OBJ_35 /* Products */,
 			);
 			sourceTree = "<group>";
