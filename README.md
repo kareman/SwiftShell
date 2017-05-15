@@ -8,7 +8,7 @@ Swift 3 | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
 	<img src="Misc/logo.png" alt="SwiftShell logo" />
 </p>
 
-[![Build Status](https://travis-ci.org/kareman/SwiftShell.svg?branch=master)](https://travis-ci.org/kareman/SwiftShell) ![Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Linux-lightgrey.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Build Status](https://travis-ci.org/kareman/SwiftShell.svg?branch=master)](https://travis-ci.org/kareman/SwiftShell) ![Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Linux-lightgrey.svg) <a href="https://swift.org/package-manager"><img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" /></a> [![Carthage compatible](https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) <a href="https://twitter.com/nottoobadsw"><img src="https://img.shields.io/badge/contact-@nottoobadsw-blue.svg?style=flat" alt="Twitter: @nottoobadsw" /></a>
 
 # SwiftShell
 
@@ -49,8 +49,8 @@ A library for creating command-line applications and running shell commands in S
     - [Parameters](#parameters)
     - [Errors](#errors)
 - [Setup](#setup)
-  - [Pre-compiled executable](#pre-compiled-executable)
-  - [Shell script](#shell-script)
+  - [Stand-alone project](#stand-alone-project)
+  - [Script file using Marathon](#script-file-using-marathon)
   - [Swift Package Manager](#swift-package-manager)
   - [Carthage](#carthage)
   - [CocoaPods](#cocoapods)
@@ -421,34 +421,23 @@ When at the top code level you don't need to catch any errors, but you still hav
 
 ## Setup
 
-One of the goals of SwiftShell is to be able to run single .swift files directly, like you do with bash and Python files. This is possible now, but every time you upgrade Xcode or Swift you have to recompile all the third party frameworks your Swift script files use (including the SwiftShell framework). This will continue to be a problem until Swift achieves ABI stability in (hopefully) version 5. For now it is more practical to precompile the script into a self-contained executable.
-
-### Pre-compiled executable
+### Stand-alone project
 
 If you put [Misc/swiftshell-init](https://raw.githubusercontent.com/kareman/SwiftShell/master/Misc/swiftshell-init) somewhere in your $PATH you can create a new project with `swiftshell-init <name>`. This creates a new folder, initialises a Swift Package Manager executable folder structure, downloads the latest version of SwiftShell, creates an Xcode project and opens it. After running `swift build` you can find the compiled executable at `.build/debug/<name>`.
 
-### Shell script
+### Script file using [Marathon](https://github.com/JohnSundell/Marathon)
 
-- In the Terminal, go to where you want to download SwiftShell.
-- Run
+First add SwiftShell to Marathon: 
 
-        git clone https://github.com/kareman/SwiftShell.git
-        cd SwiftShell
-
-- Copy/link `Misc/swiftshell` to your bin folder or anywhere in your PATH.
-- To install the framework itself, run `xcodebuild` and copy the resulting framework from the build folder to your library folder of choice. If that is not "~/Library/Frameworks" or "/Library/Frameworks"  then make sure the folder is listed in $SWIFTSHELL_FRAMEWORK_PATH.
-
-Then include this in the beginning of each script:
-
-```swift
-#!/usr/bin/env swiftshell
-
-import SwiftShell
+```bash
+marathon add https://github.com/kareman/SwiftShell.git
 ```
+
+Then run your Swift scripts with `marathon run <name>.swift`. Or add `#!/usr/bin/env marathon run` to the top of every script file and run them with `./<name>.swift`.
 
 ### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
-Add `.Package(url: "https://github.com/kareman/SwiftShell", "3.0.0")` to your Package.swift:
+Add `.Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 3)` to your Package.swift:
 
 ```swift
 import PackageDescription
@@ -456,7 +445,7 @@ import PackageDescription
 let package = Package(
 	name: "somecommandlineapp",
 	dependencies: [
-		.Package(url: "https://github.com/kareman/SwiftShell.git", "3.0.0")
+		.Package(url: "https://github.com/kareman/SwiftShell.git", majorVersion: 3)
 		 ]
 )
 ```
@@ -465,7 +454,7 @@ and run `swift build`.
 
 ### [Carthage](https://github.com/Carthage/Carthage)
 
-Add `github "kareman/SwiftShell" "master"` to your Cartfile, then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for further instructions.
+Add `github "kareman/SwiftShell" >= 3.0` to your Cartfile, then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for further instructions.
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
