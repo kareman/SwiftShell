@@ -19,12 +19,9 @@ extension Collection where Iterator.Element: Equatable {
 /// A sequence from splitting a Collection lazily.
 public struct LazySplitSequence <Base: Collection>: IteratorProtocol, LazySequenceProtocol where
 	Base.Iterator.Element: Equatable,
-	Base.SubSequence: Collection,
-	Base.SubSequence.Iterator.Element==Base.Iterator.Element,
-	Base.SubSequence==Base.SubSequence.SubSequence {
-
+	Base.SubSequence: Collection {
 	public fileprivate(set) var remaining: Base.SubSequence?
-	public let separator: Base.Generator.Element
+	public let separator: Base.Iterator.Element
 	public let allowEmptySlices: Bool
 
 	/// Creates a lazy sequence by splitting a Collection repeatedly.
@@ -50,9 +47,7 @@ public struct LazySplitSequence <Base: Collection>: IteratorProtocol, LazySequen
 }
 
 extension LazyCollectionProtocol where Elements.Iterator.Element: Equatable,
-	Elements.SubSequence: Collection,
-	Elements.SubSequence.Iterator.Element==Elements.Iterator.Element,
-	Elements.SubSequence==Elements.SubSequence.SubSequence {
+	Elements.SubSequence: Collection {
 
 	/// Creates a lazy sequence by splitting this Collection repeatedly.
 	///
@@ -71,9 +66,7 @@ extension LazyCollectionProtocol where Elements.Iterator.Element: Equatable,
 /// A sequence from splitting a series of Collections lazily, as if they were one Collection.
 public struct PartialSourceLazySplitSequence <Base: Collection>: IteratorProtocol, LazySequenceProtocol where
 	Base.Iterator.Element: Equatable,
-	Base.SubSequence: RangeReplaceableCollection,
-	Base.SubSequence.Iterator.Element==Base.Iterator.Element,
-	Base.SubSequence==Base.SubSequence.SubSequence {
+	Base.SubSequence: RangeReplaceableCollection {
 
 	private var gs: LazyMapIterator<AnyIterator<Base>, LazySplitSequence<Base>>
 	private var g: LazySplitSequence<Base>?

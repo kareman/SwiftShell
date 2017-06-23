@@ -128,8 +128,6 @@ public func == (e1: CommandError, e2: CommandError) -> Bool {
 		return c1 == c2
 	case (.inAccessibleExecutable, .returnedErrorCode), (.returnedErrorCode, .inAccessibleExecutable):
 		return false
-	default:
-		fatalError("not implemented")
 	}
 }
 
