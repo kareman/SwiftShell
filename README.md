@@ -2,7 +2,7 @@ Run shell commands | [Parse command line arguments](https://github.com/kareman/M
 
 ---
 
-Swift 3 | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
+[Swift 4 (beta)](https://github.com/kareman/SwiftShell/tree/swift4) | Swift 3 | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
 
 <p align="center">
 	<img src="Misc/logo.png" alt="SwiftShell logo" />
