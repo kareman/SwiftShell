@@ -2,7 +2,7 @@ Run shell commands | [Parse command line arguments](https://github.com/kareman/M
 
 ---
 
-Swift 4 (beta) | [Swift 3](https://github.com/kareman/SwiftShell) | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
+Swift 4 | [Swift 3](https://github.com/kareman/SwiftShell/tree/Swift3) | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
 
 <p align="center">
 	<img src="Misc/logo.png" alt="SwiftShell logo" />
@@ -463,7 +463,7 @@ Add `github "kareman/SwiftShell" >= 3.0` to your Cartfile, then run `carthage up
 Add `SwiftShell` to your `Podfile`.
 
 ```Ruby
-pod 'SwiftShell', '>= 3.0.0'
+pod 'SwiftShell', '>= 4.0.0'
 ```
 
 Then run `pod install` to install it.
