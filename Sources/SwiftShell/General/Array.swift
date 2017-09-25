@@ -5,21 +5,11 @@
 *
 */
 
-private protocol AnyArrayType {
-	var anyValues: [Any] { get }
-}
-
-extension Array: AnyArrayType {
-	fileprivate var anyValues: [Any] {
-		return self.map { $0 as Any }
-	}
-}
-
 extension Array where Element: Any {
 	func flatten() -> [Any] {
 		return self.flatMap { x -> [Any] in
-			if let anyarray = x as? AnyArrayType {
-				return anyarray.anyValues.flatten()
+			if let anyarray = x as? Array<Any> {
+				return anyarray.map { $0 as Any }.flatten()
 			}
 			return [x]
 		}

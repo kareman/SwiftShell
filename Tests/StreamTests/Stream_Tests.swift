@@ -104,10 +104,12 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(reader.readSome(), text)
 	}
 
+#if !(os(iOS) || os(tvOS) || os(watchOS))
 	func testWriteStreamToAnotherStreamCompiles() {
 		var file = try! open(forWriting: "/tmp/testWriteStreamToAnotherStreamCompiles.txt")
 		runAsync("echo", "arg1").stdout.runAsync("wc").stdout.write(to: &file)
 	}
+#endif
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	func testOnOutput() {
