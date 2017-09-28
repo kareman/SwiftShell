@@ -437,7 +437,7 @@ Then run your Swift scripts with `marathon run <name>.swift`. Or add `#!/usr/bin
 
 ### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
-Add `.Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 3)` to your Package.swift:
+Add `.Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 4)` to your Package.swift:
 
 ```swift
 import PackageDescription
@@ -445,7 +445,7 @@ import PackageDescription
 let package = Package(
 	name: "somecommandlineapp",
 	dependencies: [
-		.Package(url: "https://github.com/kareman/SwiftShell.git", majorVersion: 3)
+		.Package(url: "https://github.com/kareman/SwiftShell.git", majorVersion: 4)
 		 ]
 )
 ```
@@ -454,7 +454,7 @@ and run `swift build`.
 
 ### [Carthage](https://github.com/Carthage/Carthage)
 
-Add `github "kareman/SwiftShell" >= 3.0` to your Cartfile, then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for further instructions.
+Add `github "kareman/SwiftShell" >= 4.0` to your Cartfile, then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for further instructions.
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
