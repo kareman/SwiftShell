@@ -123,7 +123,7 @@ extension ReadableStream {
                 guard let wSelf = self else {
                     return
                 }
-				handler(self)
+				handler(wSelf)
 			}
 		}
 
