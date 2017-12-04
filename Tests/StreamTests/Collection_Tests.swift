@@ -13,7 +13,7 @@ public class LazySplitGenerator_Tests: XCTestCase {
 
 	func lazySplitToArray(allowEmptySlices: Bool) -> (String) -> [String] {
 		return { s in
-			let seq: LazySplitSequence = s.characters.lazy.split(separator: "," as Character, allowEmptySlices: allowEmptySlices)
+			let seq: LazySplitSequence = s.lazy.split(separator: "," as Character, allowEmptySlices: allowEmptySlices)
 			return seq.map {String($0)}
 		}
 	}
@@ -32,7 +32,7 @@ public class LazySplitGenerator_Tests: XCTestCase {
 
 	func testCollectionTypeSplit_AllowingEmptySlices() {
 		let split = { (s: String) -> [String] in
-			s.characters.split(separator: ",", omittingEmptySubsequences: false).map(String.init)
+			s.split(separator: ",", omittingEmptySubsequences: false).map(String.init)
 		}
 
 		XCTAssertEqual(split("ab,c,de,f"), ["ab","c","de","f"])
@@ -58,7 +58,7 @@ public class LazySplitGenerator_Tests: XCTestCase {
 
 	func testCollectionTypeSplit_NoEmptySlices() {
 		let split = {(s: String) -> [String] in
-			s.characters.split(separator: ",", omittingEmptySubsequences: true).map(String.init)
+			s.split(separator: ",", omittingEmptySubsequences: true).map(String.init)
 		}
 
 		XCTAssertEqual(split("ab,c,de,f"), ["ab","c","de","f"])
@@ -80,7 +80,7 @@ public class LazySplitGenerator_Tests: XCTestCase {
 
 	func testPartialSourceLazySplit_AllowingEmptySlices() {
 		func split(_ s: String...) -> [String] {
-			var sg = s.map {$0.characters} .makeIterator()
+			var sg = s.makeIterator()
 			return PartialSourceLazySplitSequence({sg.next()}, separator: ",").map {String($0)}
 		}
 
@@ -97,10 +97,6 @@ public class LazySplitGenerator_Tests: XCTestCase {
 		XCTAssertEqual(split(",abc","def","g","h,"),      ["","abcdefgh",""])
 		XCTAssertEqual(split("","abc","","def","g,","h"), ["abcdefg","h"])
 	}
-}
-
-extension String.CharacterView: CustomDebugStringConvertible {
-	public var debugDescription: String { return String(self) }
 }
 
 extension LazySplitGenerator_Tests {

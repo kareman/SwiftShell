@@ -77,7 +77,7 @@ extension ReadableStream {
 
 	/// Splits stream lazily into lines.
 	public func lines() -> LazySequence<AnySequence<String>> {
-		return AnySequence(PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }).lazy
+		return AnySequence(PartialSourceLazySplitSequence({self.readSome()}, separator: "\n").map { String($0) }).lazy
 	}
 
 	/// Writes the text in this stream to the given TextOutputStream.
