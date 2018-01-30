@@ -119,8 +119,11 @@ extension ReadableStream {
 		/// - Note: if the stream is read from outside of the handler, or more than once inside
 		/// the handler, it may be called once when stream is closed and empty.
 		public func onOutput(_ handler: @escaping (ReadableStream) -> Void) {
-			filehandle.readabilityHandler = { [unowned self] _ in
-				handler(self)
+			filehandle.readabilityHandler = { [weak self] _ in
+                guard let wSelf = self else {
+                    return
+                }
+				handler(wSelf)
 			}
 		}
 
