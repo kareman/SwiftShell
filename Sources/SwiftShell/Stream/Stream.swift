@@ -120,9 +120,9 @@ extension ReadableStream {
 		/// the handler, it may be called once when stream is closed and empty.
 		public func onOutput(_ handler: @escaping (ReadableStream) -> Void) {
 			filehandle.readabilityHandler = { [weak self] _ in
-                guard let wSelf = self else {
-                    return
-                }
+				guard let wSelf = self else {
+					return
+				}
 				handler(wSelf)
 			}
 		}
