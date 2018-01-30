@@ -65,7 +65,7 @@ extension CommandRunning {
 		Otherwise just return `executable`.
 		*/
 		func pathForExecutable(executable: String) -> String {
-			guard !executable.characters.contains("/") else {
+			guard !executable.contains("/") else {
 				return executable
 			}
 			let path = self.run("/usr/bin/which", executable).stdout
@@ -163,7 +163,7 @@ extension Process {
 	func commandAsString() -> String? {
 		guard let path = self.launchPath else { return nil }
 		return self.arguments?.reduce(path) { (acc: String, arg: String) in
-			return acc + " " + ( arg.characters.contains(" ") ? ("\"" + arg + "\"") : arg )
+			return acc + " " + ( arg.contains(" ") ? ("\"" + arg + "\"") : arg )
 		}
 	}
 }
@@ -192,8 +192,8 @@ public final class RunOutput {
 	/// If output is single-line, trim it.
 	static private func cleanUpOutput(_ text: String) -> String {
 		var text = text
-		let firstnewline = text.characters.index(of: "\n")
-		if firstnewline == nil || text.characters.index(after: firstnewline!) == text.endIndex {
+		let firstnewline = text.index(of: "\n")
+		if firstnewline == nil || text.index(after: firstnewline!) == text.endIndex {
 			text = text.trimmingCharacters(in: .whitespacesAndNewlines)
 		}
 		return text
