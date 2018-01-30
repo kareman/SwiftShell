@@ -14,7 +14,7 @@ public class LazySplitGenerator_Tests: XCTestCase {
 	func lazySplitToArray(allowEmptySlices: Bool) -> (String) -> [String] {
 		return { s in
 			let seq: LazySplitSequence = s.lazy.split(separator: "," as Character, allowEmptySlices: allowEmptySlices)
-			return seq.map {String($0)}
+			return seq.map(String.init)
 		}
 	}
 
@@ -81,7 +81,7 @@ public class LazySplitGenerator_Tests: XCTestCase {
 	func testPartialSourceLazySplit_AllowingEmptySlices() {
 		func split(_ s: String...) -> [String] {
 			var sg = s.makeIterator()
-			return PartialSourceLazySplitSequence({sg.next()}, separator: ",").map {String($0)}
+			return PartialSourceLazySplitSequence({sg.next()}, separator: ",").map(String.init)
 		}
 
 		XCTAssertEqual(split("ab,c",",de,f"), ["ab","c","de","f"])

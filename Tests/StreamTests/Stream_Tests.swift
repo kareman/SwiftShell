@@ -143,6 +143,7 @@ public class Stream_Tests: XCTestCase {
 extension Stream_Tests {
 	public static var allTests = [
 		("testStreams", testStreams),
+		("testData", testData),
 		("testReadableStreamRun", testReadableStreamRun),
 		("testReadableStreamRunAsync", testReadableStreamRunAsync),
 		("testPrintStream", testPrintStream),
