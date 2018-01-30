@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>CommandRunning Protocol Reference</title>
+    <title>Signals Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/CommandRunning" class="dashAnchor"></a>
-    <a title="CommandRunning Protocol Reference"></a>
+    <a name="//apple_ref/swift/Class/Signals" class="dashAnchor"></a>
+    <a title="Signals Class Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">SwiftShell Docs</a> (67% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">SwiftShell Reference</a>
         <img id="carat" src="../img/carat.png" />
-        CommandRunning Protocol Reference
+        Signals Class Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -185,48 +185,48 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>CommandRunning</h1>
+            <h1>Signals</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CommandRunning</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Signals</span></code></pre>
 
                 </div>
               </div>
-            <p>Can run commands.</p>
+            <p>Undocumented</p>
 
           </section>
           <section class="section task-group-section">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Enums"></a>
+                <a name="//apple_ref/swift/Section/Enums" class="dashAnchor"></a>
+                <a href="#/Enums">
+                  <h3 class="section-name">Enums</h3>
+                </a>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell14CommandRunningP7contextAA7Context_pv"></a>
-                    <a name="//apple_ref/swift/Property/context" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell14CommandRunningP7contextAA7Context_pv">context</a>
+                    <a name="/s:10SwiftShell7SignalsC6SignalO"></a>
+                    <a name="//apple_ref/swift/Enum/Signal" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell7SignalsC6SignalO">Signal</a>
                     </code>
-                      <span class="declaration-note">
-                        Default implementation
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Common OS Signals</p>
 
-                      </div>
-                      <h4>Default Implementation</h4>
-                      <div class="default_impl abstract">
-                        <p>Undocumented</p>
-
+                        <a href="../Classes/Signals/Signal.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Context.html">Context</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Signal</span></code></pre>
 
                         </div>
                       </div>
@@ -236,171 +236,37 @@
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Typealiases"></a>
+                <a name="//apple_ref/swift/Section/Typealiases" class="dashAnchor"></a>
+                <a href="#/Typealiases">
+                  <h3 class="section-name">Typealiases</h3>
+                </a>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell14CommandRunningPAAE3runAA9RunOutputCSS4bash_Sb07combineG0tF"></a>
-                    <a name="//apple_ref/swift/Method/run(bash:combineOutput:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell14CommandRunningPAAE3runAA9RunOutputCSS4bash_Sb07combineG0tF">run(bash:combineOutput:)</a>
+                    <a name="/s:10SwiftShell7SignalsC16SigActionHandlera"></a>
+                    <a name="//apple_ref/swift/Alias/SigActionHandler" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell7SignalsC16SigActionHandlera">SigActionHandler</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Runs a bash shell command.</p>
+                        <p>Action handler signature.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">combineOutput</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RunOutput.html">RunOutput</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">SigActionHandler</span> <span class="o">=</span> <span class="kd">@convention(c)</span><span class="p">(</span><span class="kt">Int32</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>bashcommand</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>the bash shell command.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>combineOutput</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>if true then stdout and stderror go to the same stream. Default is false.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10SwiftShell14CommandRunningPAAE8runAsyncAA0fC0CSS4bash_SS4fileSi4linetF"></a>
-                    <a name="//apple_ref/swift/Method/runAsync(bash:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell14CommandRunningPAAE8runAsyncAA0fC0CSS4bash_SS4fileSi4linetF">runAsync(bash:file:line:)</a>
-                    </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Run bash command and return before it is finished.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span><span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/AsyncCommand.html">AsyncCommand</a></span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>bashcommand</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>the bash shell command.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>an AsyncCommand struct with standard output, standard error and a &lsquo;finish&rsquo; function.</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10SwiftShell14CommandRunningPAAE11runAndPrintySS4bash_tKF"></a>
-                    <a name="//apple_ref/swift/Method/runAndPrint(bash:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell14CommandRunningPAAE11runAndPrintySS4bash_tKF">runAndPrint(bash:)</a>
-                    </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Run bash command and print output and errors.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    a CommandError.returnedErrorCode if the return code is anything but 0.
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAndPrint</span><span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>bashcommand</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>the bash shell command.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -408,31 +274,35 @@
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Class%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Class Methods" class="dashAnchor"></a>
+                <a href="#/Class%20Methods">
+                  <h3 class="section-name">Class Methods</h3>
+                </a>
+              </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell14CommandRunningPAAE3runAA9RunOutputCSS_SayypGdSb07combineG0tF"></a>
-                    <a name="//apple_ref/swift/Method/run(_:_:combineOutput:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell14CommandRunningPAAE3runAA9RunOutputCSS_SayypGdSb07combineG0tF">run(_:_:combineOutput:)</a>
+                    <a name="/s:10SwiftShell7SignalsC4trapyAC6SignalO6signal_ys5Int32VXC6actiontFZ"></a>
+                    <a name="//apple_ref/swift/Method/trap(signal:action:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell7SignalsC4trapyAC6SignalO6signal_ys5Int32VXC6actiontFZ">trap(signal:action:)</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Runs a command.</p>
+                        <p>Trap an operating system signal.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">run</span><span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">combineOutput</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/RunOutput.html">RunOutput</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">trap</span><span class="p">(</span><span class="nv">signal</span><span class="p">:</span> <span class="kt"><a href="../Classes/Signals/Signal.html">Signal</a></span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Classes/Signals.html#/s:10SwiftShell7SignalsC16SigActionHandlera">SigActionHandler</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -443,36 +313,24 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>executable</em>
+                                <em>signal</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>path to an executable, or the name of an executable in PATH.</p>
+                                  <p>The signal to catch.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>args</em>
+                                <em>action</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>the arguments, one string for each.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>combineOutput</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>if true then stdout and stderror go to the same stream. Default is false.</p>
+                                  <p>The action handler.</p>
                                 </div>
                               </td>
                             </tr>
@@ -482,39 +340,27 @@
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell14CommandRunningPAAE8runAsyncAA0fC0CSS_SayypGdSS4fileSi4linetF"></a>
-                    <a name="//apple_ref/swift/Method/runAsync(_:_:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell14CommandRunningPAAE8runAsyncAA0fC0CSS_SayypGdSS4fileSi4linetF">runAsync(_:_:file:line:)</a>
+                    <a name="/s:10SwiftShell7SignalsC4trapySayAC6SignalO6signal_ys5Int32VXC6actiontG7signals_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/trap(signals:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell7SignalsC4trapySayAC6SignalO6signal_ys5Int32VXC6actiontG7signals_tFZ">trap(signals:)</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Run executable and return before it is finished.</p>
-<div class="aside aside-warning">
-    <p class="aside-title">Warning</p>
-    will crash if ‘executable’ could not be launched.
-
-</div>
+                        <p>Trap multiple signals to individual handlers</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsync</span><span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/AsyncCommand.html">AsyncCommand</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">trap</span><span class="p">(</span><span class="nv">signals</span><span class="p">:</span> <span class="p">[(</span><span class="nv">signal</span><span class="p">:</span> <span class="kt"><a href="../Classes/Signals/Signal.html">Signal</a></span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Classes/Signals.html#/s:10SwiftShell7SignalsC16SigActionHandlera">SigActionHandler</a></span><span class="p">)])</span></code></pre>
 
                         </div>
                       </div>
@@ -525,72 +371,42 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>executable</em>
+                                <em>signals</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>Path to an executable file. If not then exit.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>args</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Arguments to the executable.</p>
+                                  <p>An array of tuples each containing a signal and signal handler.</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An AsyncCommand with standard output, standard error and a &lsquo;finish&rsquo; function.</p>
-                      </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell14CommandRunningPAAE11runAndPrintySS_SayypGdtKF"></a>
-                    <a name="//apple_ref/swift/Method/runAndPrint(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell14CommandRunningPAAE11runAndPrintySS_SayypGdtKF">runAndPrint(_:_:)</a>
+                    <a name="/s:10SwiftShell7SignalsC4trapySayAC6SignalOG7signals_ys5Int32VXC6actiontFZ"></a>
+                    <a name="//apple_ref/swift/Method/trap(signals:action:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell7SignalsC4trapySayAC6SignalOG7signals_ys5Int32VXC6actiontFZ">trap(signals:action:)</a>
                     </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Run executable and print output and errors.</p>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    <code>CommandError.returnedErrorCode(command: String, errorcode: Int)</code> if the exit code is anything but 0.
-
-</div>
-
-<p><code>CommandError.inAccessibleExecutable(path: String)</code> if &lsquo;executable’ turned out to be not so executable after all.</p>
+                        <p>Trap multiple signals to a single handler</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAndPrint</span><span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">trap</span><span class="p">(</span><span class="nv">signals</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Classes/Signals/Signal.html">Signal</a></span><span class="p">],</span> <span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Classes/Signals.html#/s:10SwiftShell7SignalsC16SigActionHandlera">SigActionHandler</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -601,24 +417,162 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>executable</em>
+                                <em>signals</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>path to an executable file.</p>
+                                  <p>An array of signals to catch.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>args</em>
+                                <em>action</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>arguments to the executable.</p>
+                                  <p>The action handler that will handle these signals.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftShell7SignalsC5raiseyAC6SignalO6signal_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/raise(signal:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell7SignalsC5raiseyAC6SignalO6signal_tFZ">raise(signal:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Raise an operating system signal</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">raise</span><span class="p">(</span><span class="nv">signal</span><span class="p">:</span> <span class="kt"><a href="../Classes/Signals/Signal.html">Signal</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>signal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The signal to raise.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftShell7SignalsC6ignoreyAC6SignalO6signal_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/ignore(signal:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell7SignalsC6ignoreyAC6SignalO6signal_tFZ">ignore(signal:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Ignore a signal</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">ignore</span><span class="p">(</span><span class="nv">signal</span><span class="p">:</span> <span class="kt"><a href="../Classes/Signals/Signal.html">Signal</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>signal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The signal to ignore.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftShell7SignalsC7restoreyAC6SignalO6signal_tFZ"></a>
+                    <a name="//apple_ref/swift/Method/restore(signal:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell7SignalsC7restoreyAC6SignalO6signal_tFZ">restore(signal:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Restore default signal handling</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">restore</span><span class="p">(</span><span class="nv">signal</span><span class="p">:</span> <span class="kt"><a href="../Classes/Signals/Signal.html">Signal</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>signal</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The signal to restore.</p>
                                 </div>
                               </td>
                             </tr>
