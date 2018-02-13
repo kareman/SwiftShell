@@ -248,6 +248,13 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Runs a bash shell command.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>If the output from the command into either standard output or standard error is larger than 65,536 bytes, the command will hang and never finish (<a href="https://github.com/kareman/SwiftShell/issues/52">#52</a>). To work around this problem, use runAsync instead and read all the output, even if you&rsquo;re not going to use it:</p>
+
+<p>_ = runAsync(<q>command</q>).stdout.read()</p>
+
+</div>
 
                       </div>
                       <div class="declaration">
