@@ -241,6 +241,10 @@ extension CommandRunning {
 	/// - parameter executable: path to an executable, or the name of an executable in PATH.
 	/// - parameter args: the arguments, one string for each.
 	/// - parameter combineOutput: if true then stdout and stderror go to the same stream. Default is false.
+	/// - warning: If the output from the command into either standard output or standard error is larger than 65,536 bytes, the command will hang and never finish ([#52](https://github.com/kareman/SwiftShell/issues/52)). To work around this problem, use runAsync instead and read all the output, even if you're not going to use it:
+	///
+	///        _ = runAsync("command").stdout.read()
+	///
 	@discardableResult public func run(_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> RunOutput {
 		let stringargs = args.flatten().map(String.init(describing:))
 		let async = AsyncCommand(unlaunched: createProcess(executable, args: stringargs), combineOutput: combineOutput)
@@ -364,6 +368,10 @@ extension CommandRunning {
 /// - parameter executable: path to an executable, or the name of an executable in PATH.
 /// - parameter args: the arguments, one string for each.
 /// - parameter combineOutput: if true then stdout and stderror go to the same stream. Default is false.
+/// - warning: If the output from the command into either standard output or standard error is larger than 65,536 bytes, the command will hang and never finish ([#52](https://github.com/kareman/SwiftShell/issues/52)). To work around this problem, use runAsync instead and read all the output, even if you're not going to use it:
+///
+///        _ = runAsync("command").stdout.read()
+///
 @discardableResult public func run(_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> RunOutput {
 	return main.run(executable, args, combineOutput: combineOutput)
 }
