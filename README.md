@@ -287,6 +287,16 @@ let date = run("date", "-u").stdout
 print("Today's date in UTC is " + date)
 ```
 
+&nbsp;
+
+Note: If the output from the command into either standard output or standard error is larger than 65,536 bytes, the command will hang and never finish ([#52](https://github.com/kareman/SwiftShell/issues/52)). To work around this problem, use runAsync instead and read all the output, even if you're not going to use it:
+
+```swift
+_ = runAsync("command").stdout.read()
+```
+
+
+
 #### Print output
 
 ```swift
