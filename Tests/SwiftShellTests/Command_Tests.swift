@@ -70,6 +70,11 @@ public class Run_Tests: XCTestCase {
 		let firstfailedsecondran = SwiftShell.run(bash: "exit 1") || SwiftShell.run("echo", "thisran")
 		XCTAssertEqual(firstfailedsecondran.stdout, "thisran")
 	}
+
+	func testDoesNotHaltOnLargeOutput() {
+		// https://github.com/kareman/SwiftShell/issues/52
+		SwiftShell.run(bash: "for i in {1..65537}; do echo -n '='; done")
+	}
 }
 
 public class RunAsync_Tests: XCTestCase {
