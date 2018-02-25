@@ -36,6 +36,10 @@ public class Run_Tests: XCTestCase {
 		XCTAssertEqual( SwiftShell.run("/bin/echo", "one\ntwo").stdout, "one\ntwo\n" )
 	}
 
+	func testStandardErrorOutput() {
+		XCTAssertEqual( SwiftShell.run(bash:"echo one 1>&2").stderror, "one" )
+	}
+
 	func testExecutableWithoutPath() {
 		XCTAssertEqual( SwiftShell.run("echo", "one").stdout, "one")
 	}
@@ -71,9 +75,13 @@ public class Run_Tests: XCTestCase {
 		XCTAssertEqual(firstfailedsecondran.stdout, "thisran")
 	}
 
+	// https://github.com/kareman/SwiftShell/issues/52
 	func testDoesNotHaltOnLargeOutput() {
-		// https://github.com/kareman/SwiftShell/issues/52
-		SwiftShell.run(bash: "for i in {1..65537}; do echo -n '='; done")
+		SwiftShell.run(bash: "for i in {1..65537}; do echo -n '='; done") // standard output
+
+		SwiftShell.run(bash: "for i in {1..65537}; do echo -n '=' 1>&2; done") // standard error
+
+		SwiftShell.run(bash: "for i in {1..65537}; do echo -n '='; echo -n '=' 1>&2; done") // both
 	}
 }
 
