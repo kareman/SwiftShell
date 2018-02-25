@@ -203,14 +203,12 @@ public final class RunOutput {
 		self.output = output
 	}
 
-	/// If output is single-line, trim it.
+	/// If text is single-line, trim it.
 	static private func cleanUpOutput(_ text: String) -> String {
-		var text = text
-		let firstnewline = text.index(of: "\n")
-		if firstnewline == nil || text.index(after: firstnewline!) == text.endIndex {
-			text = text.trimmingCharacters(in: .whitespacesAndNewlines)
-		}
-		return text
+		let afterfirstnewline = text.index(of: "\n").map(text.index(after:))
+		return (afterfirstnewline == nil || afterfirstnewline == text.endIndex)
+			? text.trimmingCharacters(in: .whitespacesAndNewlines)
+			: text
 	}
 
 	/// Standard output, trimmed of whitespace and newline if it is single-line.
