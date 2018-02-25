@@ -8,6 +8,7 @@
 #if !(os(iOS) || os(tvOS) || os(watchOS))
 
 import Foundation
+import Dispatch
 
 #if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !swift(>=3.1)
 typealias Process = Task
@@ -174,20 +175,31 @@ extension Process {
 public final class RunOutput {
 	fileprivate let output: AsyncCommand
 	private var _stdout = Data()
+	private var _stderror: Data
 
 	/// The error from running the command, if any.
 	public private(set) var error: CommandError?
 
 	init(launch output: AsyncCommand) {
+		var _stderror = Data()
 		do {
 			try output.process.launchThrowably()
+
+			// see https://github.com/kareman/SwiftShell/issues/52
+			let stderrorWork = DispatchWorkItem {
+				_stderror = output.stderror.readData()
+			}
+			DispatchQueue.global().async(execute: stderrorWork)
+
 			_stdout = output.stdout.readData()
 			try output.finish()
+			stderrorWork.wait()
 		} catch let error as CommandError {
 			self.error = error
 		} catch {
 			assertionFailure("Unexpected error: \(error)")
 		}
+		self._stderror = _stderror
 		self.output = output
 	}
 
@@ -201,7 +213,7 @@ public final class RunOutput {
 		return text
 	}
 
-	/// Standard output, trimmed for whitespace and newline if it is single-line.
+	/// Standard output, trimmed of whitespace and newline if it is single-line.
 	public private(set) lazy var stdout: String = {
 		guard let result = String(data: _stdout, encoding: output.stdout.encoding) else {
 			fatalError("Could not convert binary data to text.")
@@ -210,8 +222,14 @@ public final class RunOutput {
 		return RunOutput.cleanUpOutput(result)
 	}()
 
-	/// Standard error, trimmed for whitespace and newline if it is single-line.
-	public private(set) lazy var stderror: String = RunOutput.cleanUpOutput(self.output.stderror.read())
+	/// Standard error, trimmed of whitespace and newline if it is single-line.
+	public private(set) lazy var stderror: String = {
+		guard let result = String(data: _stderror, encoding: output.stdout.encoding) else {
+			fatalError("Could not convert binary data to text.")
+		}
+		_stderror = Data()
+		return RunOutput.cleanUpOutput(result)
+	}()
 
 	/// The exit code of the command. Anything but 0 means there was an error.
 	public var exitcode: Int { return output.exitcode() }
