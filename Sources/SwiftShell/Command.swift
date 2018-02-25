@@ -173,6 +173,7 @@ extension Process {
 /// Output from a `run` command.
 public final class RunOutput {
 	fileprivate let output: AsyncCommand
+	private var _stdout = Data()
 
 	/// The error from running the command, if any.
 	public private(set) var error: CommandError?
@@ -180,6 +181,7 @@ public final class RunOutput {
 	init(launch output: AsyncCommand) {
 		do {
 			try output.process.launchThrowably()
+			_stdout = output.stdout.readData()
 			try output.finish()
 		} catch let error as CommandError {
 			self.error = error
@@ -200,7 +202,13 @@ public final class RunOutput {
 	}
 
 	/// Standard output, trimmed for whitespace and newline if it is single-line.
-	public private(set) lazy var stdout: String = RunOutput.cleanUpOutput(self.output.stdout.read())
+	public private(set) lazy var stdout: String = {
+		guard let result = String(data: _stdout, encoding: output.stdout.encoding) else {
+			fatalError("Could not convert binary data to text.")
+		}
+		_stdout = Data()
+		return RunOutput.cleanUpOutput(result)
+	}()
 
 	/// Standard error, trimmed for whitespace and newline if it is single-line.
 	public private(set) lazy var stderror: String = RunOutput.cleanUpOutput(self.output.stderror.read())
