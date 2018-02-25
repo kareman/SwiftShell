@@ -22,11 +22,6 @@ extension CommandRunning {
 	///
 	/// - parameter bashcommand: the bash shell command.
 	/// - parameter combineOutput: if true then stdout and stderror go to the same stream. Default is false.
-	/// - warning: If the output from the command into either standard output or standard error is larger than 65,536 bytes, the command will hang and never finish ([#52](https://github.com/kareman/SwiftShell/issues/52)). To work around this problem, use runAsync instead and read all the output, even if you're not going to use it:
-	///
-	///        _ = runAsync("command").stdout.read()
-	///
-
 	@discardableResult public func run(bash bashcommand: String, combineOutput: Bool = false) -> RunOutput {
 		return run("/bin/bash", "-c", bashcommand, combineOutput: combineOutput)
 	}
@@ -61,9 +56,6 @@ extension CommandRunning {
 ///
 /// - parameter bashcommand: the bash shell command.
 /// - parameter combineOutput: if true then stdout and stderror go to the same stream. Default is false.
-/// - warning: If the output from the command into either standard output or standard error is larger than 65,536 bytes, the command will hang and never finish ([#52](https://github.com/kareman/SwiftShell/issues/52)). To work around this problem, use runAsync instead and read all the output, even if you're not going to use it:
-///
-///        _ = runAsync("command").stdout.read()
 @discardableResult public func run(bash bashcommand: String, combineOutput: Bool = false) -> RunOutput {
 	return main.run(bash: bashcommand, combineOutput: combineOutput)
 }
