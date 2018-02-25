@@ -181,11 +181,17 @@ public class RunAndPrint_Tests: XCTestCase {
 
 extension Run_Tests {
 	public static var allTests = [
+		("testCompilesWhenNotDefiningReturnType", testCompilesWhenNotDefiningReturnType),
 		("testBashCommand", testBashCommand),
 		("testArgumentsFromArray", testArgumentsFromArray),
 		("testSinglelineOutput", testSinglelineOutput),
 		("testMultilineOutput", testMultilineOutput),
+		("testStandardErrorOutput", testStandardErrorOutput),
 		("testExecutableWithoutPath", testExecutableWithoutPath),
+		("testSuccess", testSuccess),
+		("testAnd", testAnd),
+		("testOr", testOr),
+		("testDoesNotHaltOnLargeOutput", testDoesNotHaltOnLargeOutput),
 		]
 }
 
