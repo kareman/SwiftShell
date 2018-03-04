@@ -2,35 +2,35 @@
   "warnings": [
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 52,
+      "line": 53,
       "symbol": "CommandRunning.context",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 56,
+      "line": 57,
       "symbol": "CommandRunning.context",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 123,
+      "line": 124,
       "symbol": "==(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 259,
+      "line": 279,
       "symbol": "AsyncCommand.stdout",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 260,
+      "line": 280,
       "symbol": "AsyncCommand.stderror",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
