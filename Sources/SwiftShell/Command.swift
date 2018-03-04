@@ -316,7 +316,8 @@ public final class AsyncCommand {
 	/**
 	Wait for this command to finish.
 
-	- returns: itself
+	- warning: Will hang if the unread output of either standard output or standard error is larger than 64KB ([#52](https://github.com/kareman/SwiftShell/issues/52)). To work around this problem, read all the output first, even if you're not going to use it.
+	- returns: self
 	- throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 	*/
 	@discardableResult public func finish() throws -> AsyncCommand {
@@ -347,7 +348,7 @@ extension CommandRunning {
 	/**
 	Run executable and return before it is finished.
 
-	- warning: will crash if ‘executable’ could not be launched.
+	- warning: Will crash if ‘executable’ could not be launched.
 	- parameter executable: Path to an executable file. If not then exit.
 	- parameter args: Arguments to the executable.
 	- returns: An AsyncCommand with standard output, standard error and a 'finish' function.
