@@ -28,3 +28,6 @@ DerivedData
 # Pods/
 .Package.toml
 ._*.swift
+
+# Vim
+.*.sw[po]

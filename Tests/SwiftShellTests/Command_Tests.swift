@@ -133,6 +133,17 @@ public class RunAsync_Tests: XCTestCase {
 		}
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
+
+	func testRunLater() {
+		let expectcompletion = expectation(description: "onCompletion will be called once the command has been started and then finishes.")
+		let command = runAsync("echo", runImmediately: false).onCompletion { command in
+			XCTAssertFalse(command.isRunning)
+			expectcompletion.fulfill()
+		}
+		XCTAssertFalse(command.isRunning)
+		XCTAssertNoThrow(try command.start())
+		waitForExpectations(timeout: 0.5, handler: nil)
+	}
 }
 
 public class RunAndPrint_Tests: XCTestCase {
@@ -203,6 +214,7 @@ extension RunAsync_Tests {
 		("testFinishThrowsErrorOnExitcodeNotZero", testFinishThrowsErrorOnExitcodeNotZero),
 		("testExitCode", testExitCode),
 		("testOnCompletion", testOnCompletion),
+		("testRunLater", testRunLater),
 		]
 }
 
