@@ -183,7 +183,7 @@ public final class RunOutput {
 	init(launch output: AsyncCommand) {
 		var _stderror = Data()
 		do {
-			try output.process.launchThrowably()
+			try output.start()
 
 			// see https://github.com/kareman/SwiftShell/issues/52
 			let stderrorWork = DispatchWorkItem {
@@ -299,7 +299,7 @@ public final class AsyncCommand {
 	convenience init(launch process: Process, file: String, line: Int) {
 		self.init(unlaunched: process, combineOutput: false)
 		do {
-			try process.launchThrowably()
+			try start()
 		} catch {
 			exit(errormessage: error, file: file, line: line)
 		}
@@ -307,6 +307,10 @@ public final class AsyncCommand {
 
 	/// Is the command still running?
 	public var isRunning: Bool { return process.isRunning }
+
+	public func start() throws {
+		try process.launchThrowably()
+	}
 
 	/// Terminates command.
 	public func stop() {
@@ -353,8 +357,11 @@ extension CommandRunning {
 	- parameter args: Arguments to the executable.
 	- returns: An AsyncCommand with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync(_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncCommand {
+	public func runAsync(_ executable: String, _ args: Any ..., runLater: Bool = false, file: String = #file, line: Int = #line) -> AsyncCommand {
 		let stringargs = args.flatten().map(String.init(describing:))
+		if runLater {
+			return AsyncCommand(unlaunched: createProcess(executable, args: stringargs), combineOutput: false)
+		}
 		return AsyncCommand(launch: createProcess(executable, args: stringargs), file: file, line: line)
 	}
 }
@@ -406,8 +413,8 @@ Run executable and return before it is finished.
 - parameter args: arguments to the executable.
 - returns: an AsyncCommand with standard output, standard error and a 'finish' function.
 */
-public func runAsync(_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncCommand {
-	return main.runAsync(executable, args, file: file, line: line)
+public func runAsync(_ executable: String, _ args: Any ..., runLater: Bool = false, file: String = #file, line: Int = #line) -> AsyncCommand {
+	return main.runAsync(executable, args, runLater: runLater, file: file, line: line)
 }
 
 /**
