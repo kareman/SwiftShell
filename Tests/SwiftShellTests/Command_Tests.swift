@@ -136,7 +136,7 @@ public class RunAsync_Tests: XCTestCase {
 
 	func testRunLater() {
 		let expectcompletion = expectation(description: "onCompletion will be called once the command has been started and then finishes.")
-		let command = runAsync("echo", runImmediately: false).onCompletion { command in
+		let command = runAsync("echo", runLater: true).onCompletion { command in
 			XCTAssertFalse(command.isRunning)
 			expectcompletion.fulfill()
 		}

@@ -357,12 +357,12 @@ extension CommandRunning {
 	- parameter args: Arguments to the executable.
 	- returns: An AsyncCommand with standard output, standard error and a 'finish' function.
 	*/
-	public func runAsync(_ executable: String, _ args: Any ..., runImmediately: Bool = false, file: String = #file, line: Int = #line) -> AsyncCommand {
+	public func runAsync(_ executable: String, _ args: Any ..., runLater: Bool = false, file: String = #file, line: Int = #line) -> AsyncCommand {
 		let stringargs = args.flatten().map(String.init(describing:))
-		if runImmediately {
-			return AsyncCommand(launch: createProcess(executable, args: stringargs), file: file, line: line)
+		if runLater {
+			return AsyncCommand(unlaunched: createProcess(executable, args: stringargs), combineOutput: false)
 		}
-		return AsyncCommand(unlaunched: createProcess(executable, args: stringargs), combineOutput: false)
+		return AsyncCommand(launch: createProcess(executable, args: stringargs), file: file, line: line)
 	}
 }
 
@@ -413,8 +413,8 @@ Run executable and return before it is finished.
 - parameter args: arguments to the executable.
 - returns: an AsyncCommand with standard output, standard error and a 'finish' function.
 */
-public func runAsync(_ executable: String, _ args: Any ..., runImmediately: Bool = false, file: String = #file, line: Int = #line) -> AsyncCommand {
-	return main.runAsync(executable, args, runImmediately: runImmediately, file: file, line: line)
+public func runAsync(_ executable: String, _ args: Any ..., runLater: Bool = false, file: String = #file, line: Int = #line) -> AsyncCommand {
+	return main.runAsync(executable, args, runLater: runLater, file: file, line: line)
 }
 
 /**
