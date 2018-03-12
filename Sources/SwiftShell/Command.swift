@@ -312,10 +312,57 @@ public final class AsyncCommand {
 	/// Terminates the command by sending the SIGTERM signal
 	@available(*, unavailable, message: "The terminate() function has not been implemented on Linux")
 	public func stop() {}
+
+	/// Interrupts the command by sending the SIGINT signal
+	@available(*, unavailable, message: "The interrupt() function has not been implemented on Linux")
+	public func interrupt() {}
+
+	/**
+	Temporarily suspends a command. Call resume() to resume a suspended command
+
+	- warning: You may suspend a command multiple times, but it must be resumed an equal number of times before the command will truly be resumed
+	- returns: true if the command was successfully suspended
+	*/
+	@available(*, unavailable, message: "The suspend() function has not been implemented on Linux")
+	public func suspend() {}
+
+	/**
+	Resumes a command previously suspended with suspend().
+
+	- warning: If the command has been suspended multiple times then it will have to be resumed the same number of times before execution will truly be resumed
+	- returns: true if the command was successfully resumed
+	*/
+	@available(*, unavailable, message: "The resume() function has not been implemented on Linux")
+	public func resume() {}
 	#else
 	/// Terminates the command by sending the SIGTERM signal
 	public func stop() {
 		process.terminate()
+	}
+
+	/// Interrupts the command by sending the SIGINT signal
+	public func interrupt() {
+		process.interrupt()
+	}
+
+	/**
+	Temporarily suspends a command. Call resume() to resume a suspended command
+
+	- warning: You may suspend a command multiple times, but it must be resumed an equal number of times before the command will truly be resumed
+	- returns: true if the command was successfully suspended
+	*/
+	@discardableResult public func suspend() -> Bool {
+		return process.suspend()
+	}
+
+	/**
+	Resumes a command previously suspended with suspend().
+
+	- warning: If the command has been suspended multiple times then it will have to be resumed the same number of times before execution will truly be resumed
+	- returns: true if the command was successfully resumed
+	*/
+	@discardableResult public func resume() -> Bool {
+		return process.resume()
 	}
 	#endif
 

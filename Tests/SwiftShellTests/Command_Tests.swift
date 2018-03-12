@@ -145,6 +145,44 @@ public class RunAsync_Tests: XCTestCase {
 		// XCTAssertFalse(command.isRunning)
 		XCTAssertTrue(command.terminationReason() == Process.TerminationReason.uncaughtSignal)
 	}
+
+	func testInterrupt() {
+		// Start a command that wouldn't ever exit normally
+		let command = runAsync("cat")
+
+		XCTAssertTrue(command.isRunning)
+		command.interrupt()
+		// command.isRunning is true until calling waitUntilExit()
+		// XCTAssertFalse(command.isRunning)
+		XCTAssertTrue(command.terminationReason() == Process.TerminationReason.uncaughtSignal)
+	}
+
+	/*
+	 Cannot test the suspend/resume calls reliably since command.isRunning is
+	 true until waitUntilExit() has been called
+
+	func testSuspend() {
+		// Start a command that wouldn't ever exit normally
+		let command = runAsync("cat")
+
+		XCTAssertTrue(command.isRunning)
+		// command.isRunning is true until calling waitUntilExit()
+		// XCTAssertFalse(command.isRunning)
+		command.suspend()
+	}
+
+	func testResume() {
+		// Start a command that wouldn't ever exit normally
+		let command = runAsync("cat")
+
+		XCTAssertTrue(command.isRunning)
+		command.suspend()
+		// command.isRunning is true until calling waitUntilExit()
+		// XCTAssertFalse(command.isRunning)
+		command.resume()
+		XCTAssertTrue(command.isRunning)
+	}
+	*/
 	#endif
 }
 
