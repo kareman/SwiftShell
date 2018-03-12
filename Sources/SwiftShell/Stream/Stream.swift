@@ -108,7 +108,10 @@ extension ReadableStream {
 	}
 
 	/// Reads everything at once.
-	public func readData() -> Data {
+	/// Marked with @discardableResult so that the stream can be read before
+	/// calling .finish() without causing any compiler warnings or requiring
+	/// developer work-arounds when the result will not be used (see #52 & #57)
+	@discardableResult public func readData() -> Data {
 		return filehandle.readDataToEndOfFile()
 	}
 }
