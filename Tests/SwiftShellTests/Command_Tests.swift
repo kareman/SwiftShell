@@ -133,6 +133,19 @@ public class RunAsync_Tests: XCTestCase {
 		}
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
+
+	#if os(macOS)
+	func testStop() {
+		// Start a command that wouldn't ever exit normally
+		let command = runAsync("cat")
+
+		XCTAssertTrue(command.isRunning)
+		command.stop()
+		// command.isRunning is true until calling waitUntilExit()
+		// XCTAssertFalse(command.isRunning)
+		XCTAssertTrue(command.terminationReason() == Process.TerminationReason.uncaughtSignal)
+	}
+	#endif
 }
 
 public class RunAndPrint_Tests: XCTestCase {

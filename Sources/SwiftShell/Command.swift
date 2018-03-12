@@ -308,10 +308,16 @@ public final class AsyncCommand {
 	/// Is the command still running?
 	public var isRunning: Bool { return process.isRunning }
 
-	/// Terminates command.
+	#if os(Linux)
+	/// Terminates the command by sending the SIGTERM signal
+	@available(*, unavailable, message: "The terminate() function has not been implemented on Linux")
+	public func stop() {}
+	#else
+	/// Terminates the command by sending the SIGTERM signal
 	public func stop() {
 		process.terminate()
 	}
+	#endif
 
 	/**
 	Wait for this command to finish.
@@ -329,6 +335,16 @@ public final class AsyncCommand {
 	public func exitcode() -> Int {
 		process.waitUntilExit()
 		return Int(process.terminationStatus)
+	}
+
+	/**
+	Wait for the command to finish, then return why the command terminated
+
+	- returns: .exited if the command exited normally, otherwise it's .uncaughtSignal
+	*/
+	public func terminationReason() -> Process.TerminationReason {
+		process.waitUntilExit()
+		return process.terminationReason
 	}
 
 	/// Takes a closure to be called when the command has finished.
