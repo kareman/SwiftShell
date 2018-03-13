@@ -9,7 +9,10 @@
 
 import Foundation
 import Dispatch
+
+#if os(Linux)
 import Glibc
+#endif
 
 #if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !swift(>=3.1)
 typealias Process = Task
@@ -310,28 +313,28 @@ public final class AsyncCommand {
 	public var isRunning: Bool { return process.isRunning }
 
 	#if os(Linux)
-	fileprivate enum MaskType: String {
-		case blocked
-		case ignored
+	fileprivate enum ProcessAttribute: String {
+		case blockedSignals = "blocked"
+		case ignoredSignals = "ignored"
 	}
 
 	/**
-	Gets a hexidecimal mask related to signals the running process is either
-	blocking, ignoring, or has captured
+	Gets a specified process attribute using the `ps` command installed on all
+	Linux systems
 
-	- parameter type: Which relevant signal mask to return
+	- parameter attr: Which specific attribute to return
 	- returns: A String containing the hexadecimal representation of the mask,
 			   or nil if there is no stdout output
 	*/
-	fileprivate func getSignalMask(_ type: MaskType) -> String? {
-		let mask = run(bash: "ps --no-headers -q \(process.processIdentifier) -o \(type.rawValue)").stdout
-		return mask.isEmpty ? nil : mask
+	fileprivate func getProcessInfo(_ attr: ProcessAttribute) -> String? {
+		let attribute = run(bash: "ps --no-headers -q \(process.processIdentifier) -o \(attr.rawValue)").stdout
+		return attribute.isEmpty ? nil : attribute
 	}
 
 	/// Determines whether the running process is blocking the specified signal
 	fileprivate func isBlockingSignal(_ signum: Int32) -> Bool {
 		// If there is no mask, then the signal isn't blocked
-		guard let blockedMask = getSignalMask(.blocked) else { return false }
+		guard let blockedMask = getProcessInfo(.blockedSignals) else { return false }
 
 		// If the output isn't in proper hexadecimal (like it should be), then
 		// it could be ignored, but we can't be sure. Return true, just to be safe
@@ -344,7 +347,7 @@ public final class AsyncCommand {
 	/// Determines whether the running process is ignoring the specified signal
 	fileprivate func isIgnoringSignal(_ signum: Int32) -> Bool {
 		// If there is no mask, then the signal isn't ignored
-		guard let ignoredMask = getSignalMask(.ignored) else { return false }
+		guard let ignoredMask = getProcessInfo(.ignoredSignals) else { return false }
 
 		// If the output isn't in proper hexadecimal (like it should be), then
 		// it could be ignored, but we can't be sure. Return true, just to be safe
@@ -355,8 +358,8 @@ public final class AsyncCommand {
 	}
 
 	/// Sends the specified signal to the currently running process
-	fileprivate func signal(_ signum: Int32) {
-		kill(process.processIdentifier, signum)
+	@discardableResult fileprivate func signal(_ signum: Int32) -> Int32 {
+		return kill(process.processIdentifier, signum)
 	}
 
 	/// Terminates the command by sending the SIGTERM signal
@@ -380,20 +383,20 @@ public final class AsyncCommand {
 	/**
 	Temporarily suspends a command. Call resume() to resume a suspended command
 
-	- warning: You may suspend a command multiple times, but it must be resumed an equal number of times before the command will truly be resumed
 	- returns: true if the command was successfully suspended
 	*/
-	@available(*, unavailable, message: "The suspend() function has not been implemented on Linux")
-	public func suspend() {}
+	@discardableResult public func suspend() -> Bool {
+		return signal(SIGTSTP) == 0
+	}
 
 	/**
 	Resumes a command previously suspended with suspend().
 
-	- warning: If the command has been suspended multiple times then it will have to be resumed the same number of times before execution will truly be resumed
 	- returns: true if the command was successfully resumed
 	*/
-	@available(*, unavailable, message: "The resume() function has not been implemented on Linux")
-	public func resume() {}
+	@discardableResult public func resume() -> Bool {
+		return signal(SIGCONT) == 0
+	}
 	#else
 	/// Terminates the command by sending the SIGTERM signal
 	public func stop() {
