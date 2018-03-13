@@ -10,6 +10,10 @@
 import Foundation
 import Dispatch
 
+#if os(Linux)
+import Glibc
+#endif
+
 #if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !swift(>=3.1)
 typealias Process = Task
 
@@ -308,10 +312,122 @@ public final class AsyncCommand {
 	/// Is the command still running?
 	public var isRunning: Bool { return process.isRunning }
 
-	/// Terminates command.
+	#if os(Linux)
+	fileprivate enum ProcessAttribute: String {
+		case blockedSignals = "blocked"
+		case ignoredSignals = "ignored"
+	}
+
+	/**
+	Gets a specified process attribute using the `ps` command installed on all
+	Linux systems
+
+	- parameter attr: Which specific attribute to return
+	- returns: A String containing the hexadecimal representation of the mask,
+			   or nil if there is no stdout output
+	*/
+	fileprivate func getProcessInfo(_ attr: ProcessAttribute) -> String? {
+		let attribute = run(bash: "ps --no-headers -q \(process.processIdentifier) -o \(attr.rawValue)").stdout
+		return attribute.isEmpty ? nil : attribute
+	}
+
+	/// Determines whether the running process is blocking the specified signal
+	fileprivate func isBlockingSignal(_ signum: Int32) -> Bool {
+		// If there is no mask, then the signal isn't blocked
+		guard let blockedMask = getProcessInfo(.blockedSignals) else { return false }
+
+		// If the output isn't in proper hexadecimal (like it should be), then
+		// it could be ignored, but we can't be sure. Return true, just to be safe
+		guard let blocked = Int(blockedMask, radix: 16) else { return true }
+
+		// Checks if the signals bit in the mask is 1 (1 == blocked)
+		return blocked & (1 << signum) == 1
+	}
+
+	/// Determines whether the running process is ignoring the specified signal
+	fileprivate func isIgnoringSignal(_ signum: Int32) -> Bool {
+		// If there is no mask, then the signal isn't ignored
+		guard let ignoredMask = getProcessInfo(.ignoredSignals) else { return false }
+
+		// If the output isn't in proper hexadecimal (like it should be), then
+		// it could be ignored, but we can't be sure. Return true, just to be safe
+		guard let ignored = Int(ignoredMask, radix: 16) else { return true }
+
+		// Checks if the signals bit in the mask is 1 (1 == ignored)
+		return ignored & (1 << signum) == 1
+	}
+
+	/// Sends the specified signal to the currently running process
+	@discardableResult fileprivate func signal(_ signum: Int32) -> Int32 {
+		return kill(process.processIdentifier, signum)
+	}
+
+	/// Terminates the command by sending the SIGTERM signal
+	public func stop() {
+		// If the SIGTERM signal is being blocked or ignored by the process,
+		// then don't bother sending it
+		guard !(isBlockingSignal(SIGTERM) || isIgnoringSignal(SIGTERM)) else { return }
+
+		signal(SIGTERM)
+	}
+
+	/// Interrupts the command by sending the SIGINT signal
+	public func interrupt() {
+		// If the SIGINT signal is being blocked or ignored by the process,
+		// then don't bother sending it
+		guard !(isBlockingSignal(SIGINT) || isIgnoringSignal(SIGINT)) else { return }
+
+		signal(SIGINT)
+	}
+
+	/**
+	Temporarily suspends a command. Call resume() to resume a suspended command
+
+	- returns: true if the command was successfully suspended
+	*/
+	@discardableResult public func suspend() -> Bool {
+		return signal(SIGTSTP) == 0
+	}
+
+	/**
+	Resumes a command previously suspended with suspend().
+
+	- returns: true if the command was successfully resumed
+	*/
+	@discardableResult public func resume() -> Bool {
+		return signal(SIGCONT) == 0
+	}
+	#else
+	/// Terminates the command by sending the SIGTERM signal
 	public func stop() {
 		process.terminate()
 	}
+
+	/// Interrupts the command by sending the SIGINT signal
+	public func interrupt() {
+		process.interrupt()
+	}
+
+	/**
+	Temporarily suspends a command. Call resume() to resume a suspended command
+
+	- warning: You may suspend a command multiple times, but it must be resumed an equal number of times before the command will truly be resumed
+	- returns: true if the command was successfully suspended
+	*/
+	@discardableResult public func suspend() -> Bool {
+		return process.suspend()
+	}
+
+	/**
+	Resumes a command previously suspended with suspend().
+
+	- warning: If the command has been suspended multiple times then it will have to be resumed the same number of times before execution will truly be resumed
+	- returns: true if the command was successfully resumed
+	*/
+	@discardableResult public func resume() -> Bool {
+		return process.resume()
+	}
+	#endif
 
 	/**
 	Wait for this command to finish.
@@ -329,6 +445,16 @@ public final class AsyncCommand {
 	public func exitcode() -> Int {
 		process.waitUntilExit()
 		return Int(process.terminationStatus)
+	}
+
+	/**
+	Wait for the command to finish, then return why the command terminated
+
+	- returns: .exited if the command exited normally, otherwise it's .uncaughtSignal
+	*/
+	public func terminationReason() -> Process.TerminationReason {
+		process.waitUntilExit()
+		return process.terminationReason
 	}
 
 	/// Takes a closure to be called when the command has finished.
@@ -368,7 +494,7 @@ extension CommandRunning {
 
 	- parameter executable: path to an executable file.
 	- parameter args: arguments to the executable.
-	- throws: 
+	- throws:
 		`CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 
 		`CommandError.inAccessibleExecutable(path: String)` if 'executable’ turned out to be not so executable after all.

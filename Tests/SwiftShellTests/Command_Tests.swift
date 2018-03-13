@@ -6,9 +6,12 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
-import SwiftShell
+@testable import SwiftShell
 import XCTest
 import Foundation
+#if os(Linux)
+import Glibc
+#endif
 
 public class Run_Tests: XCTestCase {
 
@@ -133,6 +136,66 @@ public class RunAsync_Tests: XCTestCase {
 		}
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
+
+	func testStop() {
+		// Start a command that won't exit for a long time
+		let command = runAsync(bash: "sleep 100")
+
+		XCTAssertTrue(command.isRunning)
+		command.stop()
+
+		// On Linux, command.isRunning becomes false once the command has been
+		// stopped, but the terminationReason does not become .uncaughtSignal
+		#if os(Linux)
+		// Checking the isRunning occasionally happens too quick for the
+		// assert. Sleeping for 1 second ensures the assert should pass
+		sleep(1)
+		XCTAssertFalse(command.isRunning)
+		// On macOS, command.isRunning is true until waitUntilExit() has been
+		// called, but the process's terminationReason becomes .uncaughtSignal.
+		#else
+		XCTAssertEqual(command.terminationReason(), Process.TerminationReason.uncaughtSignal)
+		#endif
+	}
+
+	func testInterrupt() {
+		// Start a command that won't exit for a long time
+		let command = runAsync(bash: "sleep 100")
+
+		XCTAssertTrue(command.isRunning)
+		command.interrupt()
+
+		// On Linux, command.isRunning becomes false once the command has been
+		// interrupted, but the terminationReason does not become
+		// .uncaughtSignal
+		#if os(Linux)
+		// Checking the isRunning occasionally happens too quick for the
+		// assert. Sleeping for 1 second ensures the assert should pass
+		sleep(1)
+		XCTAssertFalse(command.isRunning)
+		// On macOS, command.isRunning is true until waitUntilExit() has been
+		// called, but the process's terminationReason becomes .uncaughtSignal.
+		#else
+		XCTAssertEqual(command.terminationReason(), Process.TerminationReason.uncaughtSignal)
+		#endif
+	}
+
+	/*
+	 Cannot test the suspend/resume calls reliably
+
+	func testSuspendAndResume() {
+		// Start a command that wouldn't ever exit normally
+		let command = runAsync("cat")
+
+		XCTAssertTrue(command.isRunning)
+		command.suspend()
+
+		XCTAssertFalse(command.isRunning)
+		command.resume()
+
+		XCTAssertTrue(command.isRunning)
+	}
+	*/
 }
 
 public class RunAndPrint_Tests: XCTestCase {
@@ -203,6 +266,9 @@ extension RunAsync_Tests {
 		("testFinishThrowsErrorOnExitcodeNotZero", testFinishThrowsErrorOnExitcodeNotZero),
 		("testExitCode", testExitCode),
 		("testOnCompletion", testOnCompletion),
+		("testStop", testStop),
+		("testInterrupt", testInterrupt),
+		// ("testSuspendAndResume", testSuspendAndResume),
 		]
 }
 
