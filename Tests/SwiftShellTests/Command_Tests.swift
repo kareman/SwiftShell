@@ -134,16 +134,22 @@ public class RunAsync_Tests: XCTestCase {
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
 
-	#if os(macOS)
 	func testStop() {
 		// Start a command that wouldn't ever exit normally
 		let command = runAsync("cat")
 
 		XCTAssertTrue(command.isRunning)
 		command.stop()
-		// command.isRunning is true until calling waitUntilExit()
-		// XCTAssertFalse(command.isRunning)
-		XCTAssertTrue(command.terminationReason() == Process.TerminationReason.uncaughtSignal)
+
+		// on macOS, command.isRunning is true until waitUntilExit() has been
+		// called, but the process's terminationReason becomes .uncaughtSignal.
+		// On Linx, command.isRunning becomes false once the command has been
+		// stopped, but the terminationReason does not become .uncaughtSignal
+		#if os(Linux)
+		XCTAssertFalse(command.isRunning)
+		#else
+		XCTAssertEqual(command.terminationReason(), Process.TerminationReason.uncaughtSignal)
+		#endif
 	}
 
 	func testInterrupt() {
@@ -152,14 +158,22 @@ public class RunAsync_Tests: XCTestCase {
 
 		XCTAssertTrue(command.isRunning)
 		command.interrupt()
-		// command.isRunning is true until calling waitUntilExit()
-		// XCTAssertFalse(command.isRunning)
-		XCTAssertTrue(command.terminationReason() == Process.TerminationReason.uncaughtSignal)
+
+		// on macOS, command.isRunning is true until waitUntilExit() has been
+		// called, but the process's terminationReason becomes .uncaughtSignal.
+		// On Linx, command.isRunning becomes false once the command has been
+		// interrupted, but the terminationReason does not become
+		// .uncaughtSignal
+		#if os(Linux)
+		XCTAssertFalse(command.isRunning)
+		#else
+		XCTAssertEqual(command.terminationReason(), Process.TerminationReason.uncaughtSignal)
+		#endif
 	}
 
 	/*
 	 Cannot test the suspend/resume calls reliably since command.isRunning is
-	 true until waitUntilExit() has been called
+	 true until waitUntilExit() has been called on macOS
 
 	func testSuspend() {
 		// Start a command that wouldn't ever exit normally
@@ -183,7 +197,6 @@ public class RunAsync_Tests: XCTestCase {
 		XCTAssertTrue(command.isRunning)
 	}
 	*/
-	#endif
 }
 
 public class RunAndPrint_Tests: XCTestCase {
@@ -254,6 +267,8 @@ extension RunAsync_Tests {
 		("testFinishThrowsErrorOnExitcodeNotZero", testFinishThrowsErrorOnExitcodeNotZero),
 		("testExitCode", testExitCode),
 		("testOnCompletion", testOnCompletion),
+		("testStop", testStop),
+		("testInterrupt", testInterrupt),
 		]
 }
 

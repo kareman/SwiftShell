@@ -9,6 +9,7 @@
 
 import Foundation
 import Dispatch
+import Glibc
 
 #if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS)) && !swift(>=3.1)
 typealias Process = Task
@@ -309,13 +310,72 @@ public final class AsyncCommand {
 	public var isRunning: Bool { return process.isRunning }
 
 	#if os(Linux)
+	fileprivate enum MaskType: String {
+		case blocked
+		case ignored
+	}
+
+	/**
+	Gets a hexidecimal mask related to signals the running process is either
+	blocking, ignoring, or has captured
+
+	- parameter type: Which relevant signal mask to return
+	- returns: A String containing the hexadecimal representation of the mask,
+			   or nil if there is no stdout output
+	*/
+	fileprivate func getSignalMask(_ type: MaskType) -> String? {
+		let mask = run(bash: "ps --no-headers -q \(process.processIdentifier) -o \(type.rawValue)").stdout
+		return mask.isEmpty ? nil : mask
+	}
+
+	/// Determines whether the running process is blocking the specified signal
+	fileprivate func isBlockingSignal(_ signum: Int32) -> Bool {
+		// If there is no mask, then the signal isn't blocked
+		guard let blockedMask = getSignalMask(.blocked) else { return false }
+
+		// If the output isn't in proper hexadecimal (like it should be), then
+		// it could be ignored, but we can't be sure. Return true, just to be safe
+		guard let blocked = Int(blockedMask, radix: 16) else { return true }
+
+		// Checks if the signals bit in the mask is 1 (1 == blocked)
+		return blocked & (1 << signum) == 1
+	}
+
+	/// Determines whether the running process is ignoring the specified signal
+	fileprivate func isIgnoringSignal(_ signum: Int32) -> Bool {
+		// If there is no mask, then the signal isn't ignored
+		guard let ignoredMask = getSignalMask(.ignored) else { return false }
+
+		// If the output isn't in proper hexadecimal (like it should be), then
+		// it could be ignored, but we can't be sure. Return true, just to be safe
+		guard let ignored = Int(ignoredMask, radix: 16) else { return true }
+
+		// Checks if the signals bit in the mask is 1 (1 == ignored)
+		return ignored & (1 << signum) == 1
+	}
+
+	/// Sends the specified signal to the currently running process
+	fileprivate func signal(_ signum: Int32) {
+		kill(process.processIdentifier, signum)
+	}
+
 	/// Terminates the command by sending the SIGTERM signal
-	@available(*, unavailable, message: "The terminate() function has not been implemented on Linux")
-	public func stop() {}
+	public func stop() {
+		// If the SIGTERM signal is being blocked or ignored by the process,
+		// then don't bother sending it
+		guard !(isBlockingSignal(SIGTERM) || isIgnoringSignal(SIGTERM)) else { return }
+
+		signal(SIGTERM)
+	}
 
 	/// Interrupts the command by sending the SIGINT signal
-	@available(*, unavailable, message: "The interrupt() function has not been implemented on Linux")
-	public func interrupt() {}
+	public func interrupt() {
+		// If the SIGINT signal is being blocked or ignored by the process,
+		// then don't bother sending it
+		guard !(isBlockingSignal(SIGINT) || isIgnoringSignal(SIGINT)) else { return }
+
+		signal(SIGINT)
+	}
 
 	/**
 	Temporarily suspends a command. Call resume() to resume a suspended command
@@ -431,7 +491,7 @@ extension CommandRunning {
 
 	- parameter executable: path to an executable file.
 	- parameter args: arguments to the executable.
-	- throws: 
+	- throws:
 		`CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 
 		`CommandError.inAccessibleExecutable(path: String)` if 'executable’ turned out to be not so executable after all.
