@@ -71,11 +71,11 @@ public class LazySplitGenerator_Tests: XCTestCase {
 	}
 
 	func testIntsLazySplit_NoEmptySlices() {
-		_ = {(s: [Int]) -> [[Int]] in
+		let split = {(s: [Int]) -> [[Int]] in
 			s.lazy.split(separator: 0, omittingEmptySubsequences: true).map(Array.init)
 		}
 
-		//XCTAssertEqual(split([1,2,0,4,0,6,7,8,9]), [[1,2],[4],[6,7,8,9]])
+		XCTAssertEqual(split([1,2,0,4,0,6,7,8,9]), [[1,2],[4],[6,7,8,9]])
 	}
 
 	func testPartialSourceLazySplit_AllowingEmptySlices() {
@@ -84,13 +84,13 @@ public class LazySplitGenerator_Tests: XCTestCase {
 			return PartialSourceLazySplitSequence({sg.next()}, separator: ",").map(String.init)
 		}
 
-		XCTAssertEqual(split("ab,c",",de,f"), ["ab","c","de","f"])
-		XCTAssertEqual(split(",a"),        ["","a"])
-		XCTAssertEqual(split("a,"),        ["a",""])
-		XCTAssertEqual(split("a,",",","b,",",,c"),  ["a","","b","","","c"])
-		XCTAssertEqual(split(""),          [""])
-		XCTAssertEqual(split(","),         ["",""])
-		XCTAssertEqual(split("ab"),        ["ab"])
+		XCTAssertEqual(split("ab,c",",de,f"),      ["ab","c","de","f"])
+		XCTAssertEqual(split(",a"),                ["","a"])
+		XCTAssertEqual(split("a,"),                ["a",""])
+		XCTAssertEqual(split("a,",",","b,",",,c"), ["a","","b","","","c"])
+		XCTAssertEqual(split(""),                  [""])
+		XCTAssertEqual(split(","),                 ["",""])
+		XCTAssertEqual(split("ab"),                ["ab"])
 
 		XCTAssertEqual(split(), [])
 		XCTAssertEqual(split("abc","def","g,","h"),       ["abcdefg","h"])
