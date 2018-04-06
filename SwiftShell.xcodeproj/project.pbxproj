@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA930AEB2077EC5C003E5703 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA930AEA2077EC5C003E5703 /* Process.swift */; };
 		OBJ_45 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Bash.swift */; };
 		OBJ_46 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Command.swift */; };
 		OBJ_47 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Context.swift */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		BA50D28D1E8DB923002BA4A5 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
+		BA930AEA2077EC5C003E5703 /* Process.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Process.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Command.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_11 /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Context.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_12 /* FileHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FileHandle.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -209,6 +211,7 @@
 				OBJ_10 /* Command.swift */,
 				OBJ_11 /* Context.swift */,
 				OBJ_12 /* FileHandle.swift */,
+				BA930AEA2077EC5C003E5703 /* Process.swift */,
 				OBJ_13 /* Files.swift */,
 				OBJ_14 /* String.swift */,
 				OBJ_15 /* General */,
@@ -354,6 +357,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_45 /* Bash.swift in Sources */,
+				BA930AEB2077EC5C003E5703 /* Process.swift in Sources */,
 				OBJ_46 /* Command.swift in Sources */,
 				OBJ_47 /* Context.swift in Sources */,
 				OBJ_48 /* FileHandle.swift in Sources */,
