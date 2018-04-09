@@ -44,11 +44,9 @@ public class Run_Tests: XCTestCase {
 		XCTAssertEqual( SwiftShell.run(bash:"echo one 1>&2").stderror, "one" )
 	}
 
-	/** FIXME: Alternates between passing and failing
 	func testCombinesOutput() {
-		XCTAssertEqual( SwiftShell.run(bash: "echo stdout && echo stderr > /dev/stderr", combineOutput: true).stdout, "stdout\nstderr\n" )
+		XCTAssertEqual( SwiftShell.run(bash: "echo stdout; echo stderr > /dev/stderr", combineOutput: true).stdout, "stdout\nstderr\n" )
 	}
-	*/
 
 	func testExecutableWithoutPath() {
 		XCTAssertEqual( SwiftShell.run("echo", "one").stdout, "one")
@@ -273,7 +271,7 @@ extension Run_Tests {
 		("testSinglelineOutput", testSinglelineOutput),
 		("testMultilineOutput", testMultilineOutput),
 		("testStandardErrorOutput", testStandardErrorOutput),
-		//("testCombinesOutput", testCombinesOutput),
+		("testCombinesOutput", testCombinesOutput),
 		("testExecutableWithoutPath", testExecutableWithoutPath),
 		("testSuccess", testSuccess),
 		("testAnd", testAnd),
