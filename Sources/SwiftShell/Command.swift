@@ -229,25 +229,14 @@ extension CommandRunning {
 
 // MARK: runAsync
 
-/** Output from the 'runAsync' methods. */
-public final class AsyncCommand {
-	public let stdout: ReadableStream
-	public let stderror: ReadableStream
+public class PrintedAsyncCommand {
 	fileprivate let process: Process
 
 	init(unlaunched process: Process, combineOutput: Bool) {
 		self.process = process
 
-		let outpipe = Pipe()
-		process.standardOutput = outpipe
-		stdout = FileHandleStream(outpipe.fileHandleForReading, encoding: main.encoding)
-
 		if combineOutput {
-			stderror = stdout
-		} else {
-			let errorpipe = Pipe()
-			process.standardError = errorpipe
-			stderror = FileHandleStream(errorpipe.fileHandleForReading, encoding: main.encoding)
+			process.standardError = process.standardOutput
 		}
 	}
 
@@ -301,7 +290,7 @@ public final class AsyncCommand {
 	- returns: self
 	- throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 	*/
-	@discardableResult public func finish() throws -> AsyncCommand {
+	@discardableResult public func finish() throws -> Self {
 		try process.finish()
 		return self
 	}
@@ -326,7 +315,7 @@ public final class AsyncCommand {
 	///
 	/// - Parameter handler: A closure taking this AsyncCommand as input, returning nothing.
 	/// - Returns: This AsyncCommand.
-	@discardableResult public func onCompletion(_ handler: @escaping (AsyncCommand) -> Void) -> AsyncCommand {
+	@discardableResult public func onCompletion(_ handler: @escaping (PrintedAsyncCommand) -> Void) -> Self {
 		process.terminationHandler = { _ in
 			handler(self)
 		}
@@ -334,8 +323,29 @@ public final class AsyncCommand {
 	}
 }
 
-extension CommandRunning {
+/** Output from the 'runAsync' methods. */
+public final class AsyncCommand: PrintedAsyncCommand {
+	public let stdout: ReadableStream
+	public let stderror: ReadableStream
 
+	override init(unlaunched process: Process, combineOutput: Bool) {
+		let outpipe = Pipe()
+		process.standardOutput = outpipe
+		stdout = FileHandleStream(outpipe.fileHandleForReading, encoding: main.encoding)
+
+		if combineOutput {
+			stderror = stdout
+		} else {
+			let errorpipe = Pipe()
+			process.standardError = errorpipe
+			stderror = FileHandleStream(errorpipe.fileHandleForReading, encoding: main.encoding)
+		}
+
+		super.init(unlaunched: process, combineOutput: combineOutput)
+	}
+}
+
+extension CommandRunning {
 	/**
 	Run executable and return before it is finished.
 
@@ -347,6 +357,11 @@ extension CommandRunning {
 	public func runAsync(_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncCommand {
 		let stringargs = args.flatten().map(String.init(describing:))
 		return AsyncCommand(launch: createProcess(executable, args: stringargs), file: file, line: line)
+	}
+
+	public func runAsyncAndPrint(_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> PrintedAsyncCommand {
+		let stringargs = args.flatten().map(String.init(describing:))
+		return PrintedAsyncCommand(launch: createProcess(executable, args: stringargs), file: file, line: line)
 	}
 }
 
@@ -399,6 +414,10 @@ Run executable and return before it is finished.
 */
 public func runAsync(_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> AsyncCommand {
 	return main.runAsync(executable, args, file: file, line: line)
+}
+
+public func runAsyncAndPrint(_ executable: String, _ args: Any ..., file: String = #file, line: Int = #line) -> PrintedAsyncCommand {
+	return main.runAsyncAndPrint(executable, args, file: file, line: line)
 }
 
 /**

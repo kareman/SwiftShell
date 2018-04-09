@@ -9,6 +9,7 @@
 @testable import SwiftShell
 import XCTest
 import Foundation
+
 #if os(Linux)
 import Glibc
 #endif
@@ -42,6 +43,12 @@ public class Run_Tests: XCTestCase {
 	func testStandardErrorOutput() {
 		XCTAssertEqual( SwiftShell.run(bash:"echo one 1>&2").stderror, "one" )
 	}
+
+	/** FIXME: Alternates between passing and failing
+	func testCombinesOutput() {
+		XCTAssertEqual( SwiftShell.run(bash: "echo stdout && echo stderr > /dev/stderr", combineOutput: true).stdout, "stdout\nstderr\n" )
+	}
+	*/
 
 	func testExecutableWithoutPath() {
 		XCTAssertEqual( SwiftShell.run("echo", "one").stdout, "one")
@@ -198,8 +205,7 @@ public class RunAsync_Tests: XCTestCase {
 	*/
 }
 
-public class RunAndPrint_Tests: XCTestCase {
-
+public class XCTestCase_TestOutput: XCTestCase {
 	var test_stdout: FileHandle!
 	var test_stderr: FileHandle!
 
@@ -212,6 +218,23 @@ public class RunAndPrint_Tests: XCTestCase {
 		main.stderror = FileHandleStream(errorpipe.fileHandleForWriting, encoding: .utf8)
 		test_stderr = errorpipe.fileHandleForReading
 	}
+}
+
+public class RunAsyncAndPrint_Tests: XCTestCase_TestOutput {
+	func testReturnsStandardOutput() {
+		AssertDoesNotThrow { try runAsyncAndPrint("/bin/echo", "one", "two" ).finish() }
+
+		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
+	}
+
+	func testReturnsStandardError() {
+		AssertDoesNotThrow { try runAsyncAndPrint(bash: "echo one two > /dev/stderr" ).finish() }
+
+		XCTAssertEqual( test_stderr.readSome(encoding: .utf8), "one two\n" )
+	}
+}
+
+public class RunAndPrint_Tests: XCTestCase_TestOutput {
 
 	func testReturnsStandardOutput() {
 		AssertDoesNotThrow { try runAndPrint("/bin/echo", "one", "two" ) }
@@ -250,6 +273,7 @@ extension Run_Tests {
 		("testSinglelineOutput", testSinglelineOutput),
 		("testMultilineOutput", testMultilineOutput),
 		("testStandardErrorOutput", testStandardErrorOutput),
+		//("testCombinesOutput", testCombinesOutput),
 		("testExecutableWithoutPath", testExecutableWithoutPath),
 		("testSuccess", testSuccess),
 		("testAnd", testAnd),
@@ -269,6 +293,13 @@ extension RunAsync_Tests {
 		("testStop", testStop),
 		("testInterrupt", testInterrupt),
 		// ("testSuspendAndResume", testSuspendAndResume),
+		]
+}
+
+extension RunAsyncAndPrint_Tests {
+	public static var allTests = [
+		("testReturnsStandardOutput", testReturnsStandardOutput),
+		("testReturnsStandardError", testReturnsStandardError),
 		]
 }
 

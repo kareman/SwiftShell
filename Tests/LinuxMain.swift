@@ -14,6 +14,7 @@ let tests: [XCTestCaseEntry] = [
 	testCase(Open.allTests),
 	testCase(Run_Tests.allTests),
 	testCase(RunAsync_Tests.allTests),
+	testCase(RunAsyncAndPrint_Tests.allTests),
 	testCase(RunAndPrint_Tests.allTests),
 	testCase(MainContext_Tests.allTests),
 	testCase(CopiedCustomContext_Tests.allTests),

@@ -36,6 +36,10 @@ extension CommandRunning {
 		return runAsync("/bin/bash", "-c", bashcommand, file: file, line: line)
 	}
 
+	public func runAsyncAndPrint(bash bashcommand: String, file: String = #file, line: Int = #line) -> PrintedAsyncCommand {
+		return runAsyncAndPrint("/bin/bash", "-c", bashcommand, file: file, line: line)
+	}
+
 	/**
 	Run bash command and print output and errors.
 
@@ -68,6 +72,10 @@ Run bash command and return before it is finished.
 */
 public func runAsync(bash bashcommand: String, file: String = #file, line: Int = #line) -> AsyncCommand {
 	return main.runAsync(bash: bashcommand, file: file, line: line)
+}
+
+public func runAsyncAndPrint(bash bashcommand: String, file: String = #file, line: Int = #line) -> PrintedAsyncCommand {
+	return main.runAsyncAndPrint(bash: bashcommand, file: file, line: line)
 }
 
 /**
