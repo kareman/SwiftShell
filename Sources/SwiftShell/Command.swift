@@ -57,7 +57,7 @@ extension CommandRunning {
 		If `executable` is not a path and a path for an executable file of that name can be found, return that path.
 		Otherwise just return `executable`.
 		*/
-		func pathForExecutable(executable: String) -> String {
+		func path(for executable: String) -> String {
 			guard !executable.contains("/") else {
 				return executable
 			}
@@ -67,7 +67,7 @@ extension CommandRunning {
 
 		let process = Process()
 		process.arguments = args
-		process.launchPath = pathForExecutable(executable: executable)
+		process.launchPath = path(for: executable)
 
 		process.environment = context.env
 		process.currentDirectoryPath = context.currentdirectory
