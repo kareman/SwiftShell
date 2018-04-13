@@ -10,4 +10,4 @@ install:
 script:
 - swift build
 - swift test
-- echo not running 'if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pod repo update --silent; pod lib lint --allow-warnings; fi'
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pod repo update --silent; pod lib lint --allow-warnings; fi

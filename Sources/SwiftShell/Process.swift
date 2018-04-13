@@ -5,6 +5,8 @@
 //  Created by Kåre Morstøl on 06/04/2018.
 //
 
+#if !(os(iOS) || os(tvOS) || os(watchOS))
+
 import Foundation
 
 // MARK: Process
@@ -124,4 +126,5 @@ extension Process {
 		return signal(SIGCONT) == 0
 	}
 }
+#endif
 #endif
