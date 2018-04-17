@@ -7,7 +7,7 @@
 import Foundation
 
 extension FileHandle {
-	/// Read what is available, as a String.
+	/// Reads what is available, as a String.
 	/// - Parameter encoding: the encoding to use.
 	/// - Returns: The contents as a String, or nil the end has been reached.
 	public func readSome(encoding: String.Encoding) -> String? {
@@ -21,7 +21,7 @@ extension FileHandle {
 		return result
 	}
 
-	/// Read to the end, as a String.
+	/// Reads to the end, as a String.
 	/// - Parameter encoding: the encoding to use.
 	public func read(encoding: String.Encoding) -> String {
 		let data = self.readDataToEndOfFile()
@@ -118,21 +118,18 @@ extension ReadableStream {
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	extension ReadableStream {
-		/// `handler` will be called whenever there is new output available.
-		/// - Note: if the stream is read from outside of the handler, or more than once inside
-		/// the handler, it may be called once when stream is closed and empty.
+		/// Sets code to be executed whenever there is new output available.
+		/// - Note: if the stream is read from outside of `handler`, or more than once inside
+		/// it, it may be called once when stream is closed and empty.
 		public func onOutput(_ handler: @escaping (ReadableStream) -> Void) {
 			filehandle.readabilityHandler = { [weak self] _ in
-				guard let wSelf = self else {
-					return
-				}
-				handler(wSelf)
+				self.map(handler)
 			}
 		}
 
-		/// `handler` will be called whenever there is new text output available.
-		/// - Note: if the stream is read from outside of the handler, or more than once inside
-		/// the handler, it may be called once when stream is closed and empty.
+		/// Sets code to be executed whenever there is new text output available.
+		/// - Note: if the stream is read from outside of `handler`, or more than once inside
+		/// it, it may be called once when stream is closed and empty.
 		public func onStringOutput(_ handler: @escaping (String) -> Void) {
 			self.onOutput { stream in
 				if let output = stream.readSome() {

@@ -9,7 +9,7 @@
 
 import Foundation
 
-/// Let Strings run commands using itself as stdin.
+/// Lets String run commands using itself as stdin.
 extension String: CommandRunning {
 	public var context: Context {
 		var context = CustomContext(main)
@@ -25,7 +25,7 @@ extension String: CommandRunning {
 #endif
 
 extension String {
-	/// Split text into lines (as separated by newlines).
+	/// Splits text into lines (as separated by newlines).
 	public func lines() -> [String] {
 		return split(separator: "\n").map(String.init)
 	}

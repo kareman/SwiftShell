@@ -90,17 +90,19 @@ extension CommandLine {
 }
 
 public final class MainContext: Context, CommandRunning {
-	/** 
-	The default character encoding used throughout SwiftShell.
 
-	Changing this has no effect on stdin, stdout and stderror as their encodings are set individually.
-	*/
+	/// The default character encoding used throughout SwiftShell.
+	/// Only affects stdin, stdout and stderror if they have not been used yet.
 	public var encoding = String.Encoding.utf8 // TODO: get encoding from environmental variable LC_CTYPE.
 
 	public lazy var env = ProcessInfo.processInfo.environment as [String: String]
-	public lazy var stdin: ReadableStream = { FileHandleStream(FileHandle.standardInput, encoding: self.encoding) }()
+	public lazy var stdin: ReadableStream = {
+		FileHandleStream(FileHandle.standardInput, encoding: self.encoding)
+	}()
 	public lazy var stdout: WritableStream = { StdoutStream.default }()
-	public lazy var stderror: WritableStream = { FileHandleStream(FileHandle.standardError, encoding: self.encoding) }()
+	public lazy var stderror: WritableStream = {
+		FileHandleStream(FileHandle.standardError, encoding: self.encoding)
+	}()
 
 	/**
 	The current working directory.
@@ -131,8 +133,7 @@ public final class MainContext: Context, CommandRunning {
 	/** The path to the currently running executable. Will be empty in playgrounds. */
 	public private(set) lazy var path: String = CommandLine.safeArguments.first ?? ""
 
-	fileprivate init() {
-	}
+	fileprivate init() {	}
 }
 
 public let main = MainContext()

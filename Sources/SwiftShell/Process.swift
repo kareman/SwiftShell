@@ -12,7 +12,7 @@ import Foundation
 // MARK: Process
 
 extension Process {
-	/// Launch process.
+	/// Launches process.
 	///
 	/// - throws: CommandError.inAccessibleExecutable if command could not be executed.
 	public func launchThrowably() throws {
@@ -22,7 +22,7 @@ extension Process {
 		launch()
 	}
 
-	/// Wait until process is finished.
+	/// Waits until process is finished.
 	///
 	/// - throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)`
 	///   if the exit code is anything but 0.

@@ -27,21 +27,26 @@ extension CommandRunning {
 	}
 
 	/**
-	Run bash command and return before it is finished.
+	Runs bash command and returns before it is finished.
 
 	- parameter bashcommand: the bash shell command.
-	- returns: an AsyncCommand struct with standard output, standard error and a 'finish' function.
 	*/
 	public func runAsync(bash bashcommand: String, file: String = #file, line: Int = #line) -> AsyncCommand {
 		return runAsync("/bin/bash", "-c", bashcommand, file: file, line: line)
 	}
 
+	/**
+	Runs bash command and returns before it is finished.
+	Any output is printed to standard output and standard error, respectively.
+
+	- parameter bashcommand: the bash shell command.
+	*/
 	public func runAsyncAndPrint(bash bashcommand: String, file: String = #file, line: Int = #line) -> PrintedAsyncCommand {
 		return runAsyncAndPrint("/bin/bash", "-c", bashcommand, file: file, line: line)
 	}
 
 	/**
-	Run bash command and print output and errors.
+	Runs bash command and prints output and errors.
 
 	- parameter bashcommand: the bash shell command.
 	- throws: a CommandError.returnedErrorCode if the return code is anything but 0.
@@ -65,21 +70,26 @@ extension CommandRunning {
 }
 
 /**
-Run bash command and return before it is finished.
+Runs bash command and returns before it is finished.
 
 - parameter bashcommand: the bash shell command.
-- returns: an AsyncCommand struct with standard output, standard error and a 'finish' function.
 */
 public func runAsync(bash bashcommand: String, file: String = #file, line: Int = #line) -> AsyncCommand {
 	return main.runAsync(bash: bashcommand, file: file, line: line)
 }
 
+/**
+Runs bash command and returns before it is finished.
+Any output is printed to standard output and standard error, respectively.
+
+- parameter bashcommand: the bash shell command.
+*/
 public func runAsyncAndPrint(bash bashcommand: String, file: String = #file, line: Int = #line) -> PrintedAsyncCommand {
 	return main.runAsyncAndPrint(bash: bashcommand, file: file, line: line)
 }
 
 /**
-Run bash command and print output and errors.
+Runs bash command and prints output and errors.
 
 - parameter bashcommand: the bash shell command.
 - throws: a CommandError.returnedErrorCode if the return code is anything but 0.
