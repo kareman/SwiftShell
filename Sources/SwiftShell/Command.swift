@@ -348,6 +348,17 @@ public final class AsyncCommand: PrintedAsyncCommand {
 
 		super.init(unlaunched: process, combineOutput: combineOutput)
 	}
+
+	/// Takes a closure to be called when the command has finished.
+	///
+	/// - Parameter handler: A closure taking this AsyncCommand as input, returning nothing.
+	/// - Returns: This AsyncCommand.
+	@discardableResult public override func onCompletion(_ handler: @escaping (AsyncCommand) -> Void) -> Self {
+		process.terminationHandler = { _ in
+			handler(self)
+		}
+		return self
+	}
 }
 
 extension CommandRunning {

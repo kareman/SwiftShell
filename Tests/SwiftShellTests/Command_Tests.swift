@@ -186,7 +186,7 @@ public class RunAsync_Tests: XCTestCase {
 	}
 
 	/*
-	 Cannot test the suspend/resume calls reliably
+	Cannot test the suspend/resume calls reliably
 
 	func testSuspendAndResume() {
 		// Start a command that wouldn't ever exit normally
@@ -229,6 +229,16 @@ public class RunAsyncAndPrint_Tests: XCTestCase_TestOutput {
 		AssertDoesNotThrow { try runAsyncAndPrint(bash: "echo one two > /dev/stderr" ).finish() }
 
 		XCTAssertEqual( test_stderr.readSome(encoding: .utf8), "one two\n" )
+	}
+
+	func testOnCompletion() {
+		let expectcompletion = expectation(description: "onCompletion will be called when command has finished.")
+
+		runAsyncAndPrint("echo").onCompletion { command in
+			XCTAssertFalse(command.isRunning)
+			expectcompletion.fulfill()
+		}
+		waitForExpectations(timeout: 0.5, handler: nil)
 	}
 }
 
