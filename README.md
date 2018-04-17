@@ -244,7 +244,7 @@ reader.readData()
 
 All Contexts (`CustomContext` and `main`) implement `CommandRunning`, which means they can run commands using themselves as the Context. ReadableStream and String can also run commands, they use `main` as the Context and themselves as `.stdin`. As a shortcut you can just use `run(...)` instead of `main.run(...)`
 
-There are three different ways of running a command:
+There are 4 different ways of running a command:
 
 #### Run
 
@@ -304,7 +304,7 @@ let command = runAsync("cmd", "-n", 245).onCompletion { command in
 	// be notified when the command is finished.
 }
 command.stdout.onOutput { stdout in 
-	// be notified when the command produces output.	
+	// be notified when the command produces output (only on macOS).	
 }
 
 // do something with ‘command’ while it is still running.
@@ -312,42 +312,50 @@ command.stdout.onOutput { stdout in
 try command.finish() // wait for it to finish.
 ```
 
-`runAsync` launches a command and continues before it's finished. It returns this:
+`runAsync` launches a command and continues before it's finished. It returns `AsyncCommand` which contains this:
 
 ```swift
-/// Output from the 'runAsync' methods.
-public final class AsyncCommand {
-	public let stdout: ReadableStream
-	public let stderror: ReadableStream
+    public let stdout: ReadableStream
+    public let stderror: ReadableStream
 
-	/// Is the command still running?
-	public var isRunning: Bool
+    /// Is the command still running?
+    public var isRunning: Bool { get }
 
-	/// Terminates command.
-	public func stop()
+    /// Terminates the command by sending the SIGTERM signal.
+    public func stop()
 
-	/// Waits for command to finish.
-	/// - returns: itself
-	/// - throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
-	public func finish() throws -> AsyncCommand
+    /// Interrupts the command by sending the SIGINT signal.
+    public func interrupt()
 
-	/// Waits for command to finish, then returns with exit code.
-	public func exitcode() -> Int
+    /// Temporarily suspends a command. Call resume() to resume a suspended command.
+    public func suspend() -> Bool
 
-	/// Takes a closure to be called when the command has finished.
-	/// - Parameter handler: A closure taking this AsyncCommand as input, returning nothing.
-	/// - Returns: This AsyncCommand.
-	public func onCompletion(_ handler: @escaping (AsyncCommand) -> Void) -> AsyncCommand
-}
+    /// Resumes a command previously suspended with suspend().
+    public func resume() -> Bool
+
+    /// Waits for this command to finish.
+    public func finish() throws -> Self
+
+    /// Waits for command to finish, then returns with exit code.
+    public func exitcode() -> Int
+
+    /// Waits for the command to finish, then returns why the command terminated.
+    /// - returns: `.exited` if the command exited normally, otherwise `.uncaughtSignal`.
+    public func terminationReason() -> Process.TerminationReason
+
+    /// Takes a closure to be called when the command has finished.
+    public func onCompletion(_ handler: @escaping (AsyncCommand) -> Void) -> Self
 ```
 
 You can process standard output and standard error, and optionally wait until it's finished and handle any errors.
 
 If you read all of command.stderror or command.stdout it will automatically wait for the command to close its streams (and presumably finish running). You can still call `finish()` to check for errors.
 
+`runAsyncAndPrint` does the same as `runAsync`, but prints any output directly and it's return type `PrintedAsyncCommand` doesn't have the `.stdout` and `.stderror` properties.
+
 #### Parameters
 
-The 3 `run` functions above take 2 different types of parameters:
+The `run`* functions above take 2 different types of parameters:
 
 ##### (_ executable: String, _ args: Any ...)
 
@@ -385,10 +393,10 @@ If the command provided to `runAsync` could not be launched for any reason the p
 
 ```swift
 let command = runAsync("cmd", "-n", 245)
-// do something with command.stderror or command.stdoutCommandError
+// ...
 do {
 	try command.finish()
-} catch CommandError.ReturnedErrorCode(let error) {
+} catch CommandError.returnedErrorCode(let error) {
 	// use error.command or error.errorcode
 }
 ```
@@ -396,7 +404,7 @@ do {
 The `runAndPrint` command can also throw this error, in addition to this one if the command could not be launched:
 
 ```swift
-} catch CommandError.InAccessibleExecutable(let path) {
+} catch CommandError.inAccessibleExecutable(let path) {
 	// ‘path’ is the full path to the executable
 }
 ```
