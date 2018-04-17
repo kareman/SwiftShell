@@ -14,7 +14,7 @@
     <a title="AsyncCommand Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SwiftShell Docs</a> (70% documented)</p>
+        <p><a href="../index.html">SwiftShell Docs</a> (73% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -41,6 +41,9 @@
                 <a href="../Classes/MainContext.html">MainContext</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/PrintedAsyncCommand.html">PrintedAsyncCommand</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/RunOutput.html">RunOutput</a>
               </li>
               <li class="nav-group-task">
@@ -52,10 +55,10 @@
             <a href="../Global Variables.html">Global Variables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Global Variables.html#/s:10SwiftShell5FilesSo11FileManagerCv">Files</a>
+                <a href="../Global Variables.html#/s:10SwiftShell5FilesSo11FileManagerCvp">Files</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a>
+                <a href="../Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a>
               </li>
             </ul>
           </li>
@@ -86,6 +89,9 @@
                 <a href="../Extensions/Process.html">Process</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/Process.html">Process</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/String.html">String</a>
               </li>
             </ul>
@@ -95,9 +101,6 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:10SwiftShell1poi10Foundation3URLVAE_SStF">+(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Functions.html#/s:10SwiftShell2eeoiSbAA12CommandErrorO_ADtF">==(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:10SwiftShell4exits5NeverOs5Error_p_SS4fileSi4linetF">exit(_:file:line:)</a>
@@ -118,22 +121,28 @@
                 <a href="../Functions.html#/s:10SwiftShell4openAA14WritableStream_pSS10forWriting_Sb9overwriteSS10FoundationE8EncodingV8encodingtKF">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:10SwiftShell3runAA9RunOutputCSS_SayypGdSb07combineE0tF">run(_:_:combineOutput:)</a>
+                <a href="../Functions.html#/s:10SwiftShell3runAA9RunOutputCSS_ypdSb07combineE0tF">run(_:_:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:10SwiftShell3runAA9RunOutputCSS4bash_Sb07combineE0tF">run(bash:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:10SwiftShell11runAndPrintySS_SayypGdtKF">runAndPrint(_:_:)</a>
+                <a href="../Functions.html#/s:10SwiftShell11runAndPrintySS_ypdtKF">runAndPrint(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:10SwiftShell11runAndPrintySS4bash_tKF">runAndPrint(bash:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:10SwiftShell8runAsyncAA0D7CommandCSS_SayypGdSS4fileSi4linetF">runAsync(_:_:file:line:)</a>
+                <a href="../Functions.html#/s:10SwiftShell8runAsyncAA0D7CommandCSS_ypdSS4fileSi4linetF">runAsync(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:10SwiftShell8runAsyncAA0D7CommandCSS4bash_SS4fileSi4linetF">runAsync(bash:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:10SwiftShell16runAsyncAndPrintAA07PrintedD7CommandCSS_ypdSS4fileSi4linetF">runAsyncAndPrint(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:10SwiftShell16runAsyncAndPrintAA07PrintedD7CommandCSS4bash_SS4fileSi4linetF">runAsyncAndPrint(bash:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:10SwiftShell7streamsAA14WritableStream_p_AA08ReadableE0_ptyF">streams()</a>
@@ -182,7 +191,7 @@
             <h1>AsyncCommand</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">AsyncCommand</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">AsyncCommand</span><span class="p">:</span> <span class="kt"><a href="../Classes/PrintedAsyncCommand.html">PrintedAsyncCommand</a></span></code></pre>
 
                 </div>
               </div>
@@ -195,9 +204,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell12AsyncCommandC6stdoutAA14ReadableStream_pv"></a>
+                    <a name="/s:10SwiftShell12AsyncCommandC6stdoutAA14ReadableStream_pvp"></a>
                     <a name="//apple_ref/swift/Property/stdout" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell12AsyncCommandC6stdoutAA14ReadableStream_pv">stdout</a>
+                    <a class="token" href="#/s:10SwiftShell12AsyncCommandC6stdoutAA14ReadableStream_pvp">stdout</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -222,9 +231,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell12AsyncCommandC8stderrorAA14ReadableStream_pv"></a>
+                    <a name="/s:10SwiftShell12AsyncCommandC8stderrorAA14ReadableStream_pvp"></a>
                     <a name="//apple_ref/swift/Property/stderror" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell12AsyncCommandC8stderrorAA14ReadableStream_pv">stderror</a>
+                    <a class="token" href="#/s:10SwiftShell12AsyncCommandC8stderrorAA14ReadableStream_pvp">stderror</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -249,131 +258,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell12AsyncCommandC9isRunningSbv"></a>
-                    <a name="//apple_ref/swift/Property/isRunning" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell12AsyncCommandC9isRunningSbv">isRunning</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Is the command still running?</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">isRunning</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10SwiftShell12AsyncCommandC4stopyyF"></a>
-                    <a name="//apple_ref/swift/Method/stop()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell12AsyncCommandC4stopyyF">stop()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Terminates command.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">stop</span><span class="p">()</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10SwiftShell12AsyncCommandC6finishACyKF"></a>
-                    <a name="//apple_ref/swift/Method/finish()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell12AsyncCommandC6finishACyKF">finish()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Wait for this command to finish.</p>
-<div class="aside aside-warning">
-    <p class="aside-title">Warning</p>
-    Will hang if the unread output of either standard output or standard error is larger than 64KB (<a href="https://github.com/kareman/SwiftShell/issues/52">#52</a>). To work around this problem, read all the output first, even if you&rsquo;re not going to use it.
-
-</div>
-<div class="aside aside-throws">
-    <p class="aside-title">Throws</p>
-    <code>CommandError.returnedErrorCode(command: String, errorcode: Int)</code> if the exit code is anything but 0.
-
-</div>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">finish</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">AsyncCommand</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>self</p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10SwiftShell12AsyncCommandC8exitcodeSiyF"></a>
-                    <a name="//apple_ref/swift/Method/exitcode()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell12AsyncCommandC8exitcodeSiyF">exitcode()</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Wait for command to finish, then return with exit code.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">exitcode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10SwiftShell12AsyncCommandC12onCompletionACyACcF"></a>
+                    <a name="/s:10SwiftShell12AsyncCommandC12onCompletionACXDyACcF"></a>
                     <a name="//apple_ref/swift/Method/onCompletion(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell12AsyncCommandC12onCompletionACyACcF">onCompletion(_:)</a>
+                    <a class="token" href="#/s:10SwiftShell12AsyncCommandC12onCompletionACXDyACcF">onCompletion(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -388,7 +275,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">onCompletion</span><span class="p">(</span><span class="n">_</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">AsyncCommand</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncCommand</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span> <span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">onCompletion</span><span class="p">(</span><span class="n">_</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">AsyncCommand</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
                       </div>
@@ -423,7 +310,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2018-03-04)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2018-04-18)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

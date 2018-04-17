@@ -13,7 +13,7 @@
     <a title="Functions  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftShell Docs</a> (70% documented)</p>
+        <p><a href="index.html">SwiftShell Docs</a> (73% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -40,6 +40,9 @@
                 <a href="Classes/MainContext.html">MainContext</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/PrintedAsyncCommand.html">PrintedAsyncCommand</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/RunOutput.html">RunOutput</a>
               </li>
               <li class="nav-group-task">
@@ -51,10 +54,10 @@
             <a href="Global Variables.html">Global Variables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:10SwiftShell5FilesSo11FileManagerCv">Files</a>
+                <a href="Global Variables.html#/s:10SwiftShell5FilesSo11FileManagerCvp">Files</a>
               </li>
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a>
+                <a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a>
               </li>
             </ul>
           </li>
@@ -85,6 +88,9 @@
                 <a href="Extensions/Process.html">Process</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/Process.html">Process</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/String.html">String</a>
               </li>
             </ul>
@@ -94,9 +100,6 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell1poi10Foundation3URLVAE_SStF">+(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:10SwiftShell2eeoiSbAA12CommandErrorO_ADtF">==(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell4exits5NeverOs5Error_p_SS4fileSi4linetF">exit(_:file:line:)</a>
@@ -117,22 +120,28 @@
                 <a href="Functions.html#/s:10SwiftShell4openAA14WritableStream_pSS10forWriting_Sb9overwriteSS10FoundationE8EncodingV8encodingtKF">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:10SwiftShell3runAA9RunOutputCSS_SayypGdSb07combineE0tF">run(_:_:combineOutput:)</a>
+                <a href="Functions.html#/s:10SwiftShell3runAA9RunOutputCSS_ypdSb07combineE0tF">run(_:_:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell3runAA9RunOutputCSS4bash_Sb07combineE0tF">run(bash:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:10SwiftShell11runAndPrintySS_SayypGdtKF">runAndPrint(_:_:)</a>
+                <a href="Functions.html#/s:10SwiftShell11runAndPrintySS_ypdtKF">runAndPrint(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell11runAndPrintySS4bash_tKF">runAndPrint(bash:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:10SwiftShell8runAsyncAA0D7CommandCSS_SayypGdSS4fileSi4linetF">runAsync(_:_:file:line:)</a>
+                <a href="Functions.html#/s:10SwiftShell8runAsyncAA0D7CommandCSS_ypdSS4fileSi4linetF">runAsync(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell8runAsyncAA0D7CommandCSS4bash_SS4fileSi4linetF">runAsync(bash:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:10SwiftShell16runAsyncAndPrintAA07PrintedD7CommandCSS_ypdSS4fileSi4linetF">runAsyncAndPrint(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:10SwiftShell16runAsyncAndPrintAA07PrintedD7CommandCSS4bash_SS4fileSi4linetF">runAsyncAndPrint(bash:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell7streamsAA14WritableStream_p_AA08ReadableE0_ptyF">streams()</a>
@@ -263,7 +272,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Run bash command and return before it is finished.</p>
+                        <p>Runs bash command and returns before it is finished.</p>
 
                       </div>
                       <div class="declaration">
@@ -293,9 +302,52 @@
                           </tbody>
                         </table>
                       </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftShell16runAsyncAndPrintAA07PrintedD7CommandCSS4bash_SS4fileSi4linetF"></a>
+                    <a name="//apple_ref/swift/Function/runAsyncAndPrint(bash:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell16runAsyncAndPrintAA07PrintedD7CommandCSS4bash_SS4fileSi4linetF">runAsyncAndPrint(bash:file:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Runs bash command and returns before it is finished.
+Any output is printed to standard output and standard error, respectively.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsyncAndPrint</span><span class="p">(</span><span class="n">bash</span> <span class="nv">bashcommand</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/PrintedAsyncCommand.html">PrintedAsyncCommand</a></span></code></pre>
+
+                        </div>
+                      </div>
                       <div>
-                        <h4>Return Value</h4>
-                        <p>an AsyncCommand struct with standard output, standard error and a &lsquo;finish&rsquo; function.</p>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bashcommand</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the bash shell command.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -313,7 +365,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Run bash command and print output and errors.</p>
+                        <p>Runs bash command and prints output and errors.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     a CommandError.returnedErrorCode if the return code is anything but 0.
@@ -375,7 +427,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Print message to standard error and halt execution.</p>
+                        <p>Prints message to standard error and terminates the application.</p>
 
                       </div>
                       <div class="declaration">
@@ -437,7 +489,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Print error to standard error and halt execution.</p>
+                        <p>Prints error to standard error and terminates the application.</p>
 
                       </div>
                       <div class="declaration">
@@ -478,44 +530,6 @@
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/CommandError"></a>
-                <a name="//apple_ref/swift/Section/CommandError" class="dashAnchor"></a>
-                <a href="#/CommandError">
-                  <h3 class="section-name">CommandError</h3>
-                </a>
-              </div>
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:10SwiftShell2eeoiSbAA12CommandErrorO_ADtF"></a>
-                    <a name="//apple_ref/swift/Function/==(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell2eeoiSbAA12CommandErrorO_ADtF">==(_:_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">e1</span><span class="p">:</span> <span class="kt"><a href="Enums/CommandError.html">CommandError</a></span><span class="p">,</span> <span class="nv">e2</span><span class="p">:</span> <span class="kt"><a href="Enums/CommandError.html">CommandError</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <div class="task-name-container">
                 <a name="/Global%20functions"></a>
                 <a name="//apple_ref/swift/Section/Global functions" class="dashAnchor"></a>
                 <a href="#/Global%20functions">
@@ -526,9 +540,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell3runAA9RunOutputCSS_SayypGdSb07combineE0tF"></a>
+                    <a name="/s:10SwiftShell3runAA9RunOutputCSS_ypdSb07combineE0tF"></a>
                     <a name="//apple_ref/swift/Function/run(_:_:combineOutput:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell3runAA9RunOutputCSS_SayypGdSb07combineE0tF">run(_:_:combineOutput:)</a>
+                    <a class="token" href="#/s:10SwiftShell3runAA9RunOutputCSS_ypdSb07combineE0tF">run(_:_:combineOutput:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -596,9 +610,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell8runAsyncAA0D7CommandCSS_SayypGdSS4fileSi4linetF"></a>
+                    <a name="/s:10SwiftShell8runAsyncAA0D7CommandCSS_ypdSS4fileSi4linetF"></a>
                     <a name="//apple_ref/swift/Function/runAsync(_:_:file:line:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell8runAsyncAA0D7CommandCSS_SayypGdSS4fileSi4linetF">runAsync(_:_:file:line:)</a>
+                    <a class="token" href="#/s:10SwiftShell8runAsyncAA0D7CommandCSS_ypdSS4fileSi4linetF">runAsync(_:_:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -606,10 +620,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Run executable and return before it is finished.</p>
+                        <p>Runs executable and returns before it is finished.</p>
 <div class="aside aside-warning">
     <p class="aside-title">Warning</p>
-    will crash if ‘executable’ could not be launched.
+    Application will be terminated if ‘executable’ could not be launched.
 
 </div>
 
@@ -634,7 +648,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>path to an executable file.</p>
+                                  <p>Path to an executable file. If not then exit.</p>
                                 </div>
                               </td>
                             </tr>
@@ -646,16 +660,12 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>arguments to the executable.</p>
+                                  <p>Arguments to the executable.</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>an AsyncCommand with standard output, standard error and a &lsquo;finish&rsquo; function.</p>
                       </div>
                     </section>
                   </div>
@@ -663,9 +673,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:10SwiftShell11runAndPrintySS_SayypGdtKF"></a>
-                    <a name="//apple_ref/swift/Function/runAndPrint(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:10SwiftShell11runAndPrintySS_SayypGdtKF">runAndPrint(_:_:)</a>
+                    <a name="/s:10SwiftShell16runAsyncAndPrintAA07PrintedD7CommandCSS_ypdSS4fileSi4linetF"></a>
+                    <a name="//apple_ref/swift/Function/runAsyncAndPrint(_:_:file:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell16runAsyncAndPrintAA07PrintedD7CommandCSS_ypdSS4fileSi4linetF">runAsyncAndPrint(_:_:file:line:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -673,7 +683,71 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Run executable and print output and errors.</p>
+                        <p>Runs executable and returns before it is finished.
+Any output is printed to standard output and standard error, respectively.</p>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    Application will be terminated if ‘executable’ could not be launched.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">runAsyncAndPrint</span><span class="p">(</span><span class="n">_</span> <span class="nv">executable</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">args</span><span class="p">:</span> <span class="kt">Any</span> <span class="o">...</span><span class="p">,</span> <span class="nv">file</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="kd">#file</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="kd">#line</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="Classes/PrintedAsyncCommand.html">PrintedAsyncCommand</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>executable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Path to an executable file. If not then exit.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>args</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Arguments to the executable.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:10SwiftShell11runAndPrintySS_ypdtKF"></a>
+                    <a name="//apple_ref/swift/Function/runAndPrint(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:10SwiftShell11runAndPrintySS_ypdtKF">runAndPrint(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Runs executable and prints output and errors.</p>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
     <p><code>CommandError.returnedErrorCode(command: String, errorcode: Int)</code> if the exit code is anything but 0.</p>
@@ -742,7 +816,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Append file or directory url to directory url</p>
+                        <p>Appends file or directory url to directory url</p>
 
                       </div>
                       <div class="declaration">
@@ -769,14 +843,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Open a file for reading, throw if an error occurs.</p>
+                        <p>Opens a file for reading, throws if an error occurs.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">_</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/ReadableStream.html">ReadableStream</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">_</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/ReadableStream.html">ReadableStream</a></span></code></pre>
 
                         </div>
                       </div>
@@ -796,14 +870,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Open a file for reading, throw if an error occurs.</p>
+                        <p>Opens a file for reading, throws if an error occurs.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">_</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/ReadableStream.html">ReadableStream</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">_</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/ReadableStream.html">ReadableStream</a></span></code></pre>
 
                         </div>
                       </div>
@@ -823,7 +897,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Open a file for writing, create it first if it doesn&rsquo;t exist.
+                        <p>Opens a file for writing, creates it first if it doesn&rsquo;t exist.
 If the file already exists and overwrite=false, the writing will begin at the end of the file.</p>
 
                       </div>
@@ -831,7 +905,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/WritableStream.html">WritableStream</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/WritableStream.html">WritableStream</a></span></code></pre>
 
                         </div>
                       </div>
@@ -870,7 +944,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Open a file for writing, create it first if it doesn&rsquo;t exist.
+                        <p>Opens a file for writing, creates it first if it doesn&rsquo;t exist.
 If the file already exists and overwrite=false, the writing will begin at the end of the file.</p>
 
                       </div>
@@ -878,7 +952,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/WritableStream.html">WritableStream</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">forWriting</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="n"><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="Protocols/WritableStream.html">WritableStream</a></span></code></pre>
 
                         </div>
                       </div>
@@ -940,7 +1014,7 @@ If the file already exists and overwrite=false, the writing will begin at the en
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2018-03-04)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2018-04-18)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

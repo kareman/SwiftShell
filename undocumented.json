@@ -2,35 +2,28 @@
   "warnings": [
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 53,
+      "line": 45,
       "symbol": "CommandRunning.context",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 57,
+      "line": 49,
       "symbol": "CommandRunning.context",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 124,
-      "symbol": "==(_:_:)",
-      "symbol_kind": "source.lang.swift.decl.function.free",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 279,
+      "line": 333,
       "symbol": "AsyncCommand.stdout",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 280,
+      "line": 334,
       "symbol": "AsyncCommand.stderror",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -121,70 +114,70 @@
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
-      "line": 100,
+      "line": 97,
       "symbol": "MainContext.env",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
-      "line": 101,
+      "line": 98,
       "symbol": "MainContext.stdin",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
-      "line": 102,
+      "line": 101,
       "symbol": "MainContext.stdout",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
-      "line": 103,
+      "line": 106,
       "symbol": "MainContext.stderror",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Context.swift",
-      "line": 138,
+      "line": 142,
       "symbol": "main",
       "symbol_kind": "source.lang.swift.decl.var.global",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Files.swift",
-      "line": 23,
+      "line": 22,
       "symbol": "FileError.notFound",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Files.swift",
-      "line": 25,
+      "line": 24,
       "symbol": "FileError.checkFile(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Stream/Lazy-split.swift",
-      "line": 23,
+      "line": 22,
       "symbol": "LazySplitSequence.remaining",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Stream/Lazy-split.swift",
-      "line": 24,
+      "line": 23,
       "symbol": "LazySplitSequence.separator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Stream/Lazy-split.swift",
-      "line": 25,
+      "line": 24,
       "symbol": "LazySplitSequence.allowEmptySlices",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

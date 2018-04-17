@@ -13,7 +13,7 @@
     <a title="SwiftShell  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftShell Docs</a> (70% documented)</p>
+        <p><a href="index.html">SwiftShell Docs</a> (73% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -40,6 +40,9 @@
                 <a href="Classes/MainContext.html">MainContext</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/PrintedAsyncCommand.html">PrintedAsyncCommand</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/RunOutput.html">RunOutput</a>
               </li>
               <li class="nav-group-task">
@@ -51,10 +54,10 @@
             <a href="Global Variables.html">Global Variables</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:10SwiftShell5FilesSo11FileManagerCv">Files</a>
+                <a href="Global Variables.html#/s:10SwiftShell5FilesSo11FileManagerCvp">Files</a>
               </li>
               <li class="nav-group-task">
-                <a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a>
+                <a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a>
               </li>
             </ul>
           </li>
@@ -85,6 +88,9 @@
                 <a href="Extensions/Process.html">Process</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/Process.html">Process</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/String.html">String</a>
               </li>
             </ul>
@@ -94,9 +100,6 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell1poi10Foundation3URLVAE_SStF">+(_:_:)</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Functions.html#/s:10SwiftShell2eeoiSbAA12CommandErrorO_ADtF">==(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell4exits5NeverOs5Error_p_SS4fileSi4linetF">exit(_:file:line:)</a>
@@ -117,22 +120,28 @@
                 <a href="Functions.html#/s:10SwiftShell4openAA14WritableStream_pSS10forWriting_Sb9overwriteSS10FoundationE8EncodingV8encodingtKF">open(forWriting:overwrite:encoding:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:10SwiftShell3runAA9RunOutputCSS_SayypGdSb07combineE0tF">run(_:_:combineOutput:)</a>
+                <a href="Functions.html#/s:10SwiftShell3runAA9RunOutputCSS_ypdSb07combineE0tF">run(_:_:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell3runAA9RunOutputCSS4bash_Sb07combineE0tF">run(bash:combineOutput:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:10SwiftShell11runAndPrintySS_SayypGdtKF">runAndPrint(_:_:)</a>
+                <a href="Functions.html#/s:10SwiftShell11runAndPrintySS_ypdtKF">runAndPrint(_:_:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell11runAndPrintySS4bash_tKF">runAndPrint(bash:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:10SwiftShell8runAsyncAA0D7CommandCSS_SayypGdSS4fileSi4linetF">runAsync(_:_:file:line:)</a>
+                <a href="Functions.html#/s:10SwiftShell8runAsyncAA0D7CommandCSS_ypdSS4fileSi4linetF">runAsync(_:_:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell8runAsyncAA0D7CommandCSS4bash_SS4fileSi4linetF">runAsync(bash:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:10SwiftShell16runAsyncAndPrintAA07PrintedD7CommandCSS_ypdSS4fileSi4linetF">runAsyncAndPrint(_:_:file:line:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:10SwiftShell16runAsyncAndPrintAA07PrintedD7CommandCSS4bash_SS4fileSi4linetF">runAsyncAndPrint(bash:file:line:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="Functions.html#/s:10SwiftShell7streamsAA14WritableStream_p_AA08ReadableE0_ptyF">streams()</a>
@@ -301,7 +310,7 @@
 <p>You can create a copy of your application&rsquo;s context: <code>let context = CustomContext(main)</code>, or create a new empty one: <code>let context = CustomContext()</code>. Everything is mutable, so you can set e.g. the current directory or redirect standard error to a file.</p>
 <h4 id='main-context' class='heading'>Main context</h4>
 
-<p>The global variable <code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a></code> is the Context for the application itself. In addition to the properties mentioned above it also has these:</p>
+<p>The global variable <code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></code> is the Context for the application itself. In addition to the properties mentioned above it also has these:</p>
 
 <ul>
 <li><code>public var encoding: String.Encoding</code>
@@ -348,7 +357,7 @@ The path to the application.</li>
 
 <p>You can use <code>let (input,output) = streams()</code> to create a new pair of streams. What you write to <code>input</code> you can read from <code>output</code>.</p>
 
-<p><a href="https://github.com/kareman/FileSmith">FileSmith</a>&rsquo;s <a href="https://kareman.github.io/FileSmith/Classes/WritableFile.html">WritableFile</a> and <a href="https://kareman.github.io/FileSmith/Classes/ReadableFile.html">ReadableFile</a> are streams too, and can be used as stdin, stdout and stderror in SwiftShell Contexts, including <code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a></code>.</p>
+<p><a href="https://github.com/kareman/FileSmith">FileSmith</a>&rsquo;s <a href="https://kareman.github.io/FileSmith/Classes/WritableFile.html">WritableFile</a> and <a href="https://kareman.github.io/FileSmith/Classes/ReadableFile.html">ReadableFile</a> are streams too, and can be used as stdin, stdout and stderror in SwiftShell Contexts, including <code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></code>.</p>
 <h4 id='writablestream' class='heading'>WritableStream</h4>
 
 <p>When writing to a WritableStream you normally use <code>.print</code> which works exactly like Swift&rsquo;s built-in print function:</p>
@@ -404,9 +413,9 @@ The path to the application.</li>
 </code></pre>
 <h2 id='commands' class='heading'>Commands</h2>
 
-<p>All Contexts (<code><a href="Structs/CustomContext.html">CustomContext</a></code> and <code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a></code>) implement <code><a href="Protocols/CommandRunning.html">CommandRunning</a></code>, which means they can run commands using themselves as the Context. ReadableStream and String can also run commands, they use <code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a></code> as the Context and themselves as <code>.stdin</code>. As a shortcut you can just use <code><a href="Functions.html#/s:10SwiftShell3runAA9RunOutputCSS4bash_Sb07combineE0tF">run(...)</a></code> instead of <code>main.run(...)</code></p>
+<p>All Contexts (<code><a href="Structs/CustomContext.html">CustomContext</a></code> and <code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></code>) implement <code><a href="Protocols/CommandRunning.html">CommandRunning</a></code>, which means they can run commands using themselves as the Context. ReadableStream and String can also run commands, they use <code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></code> as the Context and themselves as <code>.stdin</code>. As a shortcut you can just use <code><a href="Functions.html#/s:10SwiftShell3runAA9RunOutputCSS4bash_Sb07combineE0tF">run(...)</a></code> instead of <code>main.run(...)</code></p>
 
-<p>There are three different ways of running a command:</p>
+<p>There are 4 different ways of running a command:</p>
 <h4 id='run' class='heading'>Run</h4>
 
 <p>The simplest is to just run the command, wait until it&rsquo;s finished and return the results:</p>
@@ -445,7 +454,7 @@ The path to the application.</li>
 <pre class="highlight swift"><code><span class="k">try</span> <span class="nf">runAndPrint</span><span class="p">(</span><span class="s">"executable"</span><span class="p">,</span> <span class="s">"arg"</span><span class="p">)</span> 
 </code></pre>
 
-<p>This runs a command like in the terminal, where any output goes to the Context&rsquo;s (<code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCv">main</a></code> in this case) <code>.stdout</code> and <code>.stderror</code> respectively.  If the executable could not be found, was inaccessible or not executable, or the command returned with an exit code other than zero, then <code>runAndPrint</code> will throw a <code><a href="Enums/CommandError.html">CommandError</a></code>.</p>
+<p>This runs a command like in the terminal, where any output goes to the Context&rsquo;s (<code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></code> in this case) <code>.stdout</code> and <code>.stderror</code> respectively.  If the executable could not be found, was inaccessible or not executable, or the command returned with an exit code other than zero, then <code>runAndPrint</code> will throw a <code><a href="Enums/CommandError.html">CommandError</a></code>.</p>
 
 <p>The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.</p>
 <h4 id='asynchronous' class='heading'>Asynchronous</h4>
@@ -453,7 +462,7 @@ The path to the application.</li>
     <span class="c1">// be notified when the command is finished.</span>
 <span class="p">}</span>
 <span class="n">command</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="nf">onOutput</span> <span class="p">{</span> <span class="n">stdout</span> <span class="k">in</span> 
-    <span class="c1">// be notified when the command produces output.    </span>
+    <span class="c1">// be notified when the command produces output (only on macOS).    </span>
 <span class="p">}</span>
 
 <span class="c1">// do something with ‘command’ while it is still running.</span>
@@ -461,39 +470,47 @@ The path to the application.</li>
 <span class="k">try</span> <span class="n">command</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span> <span class="c1">// wait for it to finish.</span>
 </code></pre>
 
-<p><code>runAsync</code> launches a command and continues before it&rsquo;s finished. It returns this:</p>
-<pre class="highlight swift"><code><span class="c1">/// Output from the 'runAsync' methods.</span>
-<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nf">AsyncCommand</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="k">let</span> <span class="nv">stdout</span><span class="p">:</span> <span class="kt">ReadableStream</span>
+<p><code>runAsync</code> launches a command and continues before it&rsquo;s finished. It returns <code><a href="Classes/AsyncCommand.html">AsyncCommand</a></code> which contains this:</p>
+<pre class="highlight swift"><code>    <span class="kd">public</span> <span class="k">let</span> <span class="nv">stdout</span><span class="p">:</span> <span class="kt">ReadableStream</span>
     <span class="kd">public</span> <span class="k">let</span> <span class="nv">stderror</span><span class="p">:</span> <span class="kt">ReadableStream</span>
 
     <span class="c1">/// Is the command still running?</span>
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">isRunning</span><span class="p">:</span> <span class="kt">Bool</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">isRunning</span><span class="p">:</span> <span class="nf">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
 
-    <span class="c1">/// Terminates command.</span>
+    <span class="c1">/// Terminates the command by sending the SIGTERM signal.</span>
     <span class="kd">public</span> <span class="kd">func</span> <span class="nf">stop</span><span class="p">()</span>
 
-    <span class="c1">/// Waits for command to finish.</span>
-    <span class="c1">/// - returns: itself</span>
-    <span class="c1">/// - throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.</span>
-    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">finish</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">AsyncCommand</span>
+    <span class="c1">/// Interrupts the command by sending the SIGINT signal.</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">interrupt</span><span class="p">()</span>
+
+    <span class="c1">/// Temporarily suspends a command. Call resume() to resume a suspended command.</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">suspend</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+
+    <span class="c1">/// Resumes a command previously suspended with suspend().</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">resume</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span>
+
+    <span class="c1">/// Waits for this command to finish.</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">finish</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="k">Self</span>
 
     <span class="c1">/// Waits for command to finish, then returns with exit code.</span>
     <span class="kd">public</span> <span class="kd">func</span> <span class="nf">exitcode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span>
 
+    <span class="c1">/// Waits for the command to finish, then returns why the command terminated.</span>
+    <span class="c1">/// - returns: `.exited` if the command exited normally, otherwise `.uncaughtSignal`.</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">terminationReason</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Process</span><span class="o">.</span><span class="kt">TerminationReason</span>
+
     <span class="c1">/// Takes a closure to be called when the command has finished.</span>
-    <span class="c1">/// - Parameter handler: A closure taking this AsyncCommand as input, returning nothing.</span>
-    <span class="c1">/// - Returns: This AsyncCommand.</span>
-    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">onCompletion</span><span class="p">(</span><span class="n">_</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">AsyncCommand</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">AsyncCommand</span>
-<span class="p">}</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">onCompletion</span><span class="p">(</span><span class="n">_</span> <span class="nv">handler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">AsyncCommand</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">Self</span>
 </code></pre>
 
 <p>You can process standard output and standard error, and optionally wait until it&rsquo;s finished and handle any errors.</p>
 
 <p>If you read all of command.stderror or command.stdout it will automatically wait for the command to close its streams (and presumably finish running). You can still call <code>finish()</code> to check for errors.</p>
+
+<p><code>runAsyncAndPrint</code> does the same as <code>runAsync</code>, but prints any output directly and it&rsquo;s return type <code><a href="Classes/PrintedAsyncCommand.html">PrintedAsyncCommand</a></code> doesn&rsquo;t have the <code>.stdout</code> and <code>.stderror</code> properties.</p>
 <h4 id='parameters' class='heading'>Parameters</h4>
 
-<p>The 3 <code>run</code> functions above take 2 different types of parameters:</p>
+<p>The <code>run</code>* functions above take 2 different types of parameters:</p>
 <h5 id='_-executable-string-_-args-any' class='heading'>(_ executable: String, _ args: Any &hellip;)</h5>
 
 <p>If the path to the executable is without any <code>/</code>, SwiftShell will try to find the full path using the <code>which</code> shell command, which searches the directories in the <code>PATH</code> environment variable in order.</p>
@@ -520,16 +537,16 @@ The path to the application.</li>
 
 <p>If the command provided to <code>runAsync</code> could not be launched for any reason the program will print the error to standard error and exit, as is usual in scripts. The <code>runAsync(&quot;cmd&quot;).finish()</code> method throws an error if the exit code of the command is anything but 0:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">command</span> <span class="o">=</span> <span class="nf">runAsync</span><span class="p">(</span><span class="s">"cmd"</span><span class="p">,</span> <span class="s">"-n"</span><span class="p">,</span> <span class="mi">245</span><span class="p">)</span>
-<span class="c1">// do something with command.stderror or command.stdoutCommandError</span>
+<span class="c1">// ...</span>
 <span class="nf">do</span> <span class="p">{</span>
     <span class="k">try</span> <span class="n">command</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
-<span class="p">}</span> <span class="k">catch</span> <span class="kt">CommandError</span><span class="o">.</span><span class="nf">ReturnedErrorCode</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="kt">CommandError</span><span class="o">.</span><span class="nf">returnedErrorCode</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// use error.command or error.errorcode</span>
 <span class="p">}</span>
 </code></pre>
 
 <p>The <code>runAndPrint</code> command can also throw this error, in addition to this one if the command could not be launched:</p>
-<pre class="highlight swift"><code><span class="p">}</span> <span class="k">catch</span> <span class="kt">CommandError</span><span class="o">.</span><span class="nf">InAccessibleExecutable</span><span class="p">(</span><span class="k">let</span> <span class="nv">path</span><span class="p">)</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="p">}</span> <span class="k">catch</span> <span class="kt">CommandError</span><span class="o">.</span><span class="nf">inAccessibleExecutable</span><span class="p">(</span><span class="k">let</span> <span class="nv">path</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ‘path’ is the full path to the executable</span>
 <span class="p">}</span>
 </code></pre>
@@ -603,7 +620,7 @@ The path to the application.</li>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2018-03-04)</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2018-04-18)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
