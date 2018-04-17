@@ -90,7 +90,6 @@ extension CommandLine {
 }
 
 public final class MainContext: Context, CommandRunning {
-
 	/// The default character encoding used throughout SwiftShell.
 	/// Only affects stdin, stdout and stderror if they have not been used yet.
 	public var encoding = String.Encoding.utf8 // TODO: get encoding from environmental variable LC_CTYPE.
@@ -99,7 +98,11 @@ public final class MainContext: Context, CommandRunning {
 	public lazy var stdin: ReadableStream = {
 		FileHandleStream(FileHandle.standardInput, encoding: self.encoding)
 	}()
-	public lazy var stdout: WritableStream = { StdoutStream.default }()
+	public lazy var stdout: WritableStream = {
+		let stdout = StdoutStream.default
+		stdout.encoding = self.encoding
+		return stdout
+	}()
 	public lazy var stderror: WritableStream = {
 		FileHandleStream(FileHandle.standardError, encoding: self.encoding)
 	}()

@@ -4,7 +4,6 @@
 //
 // Created by Kåre Morstøl on 20.07.15.
 //
-//
 
 import XCTest
 import SwiftShell
