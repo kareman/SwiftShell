@@ -230,7 +230,6 @@
 			buildPhases = (
 				OBJ_44 /* Sources */,
 				OBJ_54 /* Frameworks */,
-				BA50D29D1E9714C7002BA4A5 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -333,23 +332,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		BA50D29D1E9714C7002BA4A5 /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		OBJ_44 /* Sources */ = {
