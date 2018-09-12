@@ -143,16 +143,19 @@ public final class RunOutput {
 			try output.process.launchThrowably()
 
 			// see https://github.com/kareman/SwiftShell/issues/52
-			var stderrorWork: DispatchWorkItem?
+			let stderrorWork: DispatchWorkItem
 			if output.stdout.filehandle.fileDescriptor != output.stderror.filehandle.fileDescriptor {
 				stderrorWork = DispatchWorkItem {
 					_stderror = output.stderror.readData()
 				}
-				stderrorWork.map(DispatchQueue.global().async(execute:))
+			} else {
+				// a no-op work item.
+				stderrorWork = DispatchWorkItem {}
 			}
+			DispatchQueue.global().async(execute: stderrorWork)
 			_stdout = output.stdout.readData()
 			try output.finish()
-			stderrorWork?.wait()
+			stderrorWork.wait()
 		} catch let error as CommandError {
 			self.error = error
 		} catch {
