@@ -131,38 +131,17 @@ extension CommandError: Equatable {
 /// Output from a `run` command.
 public final class RunOutput {
 	fileprivate let output: AsyncCommand
-	private var _stdout = Data()
-	private var _stderror: Data
+	private let rawStdout: Data
+	private let rawStderror: Data
 
 	/// The error from running the command, if any.
 	public private(set) var error: CommandError?
 
-	init(launch output: AsyncCommand) {
-		var _stderror = Data()
-		do {
-			try output.process.launchThrowably()
-
-			// see https://github.com/kareman/SwiftShell/issues/52
-			let stderrorWork: DispatchWorkItem
-			if output.stdout.filehandle.fileDescriptor != output.stderror.filehandle.fileDescriptor {
-				stderrorWork = DispatchWorkItem {
-					_stderror = output.stderror.readData()
-				}
-			} else {
-				// a no-op work item.
-				stderrorWork = DispatchWorkItem {}
-			}
-			DispatchQueue.global().async(execute: stderrorWork)
-			_stdout = output.stdout.readData()
-			try output.finish()
-			stderrorWork.wait()
-		} catch let error as CommandError {
-			self.error = error
-		} catch {
-			assertionFailure("Unexpected error: \(error)")
-		}
-		self._stderror = _stderror
-		self.output = output
+	init(command: AsyncCommand, stdout: Data, stderror: Data, error: CommandError?) {
+		self.output = command
+		self.rawStdout = stdout
+		self.rawStderror = stderror
+		self.error = error
 	}
 
 	/// If text is single-line, trim it.
@@ -175,19 +154,17 @@ public final class RunOutput {
 
 	/// Standard output, trimmed of whitespace and newline if it is single-line.
 	public private(set) lazy var stdout: String = {
-		guard let result = String(data: _stdout, encoding: output.stdout.encoding) else {
+		guard let result = String(data: rawStdout, encoding: output.stdout.encoding) else {
 			fatalError("Could not convert binary data to text.")
 		}
-		_stdout = Data()
 		return RunOutput.cleanUpOutput(result)
 	}()
 
 	/// Standard error, trimmed of whitespace and newline if it is single-line.
 	public private(set) lazy var stderror: String = {
-		guard let result = String(data: _stderror, encoding: output.stdout.encoding) else {
+		guard let result = String(data: rawStderror, encoding: output.stdout.encoding) else {
 			fatalError("Could not convert binary data to text.")
 		}
-		_stderror = Data()
 		return RunOutput.cleanUpOutput(result)
 	}()
 
@@ -229,8 +206,23 @@ extension CommandRunning {
 	/// - parameter combineOutput: if true then stdout and stderror go to the same stream. Default is false.
 	@discardableResult public func run(_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> RunOutput {
 		let stringargs = args.flatten().map(String.init(describing:))
-		let async = AsyncCommand(unlaunched: createProcess(executable, args: stringargs), combineOutput: combineOutput)
-		return RunOutput(launch: async)
+		let asyncCommand = AsyncCommand(unlaunched: createProcess(executable, args: stringargs), combineOutput: combineOutput)
+		var output: RunOutput? = nil
+		
+		let group = DispatchGroup()
+		group.enter()
+		asyncCommand.launch { runOutput in
+			output = runOutput
+			group.leave()
+		}
+		
+		group.wait()
+		
+		guard let runOutput = output else {
+			exit(errormessage: "unexpected output")
+		}
+		
+		return runOutput
 	}
 }
 
@@ -362,6 +354,45 @@ public final class AsyncCommand: PrintedAsyncCommand {
 		}
 		return self
 	}
+	
+	public func launch(complete: @escaping (RunOutput) -> Void) {
+		var error: CommandError? = nil
+		var stdout = Data()
+		var stderror = Data()
+		
+		let queue = DispatchQueue.global()
+		let group = DispatchGroup()
+		
+		do {
+			// launch and read stdout.
+			group.enter()
+			defer {
+				group.leave()
+			}
+			try self.process.launchThrowably()
+			
+			// read stderr concurrently.
+			if self.stdout.filehandle.fileDescriptor != self.stderror.filehandle.fileDescriptor {
+				group.enter()
+				queue.async {
+					stderror = self.stderror.readData()
+					group.leave()
+				}
+			}
+			
+			stdout = self.stdout.readData()
+			try self.finish()
+		} catch let commandError as CommandError {
+			error = commandError
+		} catch let error {
+			assertionFailure("Unexpected error: \(error)")
+		}
+		
+		group.notify(queue: queue) {
+			complete(RunOutput(command: self, stdout: stdout, stderror: stderror, error: error))
+		}
+	}
+
 }
 
 extension CommandRunning {
