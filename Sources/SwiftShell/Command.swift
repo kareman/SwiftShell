@@ -355,7 +355,7 @@ public final class AsyncCommand: PrintedAsyncCommand {
 		return self
 	}
 	
-	public func launch(complete: @escaping (RunOutput) -> Void) {
+	func launch(complete: @escaping (RunOutput) -> Void) {
 		var error: CommandError? = nil
 		var stdout = Data()
 		var stderror = Data()
