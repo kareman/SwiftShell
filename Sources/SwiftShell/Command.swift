@@ -137,32 +137,27 @@ public final class RunOutput {
 	/// The error from running the command, if any.
 	public let error: CommandError?
 
-	init(launch output: AsyncCommand) {
+	/// Launches command, reads all output from both standard output and standard error simultaneously,
+	/// and waits until the command is finished.
+	init(launch command: AsyncCommand) {
 		var error: CommandError?
 		var stdout = Data()
 		var stderror = Data()
-		let queue = DispatchQueue.global()
 		let group = DispatchGroup()
 
 		do {
 			// launch and read stdout and stderror.
 			// see https://github.com/kareman/SwiftShell/issues/52
-			group.enter()
-			defer {
-				group.leave()
-			}
-			try output.process.launchThrowably()
+			try command.process.launchThrowably()
 
-			if output.stdout.filehandle.fileDescriptor != output.stderror.filehandle.fileDescriptor {
-				group.enter()
-				queue.async {
-					stderror = output.stderror.readData()
-					group.leave()
+			if command.stdout.filehandle.fileDescriptor != command.stderror.filehandle.fileDescriptor {
+				DispatchQueue.global().async(group: group) {
+					stderror = command.stderror.readData()
 				}
 			}
 
-			stdout = output.stdout.readData()
-			try output.finish()
+			stdout = command.stdout.readData()
+			try command.finish()
 		} catch let commandError as CommandError {
 			error = commandError
 		} catch let error {
@@ -173,7 +168,7 @@ public final class RunOutput {
 
 		self.rawStdout = stdout
 		self.rawStderror = stderror
-		self.output = output
+		self.output = command
 		self.error = error
 	}
 
@@ -341,7 +336,7 @@ public class PrintedAsyncCommand {
 	}
 }
 
-/** Output from the 'runAsync' methods. */
+/** Output from the 'runAsync' commands. */
 public final class AsyncCommand: PrintedAsyncCommand {
 	public let stdout: ReadableStream
 	public let stderror: ReadableStream
