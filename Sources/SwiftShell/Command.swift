@@ -186,17 +186,17 @@ public final class RunOutput {
 	}
 
 	/// Standard output, trimmed of whitespace and newline if it is single-line.
-	public lazy var stdout: String = {
+	public private(set) lazy var stdout: String = {
 		guard let result = String(data: rawStdout, encoding: output.stdout.encoding) else {
-			fatalError("Could not convert binary data to text.")
+			fatalError("Could not convert binary output of stdout to text using encoding \(output.stdout.encoding).")
 		}
 		return RunOutput.cleanUpOutput(result)
 	}()
 
 	/// Standard error, trimmed of whitespace and newline if it is single-line.
-	public lazy var stderror: String = {
+	public private(set) lazy var stderror: String = {
 		guard let result = String(data: rawStderror, encoding: output.stderror.encoding) else {
-			fatalError("Could not convert binary data to text.")
+			fatalError("Could not convert binary output of stderror to text using encoding \(output.stderror.encoding).")
 		}
 		return RunOutput.cleanUpOutput(result)
 	}()
