@@ -135,12 +135,45 @@ public final class RunOutput {
 	private let rawStderror: Data
 
 	/// The error from running the command, if any.
-	public private(set) var error: CommandError?
+	public let error: CommandError?
 
-	init(command: AsyncCommand, stdout: Data, stderror: Data, error: CommandError?) {
-		self.output = command
+	init(launch output: AsyncCommand) {
+		var error: CommandError?
+		var stdout = Data()
+		var stderror = Data()
+		let queue = DispatchQueue.global()
+		let group = DispatchGroup()
+
+		do {
+			// launch and read stdout and stderror.
+			// see https://github.com/kareman/SwiftShell/issues/52
+			group.enter()
+			defer {
+				group.leave()
+			}
+			try output.process.launchThrowably()
+
+			if output.stdout.filehandle.fileDescriptor != output.stderror.filehandle.fileDescriptor {
+				group.enter()
+				queue.async {
+					stderror = output.stderror.readData()
+					group.leave()
+				}
+			}
+
+			stdout = output.stdout.readData()
+			try output.finish()
+		} catch let commandError as CommandError {
+			error = commandError
+		} catch let error {
+			assertionFailure("Unexpected error: \(error)")
+		}
+
+		group.wait()
+
 		self.rawStdout = stdout
 		self.rawStderror = stderror
+		self.output = output
 		self.error = error
 	}
 
@@ -153,7 +186,7 @@ public final class RunOutput {
 	}
 
 	/// Standard output, trimmed of whitespace and newline if it is single-line.
-	public private(set) lazy var stdout: String = {
+	public lazy var stdout: String = {
 		guard let result = String(data: rawStdout, encoding: output.stdout.encoding) else {
 			fatalError("Could not convert binary data to text.")
 		}
@@ -161,8 +194,8 @@ public final class RunOutput {
 	}()
 
 	/// Standard error, trimmed of whitespace and newline if it is single-line.
-	public private(set) lazy var stderror: String = {
-		guard let result = String(data: rawStderror, encoding: output.stdout.encoding) else {
+	public lazy var stderror: String = {
+		guard let result = String(data: rawStderror, encoding: output.stderror.encoding) else {
 			fatalError("Could not convert binary data to text.")
 		}
 		return RunOutput.cleanUpOutput(result)
@@ -207,22 +240,7 @@ extension CommandRunning {
 	@discardableResult public func run(_ executable: String, _ args: Any ..., combineOutput: Bool = false) -> RunOutput {
 		let stringargs = args.flatten().map(String.init(describing:))
 		let asyncCommand = AsyncCommand(unlaunched: createProcess(executable, args: stringargs), combineOutput: combineOutput)
-		var output: RunOutput? = nil
-		
-		let group = DispatchGroup()
-		group.enter()
-		asyncCommand.launch { runOutput in
-			output = runOutput
-			group.leave()
-		}
-		
-		group.wait()
-		
-		guard let runOutput = output else {
-			exit(errormessage: "unexpected output")
-		}
-		
-		return runOutput
+		return RunOutput(launch: asyncCommand)
 	}
 }
 
@@ -354,45 +372,6 @@ public final class AsyncCommand: PrintedAsyncCommand {
 		}
 		return self
 	}
-	
-	func launch(complete: @escaping (RunOutput) -> Void) {
-		var error: CommandError? = nil
-		var stdout = Data()
-		var stderror = Data()
-		
-		let queue = DispatchQueue.global()
-		let group = DispatchGroup()
-		
-		do {
-			// launch and read stdout.
-			group.enter()
-			defer {
-				group.leave()
-			}
-			try self.process.launchThrowably()
-			
-			// read stderr concurrently.
-			if self.stdout.filehandle.fileDescriptor != self.stderror.filehandle.fileDescriptor {
-				group.enter()
-				queue.async {
-					stderror = self.stderror.readData()
-					group.leave()
-				}
-			}
-			
-			stdout = self.stdout.readData()
-			try self.finish()
-		} catch let commandError as CommandError {
-			error = commandError
-		} catch let error {
-			assertionFailure("Unexpected error: \(error)")
-		}
-		
-		group.notify(queue: queue) {
-			complete(RunOutput(command: self, stdout: stdout, stderror: stderror, error: error))
-		}
-	}
-
 }
 
 extension CommandRunning {
