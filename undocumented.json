@@ -16,14 +16,14 @@
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 333,
+      "line": 341,
       "symbol": "AsyncCommand.stdout",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Command.swift",
-      "line": 334,
+      "line": 342,
       "symbol": "AsyncCommand.stderror",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -150,7 +150,7 @@
     {
       "file": "/Users/karemorstol/Programming/SwiftShell/SwiftShell3/Sources/SwiftShell/Files.swift",
       "line": 22,
-      "symbol": "FileError.notFound",
+      "symbol": "FileError.notFound(path:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
