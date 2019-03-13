@@ -88,8 +88,8 @@ Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumber
 #### Others
 
 - [Test the latest commit (using make and/or Swift).][testcommit]
-- [Run a shell command in the middle of a method chain](http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/).
-- [Move files to the trash](http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/).
+- [Run a shell command in the middle of a method chain](https://nottoobadsoftware.com/blog/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/).
+- [Move files to the trash](http://nottoobadsoftware.com/blog/swiftshell/move-files-to-the-trash/).
 
 [testcommit]: https://github.com/kareman/testcommit/blob/master/Sources/main.swift
 
@@ -492,4 +492,4 @@ Then run `pod install` to install it.
 
 Released under the MIT License (MIT), http://opensource.org/licenses/MIT
 
-Kåre Morstøl, [NotTooBad Software](http://nottoobadsoftware.com)
+Kåre Morstøl, [NotTooBad Software](https://nottoobadsoftware.com)
