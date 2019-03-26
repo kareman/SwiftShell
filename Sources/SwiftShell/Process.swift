@@ -15,11 +15,12 @@ extension Process {
 	/// Launches process.
 	///
 	/// - throws: CommandError.inAccessibleExecutable if command could not be executed.
+    @available(swift, deprecated: 5.0)
 	public func launchThrowably() throws {
-		guard Files.isExecutableFile(atPath: self.launchPath!) else {
-			throw CommandError.inAccessibleExecutable(path: self.launchPath!)
+		guard Files.isExecutableFile(atPath: self.executableURL!.path) else {
+			throw CommandError.inAccessibleExecutable(path: self.executableURL!.lastPathComponent)
 		}
-		launch()
+		try run()
 	}
 
 	/// Waits until process is finished.
@@ -29,7 +30,7 @@ extension Process {
 	public func finish() throws {
 		/// The full path to the executable + all arguments, each one quoted if it contains a space.
 		func commandAsString() -> String {
-			let path = self.launchPath ?? ""
+			let path = self.executableURL?.path ?? ""
 			return (self.arguments ?? []).reduce(path) { (acc: String, arg: String) in
 				return acc + " " + ( arg.contains(" ") ? ("\"" + arg + "\"") : arg )
 			}
@@ -58,7 +59,7 @@ extension Process {
 	/// - returns: A String containing the hexadecimal representation of the mask,
 	/// or nil if there is no stdout output
 	fileprivate func getProcessInfo(_ attr: ProcessAttribute) -> String? {
-		let attribute = run(bash: "ps --no-headers -q \(self.processIdentifier) -o \(attr.rawValue)").stdout
+		let attribute = SwiftShell.run(bash: "ps --no-headers -q \(self.processIdentifier) -o \(attr.rawValue)").stdout
 		return attribute.isEmpty ? nil : attribute
 	}
 

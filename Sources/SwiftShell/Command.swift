@@ -67,10 +67,10 @@ extension CommandRunning {
 
 		let process = Process()
 		process.arguments = args
-		process.launchPath = path(for: executable)
+		process.executableURL = URL(fileURLWithPath: path(for: executable))
 
 		process.environment = context.env
-		process.currentDirectoryPath = context.currentdirectory
+		process.currentDirectoryURL = URL(fileURLWithPath: context.currentdirectory, isDirectory: true)
 
 		process.standardInput = context.stdin.filehandle
 		process.standardOutput = context.stdout.filehandle
