@@ -15,7 +15,6 @@ extension Process {
 	/// Launches process.
 	///
 	/// - throws: CommandError.inAccessibleExecutable if command could not be executed.
-    @available(swift, deprecated: 5.0)
 	public func launchThrowably() throws {
 		guard Files.isExecutableFile(atPath: self.executableURL!.path) else {
 			throw CommandError.inAccessibleExecutable(path: self.executableURL!.lastPathComponent)
