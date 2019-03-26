@@ -83,7 +83,7 @@ extension CommandRunning {
 // MARK: CommandError
 
 /** Error type for commands. */
-public enum CommandError: Error {
+public enum CommandError: Error, Equatable {
 
 	/** Exit code was not zero. */
 	case returnedErrorCode(command: String, errorcode: Int)
@@ -109,19 +109,6 @@ extension CommandError: CustomStringConvertible {
 			return "Could not execute file at path '\(path)'."
 		case .returnedErrorCode(let command, let code):
 			return "Command '\(command)' returned with error code \(code)."
-		}
-	}
-}
-
-extension CommandError: Equatable {
-	static public func == (e1: CommandError, e2: CommandError) -> Bool {
-		switch (e1, e2) {
-		case (.returnedErrorCode(let c1), .returnedErrorCode(let c2)):
-			return c1.errorcode == c2.errorcode && c1.command == c2.command
-		case (.inAccessibleExecutable(let c1), .inAccessibleExecutable(let c2)):
-			return c1 == c2
-		case (.inAccessibleExecutable, .returnedErrorCode), (.returnedErrorCode, .inAccessibleExecutable):
-			return false
 		}
 	}
 }
