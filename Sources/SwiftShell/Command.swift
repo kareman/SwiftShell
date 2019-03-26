@@ -174,7 +174,7 @@ public final class RunOutput {
 
 	/// If text is single-line, trim it.
 	static private func cleanUpOutput(_ text: String) -> String {
-		let afterfirstnewline = text.index(of: "\n").map(text.index(after:))
+		let afterfirstnewline = text.firstIndex(of: "\n").map(text.index(after:))
 		return (afterfirstnewline == nil || afterfirstnewline == text.endIndex)
 			? text.trimmingCharacters(in: .whitespacesAndNewlines)
 			: text

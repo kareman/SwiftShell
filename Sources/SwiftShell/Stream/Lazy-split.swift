@@ -11,7 +11,7 @@ extension Collection where Element: Equatable {
 	///
 	/// If ‘separator’ is not found then ‘head’ contains everything and 'tail' is nil.
 	func splitOnce(separator: Element) -> (head: SubSequence, tail: SubSequence?) {
-		guard let nextindex = index(of: separator) else { return (self[...], nil) }
+		guard let nextindex = firstIndex(of: separator) else { return (self[...], nil) }
 		return (self[..<nextindex], self[index(after: nextindex)...])
 	}
 }
@@ -66,7 +66,7 @@ public struct PartialSourceLazySplitSequence <Base: Collection>: IteratorProtoco
 	Base.Element: Equatable,
 	Base.SubSequence: RangeReplaceableCollection {
 
-	private var gs: LazyMapIterator<AnyIterator<Base>, LazySplitSequence<Base>>
+	private var gs: LazyMapSequence<AnyIterator<Base>, LazySplitSequence<Base>>.Iterator
 	private var g: LazySplitSequence<Base>?
 
 	/// Creates a lazy sequence by splitting a series of collections repeatedly, as if they were one collection.

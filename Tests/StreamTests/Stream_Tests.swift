@@ -29,7 +29,7 @@ public class Stream_Tests: XCTestCase {
 
 	func testData() {
 		let (writer,reader) = streams()
-		let data = Data(bytes: [2,4,9,7])
+		let data = Data([2,4,9,7])
 
 		writer.write(data: data)
 		XCTAssertEqual(reader.readSomeData(), data)
