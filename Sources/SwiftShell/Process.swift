@@ -16,6 +16,11 @@ extension Process {
 	///
 	/// - throws: CommandError.inAccessibleExecutable if command could not be executed.
 	public func launchThrowably() throws {
+		#if !os(macOS)
+		guard Files.isExecutableFile(atPath: self.executableURL!.path) else {
+			throw CommandError.inAccessibleExecutable(path: self.executableURL!.lastPathComponent)
+		}
+		#endif
 		do {
 			try run()
 		} catch CocoaError.fileNoSuchFile {
