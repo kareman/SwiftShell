@@ -1,8 +1,11 @@
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 import PackageDescription
 
 let package = Package(
     name: "SwiftShell",
+		platforms: [
+			.macOS(.v10_13),
+		],
     products: [
         .library(
             name: "SwiftShell",
@@ -21,5 +24,5 @@ let package = Package(
             name: "GeneralTests",
             dependencies: ["SwiftShell"]),
     ],
-    swiftLanguageVersions: [4]
+    swiftLanguageVersions: [.v5]
 )
