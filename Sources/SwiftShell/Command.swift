@@ -15,12 +15,18 @@ import Dispatch
 /**
 Prints message to standard error and terminates the application.
 
+In debug builds it precedes the message with filename and line number.
+
 - parameter errormessage: the error message.
 - parameter errorcode: exit code for the entire program. Defaults to 1.
 - returns: Never.
 */
 public func exit <T>(errormessage: T, errorcode: Int = 1, file: String = #file, line: Int = #line) -> Never  {
+	#if DEBUG
 	main.stderror.print(file + ":\(line):", errormessage)
+	#else
+	main.stderror.print(errormessage)
+	#endif
 	exit(Int32(errorcode))
 }
 
