@@ -2,7 +2,7 @@ Run shell commands | [Parse command line arguments](https://github.com/kareman/M
 
 ---
 
-Swift 4 | [Swift 3](https://github.com/kareman/SwiftShell/tree/Swift3) | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
+Swift 5 | [Swift 4](https://github.com/kareman/SwiftShell/tree/Swift4) | [Swift 3](https://github.com/kareman/SwiftShell/tree/Swift3) | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
 
 <p align="center">
 	<img src="https://raw.githubusercontent.com/kareman/SwiftShell/master/Misc/logo.png" alt="SwiftShell logo" />
@@ -445,10 +445,10 @@ Then run your Swift scripts with `marathon run <name>.swift`. Or add `#!/usr/bin
 
 ### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
-Add `.package(url: "https://github.com/kareman/SwiftShell", from: "4.0.0")` to your Package.swift:
+Add `.package(url: "https://github.com/kareman/SwiftShell", from: "5.0.0")` to your Package.swift:
 
 ```swift
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -457,7 +457,7 @@ let package = Package(
     name: "ProjectName",
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/kareman/SwiftShell", from: "4.0.0")
+        .package(url: "https://github.com/kareman/SwiftShell", from: "5.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -474,7 +474,7 @@ and run `swift build`.
 
 ### [Carthage](https://github.com/Carthage/Carthage)
 
-Add `github "kareman/SwiftShell" >= 4.0` to your Cartfile, then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for further instructions.
+Add `github "kareman/SwiftShell" >= 5.0` to your Cartfile, then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for further instructions.
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
@@ -483,7 +483,7 @@ Add `github "kareman/SwiftShell" >= 4.0` to your Cartfile, then run `carthage up
 Add `SwiftShell` to your `Podfile`.
 
 ```Ruby
-pod 'SwiftShell', '>= 4.0.0'
+pod 'SwiftShell', '>= 5.0.0'
 ```
 
 Then run `pod install` to install it.
