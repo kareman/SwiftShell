@@ -13,13 +13,16 @@ cd $NAME
 swift package init --type executable
 
 cat > Package.swift <<_EOF_
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "$NAME",
+    platforms: [
+        .macOS(.v10_13),
+	],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/kareman/SwiftShell", from: "5.0.0")
