@@ -8,7 +8,7 @@ Swift 5 | [Swift 4](https://github.com/kareman/SwiftShell/tree/Swift4) | [Swift 
 	<img src="https://raw.githubusercontent.com/kareman/SwiftShell/master/Misc/logo.png" alt="SwiftShell logo" />
 </p>
 
-[![Build Status](https://travis-ci.org/kareman/SwiftShell.svg?branch=master)](https://travis-ci.org/kareman/SwiftShell) ![Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Linux-lightgrey.svg) <a href="https://swift.org/package-manager"><img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" /></a> [![Carthage compatible](https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) <a href="https://twitter.com/nottoobadsw"><img src="https://img.shields.io/badge/contact-@nottoobadsw-blue.svg?style=flat" alt="Twitter: @nottoobadsw" /></a>
+![Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Linux-lightgrey.svg) <a href="https://swift.org/package-manager"><img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" /></a> [![Carthage compatible](https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) <a href="https://twitter.com/nottoobadsw"><img src="https://img.shields.io/badge/contact-@nottoobadsw-blue.svg?style=flat" alt="Twitter: @nottoobadsw" /></a>
 
 # SwiftShell
 
