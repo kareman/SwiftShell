@@ -25,7 +25,7 @@ A library for creating command-line applications and running shell commands in S
 
 #### See also
 
-- [API Documentation](http://kareman.github.io/SwiftShell).
+- [API Documentation](https://kareman.github.io/SwiftShell).
 - A [description](https://www.skilled.io/kare/swiftshell) of the project on [skilled.io](https://www.skilled.io).
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -89,7 +89,7 @@ Launched with e.g. `cat long.txt | print_linenumbers.swift` or `print_linenumber
 
 - [Test the latest commit (using make and/or Swift).][testcommit]
 - [Run a shell command in the middle of a method chain](https://nottoobadsoftware.com/blog/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/).
-- [Move files to the trash](http://nottoobadsoftware.com/blog/swiftshell/move-files-to-the-trash/).
+- [Move files to the trash](https://nottoobadsoftware.com/blog/swiftshell/move-files-to-the-trash/).
 
 [testcommit]: https://github.com/kareman/testcommit/blob/master/Sources/main.swift
 
@@ -490,6 +490,6 @@ Then run `pod install` to install it.
 
 ## License
 
-Released under the MIT License (MIT), http://opensource.org/licenses/MIT
+Released under the MIT License (MIT), https://opensource.org/licenses/MIT
 
 Kåre Morstøl, [NotTooBad Software](https://nottoobadsoftware.com)
