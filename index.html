@@ -13,7 +13,7 @@
     <a title="SwiftShell  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">SwiftShell Docs</a> (73% documented)</p>
+        <p><a href="index.html">SwiftShell Docs</a> (72% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/SwiftShell"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -192,7 +192,7 @@
 
 <hr>
 
-<p>Swift 4 | <a href="https://github.com/kareman/SwiftShell/tree/Swift3">Swift 3</a> | <a href="https://github.com/kareman/SwiftShell/tree/Swift2">Swift 2</a></p>
+<p>Swift 5 | <a href="https://github.com/kareman/SwiftShell/tree/Swift4">Swift 4</a> | <a href="https://github.com/kareman/SwiftShell/tree/Swift3">Swift 3</a> | <a href="https://github.com/kareman/SwiftShell/tree/Swift2">Swift 2</a></p>
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/kareman/SwiftShell/master/Misc/logo.png" alt="SwiftShell logo" />
@@ -272,17 +272,17 @@
 
 <span class="kd">import</span> <span class="kt">SwiftShell</span>
 
-<span class="nf">do</span> <span class="p">{</span>
+<span class="k">do</span> <span class="p">{</span>
     <span class="c1">// If there is an argument, try opening it as a file. Otherwise use standard input.</span>
-    <span class="k">let</span> <span class="nv">input</span> <span class="o">=</span> <span class="k">try</span> <span class="n">main</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="nf">map</span> <span class="p">{</span><span class="k">try</span> <span class="nf">open</span><span class="p">(</span><span class="nv">$0</span><span class="p">)}</span> <span class="p">??</span> <span class="n">main</span><span class="o">.</span><span class="n">stdin</span>
+    <span class="k">let</span> <span class="nv">input</span> <span class="o">=</span> <span class="k">try</span> <span class="n">main</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">first</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="k">try</span> <span class="nf">open</span><span class="p">(</span><span class="nv">$0</span><span class="p">)}</span> <span class="p">??</span> <span class="n">main</span><span class="o">.</span><span class="n">stdin</span>
 
-    <span class="n">input</span><span class="o">.</span><span class="nf">lines</span><span class="p">()</span><span class="o">.</span><span class="nf">enumerated</span><span class="p">()</span><span class="o">.</span><span class="nf">forEach</span> <span class="p">{</span> <span class="p">(</span><span class="n">linenr</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="k">in</span> 
+    <span class="n">input</span><span class="o">.</span><span class="nf">lines</span><span class="p">()</span><span class="o">.</span><span class="nf">enumerated</span><span class="p">()</span><span class="o">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="p">(</span><span class="n">linenr</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="k">in</span> 
         <span class="nf">print</span><span class="p">(</span><span class="n">linenr</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s">":"</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span> 
     <span class="p">}</span>
 
     <span class="c1">// Add a newline at the end.</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
-<span class="p">}</span> <span class="nf">catch</span> <span class="p">{</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
     <span class="nf">exit</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
@@ -292,13 +292,13 @@
 
 <ul>
 <li><a href="https://github.com/kareman/testcommit/blob/master/Sources/main.swift">Test the latest commit (using make and/or Swift).</a></li>
-<li><a href="http://blog.nottoobadsoftware.com/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/">Run a shell command in the middle of a method chain</a>.</li>
-<li><a href="http://blog.nottoobadsoftware.com/swiftshell/move-files-to-the-trash/">Move files to the trash</a>.</li>
+<li><a href="https://nottoobadsoftware.com/blog/swiftshell/combine-markdown-files-and-convert-to-html-in-a-swift-script/">Run a shell command in the middle of a method chain</a>.</li>
+<li><a href="http://nottoobadsoftware.com/blog/swiftshell/move-files-to-the-trash/">Move files to the trash</a>.</li>
 </ul>
 <h2 id='context' class='heading'>Context</h2>
 
 <p>All commands (a.k.a. <a href="https://en.wikipedia.org/wiki/Process_(computing)">processes</a>) you run in SwiftShell need context: <a href="https://en.wikipedia.org/wiki/Environment_variable">environment variables</a>, the <a href="https://en.wikipedia.org/wiki/Working_directory">current working directory</a>, standard input, standard output and standard error (<a href="https://en.wikipedia.org/wiki/Standard_streams">standard streams</a>).</p>
-<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CustomContext</span><span class="p">:</span> <span class="kt">Context</span><span class="p">,</span> <span class="nf">CommandRunning</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CustomContext</span><span class="p">:</span> <span class="kt">Context</span><span class="p">,</span> <span class="kt">CommandRunning</span> <span class="p">{</span>
     <span class="kd">public</span> <span class="k">var</span> <span class="nv">env</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]</span>
     <span class="kd">public</span> <span class="k">var</span> <span class="nv">currentdirectory</span><span class="p">:</span> <span class="kt">String</span>
     <span class="kd">public</span> <span class="k">var</span> <span class="nv">stdin</span><span class="p">:</span> <span class="kt">ReadableStream</span>
@@ -332,18 +332,18 @@ The path to the application.</li>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SwiftShell</span>
 <span class="kd">import</span> <span class="kt">Foundation</span>
 
-<span class="kd">extension</span> <span class="kt">Dictionary</span> <span class="k">where</span> <span class="kt">Key</span><span class="p">:</span><span class="nf">Hashable</span> <span class="p">{</span>
+<span class="kd">extension</span> <span class="kt">Dictionary</span> <span class="k">where</span> <span class="kt">Key</span><span class="p">:</span><span class="kt">Hashable</span> <span class="p">{</span>
     <span class="kd">public</span> <span class="kd">func</span> <span class="n">filterToDictionary</span> <span class="o">&lt;</span><span class="kt">C</span><span class="p">:</span> <span class="kt">Collection</span><span class="o">&gt;</span> <span class="p">(</span><span class="nv">keys</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Key</span><span class="p">:</span><span class="kt">Value</span><span class="p">]</span>
-        <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">Key</span><span class="p">,</span> <span class="kt">C</span><span class="o">.</span><span class="kt">IndexDistance</span> <span class="o">==</span> <span class="nf">Int</span> <span class="p">{</span>
+        <span class="k">where</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Iterator</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="kt">Key</span><span class="p">,</span> <span class="kt">C</span><span class="o">.</span><span class="kt">IndexDistance</span> <span class="o">==</span> <span class="kt">Int</span> <span class="p">{</span>
 
         <span class="k">var</span> <span class="nv">result</span> <span class="o">=</span> <span class="p">[</span><span class="kt">Key</span><span class="p">:</span><span class="kt">Value</span><span class="p">](</span><span class="nv">minimumCapacity</span><span class="p">:</span> <span class="n">keys</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">key</span> <span class="k">in</span> <span class="nf">keys</span> <span class="p">{</span> <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="p">}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="k">in</span> <span class="n">keys</span> <span class="p">{</span> <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="p">}</span>
         <span class="k">return</span> <span class="n">result</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// Prepare an environment as close to a new OS X user account as possible.</span>
-<span class="k">var</span> <span class="nv">cleanctx</span> <span class="o">=</span> <span class="nf">CustomContext</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">cleanctx</span> <span class="o">=</span> <span class="kt">CustomContext</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">cleanenvvars</span> <span class="o">=</span> <span class="p">[</span><span class="s">"TERM_PROGRAM"</span><span class="p">,</span> <span class="s">"SHELL"</span><span class="p">,</span> <span class="s">"TERM"</span><span class="p">,</span> <span class="s">"TMPDIR"</span><span class="p">,</span> <span class="s">"Apple_PubSub_Socket_Render"</span><span class="p">,</span> <span class="s">"TERM_PROGRAM_VERSION"</span><span class="p">,</span> <span class="s">"TERM_SESSION_ID"</span><span class="p">,</span> <span class="s">"USER"</span><span class="p">,</span> <span class="s">"SSH_AUTH_SOCK"</span><span class="p">,</span> <span class="s">"__CF_USER_TEXT_ENCODING"</span><span class="p">,</span> <span class="s">"XPC_FLAGS"</span><span class="p">,</span> <span class="s">"XPC_SERVICE_NAME"</span><span class="p">,</span> <span class="s">"SHLVL"</span><span class="p">,</span> <span class="s">"HOME"</span><span class="p">,</span> <span class="s">"LOGNAME"</span><span class="p">,</span> <span class="s">"LC_CTYPE"</span><span class="p">,</span> <span class="s">"_"</span><span class="p">]</span>
 <span class="n">cleanctx</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">cleanctx</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="nf">filterToDictionary</span><span class="p">(</span><span class="nv">keys</span><span class="p">:</span> <span class="n">cleanenvvars</span><span class="p">)</span>
 <span class="n">cleanctx</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s">"PATH"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"</span>
@@ -357,7 +357,7 @@ The path to the application.</li>
 
 <p>You can use <code>let (input,output) = streams()</code> to create a new pair of streams. What you write to <code>input</code> you can read from <code>output</code>.</p>
 
-<p><a href="https://github.com/kareman/FileSmith">FileSmith</a>&rsquo;s <a href="https://kareman.github.io/FileSmith/Classes/WritableFile.html">WritableFile</a> and <a href="https://kareman.github.io/FileSmith/Classes/ReadableFile.html">ReadableFile</a> are streams too, and can be used as stdin, stdout and stderror in SwiftShell Contexts, including <code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></code>.</p>
+<p><a href="https://github.com/kareman/FileSmith">FileSmith</a>&lsquo;s <a href="https://kareman.github.io/FileSmith/Classes/WritableFile.html">WritableFile</a> and <a href="https://kareman.github.io/FileSmith/Classes/ReadableFile.html">ReadableFile</a> are streams too, and can be used as stdin, stdout and stderror in SwiftShell Contexts, including <code><a href="Global Variables.html#/s:10SwiftShell4mainAA11MainContextCvp">main</a></code>.</p>
 <h4 id='writablestream' class='heading'>WritableStream</h4>
 
 <p>When writing to a WritableStream you normally use <code>.print</code> which works exactly like Swift&rsquo;s built-in print function:</p>
@@ -399,14 +399,14 @@ The path to the application.</li>
 </code></pre>
 
 <p>Or instead of stopping and waiting for any output you can be notified whenever there is something in the stream:</p>
-<pre class="highlight swift"><code><span class="n">main</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="nf">onOutput</span> <span class="p">{</span> <span class="n">stream</span> <span class="k">in</span>
+<pre class="highlight swift"><code><span class="n">main</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">onOutput</span> <span class="p">{</span> <span class="n">stream</span> <span class="k">in</span>
     <span class="c1">// ‘stream’ refers to main.stdin</span>
 <span class="p">}</span>
 </code></pre>
 <h4 id='data' class='heading'>Data</h4>
 
 <p>In addition to text, streams can also handle raw Data:</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="nf">Data</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="kt">Data</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="n">writer</span><span class="o">.</span><span class="nf">write</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
 <span class="n">reader</span><span class="o">.</span><span class="nf">readSomeData</span><span class="p">()</span>
 <span class="n">reader</span><span class="o">.</span><span class="nf">readData</span><span class="p">()</span> 
@@ -427,7 +427,7 @@ The path to the application.</li>
 
 <p><code>run</code> returns the following information:</p>
 <pre class="highlight swift"><code><span class="c1">/// Output from a `run` command.</span>
-<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nf">RunOutput</span> <span class="p">{</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">RunOutput</span> <span class="p">{</span>
 
     <span class="c1">/// The error from running the command, if any.</span>
     <span class="k">let</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">CommandError</span><span class="p">?</span>
@@ -458,10 +458,10 @@ The path to the application.</li>
 
 <p>The name may seem a bit cumbersome, but it explains exactly what it does. SwiftShell never prints anything without explicitly being told to.</p>
 <h4 id='asynchronous' class='heading'>Asynchronous</h4>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">command</span> <span class="o">=</span> <span class="nf">runAsync</span><span class="p">(</span><span class="s">"cmd"</span><span class="p">,</span> <span class="s">"-n"</span><span class="p">,</span> <span class="mi">245</span><span class="p">)</span><span class="o">.</span><span class="nf">onCompletion</span> <span class="p">{</span> <span class="n">command</span> <span class="k">in</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">command</span> <span class="o">=</span> <span class="nf">runAsync</span><span class="p">(</span><span class="s">"cmd"</span><span class="p">,</span> <span class="s">"-n"</span><span class="p">,</span> <span class="mi">245</span><span class="p">)</span><span class="o">.</span><span class="n">onCompletion</span> <span class="p">{</span> <span class="n">command</span> <span class="k">in</span>
     <span class="c1">// be notified when the command is finished.</span>
 <span class="p">}</span>
-<span class="n">command</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="nf">onOutput</span> <span class="p">{</span> <span class="n">stdout</span> <span class="k">in</span> 
+<span class="n">command</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">onOutput</span> <span class="p">{</span> <span class="n">stdout</span> <span class="k">in</span> 
     <span class="c1">// be notified when the command produces output (only on macOS).    </span>
 <span class="p">}</span>
 
@@ -475,7 +475,7 @@ The path to the application.</li>
     <span class="kd">public</span> <span class="k">let</span> <span class="nv">stderror</span><span class="p">:</span> <span class="kt">ReadableStream</span>
 
     <span class="c1">/// Is the command still running?</span>
-    <span class="kd">public</span> <span class="k">var</span> <span class="nv">isRunning</span><span class="p">:</span> <span class="nf">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">isRunning</span><span class="p">:</span> <span class="kt">Bool</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
 
     <span class="c1">/// Terminates the command by sending the SIGTERM signal.</span>
     <span class="kd">public</span> <span class="kd">func</span> <span class="nf">stop</span><span class="p">()</span>
@@ -538,7 +538,7 @@ The path to the application.</li>
 <p>If the command provided to <code>runAsync</code> could not be launched for any reason the program will print the error to standard error and exit, as is usual in scripts. The <code>runAsync(&quot;cmd&quot;).finish()</code> method throws an error if the exit code of the command is anything but 0:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">command</span> <span class="o">=</span> <span class="nf">runAsync</span><span class="p">(</span><span class="s">"cmd"</span><span class="p">,</span> <span class="s">"-n"</span><span class="p">,</span> <span class="mi">245</span><span class="p">)</span>
 <span class="c1">// ...</span>
-<span class="nf">do</span> <span class="p">{</span>
+<span class="k">do</span> <span class="p">{</span>
     <span class="k">try</span> <span class="n">command</span><span class="o">.</span><span class="nf">finish</span><span class="p">()</span>
 <span class="p">}</span> <span class="k">catch</span> <span class="kt">CommandError</span><span class="o">.</span><span class="nf">returnedErrorCode</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// use error.command or error.errorcode</span>
@@ -552,13 +552,13 @@ The path to the application.</li>
 </code></pre>
 
 <p>Instead of dealing with the values from these errors you can just print them:</p>
-<pre class="highlight swift"><code><span class="p">}</span> <span class="nf">catch</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
 <p>&hellip; or if they are sufficiently serious you can print them to standard error and exit:</p>
-<pre class="highlight swift"><code><span class="p">}</span> <span class="nf">catch</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
     <span class="nf">exit</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
@@ -577,17 +577,17 @@ The path to the application.</li>
 <p>Then run your Swift scripts with <code>marathon run &lt;name&gt;.swift</code>. Or add <code>#!/usr/bin/env marathon run</code> to the top of every script file and run them with <code>./&lt;name&gt;.swift</code>.</p>
 <h3 id='a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a' class='heading'><a href="https://github.com/apple/swift-package-manager">Swift Package Manager</a></h3>
 
-<p>Add <code>.package(url: &quot;https://github.com/kareman/SwiftShell&quot;, from: &quot;4.0.0&quot;)</code> to your Package.swift:</p>
-<pre class="highlight swift"><code><span class="c1">// swift-tools-version:4.0</span>
+<p>Add <code>.package(url: &quot;https://github.com/kareman/SwiftShell&quot;, from: &quot;5.0.0&quot;)</code> to your Package.swift:</p>
+<pre class="highlight swift"><code><span class="c1">// swift-tools-version:5.0</span>
 <span class="c1">// The swift-tools-version declares the minimum version of Swift required to build this package.</span>
 
 <span class="kd">import</span> <span class="kt">PackageDescription</span>
 
-<span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="nf">Package</span><span class="p">(</span>
+<span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="s">"ProjectName"</span><span class="p">,</span>
     <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
         <span class="c1">// Dependencies declare other packages that this package depends on.</span>
-        <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/kareman/SwiftShell"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"4.0.0"</span><span class="p">)</span>
+        <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/kareman/SwiftShell"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"5.0.0"</span><span class="p">)</span>
     <span class="p">],</span>
     <span class="nv">targets</span><span class="p">:</span> <span class="p">[</span>
         <span class="c1">// Targets are the basic building blocks of a package. A target can define a module or a test suite.</span>
@@ -603,11 +603,11 @@ The path to the application.</li>
 <p>and run <code>swift build</code>.</p>
 <h3 id='a-href-https-github-com-carthage-carthage-carthage-a' class='heading'><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
 
-<p>Add <code>github &quot;kareman/SwiftShell&quot; &gt;= 4.0</code> to your Cartfile, then run <code>carthage update</code> and add the resulting framework to the <q>Embedded Binaries</q> section of the application. See <a href="https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">Carthage&rsquo;s README</a> for further instructions.</p>
+<p>Add <code>github &quot;kareman/SwiftShell&quot; &gt;= 5.0</code> to your Cartfile, then run <code>carthage update</code> and add the resulting framework to the <q>Embedded Binaries</q> section of the application. See <a href="https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">Carthage&rsquo;s README</a> for further instructions.</p>
 <h3 id='a-href-https-cocoapods-org-cocoapods-a' class='heading'><a href="https://cocoapods.org/">CocoaPods</a></h3>
 
 <p>Add <code>SwiftShell</code> to your <code>Podfile</code>.</p>
-<pre class="highlight plaintext"><code>pod 'SwiftShell', '&gt;= 4.0.0'
+<pre class="highlight plaintext"><code>pod 'SwiftShell', '&gt;= 5.0.0'
 </code></pre>
 
 <p>Then run <code>pod install</code> to install it.</p>
@@ -615,13 +615,13 @@ The path to the application.</li>
 
 <p>Released under the MIT License (MIT), <a href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a></p>
 
-<p>Kåre Morstøl, <a href="http://nottoobadsoftware.com">NotTooBad Software</a></p>
+<p>Kåre Morstøl, <a href="https://nottoobadsoftware.com">NotTooBad Software</a></p>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2018-10-22)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
