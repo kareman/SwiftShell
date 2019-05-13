@@ -445,7 +445,7 @@ Then run your Swift scripts with `marathon run <name>.swift`. Or add `#!/usr/bin
 
 ### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
-Add `.package(url: "https://github.com/kareman/SwiftShell", from: "5.0.0")` to your Package.swift:
+Add `.package(url: "https://github.com/kareman/SwiftShell", from: "5.0.0")` and `platforms: [.macOS(.v10_13)],` to your Package.swift:
 
 ```swift
 // swift-tools-version:5.0
@@ -455,6 +455,7 @@ import PackageDescription
 
 let package = Package(
     name: "ProjectName",
+    platforms: [.macOS(.v10_13)],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/kareman/SwiftShell", from: "5.0.0")
