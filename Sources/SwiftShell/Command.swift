@@ -73,10 +73,20 @@ extension CommandRunning {
 
 		let process = Process()
 		process.arguments = args
-		process.executableURL = URL(fileURLWithPath: path(for: executable))
+        if #available(OSX 10.13, *) {
+            process.executableURL = URL(fileURLWithPath: path(for: executable))
+        } else {
+            // Fallback on earlier versions
+            process.launchPath = path(for: executable)
+        }
 
 		process.environment = context.env
-		process.currentDirectoryURL = URL(fileURLWithPath: context.currentdirectory, isDirectory: true)
+        if #available(OSX 10.13, *) {
+            process.currentDirectoryURL = URL(fileURLWithPath: context.currentdirectory, isDirectory: true)
+        } else {
+            // Fallback on earlier versions
+            process.currentDirectoryPath = context.currentdirectory
+        }
 
 		process.standardInput = context.stdin.filehandle
 		process.standardOutput = context.stdout.filehandle

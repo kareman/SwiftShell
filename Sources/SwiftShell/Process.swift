@@ -22,9 +22,18 @@ extension Process {
 		}
 		#endif
 		do {
-			try run()
+            if #available(OSX 10.13, *) {
+                try run()
+            } else {
+                // Fallback on earlier versions
+                launch()
+            }
 		} catch CocoaError.fileNoSuchFile {
-			throw CommandError.inAccessibleExecutable(path: self.executableURL!.lastPathComponent)
+            if #available(OSX 10.13, *) {
+                throw CommandError.inAccessibleExecutable(path: self.executableURL!.lastPathComponent)
+            } else {
+                // Fallback on earlier versions
+            }
 		}
 	}
 
@@ -35,10 +44,19 @@ extension Process {
 	public func finish() throws {
 		/// The full path to the executable + all arguments, each one quoted if it contains a space.
 		func commandAsString() -> String {
-			let path = self.executableURL?.path ?? ""
-			return (self.arguments ?? []).reduce(path) { (acc: String, arg: String) in
-				return acc + " " + ( arg.contains(" ") ? ("\"" + arg + "\"") : arg )
-			}
+            if #available(OSX 10.13, *) {
+                let path = self.executableURL?.path ?? ""
+                return (self.arguments ?? []).reduce(path) { (acc: String, arg: String) in
+                    return acc + " " + ( arg.contains(" ") ? ("\"" + arg + "\"") : arg )
+                }
+            } else {
+                // Fallback on earlier versions
+                let path = self.launchPath ?? ""
+                return (self.arguments ?? []).reduce(path) { (acc: String, arg: String) in
+                    return acc + " " + ( arg.contains(" ") ? ("\"" + arg + "\"") : arg )
+                }
+            }
+			
 		}
 		self.waitUntilExit()
 		guard self.terminationStatus == 0 else {
