@@ -73,10 +73,18 @@ extension CommandRunning {
 
 		let process = Process()
 		process.arguments = args
-		process.executableURL = URL(fileURLWithPath: path(for: executable))
+		if #available(OSX 10.13, *) {
+			process.executableURL = URL(fileURLWithPath: path(for: executable))
+		} else {
+			process.launchPath = path(for: executable)
+		}
 
 		process.environment = context.env
-		process.currentDirectoryURL = URL(fileURLWithPath: context.currentdirectory, isDirectory: true)
+		if #available(OSX 10.13, *) {
+			process.currentDirectoryURL = URL(fileURLWithPath: context.currentdirectory, isDirectory: true)
+		} else {
+			process.currentDirectoryPath = context.currentdirectory
+		}
 
 		process.standardInput = context.stdin.filehandle
 		process.standardOutput = context.stdout.filehandle
@@ -399,9 +407,9 @@ extension CommandRunning {
 	- parameter executable: path to an executable file.
 	- parameter args:       arguments to the executable.
 	- throws:
-		`CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
+	`CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 
-		`CommandError.inAccessibleExecutable(path: String)` if 'executable’ turned out to be not so executable after all.
+	`CommandError.inAccessibleExecutable(path: String)` if 'executable’ turned out to be not so executable after all.
 	*/
 	public func runAndPrint(_ executable: String, _ args: Any ...) throws {
 		let stringargs = args.flatten().map(String.init(describing:))
@@ -458,7 +466,7 @@ Runs executable and prints output and errors.
 - parameter args: arguments to the executable.
 - throws: `CommandError.returnedErrorCode(command: String, errorcode: Int)` if the exit code is anything but 0.
 
-	`CommandError.inAccessibleExecutable(path: String)` if 'executable’ turned out to be not so executable after all.
+`CommandError.inAccessibleExecutable(path: String)` if 'executable’ turned out to be not so executable after all.
 */
 public func runAndPrint(_ executable: String, _ args: Any ...) throws {
 	return try main.runAndPrint(executable, args)
