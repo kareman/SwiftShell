@@ -392,12 +392,12 @@ runAsync("cmd1", "arg1").stdout.runAsync("cmd2").stdout.write(to: &file)
 If the command provided to `runAsync` could not be launched for any reason the program will print the error to standard error and exit, as is usual in scripts. The `runAsync("cmd").finish()` method throws an error if the exit code of the command is anything but 0:
 
 ```swift
-let command = runAsync("cmd", "-n", 245)
+let someCommand = runAsync("cmd", "-n", 245)
 // ...
 do {
-	try command.finish()
-} catch CommandError.returnedErrorCode(let error) {
-	// use error.command or error.errorcode
+	try someCommand.finish()
+} catch let CommandError.returnedErrorCode(command, errorcode) {
+	print("Command '\(command)' finished with exit code \(errorcode).")
 }
 ```
 
