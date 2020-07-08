@@ -65,9 +65,9 @@ public class BlankCustomContext_Tests: XCTestCase {
 	func testIsBlank() {
 		let context = CustomContext()
 
-		XCTAssert( context.stdin.filehandle === FileHandle.nullDev )
-		XCTAssert( context.stdout.filehandle === FileHandle.nullDev )
-		XCTAssert( context.stderror.filehandle === FileHandle.nullDev )
+		XCTAssert( context.stdin.filehandle === FileHandle.nullDevice )
+		XCTAssert( context.stdout.filehandle === FileHandle.nullDevice )
+		XCTAssert( context.stderror.filehandle === FileHandle.nullDevice )
 	}
 
 	func testRunCommand() {

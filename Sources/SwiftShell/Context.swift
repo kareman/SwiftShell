@@ -51,9 +51,9 @@ public struct CustomContext: Context, CommandRunning {
 	public init() {
 		let encoding = String.Encoding.utf8
 		env = [String: String]()
-		stdin =    FileHandleStream(FileHandle.nullDev, encoding: encoding)
-		stdout =   FileHandleStream(FileHandle.nullDev, encoding: encoding)
-		stderror = FileHandleStream(FileHandle.nullDev, encoding: encoding)
+		stdin =    FileHandleStream(FileHandle.nullDevice, encoding: encoding)
+		stdout =   FileHandleStream(FileHandle.nullDevice, encoding: encoding)
+		stderror = FileHandleStream(FileHandle.nullDevice, encoding: encoding)
 		currentdirectory = main.currentdirectory
 	}
 
