@@ -162,12 +162,6 @@ The protocols ReadableStream and WritableStream in `Context` above can read and 
 
 You can use `let (input,output) = streams()` to create a new pair of streams. What you write to `input` you can read from `output`.
 
-[FileSmith][]'s [WritableFile][] and [ReadableFile][] are streams too, and can be used as stdin, stdout and stderror in SwiftShell Contexts, including `main`.
-
-[FileSmith]: https://github.com/kareman/FileSmith 
-[WritableFile]: https://kareman.github.io/FileSmith/Classes/WritableFile.html
-[ReadableFile]: https://kareman.github.io/FileSmith/Classes/ReadableFile.html
-
 #### WritableStream
 
 When writing to a WritableStream you normally use `.print` which works exactly like Swift's built-in print function:
