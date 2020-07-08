@@ -1,0 +1,37 @@
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-18.04]
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install Swift
+      uses: YOCKOW/Action-setup-swift@master
+    - name: Build
+      run: |
+        swift --version
+        swift build
+    - name: Test
+      run: swift test --enable-test-discovery --parallel
+    - name: Test Xcodeproject
+      if: matrix.os == 'macos-latest'
+      run: |
+        gem install xcpretty-travis-formatter
+        xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`
+    - name: Test Cocoapod
+      if: matrix.os == 'macos-latest'
+      run: |
+        pod repo update --silent
+        pod lib lint --allow-warnings
