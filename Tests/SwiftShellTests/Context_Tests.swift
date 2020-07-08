@@ -83,18 +83,16 @@ public class BlankCustomContext_Tests: XCTestCase {
 		XCTAssertEqual(process.stdout.read(), "one\n")
 	}
 
-	func testRunAndPrintCommand() {
+	func testRunAndPrintCommand() throws {
 		var context = CustomContext()
 
-		AssertDoesNotThrow {
-			try context.runAndPrint("/bin/echo", "one") // sent to null
+		try context.runAndPrint("/bin/echo", "one") // sent to null
 
-			let outputpipe = Pipe()
-			context.stdout = FileHandleStream(outputpipe.fileHandleForWriting, encoding: .utf8)
-			let output = outputpipe.fileHandleForReading
+		let outputpipe = Pipe()
+		context.stdout = FileHandleStream(outputpipe.fileHandleForWriting, encoding: .utf8)
+		let output = outputpipe.fileHandleForReading
 
-			try context.runAndPrint("/bin/echo", "two")
-			XCTAssertEqual(output.readSome(encoding: .utf8), "two\n")
-		}
+		try context.runAndPrint("/bin/echo", "two")
+		XCTAssertEqual(output.readSome(encoding: .utf8), "two\n")
 	}
 }

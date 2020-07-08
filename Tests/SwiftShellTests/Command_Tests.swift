@@ -95,34 +95,31 @@ public class Run_Tests: XCTestCase {
 
 public class RunAsync_Tests: XCTestCase {
 
-	func testReturnsStandardOutput() {
+	func testReturnsStandardOutput() throws {
 		let asynccommand = runAsync("/bin/echo", "one", "two" )
-		AssertDoesNotThrow { try asynccommand.finish() }
+		try asynccommand.finish()
 
 		XCTAssertEqual( asynccommand.stdout.read(), "one two\n" )
 		XCTAssertEqual( asynccommand.stderror.read(), "" )
 	}
 
-	func testReturnsStandardError() {
+	func testReturnsStandardError() throws {
 		let asynccommand = runAsync(bash: "echo one two > /dev/stderr" )
-		AssertDoesNotThrow { try asynccommand.finish() }
+		try asynccommand.finish()
 
 		XCTAssertEqual( asynccommand.stderror.read(), "one two\n" )
 		XCTAssertEqual( asynccommand.stdout.read(), "" )
 	}
 
-	func testArgumentsFromArray() {
-		AssertDoesNotThrow {
-			let output = try runAsync("/bin/echo", ["one", "two"]).finish().stdout.read()
-			XCTAssertEqual( output, "one two\n" )
-		}
+	func testArgumentsFromArray() throws {
+		let output = try runAsync("/bin/echo", ["one", "two"]).finish().stdout.read()
+		XCTAssertEqual( output, "one two\n" )
 	}
 
 	func testFinishThrowsErrorOnExitcodeNotZero() {
 		let asynccommand = runAsync(bash: "echo errormessage > /dev/stderr; exit 1" )
 
-		AssertThrows(CommandError.returnedErrorCode(command: "/bin/bash -c \"echo errormessage > /dev/stderr; exit 1\"", errorcode: 1))
-			{ try asynccommand.finish() }
+		XCTAssertThrowsError(try asynccommand.finish())
 		XCTAssertEqual( asynccommand.stderror.read(), "errormessage\n" )
 	}
 
@@ -219,14 +216,14 @@ public class XCTestCase_TestOutput: XCTestCase {
 }
 
 public class RunAsyncAndPrint_Tests: XCTestCase_TestOutput {
-	func testReturnsStandardOutput() {
-		AssertDoesNotThrow { try runAsyncAndPrint("/bin/echo", "one", "two" ).finish() }
+	func testReturnsStandardOutput() throws {
+		try runAsyncAndPrint("/bin/echo", "one", "two" ).finish()
 
 		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
 	}
 
-	func testReturnsStandardError() {
-		AssertDoesNotThrow { try runAsyncAndPrint(bash: "echo one two > /dev/stderr" ).finish() }
+	func testReturnsStandardError() throws {
+		try runAsyncAndPrint(bash: "echo one two > /dev/stderr" ).finish()
 
 		XCTAssertEqual( test_stderr.readSome(encoding: .utf8), "one two\n" )
 	}
@@ -243,32 +240,26 @@ public class RunAsyncAndPrint_Tests: XCTestCase_TestOutput {
 }
 
 public class RunAndPrint_Tests: XCTestCase_TestOutput {
-
-	func testReturnsStandardOutput() {
-		AssertDoesNotThrow { try runAndPrint("/bin/echo", "one", "two" ) }
-
+	func testArgumentsFromArray() throws {
+		try runAndPrint("/bin/echo", ["one", "two"] )
 		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
 	}
 
-	func testArgumentsFromArray() {
-		AssertDoesNotThrow { try runAndPrint("/bin/echo", ["one", "two"] ) }
-
+	func testReturnsStandardOutput() throws {
+		try runAndPrint("/bin/echo", "one", "two" )
 		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
 	}
 
-	func testReturnsStandardError() {
-		AssertDoesNotThrow { try runAndPrint(bash: "echo one two > /dev/stderr" ) }
-
+	func testReturnsStandardError() throws {
+		try runAndPrint(bash: "echo one two > /dev/stderr" )
 		XCTAssertEqual( test_stderr.readSome(encoding: .utf8), "one two\n" )
 	}
 
 	func testThrowsErrorOnExitcodeNotZero() {
-		AssertThrows(CommandError.returnedErrorCode(command: "/bin/bash -c \"exit 1\"", errorcode: 1))
-			{ try runAndPrint("bash", "-c", "exit 1") }
+		XCTAssertThrowsError(try runAndPrint("bash", "-c", "exit 1"))
 	}
 
 	func testThrowsErrorOnInaccessibleExecutable() {
-		AssertThrows(CommandError.inAccessibleExecutable(path: "notachance"))
-			{ try runAndPrint("notachance") }
+		XCTAssertThrowsError(try runAndPrint("notachance"))
 	}
 }
