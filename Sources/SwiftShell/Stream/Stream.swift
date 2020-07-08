@@ -85,11 +85,6 @@ extension ReadableStream {
 		while let text = self.readSome() { target.write(text) }
 	}
 
-	/// Writes the text in this stream to the given WritableStream.
-	public func write(to target: inout WritableStream) {
-		while let text = self.readSome() { target.write(text) }
-	}
-
 	#if !(os(iOS) || os(tvOS) || os(watchOS))
 	public var context: Context {
 		var context = CustomContext(main)
