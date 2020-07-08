@@ -30,5 +30,8 @@ jobs:
       run: |
         gem install xcpretty-travis-formatter
         xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`
+    - name: Test Cocoapod
+      if: matrix.os == 'macos-latest'
+      run: |
         pod repo update --silent
         pod lib lint --allow-warnings
