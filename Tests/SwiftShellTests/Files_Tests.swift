@@ -98,21 +98,3 @@ public class Open: XCTestCase {
         }
     }
 }
-
-extension UrlAppendationOperator {
-	public static var allTests = [
-		("testUrlPlusString", testUrlPlusString),
-		]
-}
-
-extension Open {
-	public static var allTests = [
-		("testReadFile", testReadFile),
-		("testReadFileWhichDoesNotExist", testReadFileWhichDoesNotExist),
-		("testOpenForWritingFileWhichDoesNotExist", testOpenForWritingFileWhichDoesNotExist),
-		("testOpenForOverWritingFileWhichDoesNotExist", testOpenForOverWritingFileWhichDoesNotExist),
-		("testOpenForWritingExistingFile_AppendsFile", testOpenForWritingExistingFile_AppendsFile),
-		("testOpenForOverWritingExistingFile", testOpenForOverWritingExistingFile),
-		("testOpenForOverWritingCreatesIntermediateDirectory", testOpenForOverWritingCreatesIntermediateDirectory)
-		]
-}

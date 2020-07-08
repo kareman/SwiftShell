@@ -132,20 +132,3 @@ public class Stream_Tests: XCTestCase {
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
 }
-
-#if !(os(macOS) || os(tvOS))
-extension Stream_Tests {
-	public static var allTests = [
-		("testStreams", testStreams),
-		("testData", testData),
-		("testReadableStreamRun", testReadableStreamRun),
-		("testReadableStreamRunAsync", testReadableStreamRunAsync),
-		("testPrintStream", testPrintStream),
-		("testPrintToStream", testPrintToStream),
-		("testPrintWorksTheSameAsTheBuiltinOne", testPrintWorksTheSameAsTheBuiltinOne),
-		("testWriteStreamToAnotherStreamCompiles", testWriteStreamToAnotherStreamCompiles),
-		//("testOnOutput", testOnOutput),
-		//("testOnStringOutput", testOnStringOutput),
-		]
-}
-#endif

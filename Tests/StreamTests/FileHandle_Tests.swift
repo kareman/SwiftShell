@@ -39,10 +39,3 @@ public class FileHandle_Tests: XCTestCase {
 		XCTAssertEqual(reader.read(encoding: .utf8), "", "Performing read() repeatedly on closed filehandle should return empty string.")
 	}
 }
-
-extension FileHandle_Tests {
-	public static var allTests = [
-		("testWriteAndReadSome", testWriteAndReadSome),
-		("testWriteAndRead", testWriteAndRead),
-		]
-}

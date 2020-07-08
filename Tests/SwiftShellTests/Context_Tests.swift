@@ -98,28 +98,3 @@ public class BlankCustomContext_Tests: XCTestCase {
 		}
 	}
 }
-
-extension MainContext_Tests {
-	public static var allTests = [
-		("testCurrentDirectory_IsCurrentDirectory", testCurrentDirectory_IsCurrentDirectory),
-		("testCurrentDirectory_CanChange", testCurrentDirectory_CanChange),
-		("testCurrentDirectory_AffectsNSURLBase", testCurrentDirectory_AffectsNSURLBase),
-		("testTempDirectory", testTempDirectory),
-		]
-}
-
-extension CopiedCustomContext_Tests {
-	public static var allTests = [
-		("testCopies", testCopies),
-		("testCurrentDirectory_DoesNotAffectNSURLBase", testCurrentDirectory_DoesNotAffectNSURLBase),
-		]
-}
-
-extension BlankCustomContext_Tests {
-	public static var allTests = [
-		("testIsBlank", testIsBlank),
-		("testRunCommand", testRunCommand),
-		("testRunAsyncCommand", testRunAsyncCommand),
-		("testRunAndPrintCommand", testRunAndPrintCommand),
-		]
-}

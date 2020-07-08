@@ -35,12 +35,3 @@ public class Array_Tests: XCTestCase {
 		XCTAssertEqual( (["1",[2,[3] as Any]] as [Any]).flatten().description, "[\"1\", 2, 3]")
 	}
 }
-
-
-extension Array_Tests {
-	public static var allTests = [
-		("testAnyArrayFlattenAFlatOne", testAnyArrayFlattenAFlatOne),
-		("testAnyArrayFlattenABumpyOne", testAnyArrayFlattenABumpyOne),
-		("testAnyArrayFlattenAVeryBumpyOne", testAnyArrayFlattenAVeryBumpyOne),
-		]
-}

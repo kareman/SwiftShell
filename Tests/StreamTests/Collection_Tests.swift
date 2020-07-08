@@ -98,14 +98,3 @@ public class LazySplitGenerator_Tests: XCTestCase {
 		XCTAssertEqual(split("","abc","","def","g,","h"), ["abcdefg","h"])
 	}
 }
-
-extension LazySplitGenerator_Tests {
-	public static var allTests = [
-		("testStringsLazySplit_AllowingEmptySlices", testStringsLazySplit_AllowingEmptySlices),
-		("testCollectionTypeSplit_AllowingEmptySlices", testCollectionTypeSplit_AllowingEmptySlices),
-		("testStringsLazySplit_NoEmptySlices", testStringsLazySplit_NoEmptySlices),
-		("testCollectionTypeSplit_NoEmptySlices", testCollectionTypeSplit_NoEmptySlices),
-		("testIntsLazySplit_NoEmptySlices", testIntsLazySplit_NoEmptySlices),
-		("testPartialSourceLazySplit_AllowingEmptySlices", testPartialSourceLazySplit_AllowingEmptySlices),
-		]
-}
