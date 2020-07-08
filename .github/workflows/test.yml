@@ -26,7 +26,7 @@ jobs:
     - name: Test
       run: swift test --enable-test-discovery --parallel
     - name: Test Xcodeproject
-      if: matrix.os == macos-latest
+      if: matrix.os == 'macos-latest'
       run: |
         gem install xcpretty-travis-formatter
         xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`
