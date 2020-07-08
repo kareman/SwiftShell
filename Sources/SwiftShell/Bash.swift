@@ -5,8 +5,6 @@
 *
 */
 
-#if !(os(iOS) || os(tvOS) || os(watchOS))
-
 import Foundation
 
 // MARK: Bash
@@ -97,5 +95,3 @@ Runs bash command and prints output and errors.
 public func runAndPrint(bash bashcommand: String) throws {
 	return try main.runAndPrint(bash: bashcommand)
 }
-
-#endif

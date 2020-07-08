@@ -39,7 +39,6 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(reader.readData(), data.base64EncodedData())
 	}
 
-#if !(os(iOS) || os(tvOS) || os(watchOS))
 	func testReadableStreamRun() {
 		let (writer,reader) = streams()
 
@@ -57,7 +56,6 @@ public class Stream_Tests: XCTestCase {
 
 		XCTAssertEqual(reader.runAsync("cat").stdout.read(), "one")
 	}
-#endif
 
 	func testPrintStream() {
 		let (writer,reader) = streams()
@@ -104,14 +102,11 @@ public class Stream_Tests: XCTestCase {
 		XCTAssertEqual(reader.readSome(), text)
 	}
 
-#if !(os(iOS) || os(tvOS) || os(watchOS))
 	func testWriteStreamToAnotherStreamCompiles() {
 		var file = try! open(forWriting: "/tmp/testWriteStreamToAnotherStreamCompiles.txt")
 		runAsync("echo", "arg1").stdout.runAsync("wc").stdout.write(to: &file)
 	}
-#endif
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	func testOnOutput() {
 		let (writer,reader) = streams()
 
@@ -136,10 +131,9 @@ public class Stream_Tests: XCTestCase {
 		writer.write("hi")
 		waitForExpectations(timeout: 0.5, handler: nil)
 	}
-#endif
 }
 
-#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
+#if !(os(macOS) || os(tvOS))
 extension Stream_Tests {
 	public static var allTests = [
 		("testStreams", testStreams),

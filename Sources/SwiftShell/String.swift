@@ -5,8 +5,6 @@
 *
 */
 
-#if !(os(iOS) || os(tvOS) || os(watchOS))
-
 import Foundation
 
 /// Lets String run commands using itself as stdin.
@@ -21,8 +19,6 @@ extension String: CommandRunning {
 		return context
 	}
 }
-
-#endif
 
 extension String {
 	/// Splits text into lines (as separated by newlines).

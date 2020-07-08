@@ -5,8 +5,6 @@
 *
 */
 
-#if !(os(iOS) || os(tvOS) || os(watchOS))
-
 import Foundation
 
 /** The default FileManager */
@@ -87,5 +85,3 @@ public func open(forWriting path: String, overwrite: Bool = false, encoding: Str
 	let fixedpath = path.hasPrefix("~") ? NSString(string: path).expandingTildeInPath : path
 	return try open(forWriting: URL(fileURLWithPath: fixedpath, isDirectory: false), overwrite: overwrite, encoding:  encoding)
 }
-
-#endif

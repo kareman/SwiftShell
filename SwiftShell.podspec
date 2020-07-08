@@ -9,5 +9,4 @@ Pod::Spec.new do |s|
   s.source = { git: 'https://github.com/kareman/SwiftShell.git', tag: s.version.to_s }
   s.source_files = 'Sources/SwiftShell/*.swift','Sources/SwiftShell/*/*.swift'
   s.osx.deployment_target = '10.11'
-  s.ios.deployment_target = '9.0'
 end

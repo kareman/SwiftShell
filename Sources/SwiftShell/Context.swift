@@ -5,8 +5,6 @@
 *
 */
 
-#if !(os(iOS) || os(tvOS) || os(watchOS))
-
 import Foundation
 
 public protocol Context: CustomDebugStringConvertible {
@@ -140,5 +138,3 @@ public final class MainContext: Context, CommandRunning {
 }
 
 public let main = MainContext()
-
-#endif
