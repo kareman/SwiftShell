@@ -36,7 +36,7 @@ extension FileHandle {
 
 extension FileHandle {
 	public func write(_ string: String, encoding: String.Encoding = .utf8) {
-		#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
+		#if !(os(macOS) || os(tvOS))
 			guard !string.isEmpty else { return }
 		#endif
 		guard let data = string.data(using: encoding, allowLossyConversion: false) else {
@@ -45,11 +45,6 @@ extension FileHandle {
 		self.write(data)
 	}
 }
-
-#if os(iOS) || os(tvOS) || os(watchOS)
-/// CommandRunning is not available on iOS, tvOS and watchOS.
-public protocol CommandRunning {}
-#endif
 
 /// A stream of text. Does as much as possible lazily.
 public protocol ReadableStream: class, TextOutputStreamable, CommandRunning {
@@ -85,18 +80,11 @@ extension ReadableStream {
 		while let text = self.readSome() { target.write(text) }
 	}
 
-	/// Writes the text in this stream to the given WritableStream.
-	public func write(to target: inout WritableStream) {
-		while let text = self.readSome() { target.write(text) }
-	}
-
-	#if !(os(iOS) || os(tvOS) || os(watchOS))
 	public var context: Context {
 		var context = CustomContext(main)
 		context.stdin = self
 		return context
 	}
-	#endif
 
 	/// All the data the stream contains so far.
 	/// If the source is a file this will read everything at once.
@@ -116,7 +104,6 @@ extension ReadableStream {
 	}
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	extension ReadableStream {
 		/// Sets code to be executed whenever there is new output available.
 		/// - Note: if the stream is read from outside of `handler`, or more than once inside
@@ -138,7 +125,6 @@ extension ReadableStream {
 			}
 		}
 	}
-#endif
 
 /// An output stream, like standard output or a writeable file.
 public protocol WritableStream: class, TextOutputStream {

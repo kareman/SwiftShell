@@ -5,8 +5,6 @@
 *
 */
 
-#if !(os(iOS) || os(tvOS) || os(watchOS))
-
 import Foundation
 import Dispatch
 
@@ -471,5 +469,3 @@ Runs executable and prints output and errors.
 public func runAndPrint(_ executable: String, _ args: Any ...) throws {
 	return try main.runAndPrint(executable, args)
 }
-
-#endif
