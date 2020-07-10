@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: |
         swift --version
-        swift build
+        swift build --enable-test-discovery
     - name: Test
       run: swift test --enable-test-discovery --parallel
     - name: Test Xcodeproject
