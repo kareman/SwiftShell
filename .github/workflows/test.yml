@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-18.04]
-        swift-version: [5.2.4, 5.3-DEVELOPMENT-SNAPSHOT-2020-07-04-a]
+        swift-version: [5.2.4, 5.1]
     name: Swift ${{ matrix.swift-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
 
