@@ -13,7 +13,7 @@ extension FileHandle {
 	public func readSome(encoding: String.Encoding) -> String? {
 		let data = self.availableData
 
-		guard data.count > 0 else { return nil }
+		guard !data.isEmpty else { return nil }
 		guard let result = String(data: data, encoding: encoding) else {
 			fatalError("Could not convert binary data to text.")
 		}
@@ -37,7 +37,7 @@ extension FileHandle {
 extension FileHandle {
 	public func write(_ string: String, encoding: String.Encoding = .utf8) {
 		#if !(os(macOS) || os(tvOS))
-			guard !string.isEmpty else { return }
+		guard !string.isEmpty else { return }
 		#endif
 		guard let data = string.data(using: encoding, allowLossyConversion: false) else {
 			fatalError("Could not convert text to binary data.")
@@ -47,12 +47,12 @@ extension FileHandle {
 }
 
 /// A stream of text. Does as much as possible lazily.
-public protocol ReadableStream: class, TextOutputStreamable, CommandRunning {
-	var encoding: String.Encoding {get set}
-	var filehandle: FileHandle {get}
+public protocol ReadableStream: AnyObject, TextOutputStreamable, CommandRunning {
+	var encoding: String.Encoding { get set }
+	var filehandle: FileHandle { get }
 
-	/// All the text the stream contains so far. 
-	/// If the source is a file this will read everything at once. 
+	/// All the text the stream contains so far.
+	/// If the source is a file this will read everything at once.
 	/// If the stream is empty and still open this will wait for more content or end-of-file.
 	/// - Returns: more text from the stream, or nil if we have reached the end.
 	func readSome() -> String?
@@ -63,16 +63,16 @@ public protocol ReadableStream: class, TextOutputStreamable, CommandRunning {
 
 extension ReadableStream {
 	public func readSome() -> String? {
-		return filehandle.readSome(encoding: encoding)
+		filehandle.readSome(encoding: encoding)
 	}
 
 	public func read() -> String {
-		return filehandle.read(encoding: encoding)
+		filehandle.read(encoding: encoding)
 	}
 
 	/// Splits stream lazily into lines.
 	public func lines() -> LazySequence<AnySequence<String>> {
-		return AnySequence(PartialSourceLazySplitSequence({self.readSome()}, separator: "\n").map(String.init)).lazy
+		AnySequence(PartialSourceLazySplitSequence({ self.readSome() }, separator: "\n").map(String.init)).lazy
 	}
 
 	/// Writes the text in this stream to the given TextOutputStream.
@@ -92,7 +92,7 @@ extension ReadableStream {
 	/// - Returns: more data from the stream, or nil if we have reached the end.
 	public func readSomeData() -> Data? {
 		let data = filehandle.availableData
-		return data.count > 0 ? data : nil
+		return !data.isEmpty ? data : nil
 	}
 
 	/// Reads everything at once.
@@ -100,36 +100,36 @@ extension ReadableStream {
 	/// calling .finish() without causing any compiler warnings or requiring
 	/// developer work-arounds when the result will not be used (see #52 & #57)
 	@discardableResult public func readData() -> Data {
-		return filehandle.readDataToEndOfFile()
+		filehandle.readDataToEndOfFile()
 	}
 }
 
-	extension ReadableStream {
-		/// Sets code to be executed whenever there is new output available.
-		/// - Note: if the stream is read from outside of `handler`, or more than once inside
-		/// it, it may be called once when stream is closed and empty.
-		public func onOutput(_ handler: @escaping (ReadableStream) -> Void) {
-			filehandle.readabilityHandler = { [weak self] _ in
-				self.map(handler)
-			}
-		}
-
-		/// Sets code to be executed whenever there is new text output available.
-		/// - Note: if the stream is read from outside of `handler`, or more than once inside
-		/// it, it may be called once when stream is closed and empty.
-		public func onStringOutput(_ handler: @escaping (String) -> Void) {
-			self.onOutput { stream in
-				if let output = stream.readSome() {
-					handler(output)
-				}
-			}
+extension ReadableStream {
+	/// Sets code to be executed whenever there is new output available.
+	/// - Note: if the stream is read from outside of `handler`, or more than once inside
+	/// it, it may be called once when stream is closed and empty.
+	public func onOutput(_ handler: @escaping (ReadableStream) -> Void) {
+		filehandle.readabilityHandler = { [weak self] _ in
+			self.map(handler)
 		}
 	}
 
+	/// Sets code to be executed whenever there is new text output available.
+	/// - Note: if the stream is read from outside of `handler`, or more than once inside
+	/// it, it may be called once when stream is closed and empty.
+	public func onStringOutput(_ handler: @escaping (String) -> Void) {
+		self.onOutput { stream in
+			if let output = stream.readSome() {
+				handler(output)
+			}
+		}
+	}
+}
+
 /// An output stream, like standard output or a writeable file.
-public protocol WritableStream: class, TextOutputStream {
-	var encoding: String.Encoding {get set}
-	var filehandle: FileHandle {get}
+public protocol WritableStream: AnyObject, TextOutputStream {
+	var encoding: String.Encoding { get set }
+	var filehandle: FileHandle { get }
 
 	/// Writes `x` to the stream.
 	func write(_ x: String)
@@ -181,7 +181,7 @@ public class StdoutStream: WritableStream {
 
 	private init() {}
 
-	public static var `default`: StdoutStream { return StdoutStream() }
+	public static var `default`: StdoutStream { StdoutStream() }
 
 	public func write(_ x: String) {
 		Swift.print(x, terminator: "")

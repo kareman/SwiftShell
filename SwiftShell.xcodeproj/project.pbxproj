@@ -11,7 +11,6 @@
 		OBJ_45 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Bash.swift */; };
 		OBJ_46 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Command.swift */; };
 		OBJ_47 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Context.swift */; };
-		OBJ_48 /* FileHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FileHandle.swift */; };
 		OBJ_49 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Files.swift */; };
 		OBJ_50 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* String.swift */; };
 		OBJ_51 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Array.swift */; };
@@ -25,7 +24,6 @@
 		OBJ_77 /* FileHandle_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* FileHandle_Tests.swift */; };
 		OBJ_78 /* Files_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* Files_Tests.swift */; };
 		OBJ_79 /* String_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* String_Tests.swift */; };
-		OBJ_80 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* TestHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,16 +51,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BA50D28D1E8DB923002BA4A5 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		BA930AEA2077EC5C003E5703 /* Process.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Process.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Command.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_11 /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Context.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		OBJ_12 /* FileHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FileHandle.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_13 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Files.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_14 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = String.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_16 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Array.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_18 /* Lazy-split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Lazy-split.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		OBJ_19 /* Stream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Stream.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		OBJ_19 /* Stream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Stream.swift; sourceTree = "<group>"; };
 		OBJ_22 /* Array_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Array_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_24 /* Collection_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Collection_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_25 /* Stream_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Stream_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -71,7 +67,6 @@
 		OBJ_29 /* FileHandle_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FileHandle_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_30 /* Files_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Files_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_31 /* String_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = String_Tests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		OBJ_32 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TestHelpers.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		OBJ_33 /* Misc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Misc; sourceTree = SOURCE_ROOT; };
 		OBJ_36 /* SwiftShell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftShell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_37 /* GeneralTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = GeneralTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,7 +128,6 @@
 		OBJ_20 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				BA50D28D1E8DB923002BA4A5 /* LinuxMain.swift */,
 				OBJ_21 /* GeneralTests */,
 				OBJ_23 /* StreamTests */,
 				OBJ_26 /* SwiftShellTests */,
@@ -168,7 +162,6 @@
 				OBJ_28 /* Context_Tests.swift */,
 				OBJ_30 /* Files_Tests.swift */,
 				OBJ_31 /* String_Tests.swift */,
-				OBJ_32 /* TestHelpers.swift */,
 			);
 			name = SwiftShellTests;
 			path = Tests/SwiftShellTests;
@@ -210,7 +203,6 @@
 				OBJ_9 /* Bash.swift */,
 				OBJ_10 /* Command.swift */,
 				OBJ_11 /* Context.swift */,
-				OBJ_12 /* FileHandle.swift */,
 				BA930AEA2077EC5C003E5703 /* Process.swift */,
 				OBJ_13 /* Files.swift */,
 				OBJ_14 /* String.swift */,
@@ -343,7 +335,6 @@
 				BA930AEB2077EC5C003E5703 /* Process.swift in Sources */,
 				OBJ_46 /* Command.swift in Sources */,
 				OBJ_47 /* Context.swift in Sources */,
-				OBJ_48 /* FileHandle.swift in Sources */,
 				OBJ_49 /* Files.swift in Sources */,
 				OBJ_50 /* String.swift in Sources */,
 				OBJ_51 /* Array.swift in Sources */,
@@ -378,7 +369,6 @@
 				OBJ_77 /* FileHandle_Tests.swift in Sources */,
 				OBJ_78 /* Files_Tests.swift in Sources */,
 				OBJ_79 /* String_Tests.swift in Sources */,
-				OBJ_80 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

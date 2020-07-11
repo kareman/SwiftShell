@@ -1,9 +1,9 @@
 /*
-* Released under the MIT License (MIT), http://opensource.org/licenses/MIT
-*
-* Copyright (c) 2015 Kåre Morstøl, NotTooBad Software (nottoobadsoftware.com)
-*
-*/
+ * Released under the MIT License (MIT), http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2015 Kåre Morstøl, NotTooBad Software (nottoobadsoftware.com)
+ *
+ */
 
 import Foundation
 
@@ -23,6 +23,6 @@ extension String: CommandRunning {
 extension String {
 	/// Splits text into lines (as separated by newlines).
 	public func lines() -> [String] {
-		return split(separator: "\n").map(String.init)
+		split(separator: "\n").map(String.init)
 	}
 }

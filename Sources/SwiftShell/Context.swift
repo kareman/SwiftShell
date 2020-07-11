@@ -1,25 +1,25 @@
 /*
-* Released under the MIT License (MIT), http://opensource.org/licenses/MIT
-*
-* Copyright (c) 2015 Kåre Morstøl, NotTooBad Software (nottoobadsoftware.com)
-*
-*/
+ * Released under the MIT License (MIT), http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2015 Kåre Morstøl, NotTooBad Software (nottoobadsoftware.com)
+ *
+ */
 
 import Foundation
 
 public protocol Context: CustomDebugStringConvertible {
-	var env: [String: String] {get set}
-	var stdin: ReadableStream {get set}
-	var stdout: WritableStream {get set}
-	var stderror: WritableStream {get set}
+	var env: [String: String] { get set }
+	var stdin: ReadableStream { get set }
+	var stdout: WritableStream { get set }
+	var stderror: WritableStream { get set }
 
 	/**
-	The current working directory.
+	 The current working directory.
 
-	Must be used instead of `run("cd", "...")` because all the `run` commands are executed in a
-	separate process and changing the directory there will not affect the rest of the Swift script.
-	*/
-	var currentdirectory: String {get set}
+	 Must be used instead of `run("cd", "...")` because all the `run` commands are executed in a
+	 separate process and changing the directory there will not affect the rest of the Swift script.
+	 */
+	var currentdirectory: String { get set }
 }
 
 extension Context {
@@ -39,29 +39,29 @@ public struct CustomContext: Context, CommandRunning {
 	public var stderror: WritableStream
 
 	/**
-	The current working directory.
+	 The current working directory.
 
-	Must be used instead of `run("cd", "...")` because all the `run` commands are executed in a
-	separate process and changing the directory there will not affect the rest of the Swift script.
-	*/
+	 Must be used instead of `run("cd", "...")` because all the `run` commands are executed in a
+	 separate process and changing the directory there will not affect the rest of the Swift script.
+	 */
 	public var currentdirectory: String
 
-	/** Creates a blank CustomContext where env and stdin are empty, stdout and stderror discard everything and 
-	currentdirectory is the current working directory. */
+	/** Creates a blank CustomContext where env and stdin are empty, stdout and stderror discard everything and
+	 currentdirectory is the current working directory. */
 	public init() {
 		let encoding = String.Encoding.utf8
 		env = [String: String]()
-		stdin =    FileHandleStream(FileHandle.nullDev, encoding: encoding)
-		stdout =   FileHandleStream(FileHandle.nullDev, encoding: encoding)
-		stderror = FileHandleStream(FileHandle.nullDev, encoding: encoding)
+		stdin = FileHandleStream(FileHandle.nullDevice, encoding: encoding)
+		stdout = FileHandleStream(FileHandle.nullDevice, encoding: encoding)
+		stderror = FileHandleStream(FileHandle.nullDevice, encoding: encoding)
 		currentdirectory = main.currentdirectory
 	}
 
 	/** Creates an identical copy of another Context. */
 	public init(_ context: Context) {
 		env = context.env
-		stdin =    context.stdin
-		stdout =   context.stdout
+		stdin = context.stdin
+		stdout = context.stdout
 		stderror = context.stderror
 		currentdirectory = context.currentdirectory
 	}
@@ -69,7 +69,7 @@ public struct CustomContext: Context, CommandRunning {
 
 private func createTempdirectory() -> String {
 	let name = URL(fileURLWithPath: main.path).lastPathComponent
-	let tempdirectory = URL(fileURLWithPath:NSTemporaryDirectory()) + (name + "-" + ProcessInfo.processInfo.globallyUniqueString)
+	let tempdirectory = URL(fileURLWithPath: NSTemporaryDirectory()) + (name + "-" + ProcessInfo.processInfo.globallyUniqueString)
 	do {
 		try Files.createDirectory(atPath: tempdirectory.path, withIntermediateDirectories: true, attributes: nil)
 		return tempdirectory.path + "/"
@@ -83,7 +83,7 @@ private func createTempdirectory() -> String {
 extension CommandLine {
 	/** Workaround for nil crash in CommandLine.arguments when run in Xcode. */
 	static var safeArguments: [String] {
-		return self.argc == 0 ? [] : self.arguments
+		self.argc == 0 ? [] : self.arguments
 	}
 }
 
@@ -96,25 +96,27 @@ public final class MainContext: Context, CommandRunning {
 	public lazy var stdin: ReadableStream = {
 		FileHandleStream(FileHandle.standardInput, encoding: self.encoding)
 	}()
+
 	public lazy var stdout: WritableStream = {
 		let stdout = StdoutStream.default
 		stdout.encoding = self.encoding
 		return stdout
 	}()
+
 	public lazy var stderror: WritableStream = {
 		FileHandleStream(FileHandle.standardError, encoding: self.encoding)
 	}()
 
 	/**
-	The current working directory.
+	 The current working directory.
 
-	Must be used instead of `run("cd", "...")` because all the `run` commands are executed in
-	separate processes and changing the directory there will not affect the rest of the Swift script.
+	 Must be used instead of `run("cd", "...")` because all the `run` commands are executed in
+	 separate processes and changing the directory there will not affect the rest of the Swift script.
 
-	This directory is also used as the base for relative URLs.
-	*/
+	 This directory is also used as the base for relative URLs.
+	 */
 	public var currentdirectory: String {
-		get {	return Files.currentDirectoryPath + "/" }
+		get { return Files.currentDirectoryPath + "/" }
 		set {
 			if !Files.changeCurrentDirectoryPath(newValue) {
 				exit(errormessage: "Could not change the working directory to \(newValue)")
@@ -123,9 +125,9 @@ public final class MainContext: Context, CommandRunning {
 	}
 
 	/**
-	The tempdirectory is unique each time a script is run and is created the first time it is used.
-	It lies in the user's temporary directory and will be automatically deleted at some point.
-	*/
+	 The tempdirectory is unique each time a script is run and is created the first time it is used.
+	 It lies in the user's temporary directory and will be automatically deleted at some point.
+	 */
 	public private(set) lazy var tempdirectory: String = createTempdirectory()
 
 	/** The arguments this executable was launched with. Use main.path to get the path. */
@@ -134,7 +136,7 @@ public final class MainContext: Context, CommandRunning {
 	/** The path to the currently running executable. Will be empty in playgrounds. */
 	public private(set) lazy var path: String = CommandLine.safeArguments.first ?? ""
 
-	fileprivate init() {	}
+	fileprivate init() {}
 }
 
 public let main = MainContext()
