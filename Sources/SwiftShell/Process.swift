@@ -48,7 +48,7 @@ extension Process {
 				path = self.launchPath ?? ""
 			}
 			return (self.arguments ?? []).reduce(path) { (acc: String, arg: String) in
-				return acc + " " + ( arg.contains(" ") ? ("\"" + arg + "\"") : arg )
+				acc + " " + (arg.contains(" ") ? ("\"" + arg + "\"") : arg)
 			}
 		}
 		self.waitUntilExit()

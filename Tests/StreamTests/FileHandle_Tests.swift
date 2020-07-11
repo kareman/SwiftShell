@@ -6,12 +6,11 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
+import Foundation
 import SwiftShell
 import XCTest
-import Foundation
 
 public class FileHandle_Tests: XCTestCase {
-
 	func testWriteAndReadSome() {
 		let pipe = Pipe()
 		let writer = pipe.fileHandleForWriting

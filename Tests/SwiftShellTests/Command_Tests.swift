@@ -6,16 +6,15 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
+import Foundation
 import SwiftShell
 import XCTest
-import Foundation
 
 #if os(Linux)
 import Glibc
 #endif
 
 public class Run_Tests: XCTestCase {
-
 	func testCompilesWhenNotDefiningReturnType() {
 		_ = SwiftShell.run("echo", "hi")
 		_ = SwiftShell.run(bash: "echo hi")
@@ -24,42 +23,42 @@ public class Run_Tests: XCTestCase {
 	}
 
 	func testBashCommand() {
-		XCTAssertEqual( SwiftShell.run(bash:"echo one").stdout, "one" )
+		XCTAssertEqual(SwiftShell.run(bash: "echo one").stdout, "one")
 	}
 
 	func testArgumentsFromArray() {
 		let stringarray = ["one", "two"]
-		XCTAssertEqual( SwiftShell.run("/bin/echo", stringarray).stdout, "one two" )
+		XCTAssertEqual(SwiftShell.run("/bin/echo", stringarray).stdout, "one two")
 	}
 
 	func testSinglelineOutput() {
-		XCTAssertEqual( SwiftShell.run("/bin/echo", "one", "two").stdout, "one two" )
+		XCTAssertEqual(SwiftShell.run("/bin/echo", "one", "two").stdout, "one two")
 	}
 
 	func testMultilineOutput() {
-		XCTAssertEqual( SwiftShell.run("/bin/echo", "one\ntwo").stdout, "one\ntwo\n" )
+		XCTAssertEqual(SwiftShell.run("/bin/echo", "one\ntwo").stdout, "one\ntwo\n")
 	}
 
 	func testStandardErrorOutput() {
-		XCTAssertEqual( SwiftShell.run(bash:"echo one 1>&2").stderror, "one" )
+		XCTAssertEqual(SwiftShell.run(bash: "echo one 1>&2").stderror, "one")
 	}
 
 	func testCombinesOutput() {
-		XCTAssertEqual( SwiftShell.run(bash: "echo stdout; echo stderr > /dev/stderr", combineOutput: true).stdout, "stdout\nstderr\n" )
+		XCTAssertEqual(SwiftShell.run(bash: "echo stdout; echo stderr > /dev/stderr", combineOutput: true).stdout, "stdout\nstderr\n")
 	}
 
 	func testExecutableWithoutPath() {
-		XCTAssertEqual( SwiftShell.run("echo", "one").stdout, "one")
+		XCTAssertEqual(SwiftShell.run("echo", "one").stdout, "one")
 	}
 
 	func testSuccess() {
 		let success = SwiftShell.run(bash: "exit 0")
-		XCTAssertEqual( success.exitcode, 0)
-		XCTAssertEqual( success.succeeded, true)
+		XCTAssertEqual(success.exitcode, 0)
+		XCTAssertEqual(success.succeeded, true)
 
 		let failure = SwiftShell.run(bash: "exit 1")
-		XCTAssertEqual( failure.exitcode, 1)
-		XCTAssertEqual( failure.succeeded, false)
+		XCTAssertEqual(failure.exitcode, 1)
+		XCTAssertEqual(failure.succeeded, false)
 	}
 
 	func testAnd() {
@@ -94,39 +93,38 @@ public class Run_Tests: XCTestCase {
 }
 
 public class RunAsync_Tests: XCTestCase {
-
 	func testReturnsStandardOutput() throws {
-		let asynccommand = runAsync("/bin/echo", "one", "two" )
+		let asynccommand = runAsync("/bin/echo", "one", "two")
 		try asynccommand.finish()
 
-		XCTAssertEqual( asynccommand.stdout.read(), "one two\n" )
-		XCTAssertEqual( asynccommand.stderror.read(), "" )
+		XCTAssertEqual(asynccommand.stdout.read(), "one two\n")
+		XCTAssertEqual(asynccommand.stderror.read(), "")
 	}
 
 	func testReturnsStandardError() throws {
-		let asynccommand = runAsync(bash: "echo one two > /dev/stderr" )
+		let asynccommand = runAsync(bash: "echo one two > /dev/stderr")
 		try asynccommand.finish()
 
-		XCTAssertEqual( asynccommand.stderror.read(), "one two\n" )
-		XCTAssertEqual( asynccommand.stdout.read(), "" )
+		XCTAssertEqual(asynccommand.stderror.read(), "one two\n")
+		XCTAssertEqual(asynccommand.stdout.read(), "")
 	}
 
 	func testArgumentsFromArray() throws {
 		let output = try runAsync("/bin/echo", ["one", "two"]).finish().stdout.read()
-		XCTAssertEqual( output, "one two\n" )
+		XCTAssertEqual(output, "one two\n")
 	}
 
 	func testFinishThrowsErrorOnExitcodeNotZero() {
-		let asynccommand = runAsync(bash: "echo errormessage > /dev/stderr; exit 1" )
+		let asynccommand = runAsync(bash: "echo errormessage > /dev/stderr; exit 1")
 
 		XCTAssertThrowsError(try asynccommand.finish())
-		XCTAssertEqual( asynccommand.stderror.read(), "errormessage\n" )
+		XCTAssertEqual(asynccommand.stderror.read(), "errormessage\n")
 	}
 
 	func testExitCode() {
-		let asynccommand = runAsync(bash: "exit 1" )
+		let asynccommand = runAsync(bash: "exit 1")
 
-		XCTAssertEqual( asynccommand.exitcode(), 1 )
+		XCTAssertEqual(asynccommand.exitcode(), 1)
 	}
 
 	func testOnCompletion() {
@@ -183,21 +181,21 @@ public class RunAsync_Tests: XCTestCase {
 	}
 
 	/*
-	Cannot test the suspend/resume calls reliably
+	 Cannot test the suspend/resume calls reliably
 
-	func testSuspendAndResume() {
-		// Start a command that wouldn't ever exit normally
-		let command = runAsync("cat")
+	 func testSuspendAndResume() {
+	 	// Start a command that wouldn't ever exit normally
+	 	let command = runAsync("cat")
 
-		XCTAssertTrue(command.isRunning)
-		command.suspend()
+	 	XCTAssertTrue(command.isRunning)
+	 	command.suspend()
 
-		XCTAssertFalse(command.isRunning)
-		command.resume()
+	 	XCTAssertFalse(command.isRunning)
+	 	command.resume()
 
-		XCTAssertTrue(command.isRunning)
-	}
-	*/
+	 	XCTAssertTrue(command.isRunning)
+	 }
+	 */
 }
 
 public class XCTestCase_TestOutput: XCTestCase {
@@ -217,15 +215,15 @@ public class XCTestCase_TestOutput: XCTestCase {
 
 public class RunAsyncAndPrint_Tests: XCTestCase_TestOutput {
 	func testReturnsStandardOutput() throws {
-		try runAsyncAndPrint("/bin/echo", "one", "two" ).finish()
+		try runAsyncAndPrint("/bin/echo", "one", "two").finish()
 
-		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
+		XCTAssertEqual(test_stdout.readSome(encoding: .utf8), "one two\n")
 	}
 
 	func testReturnsStandardError() throws {
-		try runAsyncAndPrint(bash: "echo one two > /dev/stderr" ).finish()
+		try runAsyncAndPrint(bash: "echo one two > /dev/stderr").finish()
 
-		XCTAssertEqual( test_stderr.readSome(encoding: .utf8), "one two\n" )
+		XCTAssertEqual(test_stderr.readSome(encoding: .utf8), "one two\n")
 	}
 
 	func testOnCompletion() {
@@ -241,18 +239,18 @@ public class RunAsyncAndPrint_Tests: XCTestCase_TestOutput {
 
 public class RunAndPrint_Tests: XCTestCase_TestOutput {
 	func testArgumentsFromArray() throws {
-		try runAndPrint("/bin/echo", ["one", "two"] )
-		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
+		try runAndPrint("/bin/echo", ["one", "two"])
+		XCTAssertEqual(test_stdout.readSome(encoding: .utf8), "one two\n")
 	}
 
 	func testReturnsStandardOutput() throws {
-		try runAndPrint("/bin/echo", "one", "two" )
-		XCTAssertEqual( test_stdout.readSome(encoding: .utf8), "one two\n" )
+		try runAndPrint("/bin/echo", "one", "two")
+		XCTAssertEqual(test_stdout.readSome(encoding: .utf8), "one two\n")
 	}
 
 	func testReturnsStandardError() throws {
-		try runAndPrint(bash: "echo one two > /dev/stderr" )
-		XCTAssertEqual( test_stderr.readSome(encoding: .utf8), "one two\n" )
+		try runAndPrint(bash: "echo one two > /dev/stderr")
+		XCTAssertEqual(test_stderr.readSome(encoding: .utf8), "one two\n")
 	}
 
 	func testThrowsErrorOnExitcodeNotZero() {

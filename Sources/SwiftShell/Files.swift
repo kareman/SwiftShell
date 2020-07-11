@@ -1,9 +1,9 @@
 /*
-* Released under the MIT License (MIT), http://opensource.org/licenses/MIT
-*
-* Copyright (c) 2015 Kåre Morstøl, NotTooBad Software (nottoobadsoftware.com)
-*
-*/
+ * Released under the MIT License (MIT), http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2015 Kåre Morstøl, NotTooBad Software (nottoobadsoftware.com)
+ *
+ */
 
 import Foundation
 
@@ -12,7 +12,7 @@ public let Files = FileManager.default
 
 /** Appends file or directory url to directory url */
 public func + (leftpath: URL, rightpath: String) -> URL {
-	return leftpath.appendingPathComponent(rightpath)
+	leftpath.appendingPathComponent(rightpath)
 }
 
 /** Error type for file commands. */
@@ -29,7 +29,7 @@ public enum FileError: Error {
 extension FileError: CustomStringConvertible {
 	public var description: String {
 		switch self {
-		case .notFound(let path):
+		case let .notFound(path):
 			return "Error: '\(path)' does not exist."
 		}
 	}
@@ -53,13 +53,12 @@ public func open(_ path: URL, encoding: String.Encoding = main.encoding) throws 
 }
 
 /**
-Opens a file for writing, creates it first if it doesn't exist.
-If the file already exists and overwrite=false, the writing will begin at the end of the file.
+ Opens a file for writing, creates it first if it doesn't exist.
+ If the file already exists and overwrite=false, the writing will begin at the end of the file.
 
-- parameter overwrite: If true, replace the file if it exists.
-*/
+ - parameter overwrite: If true, replace the file if it exists.
+ */
 public func open(forWriting path: URL, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> FileHandleStream {
-
 	if overwrite || !Files.fileExists(atPath: path.path) {
 		try Files.createDirectory(at: path.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
 		_ = Files.createFile(atPath: path.path, contents: nil, attributes: nil)
@@ -76,12 +75,12 @@ public func open(forWriting path: URL, overwrite: Bool = false, encoding: String
 }
 
 /**
-Opens a file for writing, creates it first if it doesn't exist.
-If the file already exists and overwrite=false, the writing will begin at the end of the file.
+ Opens a file for writing, creates it first if it doesn't exist.
+ If the file already exists and overwrite=false, the writing will begin at the end of the file.
 
-- parameter overwrite: If true, replace the file if it exists.
-*/
+ - parameter overwrite: If true, replace the file if it exists.
+ */
 public func open(forWriting path: String, overwrite: Bool = false, encoding: String.Encoding = main.encoding) throws -> FileHandleStream {
 	let fixedpath = path.hasPrefix("~") ? NSString(string: path).expandingTildeInPath : path
-	return try open(forWriting: URL(fileURLWithPath: fixedpath, isDirectory: false), overwrite: overwrite, encoding:  encoding)
+	return try open(forWriting: URL(fileURLWithPath: fixedpath, isDirectory: false), overwrite: overwrite, encoding: encoding)
 }

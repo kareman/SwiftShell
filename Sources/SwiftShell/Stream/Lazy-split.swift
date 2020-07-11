@@ -5,7 +5,6 @@
 //
 
 extension Collection where Element: Equatable {
-
 	/// Returns everything before the first occurrence of ‘separator’ as 'head', and everything after it as 'tail'.
 	/// Including empty sequences if ‘separator’ is first or last.
 	///
@@ -17,7 +16,7 @@ extension Collection where Element: Equatable {
 }
 
 /// A sequence from splitting a Collection lazily.
-public struct LazySplitSequence <Base: Collection>: IteratorProtocol, LazySequenceProtocol where
+public struct LazySplitSequence<Base: Collection>: IteratorProtocol, LazySequenceProtocol where
 	Base.Element: Equatable {
 	public fileprivate(set) var remaining: Base.SubSequence?
 	public let separator: Base.Element
@@ -28,7 +27,7 @@ public struct LazySplitSequence <Base: Collection>: IteratorProtocol, LazySequen
 	/// - Parameters:
 	///   - base: The Collection to split.
 	///   - separator: The element of `base` to split over.
-	///   - allowEmptySlices: If there are two or more separators in a row, or `base` begins or ends with 
+	///   - allowEmptySlices: If there are two or more separators in a row, or `base` begins or ends with
 	///     a separator, should empty slices be emitted? Defaults to false.
 	public init(_ base: Base, separator: Base.Element, allowEmptySlices: Bool = false) {
 		self.separator = separator
@@ -46,7 +45,6 @@ public struct LazySplitSequence <Base: Collection>: IteratorProtocol, LazySequen
 }
 
 extension LazyCollectionProtocol where Elements.Element: Equatable {
-
 	/// Creates a lazy sequence by splitting this Collection repeatedly.
 	///
 	/// - Parameters:
@@ -54,31 +52,28 @@ extension LazyCollectionProtocol where Elements.Element: Equatable {
 	///   - allowEmptySlices: If there are two or more separators in a row, or this Collection begins or ends with
 	///     a separator, should empty slices be emitted? Defaults to false.
 	public func split(
-		separator: Elements.Element, allowEmptySlices: Bool = false
-		) -> LazySplitSequence<Elements> {
-
-		return LazySplitSequence(self.elements, separator: separator, allowEmptySlices: allowEmptySlices)
+		separator: Elements.Element, allowEmptySlices: Bool = false) -> LazySplitSequence<Elements> {
+		LazySplitSequence(self.elements, separator: separator, allowEmptySlices: allowEmptySlices)
 	}
 }
 
 /// A sequence from splitting a series of Collections lazily, as if they were one Collection.
-public struct PartialSourceLazySplitSequence <Base: Collection>: IteratorProtocol, LazySequenceProtocol where
+public struct PartialSourceLazySplitSequence<Base: Collection>: IteratorProtocol, LazySequenceProtocol where
 	Base.Element: Equatable,
 	Base.SubSequence: RangeReplaceableCollection {
-
 	private var gs: LazyMapSequence<AnyIterator<Base>, LazySplitSequence<Base>>.Iterator
 	private var g: LazySplitSequence<Base>?
 
 	/// Creates a lazy sequence by splitting a series of collections repeatedly, as if they were one collection.
 	///
 	/// - Parameters:
-	///   - bases: A function which returns the next collection in the series each time it is called, 
+	///   - bases: A function which returns the next collection in the series each time it is called,
 	///     or nil if there are no more collections.
 	///   - separator: The element of ‘bases’ to split over.
 	public init(_ bases: @escaping () -> Base?, separator: Base.Element) {
 		gs = AnyIterator(bases).lazy.map {
 			LazySplitSequence($0, separator: separator, allowEmptySlices: true).makeIterator()
-			}.makeIterator()
+		}.makeIterator()
 	}
 
 	/// The contents of ‘bases’ up to the next occurrence of ‘separator’.

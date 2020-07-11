@@ -6,12 +6,11 @@
 // Copyright (c) 2014 NotTooBad Software. All rights reserved.
 //
 
+import Foundation
 import SwiftShell
 import XCTest
-import Foundation
 
 public class UrlAppendationOperator: XCTestCase {
-
 	func testUrlPlusString() {
 		XCTAssertEqual(URL(fileURLWithPath: "dir") + "file.txt", URL(fileURLWithPath: "dir/file.txt"))
 		XCTAssertEqual(URL(fileURLWithPath: "dir/") + "/file.txt", URL(fileURLWithPath: "dir/file.txt"))
@@ -20,10 +19,9 @@ public class UrlAppendationOperator: XCTestCase {
 }
 
 public class Open: XCTestCase {
-
 	func testReadFile() throws {
 		let path = main.tempdirectory + "testReadFile.txt"
-		let _ = SwiftShell.run(bash: "echo Lorem ipsum dolor > " + path)
+		_ = SwiftShell.run(bash: "echo Lorem ipsum dolor > " + path)
 
 		let file = try open(path)
 		XCTAssert(file.read().hasPrefix("Lorem ipsum dolor"))
@@ -41,7 +39,7 @@ public class Open: XCTestCase {
 		file.close()
 
 		let contents = try String(contentsOfFile: path, encoding: .utf8)
-		XCTAssertEqual( contents, "line 1\n" )
+		XCTAssertEqual(contents, "line 1\n")
 	}
 
 	func testOpenForOverWritingFileWhichDoesNotExist() throws {
@@ -52,31 +50,31 @@ public class Open: XCTestCase {
 		file.close()
 
 		let contents = try String(contentsOfFile: path, encoding: .utf8)
-		XCTAssertEqual( contents, "line 1\n" )
+		XCTAssertEqual(contents, "line 1\n")
 	}
 
 	func testOpenForWritingExistingFile_AppendsFile() throws {
 		let path = main.tempdirectory + "testOpenForWritingExistingFile_AppendsFile.txt"
-		let _ = SwiftShell.run(bash: "echo existing line > " + path)
+		_ = SwiftShell.run(bash: "echo existing line > " + path)
 
 		let file = try open(forWriting: path)
 		file.print("new line")
 		file.close()
 
 		let contents = try String(contentsOfFile: path, encoding: .utf8)
-		XCTAssertEqual( contents, "existing line\nnew line\n" )
+		XCTAssertEqual(contents, "existing line\nnew line\n")
 	}
 
 	func testOpenForOverWritingExistingFile() throws {
 		let path = main.tempdirectory + "testOpenForOverWritingExistingFile.txt"
-		let _ = SwiftShell.run(bash: "echo existing line > " + path)
+		_ = SwiftShell.run(bash: "echo existing line > " + path)
 
 		let file = try open(forWriting: path, overwrite: true)
 		file.print("new line")
 		file.close()
 
 		let contents = try String(contentsOfFile: path, encoding: .utf8)
-		XCTAssertEqual( contents, "new line\n" )
+		XCTAssertEqual(contents, "new line\n")
 	}
 
 	func testOpenForOverWritingCreatesIntermediateDirectory() throws {
@@ -85,4 +83,3 @@ public class Open: XCTestCase {
 		XCTAssert(Files.fileExists(atPath: path))
 	}
 }
-
