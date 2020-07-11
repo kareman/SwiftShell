@@ -18,6 +18,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Remove .swift-version file
+      run: rm .swift-version
     - name: Install Swift
       uses: YOCKOW/Action-setup-swift@master
       with:
