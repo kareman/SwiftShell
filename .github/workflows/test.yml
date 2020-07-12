@@ -41,7 +41,14 @@ jobs:
       run: |
         set -eo pipefail
         gem install xcpretty-travis-formatter
+        xcodebuild -version
         xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`
+    - name: Test Xcodeproject in Xcode beta
+      run: |
+        set -eo pipefail
+        sudo xcode-select -s /Applications/Xcode-beta.app/
+        xcodebuild -version
+        xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`   
     - name: Test Cocoapod
       run: |
         pod repo update --silent
