@@ -14,7 +14,6 @@ jobs:
         swift-version: [5.2.4, 5.1]
     name: Swift ${{ matrix.swift-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -30,13 +29,26 @@ jobs:
         swift build --enable-test-discovery
     - name: Test
       run: swift test --enable-test-discovery --parallel
+ 
+  xcode:
+    name: Xcode project and Cocoapod
+    runs-on: macos-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Test Xcodeproject
-      if: matrix.os == 'macos-latest'
       run: |
+        set -eo pipefail
         gem install xcpretty-travis-formatter
+        xcodebuild -version
         xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`
+    - name: Test Xcodeproject in Xcode 12 beta
+      run: |
+        set -eo pipefail
+        sudo xcode-select -s /Applications/Xcode_12_beta.app
+        xcodebuild -version
+        xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`   
     - name: Test Cocoapod
-      if: matrix.os == 'macos-latest'
       run: |
         pod repo update --silent
         pod lib lint --allow-warnings
