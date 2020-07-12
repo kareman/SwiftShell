@@ -30,13 +30,16 @@ jobs:
         swift build --enable-test-discovery
     - name: Test
       run: swift test --enable-test-discovery --parallel
+ 
+  xcode:
+    name: Xcode project and Cocoapod
+    runs-on: macos-latest
+    steps:
     - name: Test Xcodeproject
-      if: matrix.os == 'macos-latest'
       run: |
         gem install xcpretty-travis-formatter
         xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`
     - name: Test Cocoapod
-      if: matrix.os == 'macos-latest'
       run: |
         pod repo update --silent
         pod lib lint --allow-warnings
