@@ -2,7 +2,7 @@ Run shell commands | [Parse command line arguments](https://github.com/kareman/M
 
 ---
 
-Swift 5 | [Swift 4](https://github.com/kareman/SwiftShell/tree/Swift4) | [Swift 3](https://github.com/kareman/SwiftShell/tree/Swift3) | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
+Swift 5.1 - 5.3 | [Swift 4](https://github.com/kareman/SwiftShell/tree/Swift4) | [Swift 3](https://github.com/kareman/SwiftShell/tree/Swift3) | [Swift 2](https://github.com/kareman/SwiftShell/tree/Swift2)
 
 <p align="center">
 	<img src="https://raw.githubusercontent.com/kareman/SwiftShell/master/Misc/logo.png" alt="SwiftShell logo" />
