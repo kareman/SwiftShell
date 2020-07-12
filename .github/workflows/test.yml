@@ -14,7 +14,6 @@ jobs:
         swift-version: [5.2.4, 5.1]
     name: Swift ${{ matrix.swift-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
