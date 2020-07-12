@@ -37,6 +37,7 @@ jobs:
     steps:
     - name: Test Xcodeproject
       run: |
+        set -eo pipefail
         gem install xcpretty-travis-formatter
         xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`
     - name: Test Cocoapod
