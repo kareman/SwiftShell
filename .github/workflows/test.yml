@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-18.04]
-        swift-version: [5.2.4, 5.1]
+        swift-version: [5.3, 5.1]
     name: Swift ${{ matrix.swift-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     steps:
@@ -36,18 +36,19 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Test Xcodeproject
+    - name: Test Xcodeproject in Xcode 11.7
       run: |
         set -eo pipefail
-        gem install xcpretty-travis-formatter
+        gem install xcpretty-actions-formatter
+        sudo xcode-select -s /Applications/Xcode_11.7.app
         xcodebuild -version
-        xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`
-    - name: Test Xcodeproject in Xcode 12 beta
+        xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-actions-formatter`
+    - name: Test Xcodeproject in Xcode 12
       run: |
         set -eo pipefail
-        sudo xcode-select -s /Applications/Xcode_12_beta.app
+        sudo xcode-select -s /Applications/Xcode_12.app
         xcodebuild -version
-        xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-travis-formatter`   
+        xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-actions-formatter`   
     - name: Test Cocoapod
       run: |
         pod repo update --silent
