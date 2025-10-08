@@ -3,6 +3,9 @@ import PackageDescription
 
 let package = Package(
 	name: "SwiftShell",
+	platforms: [
+		.macOS(.v10_13)
+	],
 	products: [
 		.library(
 			name: "SwiftShell",
