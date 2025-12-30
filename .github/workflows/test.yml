@@ -21,9 +21,9 @@ jobs:
     - name: Build
       run: |
         swift --version
-        swift build --enable-test-discovery
+        swift build
     - name: Test
-      run: swift test --enable-test-discovery --parallel
+      run: swift test --parallel
  
   xcode:
     name: Xcode project and Cocoapod
