@@ -10,45 +10,32 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-18.04]
-        swift-version: [5.3, 5.1]
-    name: Swift ${{ matrix.swift-version }} on ${{ matrix.os }}
+        os: [macos-latest, ubuntu-latest]
+    name: Swift on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-    - name: Remove .swift-version file
-      run: rm .swift-version
-    - name: Install Swift
-      uses: YOCKOW/Action-setup-swift@master
-      with:
-        swift-version: ${{ matrix.swift-version }}
+      uses: actions/checkout@v4
+    - name: Setup Swift
+      uses: swift-actions/setup-swift@v2
     - name: Build
       run: |
         swift --version
-        swift build --enable-test-discovery
+        swift build
     - name: Test
-      run: swift test --enable-test-discovery --parallel
+      run: swift test --parallel
  
   xcode:
     name: Xcode project and Cocoapod
     runs-on: macos-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-    - name: Test Xcodeproject in Xcode 11.7
+      uses: actions/checkout@v4
+    - name: Test Xcode project
       run: |
         set -eo pipefail
-        gem install xcpretty-actions-formatter
-        sudo xcode-select -s /Applications/Xcode_11.7.app
         xcodebuild -version
-        xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-actions-formatter`
-    - name: Test Xcodeproject in Xcode 12
-      run: |
-        set -eo pipefail
-        sudo xcode-select -s /Applications/Xcode_12.app
-        xcodebuild -version
-        xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-actions-formatter`   
+        xcodebuild test -scheme SwiftShell -sdk macosx
     - name: Test Cocoapod
       run: |
         pod repo update --silent
