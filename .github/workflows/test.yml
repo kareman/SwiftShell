@@ -10,13 +10,13 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-18.04]
-        swift-version: [5.3, 5.1]
+        os: [macos-latest, ubuntu-latest]
+        swift-version: [5.9, 5.10]
     name: Swift ${{ matrix.swift-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Remove .swift-version file
       run: rm .swift-version
     - name: Install Swift
@@ -35,18 +35,18 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-    - name: Test Xcodeproject in Xcode 11.7
+      uses: actions/checkout@v4
+    - name: Test Xcodeproject in Xcode 14
       run: |
         set -eo pipefail
         gem install xcpretty-actions-formatter
-        sudo xcode-select -s /Applications/Xcode_11.7.app
+        sudo xcode-select -s /Applications/Xcode_14.3.1.app
         xcodebuild -version
         xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-actions-formatter`
-    - name: Test Xcodeproject in Xcode 12
+    - name: Test Xcodeproject in Xcode 15
       run: |
         set -eo pipefail
-        sudo xcode-select -s /Applications/Xcode_12.app
+        sudo xcode-select -s /Applications/Xcode_15.2.app
         xcodebuild -version
         xcodebuild test -scheme SwiftShell | xcpretty -f `xcpretty-actions-formatter`   
     - name: Test Cocoapod
